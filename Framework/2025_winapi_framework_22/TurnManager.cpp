@@ -1,4 +1,5 @@
 #include "pch.h"
+#include <windows.h>
 #include "TurnManager.h"
 
 
@@ -9,6 +10,7 @@
 void TurnManager::ChangeNextTurn(TurnType nextTurn)
 {
 	m_curTurn = nextTurn;
+
 
 	switch (m_curTurn)
 	{
@@ -70,10 +72,13 @@ TurnType TurnManager::GetCurTurn()
 
 void TurnManager::WaitingTurnUpdate()
 {
-	while(m_waitTimer < 3)
-	{
-		m_waitTimer += fDT;
+	m_waitTimer = 0;
 
+	while (m_waitTimer < 3)
+	{
+		Sleep(1000); 
+		m_waitTimer++;
+	
 		if (m_waitTimer >= 3)
 		{
 			ChangeNextTurn(TurnType::Select);
