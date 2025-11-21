@@ -10,27 +10,50 @@ void TurnManager::ChangeNextTurn(TurnType nextTurn)
 {
 	m_curTurn = nextTurn;
 
-	if (m_curTurn == TurnType::Play)
+	switch (m_curTurn)
 	{
-		if (m_curPlayerIdx == 1)
-		{
-			m_curTurn = TurnType::Player1;
-		}
-		else if(m_curPlayerIdx == 2)
-		{
-			m_curTurn = TurnType::Player2;
-		}
+	case TurnType::Select:
+		cout << "Select Scene" << " ";
+		break;
+	case TurnType::Play:
+		cout << "Play Scene" << " ";
+		break;
+	case TurnType::Waiting:
+		cout << "Waiting Scene" << " ";
+		break;
+	case TurnType::GameEnd:
+		cout << "Game End Scene" << " ";
+		break;
+	case TurnType::Player1:
+		cout << "Player 1 Scene" << " ";
+		break;
+	case TurnType::Player2:
+		cout << "Player 2 Scene" << " ";
+	default:
+		break;
 	}
 
 	if (m_curTurn == TurnType::Waiting)
 	{
-		if (m_curPlayerIdx > 2)
+		if (m_curPlayerIdx == 2)
 		{
 			m_curPlayerIdx = 1;
 		}
 		else
 		{
 			m_curPlayerIdx += 1;
+		}
+	}
+
+	if (m_curTurn == TurnType::Play)
+	{
+		if (m_curPlayerIdx == 1)
+		{
+			ChangeNextTurn(TurnType::Player1);
+		}
+		else if(m_curPlayerIdx == 2)
+		{
+			ChangeNextTurn(TurnType::Player2);
 		}
 	}
 }
@@ -43,6 +66,7 @@ TurnType TurnManager::GetCurTurn()
 {
 	return m_curTurn;
 }
+
 
 void TurnManager::WaitingTurnUpdate()
 {
