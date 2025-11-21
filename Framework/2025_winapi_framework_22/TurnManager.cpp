@@ -3,9 +3,9 @@
 
 
 /// <summary>
-/// 턴을 넘겨주는 함수 (플레이어 턴으로 넘어갈떄 Play이넘값으로 해주세요)
+/// 턴을 넘겨주는 함수 (플레이어 턴으로 넘어갈떄 Enum값을 Play로 해주세요)
 /// </summary>
-/// <param name="nextTurn"></param>
+/// <param name="nextTurn">다음 턴</param>
 void TurnManager::ChangeNextTurn(TurnType nextTurn)
 {
 	m_curTurn = nextTurn;
