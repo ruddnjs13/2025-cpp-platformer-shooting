@@ -47,9 +47,6 @@
     <Filter Include="Engine\02. Manager\Framework">
       <UniqueIdentifier>{b4df280d-99d4-4098-9967-569d0836c34f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engine\02. Manager\TurnSystem">
-      <UniqueIdentifier>{debe51a2-69e1-42f9-8204-bf32c52abc45}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="2025_winapi_framework_22.h">
@@ -143,8 +140,14 @@
       <Filter>Engine\06. Component\Physics</Filter>
     </ClInclude>
     <ClInclude Include="Floor.h" />
-    <ClInclude Include="TurnManager.h">
-      <Filter>Engine\02. Manager\TurnSystem</Filter>
+    <ClInclude Include="LkwScene.h">
+      <Filter>Engine\04. Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="KmjScene.h">
+      <Filter>Engine\04. Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="IscScene.h">
+      <Filter>Engine\04. Scene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -231,8 +234,14 @@
       <Filter>Engine\06. Component\Physics</Filter>
     </ClCompile>
     <ClCompile Include="Floor.cpp" />
-    <ClCompile Include="TurnManager.cpp">
-      <Filter>Engine\02. Manager\TurnSystem</Filter>
+    <ClCompile Include="LkwScene.cpp">
+      <Filter>Engine\04. Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="KmjScene.cpp">
+      <Filter>Engine\04. Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="IscScene.cpp">
+      <Filter>Engine\04. Scene</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

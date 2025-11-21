@@ -2,14 +2,22 @@
 #include "SceneManager.h"
 #include "DevScene.h"
 #include "TestScene.h"
+#include "LkwScene.h"
+#include "KmjScene.h"
+#include "IscScene.h"
 #include "Collider.h"
 #include "Object.h"
+#include "Defines.h"
+#include "InputManager.h"
 void SceneManager::Init()
 {
 	m_curScene = nullptr;
 	
 	// 등록
 	RegisterScene(L"DevScene", std::make_shared<DevScene>());
+	RegisterScene(L"LkwScene", std::make_shared<LkwScene>());
+	RegisterScene(L"KmjScene", std::make_shared<KmjScene>());
+	RegisterScene(L"IscScene", std::make_shared<IscScene>());
 	RegisterScene(L"TestScene", std::make_shared<TestScene>());
 	// Scene 추가
 	
@@ -34,6 +42,20 @@ void SceneManager::Update()
 		return;
 	m_curScene->Update();
 	m_curScene->LateUpdate();
+
+	if (GET_KEY((KEY_TYPE::NUM_1)))
+	{
+		LoadScene(L"LkwScene");
+	}
+	else if (GET_KEY((KEY_TYPE::NUM_2)))
+	{
+		LoadScene(L"KmjScene");
+	}
+	else if (GET_KEY((KEY_TYPE::NUM_3)))
+	{
+		LoadScene(L"IscScene");
+	}
+
 }
 
 void SceneManager::FixedUpdate(float _fixedDT)
