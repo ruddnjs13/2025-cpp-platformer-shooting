@@ -140,6 +140,15 @@
       <Filter>Engine\06. Component\Physics</Filter>
     </ClInclude>
     <ClInclude Include="Floor.h" />
+    <ClInclude Include="LkwScene.h">
+      <Filter>Engine\04. Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="KmjScene.h">
+      <Filter>Engine\04. Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="IscScene.h">
+      <Filter>Engine\04. Scene</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="2025_winapi_framework_22.rc">
@@ -225,5 +234,14 @@
       <Filter>Engine\06. Component\Physics</Filter>
     </ClCompile>
     <ClCompile Include="Floor.cpp" />
+    <ClCompile Include="LkwScene.cpp">
+      <Filter>Engine\04. Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="KmjScene.cpp">
+      <Filter>Engine\04. Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="IscScene.cpp">
+      <Filter>Engine\04. Scene</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
