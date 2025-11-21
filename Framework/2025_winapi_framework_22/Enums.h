@@ -29,3 +29,11 @@ enum class PlayMode
 {
 	Once, Loop, Counted
 };
+
+enum class TurnType
+{
+	Select,
+	Player1,
+	Waiting,
+	Player2,
+};
