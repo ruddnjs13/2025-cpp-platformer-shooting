@@ -5,7 +5,19 @@ void TurnManager::ChangeNextTurn(TurnType nextTurn)
 {
 	m_curTurn = nextTurn;
 
-	if (nextTurn == TurnType::Waiting)
+	if (m_curTurn == TurnType::Play)
+	{
+		if (m_curPlayerIdx == 1)
+		{
+			m_curTurn = TurnType::Player1;
+		}
+		else if(m_curPlayerIdx == 2)
+		{
+			m_curTurn = TurnType::Player2;
+		}
+	}
+
+	if (m_curTurn == TurnType::Waiting)
 	{
 		if (m_curPlayerIdx > 2)
 		{
@@ -23,7 +35,7 @@ TurnType TurnManager::GetCurTurn()
 	return m_curTurn;
 }
 
-int TurnManager::GetCurPlayerTurn()
+int TurnManager::GetCurPlayerIdx()
 {
 	return m_curPlayerIdx;
 }
@@ -34,7 +46,7 @@ void TurnManager::WaitingTurnUpdate()
 	{
 		float waitTime = GET_SINGLE(TimeManager)->GetDT();
 
-		if(waitTime >= 2.f)
-			m_curTurn = TurnType::Select;
+		if (waitTime >= 2.f)
+			ChangeNextTurn(TurnType::Select);
 	}
 }

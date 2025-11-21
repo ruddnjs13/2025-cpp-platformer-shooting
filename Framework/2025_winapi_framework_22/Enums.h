@@ -33,6 +33,7 @@ enum class PlayMode
 enum class TurnType
 {
 	Select,
+	Play,
 	Player1,
 	Waiting,
 	Player2,

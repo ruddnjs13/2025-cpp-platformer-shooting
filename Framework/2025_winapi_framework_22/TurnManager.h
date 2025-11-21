@@ -6,7 +6,7 @@ class TurnManager
 public:
 	void ChangeNextTurn(TurnType nextTurn);
 	TurnType GetCurTurn();
-	int GetCurPlayerTurn();
+	int GetCurPlayerIdx();
 
 private:
 	void WaitingTurnUpdate();
