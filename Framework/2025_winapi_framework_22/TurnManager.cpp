@@ -1,6 +1,11 @@
 #include "pch.h"
 #include "TurnManager.h"
 
+
+/// <summary>
+/// 턴을 넘겨주는 함수 (플레이어 턴으로 넘어갈떄 Play이넘값으로 해주세요)
+/// </summary>
+/// <param name="nextTurn"></param>
 void TurnManager::ChangeNextTurn(TurnType nextTurn)
 {
 	m_curTurn = nextTurn;
@@ -30,6 +35,10 @@ void TurnManager::ChangeNextTurn(TurnType nextTurn)
 	}
 }
 
+/// <summary>
+/// 현재 턴을 반환하는 함수
+/// </summary>
+/// <returns></returns>
 TurnType TurnManager::GetCurTurn()
 {
 	return m_curTurn;
