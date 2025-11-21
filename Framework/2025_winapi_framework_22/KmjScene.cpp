@@ -5,6 +5,7 @@
 
 void KmjScene::Init()
 {
+	GET_SINGLE(TurnManager)->ChangeNextTurn(TurnType::Waiting);
 }
 
 void KmjScene::Update()
@@ -20,5 +21,4 @@ void KmjScene::Update()
 	{
 		GET_SINGLE(TurnManager)->ChangeNextTurn(TurnType::Play);
 	}
-
 }

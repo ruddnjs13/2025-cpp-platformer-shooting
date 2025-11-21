@@ -149,6 +149,9 @@
     <ClInclude Include="IscScene.h">
       <Filter>Engine\04. Scene</Filter>
     </ClInclude>
+    <ClInclude Include="TurnManager.h">
+      <Filter>Engine\02. Manager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="2025_winapi_framework_22.rc">
@@ -242,6 +245,9 @@
     </ClCompile>
     <ClCompile Include="IscScene.cpp">
       <Filter>Engine\04. Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="TurnManager.cpp">
+      <Filter>Engine\02. Manager</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
