@@ -34,7 +34,9 @@ enum class TurnType
 {
 	Select,
 	Play,
-	Player1,
 	Waiting,
+	GameEnd,
+
+	Player1,
 	Player2,
 };

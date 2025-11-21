@@ -35,11 +35,6 @@ TurnType TurnManager::GetCurTurn()
 	return m_curTurn;
 }
 
-int TurnManager::GetCurPlayerIdx()
-{
-	return m_curPlayerIdx;
-}
-
 void TurnManager::WaitingTurnUpdate()
 {
 	if (m_curTurn == TurnType::Waiting)
