@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -163,6 +163,7 @@
     <ClInclude Include="Animation.h" />
     <ClInclude Include="Animator.h" />
     <ClInclude Include="BaseWindow.h" />
+    <ClInclude Include="Bullet.h" />
     <ClInclude Include="Collider.h" />
     <ClInclude Include="CollisionManager.h" />
     <ClInclude Include="Component.h" />
@@ -189,16 +190,20 @@
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="Defines.h" />
+    <ClInclude Include="TestBullet.h" />
     <ClInclude Include="TestScene.h" />
+    <ClInclude Include="TestWeapon.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="TimeManager.h" />
     <ClInclude Include="TurnManager.h" />
     <ClInclude Include="Vec2.h" />
+    <ClInclude Include="Weapon.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Animation.cpp" />
     <ClCompile Include="Animator.cpp" />
     <ClCompile Include="BaseWindow.cpp" />
+    <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="Collider.cpp" />
     <ClCompile Include="CollisionManager.cpp" />
     <ClCompile Include="Component.cpp" />
@@ -220,10 +225,13 @@
     <ClCompile Include="Rigidbody.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneManager.cpp" />
+    <ClCompile Include="TestBullet.cpp" />
     <ClCompile Include="TestScene.cpp" />
+    <ClCompile Include="TestWeapon.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="TimeManager.cpp" />
     <ClCompile Include="TurnManager.cpp" />
+    <ClCompile Include="Weapon.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="2025_winapi_framework_22.rc" />
