@@ -50,6 +50,9 @@
     <Filter Include="Engine\03. Object\Weapon">
       <UniqueIdentifier>{30891876-3cdf-4e7f-b877-6a0239f27be6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\03. Object\Weapon\Test">
+      <UniqueIdentifier>{7866a8dc-ee3e-408b-a1fe-32e5c36efa44}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="2025_winapi_framework_22.h">
@@ -158,6 +161,15 @@
     <ClInclude Include="Weapon.h">
       <Filter>Engine\03. Object\Weapon</Filter>
     </ClInclude>
+    <ClInclude Include="Bullet.h">
+      <Filter>Engine\03. Object\Weapon</Filter>
+    </ClInclude>
+    <ClInclude Include="TestBullet.h">
+      <Filter>Engine\03. Object\Weapon\Test</Filter>
+    </ClInclude>
+    <ClInclude Include="TestWeapon.h">
+      <Filter>Engine\03. Object\Weapon\Test</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="2025_winapi_framework_22.rc">
@@ -257,6 +269,15 @@
     </ClCompile>
     <ClCompile Include="Weapon.cpp">
       <Filter>Engine\03. Object\Weapon</Filter>
+    </ClCompile>
+    <ClCompile Include="Bullet.cpp">
+      <Filter>Engine\03. Object\Weapon</Filter>
+    </ClCompile>
+    <ClCompile Include="TestBullet.cpp">
+      <Filter>Engine\03. Object\Weapon\Test</Filter>
+    </ClCompile>
+    <ClCompile Include="TestWeapon.cpp">
+      <Filter>Engine\03. Object\Weapon\Test</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
