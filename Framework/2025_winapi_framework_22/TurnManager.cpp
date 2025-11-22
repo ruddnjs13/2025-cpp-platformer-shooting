@@ -1,4 +1,5 @@
 #include "pch.h"
+#include <windows.h>
 #include "TurnManager.h"
 
 
@@ -10,27 +11,51 @@ void TurnManager::ChangeNextTurn(TurnType nextTurn)
 {
 	m_curTurn = nextTurn;
 
-	if (m_curTurn == TurnType::Play)
+
+	switch (m_curTurn)
 	{
-		if (m_curPlayerIdx == 1)
-		{
-			m_curTurn = TurnType::Player1;
-		}
-		else if(m_curPlayerIdx == 2)
-		{
-			m_curTurn = TurnType::Player2;
-		}
+	case TurnType::Select:
+		cout << "Select Scene" << endl;
+		break;
+	case TurnType::Play:
+		cout << "Play Scene" << endl;
+		break;
+	case TurnType::Waiting:
+		cout << "Waiting Scene" << endl;
+		break;
+	case TurnType::GameEnd:
+		cout << "Game End Scene" << endl;
+		break; 
+	case TurnType::Player1:
+		cout << "Player 1 Scene" << endl;
+		break;
+	case TurnType::Player2:
+		cout << "Player 2 Scene" << endl;
 	}
 
 	if (m_curTurn == TurnType::Waiting)
 	{
-		if (m_curPlayerIdx > 2)
+		m_waitTimer = 0;
+		WaitingTurnUpdate();
+		if (m_curPlayerIdx == 2)
 		{
 			m_curPlayerIdx = 1;
 		}
 		else
 		{
 			m_curPlayerIdx += 1;
+		}
+	}
+
+	if (m_curTurn == TurnType::Play)
+	{
+		if (m_curPlayerIdx == 1)
+		{
+			ChangeNextTurn(TurnType::Player1);
+		}
+		else if(m_curPlayerIdx == 2)
+		{
+			ChangeNextTurn(TurnType::Player2);
 		}
 	}
 }
@@ -44,13 +69,20 @@ TurnType TurnManager::GetCurTurn()
 	return m_curTurn;
 }
 
+
 void TurnManager::WaitingTurnUpdate()
 {
-	if (m_curTurn == TurnType::Waiting)
-	{
-		float waitTime = GET_SINGLE(TimeManager)->GetDT();
+	m_waitTimer = 0;
 
-		if (waitTime >= 2.f)
+	while (m_waitTimer < 3)
+	{
+		Sleep(1000); 
+		m_waitTimer++;
+	
+		if (m_waitTimer >= 3)
+		{
 			ChangeNextTurn(TurnType::Select);
+			break;
+		}
 	}
 }
