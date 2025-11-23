@@ -170,6 +170,12 @@
     <ClInclude Include="TestWeapon.h">
       <Filter>Engine\03. Object\Weapon\Test</Filter>
     </ClInclude>
+    <ClInclude Include="Canvas.h">
+      <Filter>Engine\07. UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UIElement.h">
+      <Filter>Engine\07. UI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="2025_winapi_framework_22.rc">
@@ -278,6 +284,12 @@
     </ClCompile>
     <ClCompile Include="TestWeapon.cpp">
       <Filter>Engine\03. Object\Weapon\Test</Filter>
+    </ClCompile>
+    <ClCompile Include="Canvas.cpp">
+      <Filter>Engine\07. UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UIElement.cpp">
+      <Filter>Engine\07. UI</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
