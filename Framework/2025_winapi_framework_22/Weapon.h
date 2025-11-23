@@ -2,6 +2,7 @@
 #include "Object.h"
 
 class Weapon 
+	:public Object
 {
 public:
 	Weapon();

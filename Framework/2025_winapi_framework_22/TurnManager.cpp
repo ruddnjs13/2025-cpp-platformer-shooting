@@ -20,7 +20,55 @@
     void TurnManager::ChangeTurn(TurnType _nextTurn)
     {
 	    m_curTurn = _nextTurn;
+
+        ChangingTurnCondition();
+
 	    Invoke(m_curTurn);
+    }
+
+    void TurnManager::ChangingTurnCondition()
+    {
+        if (m_curTurn == TurnType::Waiting)
+        {
+            m_waitTimer = 0;
+
+            WaitingTurnUpdate();
+
+            if (m_CurPlayer == 2)
+            {
+                m_CurPlayer = 1;
+            }
+            else
+            {
+                m_CurPlayer += 1;
+            }
+        }
+        if (m_curTurn == TurnType::Play)
+        {
+            if (m_CurPlayer == 1)
+            {
+                ChangeTurn(TurnType::Player1);
+            }
+            else if (m_CurPlayer == 2)
+            {
+                ChangeTurn(TurnType::Player2);
+            }
+        }
+    }
+
+    void TurnManager::WaitingTurnUpdate()
+    { 
+        m_waitTimer = 0;
+        while (m_waitTimer < 3) 
+        {
+            Sleep(1000); m_waitTimer++; 
+
+            if (m_waitTimer >= 3) 
+            { 
+                ChangeTurn(TurnType::Select); 
+                break; 
+            } 
+        } 
     }
 
 

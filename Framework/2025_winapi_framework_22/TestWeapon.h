@@ -4,7 +4,7 @@
 class Texture;
 
 class TestWeapon
-	: Weapon
+	:public Weapon
 {
 public:
 	TestWeapon();

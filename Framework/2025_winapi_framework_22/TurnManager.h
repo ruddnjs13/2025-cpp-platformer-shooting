@@ -14,7 +14,11 @@ public:
     void ClearEvents();
 private:
     void Invoke(TurnType _turn);
+    void ChangingTurnCondition();
+    void WaitingTurnUpdate();
 private:
     std::map<TurnType, std::vector<Action>> m_eventMap;
 	TurnType m_curTurn = TurnType::Select;
+	int m_CurPlayer = 1;
+	float m_waitTimer = 0.f;
 };
