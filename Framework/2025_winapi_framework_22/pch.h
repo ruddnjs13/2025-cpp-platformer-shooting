@@ -40,7 +40,7 @@ using std::wstring;
 #define PI 3.14159265358979f
 #define WINDOW_WIDTH 1280
 #define WINDOW_HEIGHT 720
-
+#define Action std::function<void()>
 
 // 메모리 릭
 #ifdef _DEBUG
