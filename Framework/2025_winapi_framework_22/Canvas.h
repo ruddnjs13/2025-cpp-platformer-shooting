@@ -12,7 +12,7 @@ public:
 	virtual void Init() abstract;
 	virtual void Update();
 	virtual void Render(HDC dc);
-	//virtual void Release();
+	virtual void Release();
 
 public:
 	void AddUIElement(UIElement* uiElement);
