@@ -149,6 +149,13 @@
     <ClInclude Include="IscScene.h">
       <Filter>Engine\04. Scene</Filter>
     </ClInclude>
+    <ClInclude Include="TurnManager.h" />
+    <ClInclude Include="Canvas.h">
+      <Filter>Engine\07. UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UIElement.h">
+      <Filter>Engine\07. UI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="2025_winapi_framework_22.rc">
@@ -242,6 +249,13 @@
     </ClCompile>
     <ClCompile Include="IscScene.cpp">
       <Filter>Engine\04. Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="TurnManager.cpp" />
+    <ClCompile Include="Canvas.cpp">
+      <Filter>Engine\07. UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UIElement.cpp">
+      <Filter>Engine\07. UI</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
