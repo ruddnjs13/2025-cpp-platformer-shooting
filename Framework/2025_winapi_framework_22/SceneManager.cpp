@@ -48,7 +48,7 @@ void SceneManager::Update()
 		LoadScene(L"LkwScene");
 	}
 	else if (GET_KEY((KEY_TYPE::NUM_2)))
-	{
+	{	
 		LoadScene(L"KmjScene");
 	}
 	else if (GET_KEY((KEY_TYPE::NUM_3)))
