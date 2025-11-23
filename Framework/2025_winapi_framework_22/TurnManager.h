@@ -5,12 +5,13 @@
 
 class TurnManager
 {
+    DECLARE_SINGLE(TurnManager);
 public:
 
     void RaiseEvent(TurnType _turn, Action _callback);
     void ChangeTurn(TurnType _nextTurn);
 	TurnType GetCurrentTurn() const { return m_curTurn; }
-    void ClearEvents(TurnType turn);
+    void ClearEvents();
 private:
     void Invoke(TurnType _turn);
 private:

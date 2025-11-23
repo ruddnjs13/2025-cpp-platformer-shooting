@@ -4,6 +4,8 @@
 // 언제든지 부를 수 있어야돼? => #include 
 //#include "Defines.h"
 //#include "Object.h"
+#include "TurnManager.h"
+
 class Core
 {
 	DECLARE_SINGLE(Core);
@@ -21,7 +23,6 @@ private:
 	HDC  m_hDC;
 	HWND m_hWnd;
 	//Object m_obj;
-
 	HBITMAP m_hBackBit; 
 	HDC  m_hBackDC;
 };

@@ -112,7 +112,9 @@ void Core::CleanUp()
 {
     ::DeleteObject(m_hBackBit);
     ::DeleteDC(m_hBackDC);
+
     ::ReleaseDC(m_hWnd, m_hDC);
+    GET_SINGLE(TurnManager)->ClearEvents();
     GET_SINGLE(ResourceManager)->Release();
 }
 
