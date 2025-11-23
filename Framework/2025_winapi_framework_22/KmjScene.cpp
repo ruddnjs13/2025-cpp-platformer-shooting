@@ -12,13 +12,5 @@ void KmjScene::Update()
 {
 	Scene::Update();
 
-	if (GET_KEYDOWN(KEY_TYPE::ENTER))
-	{
-		GET_SINGLE(TurnManager)->ChangeNextTurn(TurnType::Waiting);
-	}
-
-	if(GET_KEYDOWN(KEY_TYPE::SPACE))
-	{
-		GET_SINGLE(TurnManager)->ChangeNextTurn(TurnType::Play);
-	}
+	
 }
