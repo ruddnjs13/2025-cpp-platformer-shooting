@@ -1,17 +1,24 @@
 #pragma once
+#include <functional>
+#include <map>
+
+
 class TurnManager
 {
-	DECLARE_SINGLE(TurnManager);
-
+    DECLARE_SINGLE(TurnManager);
 public:
-	void ChangeNextTurn(TurnType nextTurn);
-	TurnType GetCurTurn();
-	void WaitingTurnUpdate();
 
-
+    void RaiseEvent(TurnType _turn, Action _callback);
+    void ChangeTurn(TurnType _nextTurn);
+	TurnType GetCurrentTurn() const { return m_curTurn; }
+    void ClearEvents();
 private:
-	int m_curPlayerIdx = 0;
-	float m_waitTimer = 0;
+    void Invoke(TurnType _turn);
+    void ChangingTurnCondition();
+    void WaitingTurnUpdate();
+private:
+    std::map<TurnType, std::vector<Action>> m_eventMap;
 	TurnType m_curTurn = TurnType::Select;
+	int m_CurPlayer = 1;
+	float m_waitTimer = 0.f;
 };
-

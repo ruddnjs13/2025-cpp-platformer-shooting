@@ -2,6 +2,7 @@
 #include "Object.h"
 
 class Bullet 
+	:public Object
 {
 public:
 	Bullet();
@@ -9,11 +10,12 @@ public:
 
 public:
 	virtual void Update() abstract;
+	virtual void Render(HDC _hdc) abstract;
 	virtual void BurstBullet() abstract;	
 	virtual void Rotate() abstract;
 
 
-private:
+protected:
 	void SetDamage(float _damage) { m_damage = _damage; }
 	void SetSpeed(float _speed) { m_speed = _speed; }
 	void SetPos(Vec2 _pos) { m_pos = _pos; }

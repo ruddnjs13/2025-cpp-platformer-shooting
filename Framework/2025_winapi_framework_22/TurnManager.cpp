@@ -1,88 +1,107 @@
-#include "pch.h"
-#include <windows.h>
-#include "TurnManager.h"
+    #include "pch.h"
+    #include "TurnManager.h"
+    #include <iostream>
 
 
-/// <summary>
-/// 턴을 넘겨주는 함수 (플레이어 턴으로 넘어갈떄 Enum값을 Play로 해주세요)
-/// </summary>
-/// <param name="nextTurn">다음 턴</param>
-void TurnManager::ChangeNextTurn(TurnType nextTurn)
-{
-	m_curTurn = nextTurn;
+    /// <summary>
+    /// 원하는 턴에 이벤트를 구독시켜주는 함수
+    /// </summary>
+    /// <param name="_turn">구독할 턴</param>
+    /// <param name="_callback">구독할 함수</param>
+    void TurnManager::RaiseEvent(TurnType _turn, Action _callback)
+    {
+	    m_eventMap[_turn].push_back(_callback);
+    }
+
+    /// <summary>
+    /// 턴을 바쭤주는 코드(자동으로 해당 턴의 이벤트를 실행시켜줌)
+    /// </summary>
+    /// <param name="_nextTurn">바꿀 턴</param>
+    void TurnManager::ChangeTurn(TurnType _nextTurn)
+    {
+	    m_curTurn = _nextTurn;
+
+        ChangingTurnCondition();
+
+	    Invoke(m_curTurn);
+    }
+
+    void TurnManager::ChangingTurnCondition()
+    {
+        if (m_curTurn == TurnType::Waiting)
+        {
+            m_waitTimer = 0;
+
+            WaitingTurnUpdate();
+
+            if (m_CurPlayer == 2)
+            {
+                m_CurPlayer = 1;
+            }
+            else
+            {
+                m_CurPlayer += 1;
+            }
+        }
+        if (m_curTurn == TurnType::Play)
+        {
+            if (m_CurPlayer == 1)
+            {
+                ChangeTurn(TurnType::Player1);
+            }
+            else if (m_CurPlayer == 2)
+            {
+                ChangeTurn(TurnType::Player2);
+            }
+        }
+    }
+
+    void TurnManager::WaitingTurnUpdate()
+    { 
+        m_waitTimer = 0;
+        while (m_waitTimer < 3) 
+        {
+            Sleep(1000); m_waitTimer++; 
+
+            if (m_waitTimer >= 3) 
+            { 
+                ChangeTurn(TurnType::Select); 
+                break; 
+            } 
+        } 
+    }
 
 
-	switch (m_curTurn)
-	{
-	case TurnType::Select:
-		cout << "Select Scene" << endl;
-		break;
-	case TurnType::Play:
-		cout << "Play Scene" << endl;
-		break;
-	case TurnType::Waiting:
-		cout << "Waiting Scene" << endl;
-		break;
-	case TurnType::GameEnd:
-		cout << "Game End Scene" << endl;
-		break; 
-	case TurnType::Player1:
-		cout << "Player 1 Scene" << endl;
-		break;
-	case TurnType::Player2:
-		cout << "Player 2 Scene" << endl;
-	}
+    /// <summary>
+    /// 이벤트 구독을 모두 해제하는 코드
+    /// </summary>
+    /// <param name="_turn"></param>
+    void TurnManager::ClearEvents()
+    {
+        for (auto& events : m_eventMap)
+        {
+            events.second.clear();
+        }
 
-	if (m_curTurn == TurnType::Waiting)
-	{
-		m_waitTimer = 0;
-		WaitingTurnUpdate();
-		if (m_curPlayerIdx == 2)
-		{
-			m_curPlayerIdx = 1;
-		}
-		else
-		{
-			m_curPlayerIdx += 1;
-		}
-	}
-
-	if (m_curTurn == TurnType::Play)
-	{
-		if (m_curPlayerIdx == 1)
-		{
-			ChangeNextTurn(TurnType::Player1);
-		}
-		else if(m_curPlayerIdx == 2)
-		{
-			ChangeNextTurn(TurnType::Player2);
-		}
-	}
-}
-
-/// <summary>
-/// 현재 턴을 반환하는 함수
-/// </summary>
-/// <returns></returns>
-TurnType TurnManager::GetCurTurn()
-{
-	return m_curTurn;
-}
+        m_eventMap.clear();
+    }
 
 
-void TurnManager::WaitingTurnUpdate()
-{
-	m_waitTimer = 0;
+    /// <summary>
+    /// 이벤트를 실행시켜주는 코드
+    /// </summary>
+    /// <param name="_turn">이벤트를 실행시킬 턴</param>
+    void TurnManager::Invoke(TurnType _turn)
+    {
+        auto _turnType = m_eventMap.find(_turn);
 
-	while (m_waitTimer < 3)
-	{
-		Sleep(1000); 
-		m_waitTimer++;
-	
-		if (m_waitTimer >= 3)
-		{
-			ChangeNextTurn(TurnType::Select);
-			break;
-		}
-	}
-}
+        if (_turnType == m_eventMap.end())
+            return;
+
+        for (auto& callback : _turnType->second)
+        {
+            if (callback)
+                callback();
+        }
+    }
+
