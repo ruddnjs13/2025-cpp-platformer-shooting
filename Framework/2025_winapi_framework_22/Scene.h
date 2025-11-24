@@ -38,6 +38,7 @@ public:
 		obj->SetSize(_size);
 		AddObject(obj, _type);
 	}
+	
 	void RequestDestroy(Object* obj);
 	void RequestSpawn(Object* obj, Layer _type);
 	void FlushEvent();

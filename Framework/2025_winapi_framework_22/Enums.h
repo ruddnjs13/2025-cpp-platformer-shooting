@@ -40,3 +40,11 @@ enum class TurnType
 	Player1,
 	Player2,
 };
+
+enum class CanvasType
+{
+	Title,
+	InGame,
+	Tutorial,
+	Credit
+};

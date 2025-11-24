@@ -10,6 +10,7 @@
 #include "Animator.h"
 #include "Animation.h"
 #include "Rigidbody.h"
+#include "Weapon.h"
 Player::Player()
 {
 	//m_pTex = new Texture;
@@ -133,6 +134,7 @@ void Player::Update()
 	if (GET_KEYDOWN(KEY_TYPE::SPACE))
 		CreateProjectile();
 }
+
 
 void Player::CreateProjectile()
 {
