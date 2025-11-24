@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "WeaponHolderComponent.h"
 #include "Weapon.h"
+#include "SceneManager.h"
 
 WeaponHolderComponent::WeaponHolderComponent()
 {
@@ -33,7 +34,7 @@ void WeaponHolderComponent::ChangeWeapon(Weapon* weapon, Vec2 pos, Vec2 size)
 {
 	if (m_pCurrentWeapon != nullptr)
 	{
-		delete m_pCurrentWeapon;
+		GET_SINGLE(SceneManager)->RequestDestroy(m_pCurrentWeapon);
 		m_pCurrentWeapon = nullptr;
 	}
 
