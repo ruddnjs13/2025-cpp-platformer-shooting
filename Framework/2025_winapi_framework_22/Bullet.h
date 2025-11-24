@@ -2,7 +2,7 @@
 #include "Object.h"
 
 class Bullet 
-	:public Object
+	: public Object
 {
 public:
 	Bullet();

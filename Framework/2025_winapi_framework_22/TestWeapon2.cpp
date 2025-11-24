@@ -1,4 +1,5 @@
 #include "pch.h"
+#include "TestWeapon2.h"
 #include "TestWeapon.h"
 #include "ResourceManager.h"
 #include "Projectile.h"
@@ -7,28 +8,26 @@
 #include "TestBullet.h"
 #include "SceneManager.h"
 
-TestWeapon::TestWeapon()
+TestWeapon2::TestWeapon2()
 {
-	m_pTex = GET_SINGLE(ResourceManager)->GetTexture(L"Plane");
-	
+	m_pTex = GET_SINGLE(ResourceManager)->GetTexture(L"Bullet");
 }
 
-TestWeapon::~TestWeapon()
+TestWeapon2::~TestWeapon2()
 {
 }
 
-void TestWeapon::Update()
+void TestWeapon2::Update()
 {
 	if (GET_KEYDOWN(KEY_TYPE::SPACE))
 		Shoot();
-
 }
 
-void TestWeapon::Rotate()
+void TestWeapon2::Rotate()
 {
 }
 
-void TestWeapon::Render(HDC _hdc)
+void TestWeapon2::Render(HDC _hdc)
 {
 	Vec2 pos = GetPos();
 	Vec2 size = GetSize();
@@ -46,7 +45,7 @@ void TestWeapon::Render(HDC _hdc)
 		RGB(255, 0, 255));
 }
 
-void TestWeapon::Shoot()
+void TestWeapon2::Shoot()
 {
 	Projectile* proj = new Projectile;
 	Vec2 pos = GetPos();
