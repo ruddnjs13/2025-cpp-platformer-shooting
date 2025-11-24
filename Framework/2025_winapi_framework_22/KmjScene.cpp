@@ -42,7 +42,6 @@ void KmjScene::Update()
 	if (GET_KEYDOWN(KEY_TYPE::W))
 		GET_SINGLE(TurnManager)->ChangeTurn(TurnType::Play);
 	if (GET_KEYDOWN(KEY_TYPE::E))
-
 		GET_SINGLE(TurnManager)->ChangeTurn(TurnType::Waiting);
 	
 

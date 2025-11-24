@@ -17,8 +17,11 @@ public:
 	void EnterCollision(Collider* _other)override;
 	void StayCollision(Collider* _other) override;
 	void ExitCollision(Collider* _other) override;
+	void SetWeaponCount(int count) { weaponCount = count; }
 
 private:
+	int weaponCount;
+
 	WeaponHolderComponent* m_pWeaponHolder = nullptr;
 
 	Texture* m_pTex = nullptr;

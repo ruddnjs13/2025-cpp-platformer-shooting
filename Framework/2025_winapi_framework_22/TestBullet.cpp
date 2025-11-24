@@ -5,6 +5,7 @@
 #include "Collider.h"
 #include "Texture.h"
 #include "Rigidbody.h"
+#include "TurnManager.h"
 
 TestBullet::TestBullet()
 {
@@ -13,7 +14,7 @@ TestBullet::TestBullet()
 
 TestBullet::~TestBullet()
 {
-
+	GET_SINGLE(TurnManager)->ChangeTurn(TurnType::Waiting);
 }
 
 void TestBullet::Update()

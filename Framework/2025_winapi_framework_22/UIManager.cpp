@@ -24,7 +24,7 @@ void UIManager::SetCanvas(const CanvasType canvasType)
 {
 	if (m_curCanvas != nullptr)
 	{
-		m_curCanvas->Release();
+		//m_curCanvas->Release();
 		m_curCanvas = nullptr;
 	}
 

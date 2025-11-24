@@ -45,6 +45,7 @@ TestPlayer::TestPlayer()
 
 
 	GET_SINGLE(SceneManager)->GetCurScene()->AddObject(m_pWeaponHolder->GetCurrentWeapon(), Layer::ENEMY);
+	weaponCount = 0;
 }
 
 TestPlayer::~TestPlayer()
@@ -70,6 +71,7 @@ void TestPlayer::Update()
 	float factor = scaleSpeed + scaleDelta;
 	Scale({ factor, factor });
 
+	
 	if(GET_KEY(KEY_TYPE::SPACE))
 	{
 		Vec2 pos = GetPos();
