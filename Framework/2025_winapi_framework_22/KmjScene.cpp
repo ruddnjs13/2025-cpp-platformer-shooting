@@ -3,10 +3,15 @@
 #include "TurnManager.h"
 #include "TestWeapon.h"
 #include "KmjScene.h"
+#include "TestPlayer.h"
 
 void KmjScene::Init()
 {
-	Spawn<TestWeapon>(Layer::ENEMY, { WINDOW_WIDTH / 2, WINDOW_HEIGHT / 4 }, { 100.f,100.f });
+	Object* obj = new TestPlayer;
+	obj->SetPos({ WINDOW_WIDTH / 2, 300 });
+	obj->SetSize({ 100.f, 100.f });
+	AddObject(obj, Layer::PLAYER);
+
 	
 	GET_SINGLE(TurnManager)->RaiseEvent(TurnType::Waiting, [this]()
 		{
@@ -37,6 +42,7 @@ void KmjScene::Update()
 	if (GET_KEYDOWN(KEY_TYPE::W))
 		GET_SINGLE(TurnManager)->ChangeTurn(TurnType::Play);
 	if (GET_KEYDOWN(KEY_TYPE::E))
+
 		GET_SINGLE(TurnManager)->ChangeTurn(TurnType::Waiting);
 	
 
