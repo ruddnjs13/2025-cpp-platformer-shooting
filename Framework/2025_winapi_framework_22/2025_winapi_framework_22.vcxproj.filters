@@ -176,6 +176,12 @@
     <ClInclude Include="UIElement.h">
       <Filter>Engine\07. UI</Filter>
     </ClInclude>
+    <ClInclude Include="UIManager.h">
+      <Filter>Engine\02. Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Action.h">
+      <Filter>Engine\01. Core</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="2025_winapi_framework_22.rc">
@@ -260,7 +266,6 @@
     <ClCompile Include="Rigidbody.cpp">
       <Filter>Engine\06. Component\Physics</Filter>
     </ClCompile>
-    <ClCompile Include="Floor.cpp" />
     <ClCompile Include="LkwScene.cpp">
       <Filter>Engine\04. Scene</Filter>
     </ClCompile>
@@ -290,6 +295,12 @@
     </ClCompile>
     <ClCompile Include="UIElement.cpp">
       <Filter>Engine\07. UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UIManager.cpp">
+      <Filter>Engine\02. Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Floor.cpp">
+      <Filter>리소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
