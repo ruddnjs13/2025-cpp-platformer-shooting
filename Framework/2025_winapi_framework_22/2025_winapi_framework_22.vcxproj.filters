@@ -176,14 +176,11 @@
     <ClInclude Include="UIElement.h">
       <Filter>Engine\07. UI</Filter>
     </ClInclude>
-    <ClInclude Include="WeaponHolderComponent.h">
-      <Filter>Engine\06. Component</Filter>
+    <ClInclude Include="UIManager.h">
+      <Filter>Engine\02. Manager</Filter>
     </ClInclude>
-    <ClInclude Include="TestPlayer.h">
-      <Filter>Engine\03. Object\Weapon\Test</Filter>
-    </ClInclude>
-    <ClInclude Include="TestWeapon2.h">
-      <Filter>Engine\03. Object\Weapon\Test</Filter>
+    <ClInclude Include="Action.h">
+      <Filter>Engine\01. Core</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -269,7 +266,6 @@
     <ClCompile Include="Rigidbody.cpp">
       <Filter>Engine\06. Component\Physics</Filter>
     </ClCompile>
-    <ClCompile Include="Floor.cpp" />
     <ClCompile Include="LkwScene.cpp">
       <Filter>Engine\04. Scene</Filter>
     </ClCompile>
@@ -300,14 +296,11 @@
     <ClCompile Include="UIElement.cpp">
       <Filter>Engine\07. UI</Filter>
     </ClCompile>
-    <ClCompile Include="WeaponHolderComponent.cpp">
-      <Filter>Engine\06. Component</Filter>
+    <ClCompile Include="UIManager.cpp">
+      <Filter>Engine\02. Manager</Filter>
     </ClCompile>
-    <ClCompile Include="TestPlayer.cpp">
-      <Filter>Engine\03. Object\Weapon\Test</Filter>
-    </ClCompile>
-    <ClCompile Include="TestWeapon2.cpp">
-      <Filter>Engine\03. Object\Weapon\Test</Filter>
+    <ClCompile Include="Floor.cpp">
+      <Filter>리소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
