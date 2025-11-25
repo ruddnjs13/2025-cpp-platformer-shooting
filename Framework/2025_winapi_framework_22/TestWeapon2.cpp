@@ -52,7 +52,7 @@ void TestWeapon2::Shoot()
 	pos.y -= GetSize().y / 2.f;
 	proj->SetPos(pos);
 	proj->SetSize({ 30.f,30.f });
-	proj->SetDir({ 0.f, -1.f });
+	proj->SetDir({ 0.f, 1.f });
 
 	GET_SINGLE(SceneManager)->GetCurScene()->AddObject(proj, Layer::PROJECTILE);
 }

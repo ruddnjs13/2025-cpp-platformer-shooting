@@ -4,6 +4,8 @@
 #include "TestWeapon.h"
 #include "KmjScene.h"
 #include "TestPlayer.h"
+#include "Floor.h"
+#include "CollisionManager.h"
 
 void KmjScene::Init()
 {
@@ -27,6 +29,11 @@ void KmjScene::Init()
 			cout << "Play Turn Event Call" << endl;
 		});
 
+	Spawn<Floor>(Layer::DEFAULT, { WINDOW_WIDTH / 2, 600 }, { 100.f,100.f });
+
+	GET_SINGLE(CollisionManager)->CheckLayer(Layer::Boom, Layer::DEFAULT);
+	GET_SINGLE(CollisionManager)->CheckLayer(Layer::PROJECTILE, Layer::DEFAULT);
+
 }
 
 void KmjScene::Update()
@@ -37,12 +44,12 @@ void KmjScene::Update()
 
 
 
-	//if (GET_KEYDOWN(KEY_TYPE::Q))
-	//	GET_SINGLE(TurnManager)->ChangeTurn(TurnType::Select);
-	//if (GET_KEYDOWN(KEY_TYPE::W))
-	//	GET_SINGLE(TurnManager)->ChangeTurn(TurnType::Play);
-	//if (GET_KEYDOWN(KEY_TYPE::E))
-	//	GET_SINGLE(TurnManager)->ChangeTurn(TurnType::Waiting);
+	if (GET_KEYDOWN(KEY_TYPE::Q))
+		GET_SINGLE(TurnManager)->ChangeTurn(TurnType::Select);
+	if (GET_KEYDOWN(KEY_TYPE::W))
+		GET_SINGLE(TurnManager)->ChangeTurn(TurnType::Play);
+	if (GET_KEYDOWN(KEY_TYPE::E))
+		GET_SINGLE(TurnManager)->ChangeTurn(TurnType::Waiting);
 	
 
 		

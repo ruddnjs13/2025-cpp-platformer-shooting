@@ -45,7 +45,7 @@ void TestBullet::Render(HDC _hdc)
 
 void TestBullet::Update()
 {
-	//Translate({ m_dir.x * 500.f * fDT, m_dir.y * 500.f * fDT });
+	Translate({ m_dir.x * 500.f * fDT, m_dir.y * 500.f * fDT });
 
 	if(GET_KEYDOWN(KEY_TYPE::H))
 	{
@@ -59,8 +59,9 @@ void TestBullet::BurstBullet()
 	Bomb* proj = new Bomb;
 	Vec2 pos = GetPos();
 	pos.y -= GetSize().y / 2.f;
+
 	proj->SetPos(pos);
-	proj->SetSize({ 30.f,30.f });
+	proj->SetSize({ 50.f,50.f });
 
 	GET_SINGLE(SceneManager)->GetCurScene()->AddObject(proj, Layer::Boom);
 }
@@ -68,6 +69,14 @@ void TestBullet::BurstBullet()
 void Bullet::EnterCollision(Collider* _other)
 {
 	if (_other->IsTrigger())
+	{
+		if (_other->GetName() == L"Floor")
+		{
+			BurstBullet();
+			GET_SINGLE(SceneManager)->RequestDestroy(this);
+		}
+	}
+	else
 	{
 		if (_other->GetName() == L"Floor")
 		{

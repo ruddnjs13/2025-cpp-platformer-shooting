@@ -14,6 +14,7 @@ Bomb::Bomb()
 	auto* col = AddComponent<Collider>();
 	col->SetName(L"Bomb");
 	col->SetTrigger(true);
+	col->SetSize({50.f, 50.f});
 	FadeOut();
 }
 
@@ -41,6 +42,7 @@ void Bomb::Render(HDC _hdc)
 		, m_pTex->GetTextureDC()
 		, 0, 0, width, height,
 		RGB(255, 0, 255));
+
 	ComponentRender(_hdc);
 }
 
@@ -51,6 +53,13 @@ void Bomb::EnterCollision(Collider* _other)
 		if (_other->GetName() == L"Player")
 		{
 			//플레이어 데미지 처리
+		}
+	}
+	else
+	{
+		if(_other->GetName() == L"Floor")
+		{
+			GET_SINGLE(SceneManager)->RequestDestroy(_other->GetOwner());
 		}
 	}
 }
@@ -65,8 +74,8 @@ void Bomb::ExitCollision(Collider* _other)
 
 void Bomb::FadeOut()
 {
-	std::thread([this]() {
-		std::this_thread::sleep_for(std::chrono::seconds(2));
+	std::thread([this]() {	
+		std::this_thread::sleep_for(std::chrono::seconds(1));
 		GET_SINGLE(SceneManager)->RequestDestroy(this);
 		}).detach();
 }
