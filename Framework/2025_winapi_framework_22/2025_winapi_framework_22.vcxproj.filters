@@ -191,6 +191,9 @@
     <ClInclude Include="TestPlayer.h">
       <Filter>Engine\03. Object\Weapon\Test</Filter>
     </ClInclude>
+    <ClInclude Include="Bomb.h">
+      <Filter>Engine\03. Object\Weapon</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="2025_winapi_framework_22.rc">
@@ -319,6 +322,9 @@
     </ClCompile>
     <ClCompile Include="TestWeapon2.cpp">
       <Filter>Engine\03. Object\Weapon\Test</Filter>
+    </ClCompile>
+    <ClCompile Include="Bomb.cpp">
+      <Filter>Engine\03. Object\Weapon</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

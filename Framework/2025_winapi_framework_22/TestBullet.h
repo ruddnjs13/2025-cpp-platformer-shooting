@@ -14,7 +14,6 @@ public:
 	void Render(HDC _hdc) override;
     void BurstBullet() override;
 	void Rotate() override;
-
 private:
 	Texture* m_pTex;
 };

@@ -1,6 +1,7 @@
     #include "pch.h"
     #include "TurnManager.h"
     #include <iostream>
+#include <thread>
 
 
     /// <summary>
@@ -59,16 +60,21 @@
     void TurnManager::WaitingTurnUpdate()
     { 
         m_waitTimer = 0;
-        while (m_waitTimer < 3) 
-        {
-            Sleep(1000); m_waitTimer++; 
+       // while (m_waitTimer < 3) 
+       // {
+       //     Sleep(1000); m_waitTimer++; 
+       //
+       //     if (m_waitTimer >= 3) 
+       //     { 
+       //         break; 
+       //     } 
+       // } 
 
-            if (m_waitTimer >= 3) 
-            { 
-                ChangeTurn(TurnType::Select); 
-                break; 
-            } 
-        } 
+        std::thread([this]() 
+            {
+            std::this_thread::sleep_for(std::chrono::seconds(2));
+            ChangeTurn(TurnType::Select); 
+            }).detach();
     }
 
 

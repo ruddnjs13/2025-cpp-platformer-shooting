@@ -39,9 +39,11 @@ TestPlayer::TestPlayer()
 	pos.y -= GetSize().y / 2.f;
 	pos.x += 10.f;
 
+	Vec2 angle = Vec2(0.f, 0.f);
+
 	m_pWeaponHolder->ChangeWeapon(new TestWeapon(),
 		{ pos },
-		{ 20.f,20.f });
+		{ 20.f,20.f }, angle);
 
 
 	GET_SINGLE(SceneManager)->GetCurScene()->AddObject(m_pWeaponHolder->GetCurrentWeapon(), Layer::ENEMY);
@@ -77,11 +79,11 @@ void TestPlayer::Update()
 		Vec2 pos = GetPos();
 		pos.y -= GetSize().y / 2.f;
 		pos.x += 10.f;
-
+		Vec2 angle = Vec2(0.f, 0.f);
 		
 		m_pWeaponHolder->ChangeWeapon(new TestWeapon2(),
 			{ pos },
-			{ 20.f,20.f });
+			{ 20.f,20.f }, angle);
 
 
 		GET_SINGLE(SceneManager)->GetCurScene()->AddObject(m_pWeaponHolder->GetCurrentWeapon(), Layer::ENEMY);

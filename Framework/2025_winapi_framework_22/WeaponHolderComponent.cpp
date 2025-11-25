@@ -30,7 +30,7 @@ void WeaponHolderComponent::Render(HDC hDC)
 {
 }
 
-void WeaponHolderComponent::ChangeWeapon(Weapon* weapon, Vec2 pos, Vec2 size, float angle)
+void WeaponHolderComponent::ChangeWeapon(Weapon* weapon, Vec2 pos, Vec2 size, Vec2 angle)
 {
 	if (m_pCurrentWeapon != nullptr)
 	{
@@ -47,7 +47,7 @@ void WeaponHolderComponent::ChangeWeapon(Weapon* weapon, Vec2 pos, Vec2 size, fl
 }
 
 
-void WeaponHolderComponent::SetWeaponRotation(float angle)
+void WeaponHolderComponent::SetWeaponRotation(Vec2 angle)
 {
 	if (m_pCurrentWeapon == nullptr)
 		return;
