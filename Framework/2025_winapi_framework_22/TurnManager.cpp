@@ -59,17 +59,6 @@
 
     void TurnManager::WaitingTurnUpdate()
     { 
-        m_waitTimer = 0;
-       // while (m_waitTimer < 3) 
-       // {
-       //     Sleep(1000); m_waitTimer++; 
-       //
-       //     if (m_waitTimer >= 3) 
-       //     { 
-       //         break; 
-       //     } 
-       // } 
-
         std::thread([this]() 
             {
             std::this_thread::sleep_for(std::chrono::seconds(2));
