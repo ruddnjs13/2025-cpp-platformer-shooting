@@ -14,3 +14,8 @@ Weapon::~Weapon()
 
 }
 
+void Weapon::SetRotation(float _angle)
+{
+	
+}
+

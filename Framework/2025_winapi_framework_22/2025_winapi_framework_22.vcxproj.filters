@@ -182,6 +182,15 @@
     <ClInclude Include="Action.h">
       <Filter>Engine\01. Core</Filter>
     </ClInclude>
+    <ClInclude Include="WeaponHolderComponent.h">
+      <Filter>Engine\06. Component</Filter>
+    </ClInclude>
+    <ClInclude Include="TestWeapon2.h">
+      <Filter>Engine\03. Object\Weapon\Test</Filter>
+    </ClInclude>
+    <ClInclude Include="TestPlayer.h">
+      <Filter>Engine\03. Object\Weapon\Test</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="2025_winapi_framework_22.rc">
@@ -301,6 +310,15 @@
     </ClCompile>
     <ClCompile Include="Floor.cpp">
       <Filter>리소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="WeaponHolderComponent.cpp">
+      <Filter>Engine\06. Component</Filter>
+    </ClCompile>
+    <ClCompile Include="TestPlayer.cpp">
+      <Filter>Engine\03. Object\Weapon\Test</Filter>
+    </ClCompile>
+    <ClCompile Include="TestWeapon2.cpp">
+      <Filter>Engine\03. Object\Weapon\Test</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -72,12 +72,13 @@ void TestPlayer::Update()
 	Scale({ factor, factor });
 
 	
-	if(GET_KEY(KEY_TYPE::SPACE))
+	if(GET_KEYDOWN(KEY_TYPE::SPACE))
 	{
 		Vec2 pos = GetPos();
 		pos.y -= GetSize().y / 2.f;
 		pos.x += 10.f;
 
+		
 		m_pWeaponHolder->ChangeWeapon(new TestWeapon2(),
 			{ pos },
 			{ 20.f,20.f });

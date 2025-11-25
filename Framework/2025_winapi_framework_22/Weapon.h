@@ -16,6 +16,8 @@ public:
 	virtual void Shoot() abstract;
 
 public:
+	void SetRotation(float _angle);
+
 	void SetPos(Vec2 _pos) { m_pos = _pos; }
 	void SetSize(Vec2 _size) { m_size = _size; }
 

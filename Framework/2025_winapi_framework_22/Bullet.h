@@ -15,7 +15,7 @@ public:
 	virtual void Rotate() abstract;
 
 
-protected:
+public:
 	void SetDamage(float _damage) { m_damage = _damage; }
 	void SetSpeed(float _speed) { m_speed = _speed; }
 	void SetPos(Vec2 _pos) { m_pos = _pos; }

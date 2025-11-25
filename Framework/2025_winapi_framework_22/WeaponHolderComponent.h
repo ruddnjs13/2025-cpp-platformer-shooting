@@ -16,10 +16,11 @@ public:
 	void Render(HDC hDC) override;
 
 public:
-	void ChangeWeapon(Weapon* weapon, Vec2 pos, Vec2 size);
+	void ChangeWeapon(Weapon* weapon, Vec2 pos, Vec2 size, float angle);
 	Weapon* GetCurrentWeapon() const { return m_pCurrentWeapon; }
 
 private:
+	void SetWeaponRotation(float angle);
 	void SetWeaponPos(Vec2 pos);
 	void SetWeaponSize(Vec2 size);
 

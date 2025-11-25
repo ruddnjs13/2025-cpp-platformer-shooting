@@ -20,7 +20,7 @@ public:
 	void SetWeaponCount(int count) { weaponCount = count; }
 
 private:
-	int weaponCount;
+	int weaponCount = 0;
 
 	WeaponHolderComponent* m_pWeaponHolder = nullptr;
 
