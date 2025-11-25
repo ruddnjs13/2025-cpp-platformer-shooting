@@ -121,6 +121,9 @@ void Animation::Render(HDC _hdc)
 
     Object* obj = m_owner->GetOwner();
     Vec2 pos = obj->GetPos();
+    double angle = obj->GetAngle();
+
+
 
     const tAnimFrame& fr = m_frames[(size_t)m_curFrame];
     pos = pos + fr.vOffset;
@@ -136,6 +139,36 @@ void Animation::Render(HDC _hdc)
     int sy = (int)fr.vLT.y;
     int sw = (int)fr.vSlice.x;
     int sh = (int)fr.vSlice.y;
+
+    double sinValue = std::sin(PI/2);
+    double cosValue = std::cos(PI/2);
+
+    POINT points[4];
+
+    POINT midPoint = { dw / 2, dh / 2 };
+
+    points[0] = { sx, sy };
+    points[1] = { sx+sw, sy };
+    points[2] = { sx+sw, sy+sh };
+    points[3] = { sx, sy + sh };
+
+    POINT dPoints[3]{};
+
+    dPoints[0].x = (midPoint.x - points[0].x) * cosValue - (midPoint.y - points[0].y) * sinValue;
+    dPoints[0].y = (midPoint.y - points[0].x) * sinValue + (midPoint.y - points[0].y) + cosValue;
+
+    dPoints[1].x = (midPoint.x - points[1].x) * cosValue - (midPoint.y - points[1].y) * sinValue;
+    dPoints[1].y = (midPoint.y - points[1].x) * sinValue + (midPoint.y - points[1].y) * cosValue;
+
+    dPoints[2].x = (midPoint.x - points[2].x) * cosValue - (midPoint.y - points[2].y) * sinValue;
+    dPoints[2].y = (midPoint.y - points[2].x) * sinValue + (midPoint.y - points[2].y) * cosValue;
+
+    PlgBlt(m_tex->GetTextureDC(),
+        dPoints, _hdc,
+        sx, sy, sw, sh,
+        NULL, 0, 0);
+
+
     BOOL debug = TransparentBlt(_hdc,
         dx, dy, dw, dh,
         m_tex->GetTextureDC(),
