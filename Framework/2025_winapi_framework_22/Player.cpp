@@ -20,7 +20,7 @@ Player::Player()
 	m_pTex = GET_SINGLE(ResourceManager)->GetTexture(L"Jiwoo");
 	AddComponent<Collider>();
 	AddComponent<Rigidbody>();
-	GetComponent<Rigidbody>()->SetUseGravity(false);
+	//GetComponent<Rigidbody>()->SetUseGravity(false);
 	auto* animator = AddComponent<Animator>();
 	animator->CreateAnimation
 	(L"JiwooFront",
@@ -122,10 +122,11 @@ void Player::Update()
 	{
 		if (GET_KEY(KEY_TYPE::A)) dir.x -= 1.f;
 		if (GET_KEY(KEY_TYPE::D)) dir.x += 1.f;
-		if (GET_KEY(KEY_TYPE::W)) angle += 1.f;
-		if (GET_KEY(KEY_TYPE::S)) angle -= 1.f;
+		if (GET_KEY(KEY_TYPE::W)) angle += 0.1f;
+		if (GET_KEY(KEY_TYPE::S)) angle -= 0.1f;
 		if (GET_KEYDOWN(KEY_TYPE::SPACE))
 		{
+			GetComponent<Rigidbody>()->AddImpulse({ 0, 10 });
 			CreateProjectile();
 			GET_SINGLE(TurnManager)->ChangeTurn(TurnType::Player2);
 		}
@@ -135,8 +136,8 @@ void Player::Update()
 	{
 		if (GET_KEY(KEY_TYPE::LEFT)) dir.x -= 1.f;
 		if (GET_KEY(KEY_TYPE::RIGHT)) dir.x += 1.f;
-		if (GET_KEY(KEY_TYPE::UP)) angle += 1.f;
-		if (GET_KEY(KEY_TYPE::DOWN)) angle -= 1.f;
+		if (GET_KEY(KEY_TYPE::UP)) angle += 0.1f;
+		if (GET_KEY(KEY_TYPE::DOWN)) angle -= 0.1f;
 		if (GET_KEYDOWN(KEY_TYPE::ENTER))
 		{
 			CreateProjectile();

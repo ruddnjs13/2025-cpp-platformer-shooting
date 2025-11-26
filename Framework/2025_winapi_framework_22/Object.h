@@ -30,6 +30,7 @@ protected:
 	}
 	void Angle(double _angle)
 	{
+		m_angle /= 360;
 		m_angle = _angle;
 	}
 	void Scale(Vec2 _s)

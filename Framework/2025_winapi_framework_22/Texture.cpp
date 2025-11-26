@@ -10,8 +10,8 @@ Texture::Texture()
 
 Texture::~Texture()
 {
-	::DeleteDC(m_hDC);
-	::DeleteObject(m_hBit);
+	::DeleteDC(m_hDC);	
+	::DeleteObject(m_hBit);	
 }
 
 void Texture::Load(const wstring& _filePath)
@@ -23,10 +23,11 @@ void Texture::Load(const wstring& _filePath)
 	// 6. 옵션 플래그
 	m_hBit = (HBITMAP)::LoadImage(nullptr, _filePath.c_str(), IMAGE_BITMAP
 		, 0, 0, LR_CREATEDIBSECTION | LR_LOADFROMFILE);
-	// 필수1!!!!!!!!@!@!@#$~!@#%$@!#%^#@!%@!#%!@
-	assert(m_hBit);
-	m_hDC = ::CreateCompatibleDC(GET_SINGLE(Core)->GetMainDC());
-	::SelectObject(m_hDC, m_hBit);
 	::GetObject(m_hBit, sizeof(BITMAP), &m_bitInfo);
+
+	assert(m_hBit); // 필수1!!!!!!!!@!@!@#$~!@#%$@!#%^#@!%@!#%!@
+	m_hDC = ::CreateCompatibleDC(GET_SINGLE(Core)->GetMainDC());
+	
+	::SelectObject(m_hDC, m_hBit);
 
 }
