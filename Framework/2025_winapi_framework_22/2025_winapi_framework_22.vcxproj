@@ -166,6 +166,7 @@
     <ClInclude Include="Animation.h" />
     <ClInclude Include="Animator.h" />
     <ClInclude Include="BaseWindow.h" />
+    <ClInclude Include="Bomb.h" />
     <ClInclude Include="Bullet.h" />
     <ClInclude Include="Canvas.h" />
     <ClInclude Include="Collider.h" />
@@ -195,8 +196,10 @@
     <ClInclude Include="targetver.h" />
     <ClInclude Include="Defines.h" />
     <ClInclude Include="TestBullet.h" />
+    <ClInclude Include="TestPlayer.h" />
     <ClInclude Include="TestScene.h" />
     <ClInclude Include="TestWeapon.h" />
+    <ClInclude Include="TestWeapon2.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="TimeManager.h" />
     <ClInclude Include="TitleCanvas.h" />
@@ -205,11 +208,13 @@
     <ClInclude Include="UIManager.h" />
     <ClInclude Include="Vec2.h" />
     <ClInclude Include="Weapon.h" />
+    <ClInclude Include="WeaponHolderComponent.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Animation.cpp" />
     <ClCompile Include="Animator.cpp" />
     <ClCompile Include="BaseWindow.cpp" />
+    <ClCompile Include="Bomb.cpp" />
     <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="Button.cpp" />
     <ClCompile Include="Canvas.cpp" />
@@ -236,8 +241,10 @@
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="TestBullet.cpp" />
+    <ClCompile Include="TestPlayer.cpp" />
     <ClCompile Include="TestScene.cpp" />
     <ClCompile Include="TestWeapon.cpp" />
+    <ClCompile Include="TestWeapon2.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="TimeManager.cpp" />
     <ClCompile Include="TitleCanvas.cpp" />
@@ -245,6 +252,7 @@
     <ClCompile Include="UIElement.cpp" />
     <ClCompile Include="UIManager.cpp" />
     <ClCompile Include="Weapon.cpp" />
+    <ClCompile Include="WeaponHolderComponent.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="2025_winapi_framework_22.rc" />

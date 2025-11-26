@@ -5,6 +5,7 @@
 Weapon::Weapon()
 	: m_pos{}
 	, m_size{}
+	, m_owner{ nullptr }
 {
 
 }
@@ -12,5 +13,10 @@ Weapon::Weapon()
 Weapon::~Weapon()
 {
 
+}
+
+void Weapon::SetRotation(Vec2 _angle)
+{
+	
 }
 

@@ -5,21 +5,23 @@
 #include "Collider.h"
 #include "Texture.h"
 #include "Rigidbody.h"
+#include "SceneManager.h"
+#include "TurnManager.h"
+#include "InputManager.h"
+#include "Bomb.h"
 
 TestBullet::TestBullet()
 {
 	m_pTex = GET_SINGLE(ResourceManager)->GetTexture(L"Bullet");
+	auto* col = AddComponent<Collider>();
+	col->SetName(L"PlayerBullet");
+	col->SetTrigger(true);
 }
 
 TestBullet::~TestBullet()
 {
-
 }
 
-void TestBullet::Update()
-{
-
-}
 
 void TestBullet::Render(HDC _hdc)
 {
@@ -37,9 +39,59 @@ void TestBullet::Render(HDC _hdc)
 		, m_pTex->GetTextureDC()
 		, 0, 0, width, height,
 		RGB(255, 0, 255));
+
+	ComponentRender(_hdc);
+}
+
+void TestBullet::Update()
+{
+	Translate({ m_dir.x * 500.f * fDT, m_dir.y * 500.f * fDT });
+
+	if(GET_KEYDOWN(KEY_TYPE::H))
+	{
+		GET_SINGLE(SceneManager)->RequestDestroy(this);
+		BurstBullet();
+	}
 }
 
 void TestBullet::BurstBullet()
+{
+	Bomb* proj = new Bomb;
+	Vec2 pos = GetPos();
+	pos.y -= GetSize().y / 2.f;
+
+	proj->SetPos(pos);
+	proj->SetSize({ 50.f,50.f });
+
+	GET_SINGLE(SceneManager)->GetCurScene()->AddObject(proj, Layer::Boom);
+}
+
+void Bullet::EnterCollision(Collider* _other)
+{
+	if (_other->IsTrigger())
+	{
+		if (_other->GetName() == L"Floor")
+		{
+			BurstBullet();
+			GET_SINGLE(SceneManager)->RequestDestroy(this);
+		}
+	}
+	else
+	{
+		if (_other->GetName() == L"Floor")
+		{
+			BurstBullet();
+			GET_SINGLE(SceneManager)->RequestDestroy(this);
+		}
+	}
+}
+
+void Bullet::StayCollision(Collider* _other)
+{
+
+}
+
+void Bullet::ExitCollision(Collider* _other)
 {
 
 }

@@ -3,10 +3,17 @@
 #include "TurnManager.h"
 #include "TestWeapon.h"
 #include "KmjScene.h"
+#include "TestPlayer.h"
+#include "Floor.h"
+#include "CollisionManager.h"
 
 void KmjScene::Init()
 {
-	Spawn<TestWeapon>(Layer::ENEMY, { WINDOW_WIDTH / 2, WINDOW_HEIGHT / 4 }, { 100.f,100.f });
+	Object* obj = new TestPlayer;
+	obj->SetPos({ WINDOW_WIDTH / 2, 300 });
+	obj->SetSize({ 100.f, 100.f });
+	AddObject(obj, Layer::PLAYER);
+
 	
 	GET_SINGLE(TurnManager)->RaiseEvent(TurnType::Waiting, [this]()
 		{
@@ -21,6 +28,11 @@ void KmjScene::Init()
 		{
 			cout << "Play Turn Event Call" << endl;
 		});
+
+	Spawn<Floor>(Layer::DEFAULT, { WINDOW_WIDTH / 2, 600 }, { 100.f,100.f });
+
+	GET_SINGLE(CollisionManager)->CheckLayer(Layer::Boom, Layer::DEFAULT);
+	GET_SINGLE(CollisionManager)->CheckLayer(Layer::PROJECTILE, Layer::DEFAULT);
 
 }
 

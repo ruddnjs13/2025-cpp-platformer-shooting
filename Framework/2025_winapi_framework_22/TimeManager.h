@@ -1,5 +1,5 @@
 #pragma once
-class TimeManager
+class TimeManager 
 {
 	DECLARE_SINGLE(TimeManager);
 
