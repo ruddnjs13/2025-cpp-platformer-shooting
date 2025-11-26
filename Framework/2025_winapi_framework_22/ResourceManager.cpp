@@ -187,6 +187,7 @@ void ResourceManager::RegisterTexture()
 	LoadTexture(L"Plane", L"Texture\\plane.bmp");
 	LoadTexture(L"Bullet", L"Texture\\Bullet.bmp");
 	LoadTexture(L"Jiwoo", L"Texture\\jiwoo.bmp");
+	LoadTexture(L"Button", L"Texture\\Btn.bmp");
 }
 
 void ResourceManager::LoadTexture(const wstring& _key, const wstring& _path)
