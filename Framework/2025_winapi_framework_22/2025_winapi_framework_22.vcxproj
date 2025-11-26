@@ -160,10 +160,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="2025_winapi_framework_22.h" />
-    <ClInclude Include="Action.h" />
+    <ClInclude Include="Button.h" />
+    <ClInclude Include="Image.h" />
+    <ClInclude Include="MyAction.h" />
     <ClInclude Include="Animation.h" />
     <ClInclude Include="Animator.h" />
     <ClInclude Include="BaseWindow.h" />
+    <ClInclude Include="Bomb.h" />
     <ClInclude Include="Bullet.h" />
     <ClInclude Include="Canvas.h" />
     <ClInclude Include="Collider.h" />
@@ -199,6 +202,7 @@
     <ClInclude Include="TestWeapon2.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="TimeManager.h" />
+    <ClInclude Include="TitleCanvas.h" />
     <ClInclude Include="TurnManager.h" />
     <ClInclude Include="UIElement.h" />
     <ClInclude Include="UIManager.h" />
@@ -210,7 +214,9 @@
     <ClCompile Include="Animation.cpp" />
     <ClCompile Include="Animator.cpp" />
     <ClCompile Include="BaseWindow.cpp" />
+    <ClCompile Include="Bomb.cpp" />
     <ClCompile Include="Bullet.cpp" />
+    <ClCompile Include="Button.cpp" />
     <ClCompile Include="Canvas.cpp" />
     <ClCompile Include="Collider.cpp" />
     <ClCompile Include="CollisionManager.cpp" />
@@ -220,6 +226,7 @@
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="Floor.cpp" />
     <ClCompile Include="GDISelector.cpp" />
+    <ClCompile Include="Image.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="IscScene.cpp" />
     <ClCompile Include="KmjScene.cpp" />
@@ -240,6 +247,7 @@
     <ClCompile Include="TestWeapon2.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="TimeManager.cpp" />
+    <ClCompile Include="TitleCanvas.cpp" />
     <ClCompile Include="TurnManager.cpp" />
     <ClCompile Include="UIElement.cpp" />
     <ClCompile Include="UIManager.cpp" />

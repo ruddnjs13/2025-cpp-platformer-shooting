@@ -53,6 +53,9 @@
     <Filter Include="Engine\03. Object\Weapon\Test">
       <UniqueIdentifier>{7866a8dc-ee3e-408b-a1fe-32e5c36efa44}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\07. UI\UIElement">
+      <UniqueIdentifier>{91d94f7c-a74e-4816-b5be-c9d2e07a4c36}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="2025_winapi_framework_22.h">
@@ -173,13 +176,34 @@
     <ClInclude Include="Canvas.h">
       <Filter>Engine\07. UI</Filter>
     </ClInclude>
-    <ClInclude Include="UIElement.h">
-      <Filter>Engine\07. UI</Filter>
-    </ClInclude>
     <ClInclude Include="UIManager.h">
       <Filter>Engine\02. Manager</Filter>
     </ClInclude>
-    <ClInclude Include="Action.h">
+    <ClInclude Include="WeaponHolderComponent.h">
+      <Filter>Engine\06. Component</Filter>
+    </ClInclude>
+    <ClInclude Include="TestWeapon2.h">
+      <Filter>Engine\03. Object\Weapon\Test</Filter>
+    </ClInclude>
+    <ClInclude Include="TestPlayer.h">
+      <Filter>Engine\03. Object\Weapon\Test</Filter>
+    </ClInclude>
+    <ClInclude Include="Bomb.h">
+      <Filter>Engine\03. Object\Weapon</Filter>
+    </ClInclude>
+    <ClInclude Include="TitleCanvas.h">
+      <Filter>Engine\07. UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UIElement.h">
+      <Filter>Engine\07. UI\UIElement</Filter>
+    </ClInclude>
+    <ClInclude Include="Image.h">
+      <Filter>Engine\07. UI\UIElement</Filter>
+    </ClInclude>
+    <ClInclude Include="Button.h">
+      <Filter>Engine\07. UI\UIElement</Filter>
+    </ClInclude>
+    <ClInclude Include="MyAction.h">
       <Filter>Engine\01. Core</Filter>
     </ClInclude>
   </ItemGroup>
@@ -293,14 +317,33 @@
     <ClCompile Include="Canvas.cpp">
       <Filter>Engine\07. UI</Filter>
     </ClCompile>
-    <ClCompile Include="UIElement.cpp">
-      <Filter>Engine\07. UI</Filter>
-    </ClCompile>
     <ClCompile Include="UIManager.cpp">
       <Filter>Engine\02. Manager</Filter>
     </ClCompile>
-    <ClCompile Include="Floor.cpp">
-      <Filter>리소스 파일</Filter>
+    <ClCompile Include="WeaponHolderComponent.cpp">
+      <Filter>Engine\06. Component</Filter>
     </ClCompile>
+    <ClCompile Include="TestPlayer.cpp">
+      <Filter>Engine\03. Object\Weapon\Test</Filter>
+    </ClCompile>
+    <ClCompile Include="TestWeapon2.cpp">
+      <Filter>Engine\03. Object\Weapon\Test</Filter>
+    </ClCompile>
+    <ClCompile Include="Bomb.cpp">
+      <Filter>Engine\03. Object\Weapon</Filter>
+    </ClCompile>
+    <ClCompile Include="TitleCanvas.cpp">
+      <Filter>Engine\07. UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UIElement.cpp">
+      <Filter>Engine\07. UI\UIElement</Filter>
+    </ClCompile>
+    <ClCompile Include="Image.cpp">
+      <Filter>Engine\07. UI\UIElement</Filter>
+    </ClCompile>
+    <ClCompile Include="Button.cpp">
+      <Filter>Engine\07. UI\UIElement</Filter>
+    </ClCompile>
+    <ClCompile Include="Floor.cpp" />
   </ItemGroup>
 </Project>

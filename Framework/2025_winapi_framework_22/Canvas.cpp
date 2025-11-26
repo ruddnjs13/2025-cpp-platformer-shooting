@@ -22,6 +22,11 @@ void Canvas::Render(HDC dc)
 		element->Render(dc);
 }
 
+void Canvas::Release()
+{
+
+}
+
 void Canvas::AddUIElement(UIElement* uiElement)
 {
 	_vecUIElement.push_back(uiElement);

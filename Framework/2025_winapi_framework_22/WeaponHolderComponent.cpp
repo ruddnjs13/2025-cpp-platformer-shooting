@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "WeaponHolderComponent.h"
 #include "Weapon.h"
+#include "SceneManager.h"
 
 WeaponHolderComponent::WeaponHolderComponent()
 {
@@ -29,11 +30,11 @@ void WeaponHolderComponent::Render(HDC hDC)
 {
 }
 
-void WeaponHolderComponent::ChangeWeapon(Weapon* weapon, Vec2 pos, Vec2 size)
+void WeaponHolderComponent::ChangeWeapon(Weapon* weapon, Vec2 pos, Vec2 size, Vec2 angle)
 {
 	if (m_pCurrentWeapon != nullptr)
 	{
-		delete m_pCurrentWeapon;
+		GET_SINGLE(SceneManager)->RequestDestroy(m_pCurrentWeapon);
 		m_pCurrentWeapon = nullptr;
 	}
 
@@ -42,8 +43,17 @@ void WeaponHolderComponent::ChangeWeapon(Weapon* weapon, Vec2 pos, Vec2 size)
 
 	SetWeaponPos(pos);
 	SetWeaponSize(size);
+	SetWeaponRotation(angle);
 }
 
+
+void WeaponHolderComponent::SetWeaponRotation(Vec2 angle)
+{
+	if (m_pCurrentWeapon == nullptr)
+		return;
+
+	m_pCurrentWeapon->SetRotation(angle);
+}
 
 void WeaponHolderComponent::SetWeaponPos(Vec2 pos)
 {

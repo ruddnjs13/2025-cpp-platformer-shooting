@@ -4,6 +4,8 @@
 void UIManager::Init()
 {
 	m_curCanvas = nullptr;
+
+	//RegisterCanvas(CanvasType::Title, )
 }
 
 void UIManager::Update()
@@ -11,6 +13,14 @@ void UIManager::Update()
 	if (m_curCanvas == nullptr)
 		return;
 	m_curCanvas->Update();
+}
+
+
+void UIManager::Render(HDC _hdc)
+{
+	if (m_curCanvas == nullptr)
+		return;
+	m_curCanvas->Render(_hdc);
 }
 
 void UIManager::RegisterCanvas(const CanvasType canvasType, std::shared_ptr<Canvas> canvas)
@@ -24,7 +34,7 @@ void UIManager::SetCanvas(const CanvasType canvasType)
 {
 	if (m_curCanvas != nullptr)
 	{
-		m_curCanvas->Release();
+		//m_curCanvas->Release();
 		m_curCanvas = nullptr;
 	}
 

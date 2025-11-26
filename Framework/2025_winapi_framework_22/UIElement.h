@@ -1,5 +1,6 @@
+
 #pragma once
-class UIElement
+class  UIElement
 {
 public:
 	UIElement();
@@ -16,5 +17,6 @@ public:
 public:
 	Vec2 m_pos;
 	Vec2 m_size;
+
 };
 

@@ -39,12 +39,15 @@ TestPlayer::TestPlayer()
 	pos.y -= GetSize().y / 2.f;
 	pos.x += 10.f;
 
+	Vec2 angle = Vec2(0.f, 0.f);
+
 	m_pWeaponHolder->ChangeWeapon(new TestWeapon(),
 		{ pos },
-		{ 20.f,20.f });
+		{ 20.f,20.f }, angle);
 
 
 	GET_SINGLE(SceneManager)->GetCurScene()->AddObject(m_pWeaponHolder->GetCurrentWeapon(), Layer::ENEMY);
+	weaponCount = 0;
 }
 
 TestPlayer::~TestPlayer()
@@ -70,15 +73,17 @@ void TestPlayer::Update()
 	float factor = scaleSpeed + scaleDelta;
 	Scale({ factor, factor });
 
-	if(GET_KEY(KEY_TYPE::SPACE))
+	
+	if(GET_KEYDOWN(KEY_TYPE::SPACE))
 	{
 		Vec2 pos = GetPos();
 		pos.y -= GetSize().y / 2.f;
 		pos.x += 10.f;
-
+		Vec2 angle = Vec2(0.f, 0.f);
+		
 		m_pWeaponHolder->ChangeWeapon(new TestWeapon2(),
 			{ pos },
-			{ 20.f,20.f });
+			{ 20.f,20.f }, angle);
 
 
 		GET_SINGLE(SceneManager)->GetCurScene()->AddObject(m_pWeaponHolder->GetCurrentWeapon(), Layer::ENEMY);

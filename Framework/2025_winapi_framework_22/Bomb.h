@@ -1,15 +1,14 @@
 #pragma once
 #include "Object.h"
-#include "WeaponHolderComponent.h"
 #include <wtypes.h>
 
 class Texture;
-class TestPlayer :
+class Bomb :
     public Object
 {
 public:
-    TestPlayer();
-	~TestPlayer();
+    Bomb();
+	~Bomb();
 
 public:
 	void Update() override;
@@ -17,13 +16,13 @@ public:
 	void EnterCollision(Collider* _other)override;
 	void StayCollision(Collider* _other) override;
 	void ExitCollision(Collider* _other) override;
-	void SetWeaponCount(int count) { weaponCount = count; }
-
 private:
-	int weaponCount = 0;
-
-	WeaponHolderComponent* m_pWeaponHolder = nullptr;
-
+	void FadeOut();
+private:
+	float fadeTime = 3.f;
+	float damage = 0.f;
 	Texture* m_pTex = nullptr;
+
+
 };
 
