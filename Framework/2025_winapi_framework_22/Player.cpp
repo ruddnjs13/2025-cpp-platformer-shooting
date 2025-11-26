@@ -126,9 +126,12 @@ void Player::Update()
 		if (GET_KEY(KEY_TYPE::S)) angle -= 0.1f;
 		if (GET_KEYDOWN(KEY_TYPE::SPACE))
 		{
-			GetComponent<Rigidbody>()->AddImpulse({ 0, 10 });
+			
+			Rigidbody* rb = GetComponent<Rigidbody>();
+			rb->AddImpulse({ 0, -500 });
+			rb->SetGrounded(false);
 			CreateProjectile();
-			GET_SINGLE(TurnManager)->ChangeTurn(TurnType::Player2);
+			//GET_SINGLE(TurnManager)->ChangeTurn(TurnType::Player2);
 		}
 		
 	}
