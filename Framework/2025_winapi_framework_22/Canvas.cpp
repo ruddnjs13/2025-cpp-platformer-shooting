@@ -39,10 +39,5 @@ void Canvas::RemoveOjbect(UIElement* uiElement)
 	_vecUIElement.erase(iter);
 }
 
-void Canvas::Release()
-{
-
-}
-
 
 

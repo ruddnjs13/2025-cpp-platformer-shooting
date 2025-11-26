@@ -6,7 +6,9 @@ void TitleCanvas::Init()
 {
 	startBtn = Button();
 
-	//startBtn.Init(defaultTexture, hoverTexture);
+	Texture* defaultTexture = GET_SINGLE(ResourceManager)->GetTexture(L"Button");
+	Texture* hoverTexture = GET_SINGLE(ResourceManager)->GetTexture(L"Button");
+	startBtn.Init(defaultTexture, hoverTexture);
 
 	startBtn.SetPos({ 400,400 });
 	startBtn.SetSize({400,100});
