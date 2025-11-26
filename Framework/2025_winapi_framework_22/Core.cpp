@@ -5,6 +5,7 @@
 #include "SceneManager.h"
 #include "ResourceManager.h"
 #include "CollisionManager.h"
+#include "UIManager.h"
 bool Core::Init(HWND _hWnd)
 {
     m_hWnd = _hWnd;
@@ -52,6 +53,7 @@ void Core::MainUpdate()
     GET_SINGLE(InputManager)->Update();
     GET_SINGLE(ResourceManager)->FmodUpdate();
     GET_SINGLE(SceneManager)->Update();
+    GET_SINGLE(UIManager)->Update();
 
     //Vec2 pos = m_obj.GetPos();
     //
@@ -83,7 +85,7 @@ void Core::MainRender()
     
     // 2. draw
     GET_SINGLE(SceneManager)->Render(m_hBackDC);
-
+    GET_SINGLE(UIManager)->Render(m_hDC);
     // 3. display
     ::BitBlt(m_hDC, 0, 0, WINDOW_WIDTH, WINDOW_HEIGHT, m_hBackDC, 0,0,SRCCOPY);
 

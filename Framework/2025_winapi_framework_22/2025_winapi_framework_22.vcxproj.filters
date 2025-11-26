@@ -53,6 +53,9 @@
     <Filter Include="Engine\03. Object\Weapon\Test">
       <UniqueIdentifier>{7866a8dc-ee3e-408b-a1fe-32e5c36efa44}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\07. UI\UIElements">
+      <UniqueIdentifier>{9a45d35b-aef4-4e6f-815b-6c11e07913b7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="2025_winapi_framework_22.h">
@@ -145,7 +148,6 @@
     <ClInclude Include="Rigidbody.h">
       <Filter>Engine\06. Component\Physics</Filter>
     </ClInclude>
-    <ClInclude Include="Floor.h" />
     <ClInclude Include="LkwScene.h">
       <Filter>Engine\04. Scene</Filter>
     </ClInclude>
@@ -173,14 +175,24 @@
     <ClInclude Include="Canvas.h">
       <Filter>Engine\07. UI</Filter>
     </ClInclude>
-    <ClInclude Include="UIElement.h">
-      <Filter>Engine\07. UI</Filter>
-    </ClInclude>
     <ClInclude Include="UIManager.h">
       <Filter>Engine\02. Manager</Filter>
     </ClInclude>
-    <ClInclude Include="Action.h">
+    <ClInclude Include="MyAction.h">
       <Filter>Engine\01. Core</Filter>
+    </ClInclude>
+    <ClInclude Include="TitleCanvas.h">
+      <Filter>Engine\07. UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UIElement.h">
+      <Filter>Engine\07. UI\UIElements</Filter>
+    </ClInclude>
+    <ClInclude Include="Button.h">
+      <Filter>Engine\07. UI\UIElements</Filter>
+    </ClInclude>
+    <ClInclude Include="Floor.h" />
+    <ClInclude Include="Image.h">
+      <Filter>Engine\07. UI\UIElements</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -293,14 +305,23 @@
     <ClCompile Include="Canvas.cpp">
       <Filter>Engine\07. UI</Filter>
     </ClCompile>
-    <ClCompile Include="UIElement.cpp">
-      <Filter>Engine\07. UI</Filter>
-    </ClCompile>
     <ClCompile Include="UIManager.cpp">
       <Filter>Engine\02. Manager</Filter>
     </ClCompile>
     <ClCompile Include="Floor.cpp">
       <Filter>리소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="TitleCanvas.cpp">
+      <Filter>Engine\07. UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UIElement.cpp">
+      <Filter>Engine\07. UI\UIElements</Filter>
+    </ClCompile>
+    <ClCompile Include="Button.cpp">
+      <Filter>Engine\07. UI\UIElements</Filter>
+    </ClCompile>
+    <ClCompile Include="Image.cpp">
+      <Filter>Engine\07. UI\UIElements</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
