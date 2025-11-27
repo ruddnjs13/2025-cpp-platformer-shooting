@@ -28,7 +28,7 @@ Player::Player()
 		{0.f,150.f},
 		{50.f,50.f},
 		{50.f,0.f},
-		1,0.1f
+		5,0.1f
 	);
 	animator->Play(L"JiwooFront");
 }
@@ -126,13 +126,17 @@ void Player::Update()
 		if (GET_KEY(KEY_TYPE::S)) angle -= 0.1f;
 		if (GET_KEYDOWN(KEY_TYPE::SPACE))
 		{
-			
 			Rigidbody* rb = GetComponent<Rigidbody>();
-			Vec2 jumpPower{ 0, -50 };
-			rb->AddImpulse(jumpPower * 5);
-			rb->SetGrounded(false);
-			CreateProjectile();
-			//GET_SINGLE(TurnManager)->ChangeTurn(TurnType::Player2);
+			if (rb->IsGrounded())
+			{
+				Jump();
+				//CreateProjectile();
+			}
+			
+		}
+		if (GET_KEYDOWN(KEY_TYPE::F))
+		{
+			GET_SINGLE(TurnManager)->ChangeTurn(TurnType::Player2);
 		}
 		
 	}
@@ -142,6 +146,14 @@ void Player::Update()
 		if (GET_KEY(KEY_TYPE::RIGHT)) dir.x += 1.f;
 		if (GET_KEY(KEY_TYPE::UP)) angle += 0.1f;
 		if (GET_KEY(KEY_TYPE::DOWN)) angle -= 0.1f;
+		if (GET_KEY(KEY_TYPE::RSHIFT))
+		{
+			Rigidbody* rb = GetComponent<Rigidbody>();
+			if (rb->IsGrounded())
+			{
+				Jump();
+			}
+		}
 		if (GET_KEYDOWN(KEY_TYPE::ENTER))
 		{
 			CreateProjectile();
@@ -176,6 +188,14 @@ void Player::CreateProjectile()
 	proj->SetDir({0.f, -1.f});
 	GET_SINGLE(SceneManager)->GetCurScene()->AddObject(proj, Layer::PROJECTILE);
 	
+}
+
+void Player::Jump()
+{
+	Rigidbody* rb = GetComponent<Rigidbody>();
+	rb->SetGrounded(false);
+	Vec2 jumpPower{ 0, -50 };
+	rb->AddImpulse(jumpPower * 5);
 }
 
 
