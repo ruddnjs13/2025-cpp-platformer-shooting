@@ -19,6 +19,7 @@ public:
 	void SetSize(Vec2 _size) { m_size = _size; }
 	const Vec2& GetPos() const { return m_pos; }
 	const Vec2& GetSize()const { return m_size; }
+	const double GetAngle() const { return m_angle; }
 	bool GetIsDead() const { return m_isDie; }
 	void SetDead() { m_isDie = true; }
 protected:
@@ -26,6 +27,11 @@ protected:
 	{
 		m_pos.x += _delta.x;
 		m_pos.y += _delta.y;
+	}
+	void Angle(double _angle)
+	{
+		m_angle /= 360;
+		m_angle = _angle;
 	}
 	void Scale(Vec2 _s)
 	{
@@ -61,6 +67,7 @@ private:
 	bool m_isDie;
 	Vec2 m_pos;
 	Vec2 m_size;
+	double m_angle;
 	vector<Component*> m_vecComponents;
 };
 

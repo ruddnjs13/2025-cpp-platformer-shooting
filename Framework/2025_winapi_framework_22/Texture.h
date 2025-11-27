@@ -13,7 +13,7 @@ public:
 public:
     void Load(const wstring& _filePath);
 private:
-    HBITMAP m_hBit;
+    HBITMAP m_hBit;    
     HDC     m_hDC;
     BITMAP  m_bitInfo;
 };

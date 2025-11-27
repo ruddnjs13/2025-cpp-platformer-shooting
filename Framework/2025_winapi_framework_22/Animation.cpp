@@ -121,6 +121,9 @@ void Animation::Render(HDC _hdc)
 
     Object* obj = m_owner->GetOwner();
     Vec2 pos = obj->GetPos();
+    double angle = obj->GetAngle();
+
+
 
     const tAnimFrame& fr = m_frames[(size_t)m_curFrame];
     pos = pos + fr.vOffset;
@@ -136,9 +139,107 @@ void Animation::Render(HDC _hdc)
     int sy = (int)fr.vLT.y;
     int sw = (int)fr.vSlice.x;
     int sh = (int)fr.vSlice.y;
-    BOOL debug = TransparentBlt(_hdc,
-        dx, dy, dw, dh,
-        m_tex->GetTextureDC(),
+    
+    double rad = angle * (PI / 180);
+    rad *= -1;
+
+    double sinA = std::sin(rad);
+    double cosA = std::cos(rad);
+
+    POINT points[4];
+
+    int cx = sw / 2;
+    int cy = sh / 2;
+
+    points[0] = { -cx, -cy };
+    points[1] = { cx,- cy };
+    points[2] = { -cx, cy };
+    points[3] = { cx, cy };
+
+
+    POINT dPoints[4];
+
+    for (int i = 0; i < 4; ++i)
+    {
+        dPoints[i].x = (LONG)(points[i].x * cosA - points[i].y * sinA);
+        dPoints[i].y = (LONG)(points[i].x * sinA + points[i].y * cosA);
+    }
+
+    LONG maxX = dPoints[0].x;
+    LONG maxY = dPoints[0].y;
+    LONG minX = dPoints[0].x;
+    LONG minY = dPoints[0].y;
+
+    for (int i = 0; i < 4; ++i)
+    {
+        maxX = std::max(dPoints[i].x, maxX);
+        minX = std::min(dPoints[i].x, minX);
+        maxY = std::max(dPoints[i].y, maxY);
+        minY = std::min(dPoints[i].y, minY);
+    }
+
+    HDC memDC = ::CreateCompatibleDC(m_tex->GetTextureDC());
+    HBITMAP hBit = ::CreateCompatibleBitmap(m_tex->GetTextureDC(),
+        maxX - minX,
+        maxY - minY);
+    HBITMAP oldBit = (HBITMAP)SelectObject(memDC, hBit);
+    
+    RECT rect = { 0, 0, maxX - minX, maxY - minY };
+    HBRUSH brush = CreateSolidBrush(RGB(255, 0, 255));
+    FillRect(memDC, &rect, brush);
+    DeleteObject(brush);
+        
+    POINT rPoints[3];
+
+    for (int i = 0; i < 4; ++i)
+    {
+        if (minX < 0)
+        {
+            dPoints[i].x -= minX;
+            maxX = std::max(dPoints[i].x, maxX);
+        }
+        if (minY < 0)
+        {
+            dPoints[i].y -= minY;
+            maxY = std::max(dPoints[i].y, maxY);
+        }
+
+        if ( i < 3)
+        {
+            rPoints[i] = dPoints[i];
+        }
+    }
+
+    if (minX < 0) minX = 0;
+    if (minY < 0) minY = 0;
+
+
+
+    ::PlgBlt(memDC,
+        rPoints, m_tex->GetTextureDC(),
         sx, sy, sw, sh,
+        NULL, 0, 0);
+    HDC scaleDC = ::CreateCompatibleDC(m_tex->GetTextureDC());
+    HBITMAP sHBit = ::CreateCompatibleBitmap(m_tex->GetTextureDC(), dw, dh);
+    HBITMAP oldScaleBit = (HBITMAP)SelectObject(scaleDC, sHBit);
+
+    ::StretchBlt(scaleDC,
+        (dw - (maxX - minX)) / 2, (dh - (maxX-minY)) / 2, maxX - minX, maxY - minY,
+        memDC,
+        0, 0, maxX-minX, maxY-minY, SRCCOPY);
+
+
+
+    BOOL debug = ::TransparentBlt(_hdc,
+        dx, dy, dw, dh,
+        scaleDC,
+        0, 0, dw, dh,
         RGB(255, 0, 255));
+
+    DeleteDC(memDC);
+    DeleteDC(scaleDC);
+    DeleteObject(hBit);
+    DeleteObject(sHBit);
+    DeleteObject(oldBit);
+    DeleteObject(oldScaleBit);
 }

@@ -40,3 +40,5 @@ void Canvas::RemoveOjbect(UIElement* uiElement)
 }
 
 
+
+

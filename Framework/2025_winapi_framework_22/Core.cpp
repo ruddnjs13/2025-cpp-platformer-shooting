@@ -85,7 +85,7 @@ void Core::MainRender()
     
     // 2. draw
     GET_SINGLE(SceneManager)->Render(m_hBackDC);
-    GET_SINGLE(UIManager)->Render(m_hDC);
+    GET_SINGLE(UIManager)->Render(m_hBackDC);
     // 3. display
     ::BitBlt(m_hDC, 0, 0, WINDOW_WIDTH, WINDOW_HEIGHT, m_hBackDC, 0,0,SRCCOPY);
 

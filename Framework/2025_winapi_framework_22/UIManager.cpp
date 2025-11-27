@@ -1,11 +1,12 @@
 #include "pch.h"
 #include "UIManager.h"
+#include "TitleCanvas.h"
 
 void UIManager::Init()
 {
 	m_curCanvas = nullptr;
 
-	//RegisterCanvas(CanvasType::Title, )
+	RegisterCanvas(CanvasType::Title, std::make_shared<TitleCanvas>());
 }
 
 void UIManager::Update()
@@ -21,20 +22,21 @@ void UIManager::Render(HDC _hdc)
 	if (m_curCanvas == nullptr)
 		return;
 	m_curCanvas->Render(_hdc);
+	cout << "·»´õÁß";
 }
 
 void UIManager::RegisterCanvas(const CanvasType canvasType, std::shared_ptr<Canvas> canvas)
 {
 	if (canvas == NULL)
 		return;
-	m_mapCanvas.insert(m_mapCanvas.end(), {canvasType, canvas});
+	m_mapCanvas.insert({canvasType, canvas});
 }
 
 void UIManager::SetCanvas(const CanvasType canvasType)
 {
 	if (m_curCanvas != nullptr)
 	{
-		//m_curCanvas->Release();
+		m_curCanvas->Release();
 		m_curCanvas = nullptr;
 	}
 

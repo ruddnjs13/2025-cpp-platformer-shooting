@@ -20,6 +20,7 @@ Player::Player()
 	m_pTex = GET_SINGLE(ResourceManager)->GetTexture(L"Jiwoo");
 	AddComponent<Collider>();
 	AddComponent<Rigidbody>();
+	//GetComponent<Rigidbody>()->SetUseGravity(false);
 	auto* animator = AddComponent<Animator>();
 	animator->CreateAnimation
 	(L"JiwooFront",
@@ -116,23 +117,48 @@ void Player::Update()
 	//SetPos(pos);
 
 	Vec2 dir = {};
-	if (GET_KEY(KEY_TYPE::W)) dir.y -= 1.f;
-	if (GET_KEY(KEY_TYPE::S)) dir.y += 1.f;
-	if (GET_KEY(KEY_TYPE::A)) dir.x -= 1.f;
-	if (GET_KEY(KEY_TYPE::D)) dir.x += 1.f;
+	double angle = GetAngle();
+	if (CheckPlayerTurn(TurnType::Player1))
+	{
+		if (GET_KEY(KEY_TYPE::A)) dir.x -= 1.f;
+		if (GET_KEY(KEY_TYPE::D)) dir.x += 1.f;
+		if (GET_KEY(KEY_TYPE::W)) angle += 0.1f;
+		if (GET_KEY(KEY_TYPE::S)) angle -= 0.1f;
+		if (GET_KEYDOWN(KEY_TYPE::SPACE))
+		{
+			
+			Rigidbody* rb = GetComponent<Rigidbody>();
+			rb->AddImpulse({ 0, -500 });
+			rb->SetGrounded(false);
+			CreateProjectile();
+			//GET_SINGLE(TurnManager)->ChangeTurn(TurnType::Player2);
+		}
+		
+	}
+	else if (CheckPlayerTurn(TurnType::Player2))
+	{
+		if (GET_KEY(KEY_TYPE::LEFT)) dir.x -= 1.f;
+		if (GET_KEY(KEY_TYPE::RIGHT)) dir.x += 1.f;
+		if (GET_KEY(KEY_TYPE::UP)) angle += 0.1f;
+		if (GET_KEY(KEY_TYPE::DOWN)) angle -= 0.1f;
+		if (GET_KEYDOWN(KEY_TYPE::ENTER))
+		{
+			CreateProjectile();
+			GET_SINGLE(TurnManager)->ChangeTurn(TurnType::Player1);
+		}
+	}
 	Translate({dir.x * fDT * 200.f, dir.y * fDT * 200.f});
+	Angle(angle);
 
 	// Q, E 크게 작게 
-	float scaleDelta = 0.f;
-	float scaleSpeed = 1.f;
-	if (GET_KEY(KEY_TYPE::Q))
-		scaleDelta += scaleSpeed * fDT;
-	if (GET_KEY(KEY_TYPE::E))
-		scaleDelta -= scaleSpeed * fDT;
-	float factor = scaleSpeed + scaleDelta;
-	Scale({ factor, factor });
-	if (GET_KEYDOWN(KEY_TYPE::SPACE))
-		CreateProjectile();
+	//float scaleDelta = 0.f;
+	//float scaleSpeed = 1.f;
+	//if (GET_KEY(KEY_TYPE::Q))
+	//	scaleDelta += scaleSpeed * fDT;
+	//if (GET_KEY(KEY_TYPE::E))
+	//	scaleDelta -= scaleSpeed * fDT;
+	//float factor = scaleSpeed + scaleDelta;
+	//Scale({ factor, factor });
 }
 
 
