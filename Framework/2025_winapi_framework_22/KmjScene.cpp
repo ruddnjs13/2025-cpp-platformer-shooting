@@ -23,6 +23,7 @@ void KmjScene::Init()
 			cout << "Play Turn Event Call" << endl;
 		});
 
+
 	Object* obj = new TestPlayer;
 	obj->SetPos({ WINDOW_WIDTH / 2, 300 });
 	obj->SetSize({ 100.f, 100.f });

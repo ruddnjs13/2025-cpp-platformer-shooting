@@ -66,7 +66,6 @@
             }).detach();
     }
 
-
     /// <summary>
     /// 이벤트 구독을 모두 해제하는 코드
     /// </summary>
@@ -80,7 +79,6 @@
 
         m_eventMap.clear();
     }
-
 
     /// <summary>
     /// 이벤트를 실행시켜주는 코드

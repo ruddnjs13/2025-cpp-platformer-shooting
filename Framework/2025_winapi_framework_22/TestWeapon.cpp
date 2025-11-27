@@ -6,11 +6,15 @@
 #include "Texture.h"
 #include "TestBullet.h"
 #include "SceneManager.h"
+#include <thread>
 
 
 TestWeapon::TestWeapon()
 {
-	m_pTex = GET_SINGLE(ResourceManager)->GetTexture(L"Gun1");
+	m_pTex = GET_SINGLE(ResourceManager)->GetTexture(L"Bullet");
+
+	m_angle.x = 1.f;
+	m_angle.y = 0.f;
 	
 }
 
@@ -22,6 +26,19 @@ void TestWeapon::Update()
 {
 	if (GET_KEYDOWN(KEY_TYPE::SPACE))
 		Shoot();
+
+	if (GET_KEYDOWN(KEY_TYPE::Q))
+	{
+		if (m_angle.y == 0.f)
+		{
+			m_angle.y = -0.2f;
+		}
+		else
+		{
+			m_angle.x = 1;
+			m_angle.y *= 3.5f;
+		}
+	}
 
 }
 
@@ -54,12 +71,24 @@ void TestWeapon::Shoot()
 	pos.y -= GetSize().y / 2.f;
 	proj->SetPos(pos);
 	proj->SetSize({ 30.f,30.f });
-	proj->SetDir({ 0.f, 1.f });
+	proj->SetDir(m_angle);
 
-
-	
 
 	GET_SINGLE(SceneManager)->GetCurScene()->AddObject(proj, Layer::PROJECTILE);
+
+	Vec2 vec = GetOwner()->GetPos();
+
+	vec.x -= 4.f;
+
+	GetOwner()->SetPos(vec);
+
+	m_offsetPos.x -= 1.f;
+
+	std::thread([this]()
+		{
+			std::this_thread::sleep_for(std::chrono::milliseconds(500));
+			m_offsetPos.y += 1.f;
+		}).detach();
 
 	
 }

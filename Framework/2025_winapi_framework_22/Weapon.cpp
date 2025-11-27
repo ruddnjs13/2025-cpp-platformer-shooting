@@ -3,9 +3,6 @@
 #include "ResourceManager.h"
 
 Weapon::Weapon()
-	: m_pos{}
-	, m_size{}
-	, m_owner{ nullptr }
 {
 
 }

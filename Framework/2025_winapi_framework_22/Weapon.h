@@ -38,9 +38,9 @@ public:
 protected:
 	Vec2 m_offsetPos;
 	bool isShoot = true; 
+	Vec2 m_angle;
 private:
 	Object* m_owner;
-	Vec2 m_angle;
 	Vec2 m_pos;
 	Vec2 m_size;
 };
