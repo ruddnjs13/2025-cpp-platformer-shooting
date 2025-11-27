@@ -17,7 +17,7 @@ public:
 
 public:
 	void SetRotation(Vec2 _angle);
-	Vec2 GetAngle() const { return m_angle; }
+	//Vec2 GetAngle() const { return m_angle; }
 
 	void SetPos(Vec2 _pos) { m_pos = _pos; }
 	void SetSize(Vec2 _size) { m_size = _size; }
