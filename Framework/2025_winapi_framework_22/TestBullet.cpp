@@ -12,7 +12,7 @@
 
 TestBullet::TestBullet()
 {
-	m_pTex = GET_SINGLE(ResourceManager)->GetTexture(L"Bullet");
+	m_pTex = GET_SINGLE(ResourceManager)->GetTexture(L"Gun1Bullet");
 	auto* col = AddComponent<Collider>();
 	col->SetName(L"PlayerBullet");
 	col->SetTrigger(true);
@@ -46,12 +46,6 @@ void TestBullet::Render(HDC _hdc)
 void TestBullet::Update()
 {
 	Translate({ m_dir.x * 500.f * fDT, m_dir.y * 500.f * fDT });
-
-	if(GET_KEYDOWN(KEY_TYPE::H))
-	{
-		GET_SINGLE(SceneManager)->RequestDestroy(this);
-		BurstBullet();
-	}
 }
 
 void TestBullet::BurstBullet()

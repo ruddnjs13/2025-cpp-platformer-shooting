@@ -9,12 +9,6 @@
 
 void KmjScene::Init()
 {
-	Object* obj = new TestPlayer;
-	obj->SetPos({ WINDOW_WIDTH / 2, 300 });
-	obj->SetSize({ 100.f, 100.f });
-	AddObject(obj, Layer::PLAYER);
-
-	
 	GET_SINGLE(TurnManager)->RaiseEvent(TurnType::Waiting, [this]()
 		{
 			cout << "Waiting Turn Event Call" << endl;
@@ -29,20 +23,20 @@ void KmjScene::Init()
 			cout << "Play Turn Event Call" << endl;
 		});
 
+	Object* obj = new TestPlayer;
+	obj->SetPos({ WINDOW_WIDTH / 2, 300 });
+	obj->SetSize({ 100.f, 100.f });
+	AddObject(obj, Layer::PLAYER);
+
 	Spawn<Floor>(Layer::DEFAULT, { WINDOW_WIDTH / 2, 600 }, { 100.f,100.f });
 
 	GET_SINGLE(CollisionManager)->CheckLayer(Layer::Boom, Layer::DEFAULT);
 	GET_SINGLE(CollisionManager)->CheckLayer(Layer::PROJECTILE, Layer::DEFAULT);
-
 }
 
 void KmjScene::Update()
 {
-
-
 	Scene::Update();
-
-
 
 	if (GET_KEYDOWN(KEY_TYPE::Q))
 		GET_SINGLE(TurnManager)->ChangeTurn(TurnType::Select);
@@ -50,7 +44,4 @@ void KmjScene::Update()
 		GET_SINGLE(TurnManager)->ChangeTurn(TurnType::Play);
 	if (GET_KEYDOWN(KEY_TYPE::E))
 		GET_SINGLE(TurnManager)->ChangeTurn(TurnType::Waiting);
-	
-
-		
 }

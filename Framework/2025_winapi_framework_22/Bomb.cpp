@@ -9,7 +9,7 @@
 
 Bomb::Bomb()
 {
-	m_pTex = GET_SINGLE(ResourceManager)->GetTexture(L"Plane");
+	m_pTex = GET_SINGLE(ResourceManager)->GetTexture(L"Explosion");
 
 	auto* col = AddComponent<Collider>();
 	col->SetName(L"Bomb");

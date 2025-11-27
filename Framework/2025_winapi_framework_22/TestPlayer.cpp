@@ -14,6 +14,7 @@
 #include "TestPlayer.h"
 #include "TestWeapon2.h"
 #include "TestWeapon.h"
+#include "TurnManager.h"
 
 TestPlayer::TestPlayer()
 {
@@ -48,6 +49,7 @@ TestPlayer::TestPlayer()
 
 	GET_SINGLE(SceneManager)->GetCurScene()->AddObject(m_pWeaponHolder->GetCurrentWeapon(), Layer::ENEMY);
 	weaponCount = 0;
+
 }
 
 TestPlayer::~TestPlayer()
