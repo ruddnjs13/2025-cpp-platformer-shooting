@@ -33,10 +33,13 @@ public:
 	{
 		return m_pos;
 	}
+	Object* GetOwner()  { return m_owner; }
 
+protected:
+	Vec2 m_offsetPos;
+	bool isShoot = true; 
 private:
 	Object* m_owner;
-	Vec2 m_offsetPos;
 	Vec2 m_angle;
 	Vec2 m_pos;
 	Vec2 m_size;
