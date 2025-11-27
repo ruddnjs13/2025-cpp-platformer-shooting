@@ -22,16 +22,16 @@ public:
 	const double GetAngle() const { return m_angle; }
 	bool GetIsDead() const { return m_isDie; }
 	void SetDead() { m_isDie = true; }
+	void Angle(double _angle)
+	{
+		m_angle /= 360;
+		m_angle = _angle;
+	}
 protected:
 	void Translate(Vec2 _delta)
 	{
 		m_pos.x += _delta.x;
 		m_pos.y += _delta.y;
-	}
-	void Angle(double _angle)
-	{
-		m_angle /= 360;
-		m_angle = _angle;
 	}
 	void Scale(Vec2 _s)
 	{

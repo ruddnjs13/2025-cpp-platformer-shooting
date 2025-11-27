@@ -128,7 +128,8 @@ void Player::Update()
 		{
 			
 			Rigidbody* rb = GetComponent<Rigidbody>();
-			rb->AddImpulse({ 0, -500 });
+			Vec2 jumpPower{ 0, -50 };
+			rb->AddImpulse(jumpPower * 5);
 			rb->SetGrounded(false);
 			CreateProjectile();
 			//GET_SINGLE(TurnManager)->ChangeTurn(TurnType::Player2);
