@@ -188,7 +188,8 @@ void ResourceManager::RegisterTexture()
 	LoadTexture(L"Bullet", L"Texture\\Bullet.bmp");
 	LoadTexture(L"Jiwoo", L"Texture\\jiwoo.bmp");
 	LoadTexture(L"Button", L"Texture\\Btn.bmp");
-	LoadTexture(L"Gun1", L"Texture\\Revolver.bmp");
+	//LoadTexture(L"Gun1", L"Texture\\Revolver.bmp");
+	LoadTexture(L"Gun1", L"Texture\\GGG.bmp");
 	LoadTexture(L"Gun1Bullet", L"Texture\\Bullet1.bmp");
 	LoadTexture(L"Explosion", L"Texture\\Explosion.bmp");
 }

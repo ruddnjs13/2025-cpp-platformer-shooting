@@ -28,7 +28,7 @@ Player::Player()
 		{0.f,150.f},
 		{50.f,50.f},
 		{50.f,0.f},
-		5,0.1f
+		1,0.1f
 	);
 	animator->Play(L"JiwooFront");
 }

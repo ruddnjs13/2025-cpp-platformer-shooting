@@ -7,9 +7,10 @@
 #include "TestBullet.h"
 #include "SceneManager.h"
 
+
 TestWeapon::TestWeapon()
 {
-	m_pTex = GET_SINGLE(ResourceManager)->GetTexture(L"Plane");
+	m_pTex = GET_SINGLE(ResourceManager)->GetTexture(L"Gun1");
 	
 }
 
@@ -59,4 +60,6 @@ void TestWeapon::Shoot()
 	
 
 	GET_SINGLE(SceneManager)->GetCurScene()->AddObject(proj, Layer::PROJECTILE);
+
+	
 }
