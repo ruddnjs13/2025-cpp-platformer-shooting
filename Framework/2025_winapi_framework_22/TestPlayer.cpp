@@ -87,8 +87,7 @@ void TestPlayer::Update()
 			{ pos },
 			{ 20.f,20.f }, angle);
 
-
-		GET_SINGLE(SceneManager)->GetCurScene()->AddObject(m_pWeaponHolder->GetCurrentWeapon(), Layer::ENEMY);
+		GET_SINGLE(SceneManager)->GetCurScene()->AddObject(m_pWeaponHolder->GetCurrentWeapon(), Layer::Weapon);
 	}
 }
 

@@ -22,11 +22,11 @@ void TestWeapon2::Update()
 {
 	if (GET_KEYDOWN(KEY_TYPE::SPACE) )
 		Shoot();
-
 }
 
 void TestWeapon2::Rotate()
 {
+
 }
 
 void TestWeapon2::Render(HDC _hdc)

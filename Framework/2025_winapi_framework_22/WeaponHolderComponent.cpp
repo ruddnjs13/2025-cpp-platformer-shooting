@@ -24,6 +24,14 @@ void WeaponHolderComponent::LateUpdate()
 	pos.x += 20.f;
 
 	m_pCurrentWeapon->SetPos(pos + m_pCurrentWeapon->GetOffSetPos());
+
+	double angle =  m_pCurrentWeapon->GetAngle();
+
+	angle += 1;
+
+	//m_pCurrentWeapon->Angle
+
+
 }
 
 void WeaponHolderComponent::Render(HDC hDC)
