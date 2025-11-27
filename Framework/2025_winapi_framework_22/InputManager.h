@@ -5,7 +5,7 @@ enum class KEY_TYPE
 	Q, W, E, R, T, Y, U, I, O, P,
 	A, S, D, F, G, H, J, K, L,
 	Z, X, C, V, B, N, M,
-	CTRL, LALT, LSHIFT, SPACE,
+	CTRL, LALT, LSHIFT, RSHIFT, SPACE,
 	ENTER, TAB, ESC, LBUTTON, RBUTTON,
 	NUM_1, NUM_2, NUM_3, NUM_4, LAST
 	// LAST의미: 끝이라는 뜻이야
@@ -54,7 +54,7 @@ private:
 	'T','Y','U','I','O','P',
 	'A','S','D','F','G','H','J','K','L',
 	'Z','X','C','V','B','N','M',
-	VK_CONTROL, VK_LMENU, VK_LSHIFT, VK_SPACE,
+	VK_CONTROL, VK_LMENU, VK_LSHIFT, VK_RSHIFT, VK_SPACE,
 	VK_RETURN, VK_TAB, VK_ESCAPE,
 	VK_LBUTTON, VK_RBUTTON,'1','2','3','4'};
 
