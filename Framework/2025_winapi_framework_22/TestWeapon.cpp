@@ -31,12 +31,15 @@ void TestWeapon::Update()
 	{
 		if (m_angle.y == 0.f)
 		{
-			m_angle.y = -0.2f;
+			cout << "야ㅕ기디임마";
+			m_angle.y = -0.5f;
 		}
 		else
 		{
-			m_angle.x = 1;
-			m_angle.y *= 3.5f;
+			m_angle.x = 0.3f;
+			m_angle.y = -0.5f;
+			float a = std::atan2(m_angle.y, m_angle.x);
+			cout << a << endl;
 		}
 	}
 

@@ -31,25 +31,8 @@ void TestWeapon2::Update()
 
 	if (GET_KEYDOWN(KEY_TYPE::Q))
 	{
-		if (m_angle.y == 0.f)
-		{
-			m_angle.y = -0.2f;
-		}
-		else
-		{
-			m_angle.x = 1;
-			m_angle.y *= 3.5f;
-		}
+		SetShootAngle(45);
 	}
-
-	//double angle = GetAngle();
-	//angle += 0.001f;
-	//
-	//cout << angle << endl;
-	//
-	//Angle(angle);
-	//
-	//cout << GetAngle() << endl;
 }
 
 void TestWeapon2::Rotate()

@@ -35,6 +35,8 @@ public:
 	}
 	Object* GetOwner()  { return m_owner; }
 
+	void SetShootAngle(float angle);
+
 protected:
 	Vec2 m_offsetPos;
 	bool isShoot = true; 

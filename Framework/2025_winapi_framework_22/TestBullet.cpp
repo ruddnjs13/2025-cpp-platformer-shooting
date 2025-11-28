@@ -8,12 +8,14 @@
 #include "SceneManager.h"
 #include "TurnManager.h"
 #include "InputManager.h"
+#include "Rigidbody.h"
 #include "Bomb.h"
 
 TestBullet::TestBullet()
 {
 	m_pTex = GET_SINGLE(ResourceManager)->GetTexture(L"Gun1Bullet");
 	auto* col = AddComponent<Collider>();
+	AddComponent<Rigidbody>();
 	col->SetName(L"PlayerBullet");
 	col->SetTrigger(true);
 }
