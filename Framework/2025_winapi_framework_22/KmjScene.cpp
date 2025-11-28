@@ -9,19 +9,8 @@
 
 void KmjScene::Init()
 {
-	GET_SINGLE(TurnManager)->RaiseEvent(TurnType::Waiting, [this]()
-		{
-			cout << "Waiting Turn Event Call" << endl;
-		});
-	GET_SINGLE(TurnManager)->RaiseEvent(TurnType::Select, [this]()
-		{
-			cout << "Select Turn Event Call" << endl;
-		});
 
-	GET_SINGLE(TurnManager)->RaiseEvent(TurnType::Play, [this]()
-		{
-			cout << "Play Turn Event Call" << endl;
-		});
+
 
 	Object* obj = new TestPlayer;
 	obj->SetPos({ WINDOW_WIDTH / 2, 300 });

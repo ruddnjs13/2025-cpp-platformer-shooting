@@ -7,22 +7,17 @@
 #include "Texture.h"
 #include "TestBullet.h"
 #include "SceneManager.h"
+#include "Collider.h"
 #include "Animator.h"
 #include <thread>
 
 TestWeapon2::TestWeapon2()
 {
 	m_pTex = GET_SINGLE(ResourceManager)->GetTexture(L"Gun1");
-		auto* animator = AddComponent<Animator>();
-	animator->CreateAnimation
-	(L"WeaponTest",
-		m_pTex,
-		{ 0.f,0.f },
-		{ 32.f,32.f },
-		{ 0.f,0.f },
-		1, 0.1f
-	);
-	animator->Play(L"WeaponTest");
+
+
+	m_angle.x = 1.f;
+	m_angle.y = 0.f;
 }
 
 TestWeapon2::~TestWeapon2()
@@ -34,12 +29,10 @@ void TestWeapon2::Update()
 	if (GET_KEYDOWN(KEY_TYPE::SPACE) )
 		Shoot();
 
-	//double angle = GetAngle();
-	//angle += 0.001f;
-
-	//cout << angle << endl;
-
-	//Angle(angle);
+	if (GET_KEYDOWN(KEY_TYPE::Q))
+	{
+		SetShootAngle(45);
+	}
 }
 
 void TestWeapon2::Rotate()
@@ -51,17 +44,18 @@ void TestWeapon2::Render(HDC _hdc)
 	Vec2 pos = GetPos();
 	Vec2 size = GetSize();
 
-	//LONG width = m_pTex->GetWidth();
-	//LONG height = m_pTex->GetHeight();
+	LONG width = m_pTex->GetWidth();
+	LONG height = m_pTex->GetHeight();
 
-	//::TransparentBlt(_hdc
-	//	, (int)(pos.x - size.x / 2)
-	//	, (int)(pos.y - size.y / 2)
-	//	, size.x
-	//	, size.y
-	//	, m_pTex->GetTextureDC()
-	//	, 0, 0, width, height,
-	//	RGB(255, 0, 255));
+	::TransparentBlt(_hdc
+		, (int)(pos.x - size.x / 2)
+		, (int)(pos.y - size.y / 2)
+		, size.x
+		, size.y
+		, m_pTex->GetTextureDC()
+		, 0, 0, width, height,
+		RGB(255, 0, 255));
+
 	ComponentRender(_hdc);
 }
 
@@ -70,18 +64,15 @@ void TestWeapon2::Shoot()
 	TestBullet* proj = new TestBullet;
 	Vec2 pos = GetPos();
 	pos.y -= GetSize().y / 2.f;
-	pos.y += 60.f;
+	pos.y += 10.f;
 	pos.x += 30.f;
 	proj->SetPos(pos);
 	proj->SetSize({ 20.f,20.f });
-	proj->SetDir({18.f, 0.f });
+	proj->SetDir(m_angle);
 
 	GET_SINGLE(SceneManager)->GetCurScene()->AddObject(proj, Layer::PROJECTILE);
 
 	Vec2 vec = GetOwner()->GetPos();
-
-	
-
 
 	vec.x -= 4.f;
 
