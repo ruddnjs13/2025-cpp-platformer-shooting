@@ -24,13 +24,14 @@ void WeaponHolderComponent::LateUpdate()
 	pos.x += 20.f;
 
 	m_pCurrentWeapon->SetPos(pos + m_pCurrentWeapon->GetOffSetPos());
+
 }
 
 void WeaponHolderComponent::Render(HDC hDC)
 {
 }
 
-void WeaponHolderComponent::ChangeWeapon(Weapon* weapon, Vec2 pos, Vec2 size, Vec2 angle)
+void WeaponHolderComponent::ChangeWeapon(Weapon* weapon, Vec2 pos, Vec2 size)
 {
 	if (m_pCurrentWeapon != nullptr)
 	{
@@ -39,21 +40,12 @@ void WeaponHolderComponent::ChangeWeapon(Weapon* weapon, Vec2 pos, Vec2 size, Ve
 	}
 
 	m_pCurrentWeapon = weapon;
-	m_pCurrentWeapon->SetOwner(GetOwner());
 
 	SetWeaponPos(pos);
 	SetWeaponSize(size);
-	SetWeaponRotation(angle);
+	m_pCurrentWeapon->SetOwner(GetOwner());
 }
 
-
-void WeaponHolderComponent::SetWeaponRotation(Vec2 angle)
-{
-	if (m_pCurrentWeapon == nullptr)
-		return;
-
-	m_pCurrentWeapon->SetRotation(angle);
-}
 
 void WeaponHolderComponent::SetWeaponPos(Vec2 pos)
 {
