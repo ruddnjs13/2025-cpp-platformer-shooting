@@ -14,6 +14,112 @@ Texture::~Texture()
 	::DeleteObject(m_hBit);	
 }
 
+HDC& Texture::GetTextureDC(const double angle)
+{
+	double rad = angle * (PI / 180);
+    rad *= -1;
+
+    double sinA = std::sin(rad);
+    double cosA = std::cos(rad);
+
+    POINT points[4];
+
+    int cx = m_bitInfo.bmWidth / 2;
+    int cy = m_bitInfo.bmHeight / 2;
+
+    points[0] = { -cx, -cy };
+    points[1] = { cx,-cy };
+    points[2] = { -cx, cy };
+    points[3] = { cx, cy };
+
+
+    POINT dPoints[4];
+
+    for (int i = 0; i < 4; ++i)
+    {
+        dPoints[i].x = (LONG)(points[i].x * cosA - points[i].y * sinA);
+        dPoints[i].y = (LONG)(points[i].x * sinA + points[i].y * cosA);
+    }
+
+    LONG maxX = dPoints[0].x;
+    LONG maxY = dPoints[0].y;
+    LONG minX = dPoints[0].x;
+    LONG minY = dPoints[0].y;
+
+    for (int i = 0; i < 4; ++i)
+    {
+        maxX = max(dPoints[i].x, maxX);
+        minX = min(dPoints[i].x, minX);
+        maxY = max(dPoints[i].y, maxY);
+        minY = min(dPoints[i].y, minY);
+    }
+
+    HDC memDC = ::CreateCompatibleDC(m_hDC);
+    HBITMAP hBit = ::CreateCompatibleBitmap(m_hDC,
+        maxX - minX,
+        maxY - minY);
+    HBITMAP oldBit = (HBITMAP)SelectObject(memDC, hBit);
+
+    RECT rect = { 0, 0, maxX - minX, maxY - minY };
+    HBRUSH brush = CreateSolidBrush(RGB(255, 0, 255));
+    FillRect(memDC, &rect, brush);
+    DeleteObject(brush);
+
+    POINT rPoints[3];
+
+    for (int i = 0; i < 4; ++i)
+    {
+        if (minX < 0)
+        {
+            dPoints[i].x -= minX;
+            maxX = max(dPoints[i].x, maxX);
+        }
+        if (minY < 0)
+        {
+            dPoints[i].y -= minY;
+            maxY = max(dPoints[i].y, maxY);
+        }
+
+        if (i < 3)
+        {
+            rPoints[i] = dPoints[i];
+        }
+    }
+
+    if (minX < 0) minX = 0;
+    if (minY < 0) minY = 0;
+
+
+
+    ::PlgBlt(memDC,
+        rPoints, m_hDC,
+        0, 0, m_bitInfo.bmWidth, m_bitInfo.bmHeight,
+        NULL, 0, 0);
+    HDC scaleDC = ::CreateCompatibleDC(m_hDC);
+    HBITMAP sHBit = ::CreateCompatibleBitmap(m_hDC,
+        maxX - minX,
+        maxY - minY);
+    HBITMAP oldScaleBit = (HBITMAP)SelectObject(scaleDC, sHBit);
+
+    ::StretchBlt(scaleDC,
+        (m_bitInfo.bmWidth - (maxX - minX)) / 2, 
+        (m_bitInfo.bmHeight - (maxX - minY)) / 2, 
+        maxX - minX, 
+        maxY - minY,
+        memDC,
+        0, 0, maxX - minX, maxY - minY, SRCCOPY);
+
+    //m_hDC = scaleDC;
+    m_rotHDC = scaleDC;
+    DeleteDC(memDC);
+    DeleteDC(scaleDC);
+    DeleteObject(hBit);
+    DeleteObject(sHBit);
+    DeleteObject(oldBit);
+    DeleteObject(oldScaleBit);
+    return m_hDC;
+}
+
 void Texture::Load(const wstring& _filePath)
 {
 	// 1. 인스턴스핸들: nullptr - 독립형 리소스
@@ -27,7 +133,5 @@ void Texture::Load(const wstring& _filePath)
 
 	assert(m_hBit); // 필수1!!!!!!!!@!@!@#$~!@#%$@!#%^#@!%@!#%!@
 	m_hDC = ::CreateCompatibleDC(GET_SINGLE(Core)->GetMainDC());
-	
-	::SelectObject(m_hDC, m_hBit);
-
+    ::SelectObject(m_hDC, m_hBit);
 }

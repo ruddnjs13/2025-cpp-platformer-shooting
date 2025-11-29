@@ -184,10 +184,8 @@ void Animation::Render(HDC _hdc)
         maxY - minY);
     HBITMAP oldBit = (HBITMAP)SelectObject(memDC, hBit);
     
-    RECT rect = { 0, 0, maxX - minX, maxY - minY };
-    HBRUSH brush = CreateSolidBrush(RGB(255, 0, 255));
-    FillRect(memDC, &rect, brush);
-    DeleteObject(brush);
+    
+    ::PatBlt(memDC, 0, 0, maxX - minX, maxY - minY, RGB(255, 0, 255));
         
     POINT rPoints[3];
 
