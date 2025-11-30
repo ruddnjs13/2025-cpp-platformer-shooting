@@ -206,6 +206,7 @@
     <ClInclude Include="MyAction.h">
       <Filter>Engine\01. Core</Filter>
     </ClInclude>
+    <ClInclude Include="Slider.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="2025_winapi_framework_22.rc">
@@ -345,5 +346,6 @@
       <Filter>Engine\07. UI\UIElement</Filter>
     </ClCompile>
     <ClCompile Include="Floor.cpp" />
+    <ClCompile Include="Slider.cpp" />
   </ItemGroup>
 </Project>
