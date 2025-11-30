@@ -56,7 +56,7 @@ void Player::Render(HDC _hdc)
 	//	, 0, 0, SRCCOPY);
 
 	////// 2. Transparent - 색깔을 뺄 수 있음
-	HDC tHDC = m_pTex->GetRotateTextureDC(GetAngle(), 0, 0, width, height);
+	/*HDC tHDC = m_pTex->GetRotateTextureDC(GetAngle(), 0, 0, width, height);
 	::TransparentBlt(_hdc
 		, (int)(pos.x - size.x / 2)
 		, (int)(pos.y - size.y / 2)
@@ -64,7 +64,7 @@ void Player::Render(HDC _hdc)
 		, size.y
 		, tHDC
 		, 0, 0,width, height,
-		RGB(255,0,255));
+		RGB(255,0,255));*/
 
 	////// 3. StretchBlt - 확대, 축소, 반전
 	//::StretchBlt(_hdc

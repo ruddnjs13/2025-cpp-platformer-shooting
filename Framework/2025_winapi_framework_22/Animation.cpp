@@ -140,7 +140,7 @@ void Animation::Render(HDC _hdc)
     int sw = (int)fr.vSlice.x;
     int sh = (int)fr.vSlice.y;
     
-    HDC tHDC = GET_ROTATE_TEXTURE(angle, sx, sy, sw, sh);
+    HDC tHDC = m_tex->GetRotateTextureDC(angle, sx, sy, sw, sh);
 
     BOOL debug = ::TransparentBlt(_hdc,
         dx, dy, dw, dh,
