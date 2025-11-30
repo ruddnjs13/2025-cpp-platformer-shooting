@@ -9,12 +9,13 @@
 #include "SceneManager.h"
 #include "Collider.h"
 #include "Animator.h"
+#include "WeaponTrajectory.h";
 #include <thread>
 
 TestWeapon2::TestWeapon2()
 {
 	m_pTex = GET_SINGLE(ResourceManager)->GetTexture(L"Gun1");
-
+	m_weaponTrajectory = AddComponent<WeaponTrajectory>();
 
 	m_angle.x = 1.f;
 	m_angle.y = 0.f;
@@ -31,6 +32,12 @@ void TestWeapon2::Update()
 
 	if (GET_KEYDOWN(KEY_TYPE::Q))
 	{
+		Vec2 pos = GetPos();
+		pos.y -= GetSize().y / 2.f;
+		pos.y += 10.f;
+		pos.x += 30.f;
+		m_weaponTrajectory->ShowTrajectory(m_angle, pos, { 20.f,20.f }, GetOwner());
+		
 		SetShootAngle(45);
 	}
 }
@@ -61,6 +68,7 @@ void TestWeapon2::Render(HDC _hdc)
 
 void TestWeapon2::Shoot()
 {
+
 	TestBullet* proj = new TestBullet;
 	Vec2 pos = GetPos();
 	pos.y -= GetSize().y / 2.f;

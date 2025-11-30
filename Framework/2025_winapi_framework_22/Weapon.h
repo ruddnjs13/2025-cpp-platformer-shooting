@@ -1,6 +1,9 @@
 #pragma once
 #include "Object.h"
 
+
+class WeaponTrajectory;
+
 class Weapon 
 	: public Object
 {
@@ -41,6 +44,7 @@ protected:
 	Vec2 m_offsetPos;
 	bool isShoot = true; 
 	Vec2 m_angle;
+	WeaponTrajectory* m_weaponTrajectory;
 private:
 	Object* m_owner;
 	Vec2 m_pos;
