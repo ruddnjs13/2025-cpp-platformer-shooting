@@ -206,6 +206,9 @@
     <ClInclude Include="MyAction.h">
       <Filter>Engine\01. Core</Filter>
     </ClInclude>
+    <ClInclude Include="WeaponTrajectory.h">
+      <Filter>Engine\06. Component</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="2025_winapi_framework_22.rc">
@@ -345,5 +348,8 @@
       <Filter>Engine\07. UI\UIElement</Filter>
     </ClCompile>
     <ClCompile Include="Floor.cpp" />
+    <ClCompile Include="WeaponTrajectory.cpp">
+      <Filter>Engine\06. Component</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

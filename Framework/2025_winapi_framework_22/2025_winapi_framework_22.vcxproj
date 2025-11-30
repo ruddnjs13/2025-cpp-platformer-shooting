@@ -209,6 +209,7 @@
     <ClInclude Include="Vec2.h" />
     <ClInclude Include="Weapon.h" />
     <ClInclude Include="WeaponHolderComponent.h" />
+    <ClInclude Include="WeaponTrajectory.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Animation.cpp" />
@@ -253,6 +254,7 @@
     <ClCompile Include="UIManager.cpp" />
     <ClCompile Include="Weapon.cpp" />
     <ClCompile Include="WeaponHolderComponent.cpp" />
+    <ClCompile Include="WeaponTrajectory.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="2025_winapi_framework_22.rc" />
