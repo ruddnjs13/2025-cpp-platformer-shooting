@@ -4,19 +4,21 @@
 Texture::Texture()
 	: m_hBit(nullptr)
 	, m_hDC(nullptr)
+	, m_rotHDC(nullptr)
 	, m_bitInfo{}
 {
 }
 
 Texture::~Texture()
 {
-	::DeleteDC(m_hDC);	
-	::DeleteObject(m_hBit);	
+    ::DeleteDC(m_hDC);
+    ::DeleteDC(m_rotHDC);
+	::DeleteObject(m_hBit);
 }
 
 HDC& Texture::GetTextureDC(const double angle)
 {
-	double rad = angle * (PI / 180);
+	double rad = angle * (  PI / 180);
     rad *= -1;
 
     double sinA = std::sin(rad);
@@ -60,10 +62,8 @@ HDC& Texture::GetTextureDC(const double angle)
         maxY - minY);
     HBITMAP oldBit = (HBITMAP)SelectObject(memDC, hBit);
 
-    RECT rect = { 0, 0, maxX - minX, maxY - minY };
-    HBRUSH brush = CreateSolidBrush(RGB(255, 0, 255));
-    FillRect(memDC, &rect, brush);
-    DeleteObject(brush);
+    ::PatBlt(memDC, 0, 0, maxX - minX, maxY - minY, RGB(255, 0, 255));
+
 
     POINT rPoints[3];
 
@@ -95,29 +95,24 @@ HDC& Texture::GetTextureDC(const double angle)
         rPoints, m_hDC,
         0, 0, m_bitInfo.bmWidth, m_bitInfo.bmHeight,
         NULL, 0, 0);
-    HDC scaleDC = ::CreateCompatibleDC(m_hDC);
+    m_rotHDC = (m_rotHDC == nullptr ? ::CreateCompatibleDC(m_hDC) : m_rotHDC);
     HBITMAP sHBit = ::CreateCompatibleBitmap(m_hDC,
-        maxX - minX,
-        maxY - minY);
-    HBITMAP oldScaleBit = (HBITMAP)SelectObject(scaleDC, sHBit);
+        maxX-minX,
+        maxY-minY);
+    HBITMAP oldScaleBit = (HBITMAP)SelectObject(m_rotHDC, sHBit);
 
-    ::StretchBlt(scaleDC,
-        (m_bitInfo.bmWidth - (maxX - minX)) / 2, 
-        (m_bitInfo.bmHeight - (maxX - minY)) / 2, 
+    ::BitBlt(m_rotHDC,
+        ((m_bitInfo.bmWidth - (maxX - minX)) / 2),
+        ((m_bitInfo.bmHeight - (maxY - minY)) / 2), 
         maxX - minX, 
         maxY - minY,
         memDC,
-        0, 0, maxX - minX, maxY - minY, SRCCOPY);
+        0, 0, SRCCOPY);
 
-    //m_hDC = scaleDC;
-    m_rotHDC = scaleDC;
     DeleteDC(memDC);
-    DeleteDC(scaleDC);
     DeleteObject(hBit);
     DeleteObject(sHBit);
-    DeleteObject(oldBit);
-    DeleteObject(oldScaleBit);
-    return m_hDC;
+    return m_rotHDC;
 }
 
 void Texture::Load(const wstring& _filePath)

@@ -15,7 +15,7 @@ public:
 private:
     HBITMAP m_hBit;    
     HDC     m_hDC;
-    HDC     m_rotHDC;
+	HDC     m_rotHDC;
     BITMAP  m_bitInfo;
 };
 

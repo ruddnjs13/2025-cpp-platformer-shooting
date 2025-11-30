@@ -61,7 +61,7 @@ void Player::Render(HDC _hdc)
 		, (int)(pos.y - size.y / 2)
 		, size.x
 		, size.y
-		, m_pTex->GetTextureDC()
+		, m_pTex->GetTextureDC(GetAngle())
 		, 0, 0,width, height,
 		RGB(255,0,255));
 
