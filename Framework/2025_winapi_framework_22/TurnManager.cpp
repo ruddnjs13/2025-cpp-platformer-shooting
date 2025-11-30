@@ -15,7 +15,7 @@
     }
 
     /// <summary>
-    /// 턴을 바쭤주는 코드(자동으로 해당 턴의 이벤트를 실행시켜줌)
+    /// 턴을 바꿔주는 코드(자동으로 해당 턴의 이벤트를 실행시켜줌)
     /// </summary>
     /// <param name="_nextTurn">바꿀 턴</param>
     void TurnManager::ChangeTurn(TurnType _nextTurn)
@@ -66,7 +66,6 @@
             }).detach();
     }
 
-
     /// <summary>
     /// 이벤트 구독을 모두 해제하는 코드
     /// </summary>
@@ -80,7 +79,6 @@
 
         m_eventMap.clear();
     }
-
 
     /// <summary>
     /// 이벤트를 실행시켜주는 코드

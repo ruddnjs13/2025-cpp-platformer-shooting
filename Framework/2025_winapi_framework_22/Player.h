@@ -34,6 +34,7 @@ private:
 
 		return curTurn == m_turnType && m_turnType == _checkType;
 	}
+	void Jump();
 private:
 	Texture* m_pTex;
 	TurnType m_turnType;

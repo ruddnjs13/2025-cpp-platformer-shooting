@@ -56,14 +56,15 @@ void Player::Render(HDC _hdc)
 	//	, 0, 0, SRCCOPY);
 
 	////// 2. Transparent - 색깔을 뺄 수 있음
-	//::TransparentBlt(_hdc
-	//	, (int)(pos.x - size.x / 2)
-	//	, (int)(pos.y - size.y / 2)
-	//	, size.x
-	//	, size.y
-	//	, m_pTex->GetTextureDC()
-	//	, 0, 0,width, height,
-	//	RGB(255,0,255));
+	/*HDC tHDC = m_pTex->GetRotateTextureDC(GetAngle(), 0, 0, width, height);
+	::TransparentBlt(_hdc
+		, (int)(pos.x - size.x / 2)
+		, (int)(pos.y - size.y / 2)
+		, size.x
+		, size.y
+		, tHDC
+		, 0, 0,width, height,
+		RGB(255,0,255));*/
 
 	////// 3. StretchBlt - 확대, 축소, 반전
 	//::StretchBlt(_hdc
@@ -126,8 +127,16 @@ void Player::Update()
 		if (GET_KEY(KEY_TYPE::S)) angle -= 0.1f;
 		if (GET_KEYDOWN(KEY_TYPE::SPACE))
 		{
-			GetComponent<Rigidbody>()->AddImpulse({ 0, 10 });
-			CreateProjectile();
+			Rigidbody* rb = GetComponent<Rigidbody>();
+			if (rb->IsGrounded())
+			{
+				Jump();
+				//CreateProjectile();
+			}
+			
+		}
+		if (GET_KEYDOWN(KEY_TYPE::F))
+		{
 			GET_SINGLE(TurnManager)->ChangeTurn(TurnType::Player2);
 		}
 		
@@ -138,6 +147,14 @@ void Player::Update()
 		if (GET_KEY(KEY_TYPE::RIGHT)) dir.x += 1.f;
 		if (GET_KEY(KEY_TYPE::UP)) angle += 0.1f;
 		if (GET_KEY(KEY_TYPE::DOWN)) angle -= 0.1f;
+		if (GET_KEY(KEY_TYPE::RSHIFT))
+		{
+			Rigidbody* rb = GetComponent<Rigidbody>();
+			if (rb->IsGrounded())
+			{
+				Jump();
+			}
+		}
 		if (GET_KEYDOWN(KEY_TYPE::ENTER))
 		{
 			CreateProjectile();
@@ -172,6 +189,14 @@ void Player::CreateProjectile()
 	proj->SetDir({0.f, -1.f});
 	GET_SINGLE(SceneManager)->GetCurScene()->AddObject(proj, Layer::PROJECTILE);
 	
+}
+
+void Player::Jump()
+{
+	Rigidbody* rb = GetComponent<Rigidbody>();
+	rb->SetGrounded(false);
+	Vec2 jumpPower{ 0, -50 };
+	rb->AddImpulse(jumpPower * 5);
 }
 
 

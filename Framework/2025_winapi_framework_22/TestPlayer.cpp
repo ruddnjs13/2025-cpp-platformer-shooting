@@ -14,12 +14,12 @@
 #include "TestPlayer.h"
 #include "TestWeapon2.h"
 #include "TestWeapon.h"
+#include "TurnManager.h"
 
 TestPlayer::TestPlayer()
 {
 	m_pTex = GET_SINGLE(ResourceManager)->GetTexture(L"Jiwoo");
 	AddComponent<Collider>();
-
 
 
 	auto* animator = AddComponent<Animator>();
@@ -43,11 +43,12 @@ TestPlayer::TestPlayer()
 
 	m_pWeaponHolder->ChangeWeapon(new TestWeapon(),
 		{ pos },
-		{ 20.f,20.f }, angle);
+		{ 20.f,20.f });
 
 
 	GET_SINGLE(SceneManager)->GetCurScene()->AddObject(m_pWeaponHolder->GetCurrentWeapon(), Layer::ENEMY);
 	weaponCount = 0;
+
 }
 
 TestPlayer::~TestPlayer()
@@ -74,7 +75,7 @@ void TestPlayer::Update()
 	Scale({ factor, factor });
 
 	
-	if(GET_KEYDOWN(KEY_TYPE::SPACE))
+	if(GET_KEYDOWN(KEY_TYPE::L))
 	{
 		Vec2 pos = GetPos();
 		pos.y -= GetSize().y / 2.f;
@@ -83,10 +84,25 @@ void TestPlayer::Update()
 		
 		m_pWeaponHolder->ChangeWeapon(new TestWeapon2(),
 			{ pos },
-			{ 20.f,20.f }, angle);
+			{ 20.f,20.f });
 
 
-		GET_SINGLE(SceneManager)->GetCurScene()->AddObject(m_pWeaponHolder->GetCurrentWeapon(), Layer::ENEMY);
+		GET_SINGLE(SceneManager)->GetCurScene()->AddObject(m_pWeaponHolder->GetCurrentWeapon(), Layer::Weapon);
+	}
+
+	if (GET_KEYDOWN(KEY_TYPE::K))
+	{
+		Vec2 pos = GetPos();
+		pos.y -= GetSize().y / 2.f;
+		pos.x += 10.f;
+		Vec2 angle = Vec2(0.f, 0.f);
+
+		m_pWeaponHolder->ChangeWeapon(new TestWeapon(),
+			{ pos },
+			{ 20.f,20.f });
+
+
+		GET_SINGLE(SceneManager)->GetCurScene()->AddObject(m_pWeaponHolder->GetCurrentWeapon(), Layer::Weapon);
 	}
 }
 

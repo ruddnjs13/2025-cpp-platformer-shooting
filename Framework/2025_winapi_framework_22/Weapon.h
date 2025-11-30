@@ -17,7 +17,7 @@ public:
 
 public:
 	void SetRotation(Vec2 _angle);
-	Vec2 GetAngle() const { return m_angle; }
+	//Vec2 GetAngle() const { return m_angle; }
 
 	void SetPos(Vec2 _pos) { m_pos = _pos; }
 	void SetSize(Vec2 _size) { m_size = _size; }
@@ -33,11 +33,16 @@ public:
 	{
 		return m_pos;
 	}
+	Object* GetOwner()  { return m_owner; }
 
+	void SetShootAngle(float angle);
+
+protected:
+	Vec2 m_offsetPos;
+	bool isShoot = true; 
+	Vec2 m_angle;
 private:
 	Object* m_owner;
-	Vec2 m_offsetPos;
-	Vec2 m_angle;
 	Vec2 m_pos;
 	Vec2 m_size;
 };

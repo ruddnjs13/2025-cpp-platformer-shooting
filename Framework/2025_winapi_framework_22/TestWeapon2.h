@@ -15,6 +15,7 @@ public:
 	void Render(HDC _hdc) override;
 	void Shoot() override;
 
+
 private:
 	Texture* m_pTex;
 };
