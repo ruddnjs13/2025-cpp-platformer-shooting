@@ -193,6 +193,7 @@
     <ClInclude Include="Rigidbody.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneManager.h" />
+    <ClInclude Include="Slider.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="Defines.h" />
     <ClInclude Include="TestBullet.h" />
@@ -243,6 +244,7 @@
     <ClCompile Include="Rigidbody.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneManager.cpp" />
+    <ClCompile Include="Slider.cpp" />
     <ClCompile Include="TestBullet.cpp" />
     <ClCompile Include="TestPlayer.cpp" />
     <ClCompile Include="TestScene.cpp" />

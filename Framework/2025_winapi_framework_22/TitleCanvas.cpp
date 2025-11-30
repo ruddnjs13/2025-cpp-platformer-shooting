@@ -1,17 +1,25 @@
 #include "pch.h"
 #include "TitleCanvas.h"
 #include "ResourceManager.h"
+#include "SceneManager.h"
 
 void TitleCanvas::Init()
 {
-	startBtn = Button();
+	startBtn = new Button();
 
 	Texture* defaultTexture = GET_SINGLE(ResourceManager)->GetTexture(L"Button");
-	Texture* hoverTexture = GET_SINGLE(ResourceManager)->GetTexture(L"Button");
-	startBtn.Init(defaultTexture, hoverTexture);
+	Texture* selectTexture = GET_SINGLE(ResourceManager)->GetTexture(L"Button");
+	startBtn->Init(defaultTexture, selectTexture);
 
-	startBtn.SetPos({ 400,400 });
-	startBtn.SetSize({400,100});
+	startBtn->SetPos({ WINDOW_WIDTH / 2,WINDOW_HEIGHT / 2 });
+	startBtn->SetSize({100,25});
 
-	AddUIElement(&startBtn);
+	startBtn->OnClickEvt.AddListener(std::bind(&TitleCanvas::GotoTitle,this));
+
+	AddUIElement(startBtn);
+}
+
+void TitleCanvas::GotoTitle()
+{
+	GET_SINGLE(SceneManager)->LoadScene(L"TestScene");
 }

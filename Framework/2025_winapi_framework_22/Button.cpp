@@ -38,6 +38,11 @@ void Button::Update()
 	{
 		OnMouseExit();
 	}
+	if (GET_KEYDOWN(KEY_TYPE::LBUTTON))
+	{
+		OnClick();
+	}
+	
 }
 
 void Button::Render(HDC _hdc)
@@ -57,6 +62,9 @@ void Button::OnMouseEnter()
 {
 	if (_isHovered) return;
 	_isHovered = true;
+	cout << "È£¹öµÊ";
+
+	SetSize({ GetSize().x * 1.2f, GetSize().y * 1.2f });
 
 	if (m_hoverTexture == NULL) return;
 	m_texture = m_hoverTexture;
@@ -67,6 +75,9 @@ void Button::OnMouseExit()
 {
 	if (!_isHovered) return;
 	_isHovered = false;
+
+	SetSize({ GetSize().x * (1/1.2f), GetSize().y * (1/ 1.2f) });
+
 
 	if (m_defaultTexture == NULL) return;
 	m_texture = m_defaultTexture;

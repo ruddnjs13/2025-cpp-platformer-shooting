@@ -8,7 +8,7 @@ class Button :
     public Image
 {
 public:
-    void Init(Texture* defaultTexture, Texture* hoverTexture);
+    void Init(Texture* defaultTexture, Texture* selectTexture);
     void Update() override;
     void Render(HDC _hdc) override;
 public:
@@ -22,6 +22,7 @@ private:
 private:
     Texture* m_defaultTexture = nullptr;
     Texture* m_hoverTexture = nullptr;
+public:
     MyAction<void> OnClickEvt;
 };
 
