@@ -56,12 +56,13 @@ void Player::Render(HDC _hdc)
 	//	, 0, 0, SRCCOPY);
 
 	////// 2. Transparent - »ö±òÀ» »¬ ¼ö ÀÖÀ½
+	HDC tHDC = m_pTex->GetRotateTextureDC(GetAngle(), 0, 0, width, height);
 	::TransparentBlt(_hdc
 		, (int)(pos.x - size.x / 2)
 		, (int)(pos.y - size.y / 2)
 		, size.x
 		, size.y
-		, m_pTex->GetTextureDC(GetAngle())
+		, tHDC
 		, 0, 0,width, height,
 		RGB(255,0,255));
 

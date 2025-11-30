@@ -16,18 +16,18 @@ Texture::~Texture()
 	::DeleteObject(m_hBit);
 }
 
-HDC& Texture::GetTextureDC(const double angle)
+HDC& Texture::GetRotateTextureDC(const double angle, int sx, int sy, int sw, int sh)
 {
-	double rad = angle * (  PI / 180);
+    float rad = angle * (PI / 180);
     rad *= -1;
 
-    double sinA = std::sin(rad);
-    double cosA = std::cos(rad);
+    float sinA = std::sin(rad);
+    float cosA = std::cos(rad);
 
     POINT points[4];
 
-    int cx = m_bitInfo.bmWidth / 2;
-    int cy = m_bitInfo.bmHeight / 2;
+    int cx = sw / 2;
+    int cy = sh / 2;
 
     points[0] = { -cx, -cy };
     points[1] = { cx,-cy };
@@ -62,8 +62,10 @@ HDC& Texture::GetTextureDC(const double angle)
         maxY - minY);
     HBITMAP oldBit = (HBITMAP)SelectObject(memDC, hBit);
 
-    ::PatBlt(memDC, 0, 0, maxX - minX, maxY - minY, RGB(255, 0, 255));
-
+    HBRUSH brush = CreateSolidBrush(RGB(255, 0, 255));
+    HBRUSH oldBrush = (HBRUSH)SelectObject(memDC, brush);
+    ::PatBlt(memDC, 0, 0, maxX - minX, maxY - minY, PATCOPY);
+    SelectObject(memDC, oldBrush);
 
     POINT rPoints[3];
 
@@ -93,23 +95,22 @@ HDC& Texture::GetTextureDC(const double angle)
 
     ::PlgBlt(memDC,
         rPoints, m_hDC,
-        0, 0, m_bitInfo.bmWidth, m_bitInfo.bmHeight,
+        sx, sy, sw, sh,
         NULL, 0, 0);
     m_rotHDC = (m_rotHDC == nullptr ? ::CreateCompatibleDC(m_hDC) : m_rotHDC);
-    HBITMAP sHBit = ::CreateCompatibleBitmap(m_hDC,
-        maxX-minX,
-        maxY-minY);
+    HBITMAP sHBit = ::CreateCompatibleBitmap(m_hDC, sw, sh);
     HBITMAP oldScaleBit = (HBITMAP)SelectObject(m_rotHDC, sHBit);
 
     ::BitBlt(m_rotHDC,
-        ((m_bitInfo.bmWidth - (maxX - minX)) / 2),
-        ((m_bitInfo.bmHeight - (maxY - minY)) / 2), 
-        maxX - minX, 
+        ((sw - (maxX - minX)) / 2),
+        ((sh - (maxY - minY)) / 2),
+        maxX - minX,
         maxY - minY,
         memDC,
         0, 0, SRCCOPY);
 
     DeleteDC(memDC);
+    DeleteObject(brush);
     DeleteObject(hBit);
     DeleteObject(sHBit);
     return m_rotHDC;
