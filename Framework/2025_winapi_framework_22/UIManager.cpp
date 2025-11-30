@@ -22,7 +22,6 @@ void UIManager::Render(HDC _hdc)
 	if (m_curCanvas == nullptr)
 		return;
 	m_curCanvas->Render(_hdc);
-	cout << "·»´õÁß";
 }
 
 void UIManager::RegisterCanvas(const CanvasType canvasType, std::shared_ptr<Canvas> canvas)
