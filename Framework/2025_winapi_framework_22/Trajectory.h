@@ -14,7 +14,6 @@ public:
 public:
 	void Update() override;
 	void Render(HDC _hdc) override;
-	void ShowAngle(Object* owner);
 
 
 public:
@@ -28,10 +27,6 @@ public:
 		m_dir = _dir;
 		m_dir.Normalize();
 	}
-
-public:
-	Object* m_owner;
-
 private:
 	float m_angle;
 	Vec2 m_dir;

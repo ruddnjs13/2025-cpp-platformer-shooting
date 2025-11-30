@@ -2,6 +2,8 @@
 #include "Component.h"
 
 class Trajectory;
+class TextureObject;
+
 class WeaponTrajectory :
     public Component
 {
@@ -20,7 +22,7 @@ public:
 	void ShowTrajectory(Vec2 angle, Vec2 pos, Vec2 size, Object* owner);
 	
 private:
-	
+	std::vector<TextureObject*> m_TextureObjects;
 	Trajectory* m_Trajectory = nullptr;
 };
 

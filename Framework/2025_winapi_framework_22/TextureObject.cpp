@@ -5,24 +5,15 @@
 
 TextureObject::TextureObject()
 {
-	m_pTex = GET_SINGLE(ResourceManager)->GetTexture(L"Gun1");
+	m_pTex = GET_SINGLE(ResourceManager)->GetTexture(L"AimLine");
 }
 
-TextureObject::~TextureObject()
+TextureObject::~TextureObject()	
 {
 }
 
 void TextureObject::Update()
 {
-
-	Object* owner = GetOwner();
-
-	if (owner != nullptr)
-	{
-		Vec2 pos = owner->GetPos();
-
-		SetPos(pos + GetOffset());
-	}
 }
 
 void TextureObject::Render(HDC _hdc)
@@ -41,4 +32,16 @@ void TextureObject::Render(HDC _hdc)
 		, 0, 0, width, height,
 		RGB(255, 0, 255));
 
+}
+
+void TextureObject::LateUpdate()
+{
+	Object* owner = GetOwner();
+
+	if (owner != nullptr)
+	{
+		Vec2 pos = owner->GetPos();
+
+		SetPos(pos + GetOffset());
+	}
 }

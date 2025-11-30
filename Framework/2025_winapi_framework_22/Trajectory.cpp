@@ -24,9 +24,3 @@ void Trajectory::Update()
 void Trajectory::Render(HDC _hdc)
 {
 }
-
-void Trajectory::ShowAngle(Object* owner)
-{
-
-
-}

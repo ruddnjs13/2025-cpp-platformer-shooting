@@ -212,7 +212,9 @@
     <ClInclude Include="Trajectory.h">
       <Filter>Engine\03. Object\Weapon</Filter>
     </ClInclude>
-    <ClInclude Include="TextureObject.h" />
+    <ClInclude Include="TextureObject.h">
+      <Filter>Engine\03. Object</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="2025_winapi_framework_22.rc">
@@ -358,6 +360,8 @@
     <ClCompile Include="Trajectory.cpp">
       <Filter>Engine\03. Object\Weapon</Filter>
     </ClCompile>
-    <ClCompile Include="TextureObject.cpp" />
+    <ClCompile Include="TextureObject.cpp">
+      <Filter>Engine\03. Object</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
