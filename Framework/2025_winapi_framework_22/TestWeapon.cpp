@@ -5,6 +5,7 @@
 #include "InputManager.h"
 #include "Texture.h"
 #include "TestBullet.h"
+#include "WeaponTrajectory.h"
 #include "SceneManager.h"
 #include <thread>
 
@@ -12,6 +13,8 @@
 TestWeapon::TestWeapon()
 {
 	m_pTex = GET_SINGLE(ResourceManager)->GetTexture(L"Bullet");
+
+	m_weaponTrajectory = AddComponent<WeaponTrajectory>();
 
 	m_angle.x = 1.f;
 	m_angle.y = 0.f;
