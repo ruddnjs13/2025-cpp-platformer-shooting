@@ -10,7 +10,7 @@ void CollisionManager::Update()
 	{
 		for (UINT Col = Row; Col < (UINT)Layer::END; ++Col)
 		{
-			if (m_objectLayer[Row] & (1 << Col))
+			if (m_objectLayer[Row] & (1 << Col) && fDT > 0.001)
 			{
 				//int a = 0;
 				CollisionLayerUpdate((Layer)Row, (Layer)Col);
@@ -50,6 +50,11 @@ void CollisionManager::CheckReset()
 {
 	// 메모리 초기화
 	memset(m_objectLayer, 0, sizeof(UINT) * (UINT)Layer::END);
+}
+
+void CollisionManager::PhysicsResolve()
+{
+	const float fixedDT = 0.00001000;
 }
 
 void CollisionManager::CollisionLayerUpdate(Layer _left, Layer _right)
