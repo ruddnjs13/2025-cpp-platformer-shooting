@@ -13,5 +13,8 @@ class TitleCanvas :
 	void GotoTitle();
 
 	Button* startBtn;
+	Button* guideBtn;
+	Button* exitBtn;
+	Image* backgroundPanel;
 };
 

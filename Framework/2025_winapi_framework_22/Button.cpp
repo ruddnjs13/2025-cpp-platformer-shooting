@@ -64,7 +64,7 @@ void Button::OnMouseEnter()
 	_isHovered = true;
 	cout << "È£¹öµÊ";
 
-	SetSize({ GetSize().x * 1.2f, GetSize().y * 1.2f });
+	SetSize({ GetSize().x * 1.1f, GetSize().y * 1.1f });
 
 	if (m_hoverTexture == NULL) return;
 	m_texture = m_hoverTexture;
@@ -76,7 +76,7 @@ void Button::OnMouseExit()
 	if (!_isHovered) return;
 	_isHovered = false;
 
-	SetSize({ GetSize().x * (1/1.2f), GetSize().y * (1/ 1.2f) });
+	SetSize({ GetSize().x * (1/1.1f), GetSize().y * (1/ 1.1f) });
 
 
 	if (m_defaultTexture == NULL) return;
