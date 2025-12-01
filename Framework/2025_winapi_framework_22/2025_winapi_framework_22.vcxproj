@@ -193,6 +193,7 @@
     <ClInclude Include="Rigidbody.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneManager.h" />
+    <ClInclude Include="Slider.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="Defines.h" />
     <ClInclude Include="TestBullet.h" />
@@ -201,8 +202,10 @@
     <ClInclude Include="TestWeapon.h" />
     <ClInclude Include="TestWeapon2.h" />
     <ClInclude Include="Texture.h" />
+    <ClInclude Include="TextureObject.h" />
     <ClInclude Include="TimeManager.h" />
     <ClInclude Include="TitleCanvas.h" />
+    <ClInclude Include="Trajectory.h" />
     <ClInclude Include="TurnManager.h" />
     <ClInclude Include="UIElement.h" />
     <ClInclude Include="UIManager.h" />
@@ -241,14 +244,17 @@
     <ClCompile Include="Rigidbody.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneManager.cpp" />
+    <ClCompile Include="Slider.cpp" />
     <ClCompile Include="TestBullet.cpp" />
     <ClCompile Include="TestPlayer.cpp" />
     <ClCompile Include="TestScene.cpp" />
     <ClCompile Include="TestWeapon.cpp" />
     <ClCompile Include="TestWeapon2.cpp" />
     <ClCompile Include="Texture.cpp" />
+    <ClCompile Include="TextureObject.cpp" />
     <ClCompile Include="TimeManager.cpp" />
     <ClCompile Include="TitleCanvas.cpp" />
+    <ClCompile Include="Trajectory.cpp" />
     <ClCompile Include="TurnManager.cpp" />
     <ClCompile Include="UIElement.cpp" />
     <ClCompile Include="UIManager.cpp" />
