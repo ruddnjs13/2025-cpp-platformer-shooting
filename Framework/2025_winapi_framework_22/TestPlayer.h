@@ -1,6 +1,7 @@
 #pragma once
 #include "Object.h"
 #include "WeaponHolderComponent.h"
+#include "SlotReel.h"
 #include <wtypes.h>
 
 class Texture;
@@ -21,6 +22,8 @@ public:
 
 private:
 	int weaponCount = 0;
+
+	SlotReel* slotReel;
 
 	WeaponHolderComponent* m_pWeaponHolder = nullptr;
 

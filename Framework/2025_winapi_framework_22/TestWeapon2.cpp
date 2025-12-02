@@ -93,5 +93,4 @@ void TestWeapon2::Shoot()
 			std::this_thread::sleep_for(std::chrono::milliseconds(500));
 			m_offsetPos.x += 1.f;
 		}).detach();
-	
 }

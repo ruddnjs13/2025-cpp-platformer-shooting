@@ -56,6 +56,9 @@
     <Filter Include="Engine\07. UI\UIElement">
       <UniqueIdentifier>{91d94f7c-a74e-4816-b5be-c9d2e07a4c36}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\09.Slot">
+      <UniqueIdentifier>{d92dbc5b-b773-4190-803a-983f69ef646b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="2025_winapi_framework_22.h">
@@ -215,6 +218,8 @@
     <ClInclude Include="TextureObject.h">
       <Filter>Engine\03. Object</Filter>
     </ClInclude>
+    <ClInclude Include="Slider.h" />
+    <ClInclude Include="SlotReel.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="2025_winapi_framework_22.rc">
@@ -363,5 +368,7 @@
     <ClCompile Include="TextureObject.cpp">
       <Filter>Engine\03. Object</Filter>
     </ClCompile>
+    <ClCompile Include="Slider.cpp" />
+    <ClCompile Include="SlotReel.cpp" />
   </ItemGroup>
 </Project>
