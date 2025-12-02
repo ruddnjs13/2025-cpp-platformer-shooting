@@ -54,7 +54,7 @@ void CollisionManager::CheckReset()
 
 void CollisionManager::PhysicsResolve()
 {
-	const float fixedDT = 0.00001000;
+	const float penetration = 0.00001000;
 }
 
 void CollisionManager::CollisionLayerUpdate(Layer _left, Layer _right)
