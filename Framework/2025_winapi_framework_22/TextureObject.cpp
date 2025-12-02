@@ -25,7 +25,7 @@ void TextureObject::Render(HDC _hdc)
 
 	::TransparentBlt(_hdc
 		, (int)(pos.x - size.x / 2)
-		, (int)(pos.y - size.y / 2)
+		, (int)(pos.y - size.y / 2)	
 		, size.x
 		, size.y
 		, m_pTex->GetTextureDC()

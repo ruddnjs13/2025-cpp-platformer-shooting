@@ -45,6 +45,8 @@ TestPlayer::TestPlayer()
 		{ pos },
 		{ 20.f,20.f });
 
+	
+
 
 	GET_SINGLE(SceneManager)->GetCurScene()->AddObject(m_pWeaponHolder->GetCurrentWeapon(), Layer::ENEMY);
 	weaponCount = 0;
@@ -103,6 +105,26 @@ void TestPlayer::Update()
 
 
 		GET_SINGLE(SceneManager)->GetCurScene()->AddObject(m_pWeaponHolder->GetCurrentWeapon(), Layer::Weapon);
+	}
+
+	if (GET_KEYDOWN(KEY_TYPE::P))
+	{
+
+		slotReel = new SlotReel();
+
+		Vec2 pos = GetPos();
+
+		pos.y -= 10;
+
+		slotReel->SetPos(pos);
+
+		slotReel->SetSize({60, 60});
+
+		slotReel->SlotRolling();
+
+		GET_SINGLE(SceneManager)->GetCurScene()->AddObject(slotReel, Layer::Weapon);
+
+
 	}
 }
 
