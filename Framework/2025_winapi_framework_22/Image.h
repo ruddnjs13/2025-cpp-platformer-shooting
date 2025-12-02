@@ -14,7 +14,7 @@ public:
 		const Vec2& _pos,
 		const Vec2& _size,
 		Texture* _texture,
-		COLORREF _colorKey = RGB(255, 255, 255)
+		COLORREF _colorKey = RGB(255, 0, 255)
 	)
 	{
 		TransparentBlt(
