@@ -10,7 +10,7 @@ void CollisionManager::Update()
 	{
 		for (UINT Col = Row; Col < (UINT)Layer::END; ++Col)
 		{
-			if (m_objectLayer[Row] & (1 << Col) && fDT > 0.001)
+			if (m_objectLayer[Row] & (1 << Col))
 			{
 				//int a = 0;
 				CollisionLayerUpdate((Layer)Row, (Layer)Col);
