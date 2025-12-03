@@ -59,6 +59,9 @@
     <Filter Include="Engine\09.Slot">
       <UniqueIdentifier>{d92dbc5b-b773-4190-803a-983f69ef646b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\03. Object\Tile">
+      <UniqueIdentifier>{b800b88d-26dd-4c1b-9dd5-b9fc2e057706}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="2025_winapi_framework_22.h">
@@ -218,12 +221,23 @@
     <ClInclude Include="TextureObject.h">
       <Filter>Engine\03. Object</Filter>
     </ClInclude>
-    <ClInclude Include="Slider.h" />
+    <ClInclude Include="RollingItem.h">
+      <Filter>Engine\09.Slot</Filter>
+    </ClInclude>
     <ClInclude Include="SlotReel.h">
       <Filter>Engine\09.Slot</Filter>
     </ClInclude>
-    <ClInclude Include="RollingItem.h">
-      <Filter>Engine\09.Slot</Filter>
+    <ClInclude Include="Tile.h">
+      <Filter>Engine\03. Object\Tile</Filter>
+    </ClInclude>
+    <ClInclude Include="TileMap.h">
+      <Filter>Engine\03. Object\Tile</Filter>
+    </ClInclude>
+    <ClInclude Include="Slider.h">
+      <Filter>Engine\07. UI</Filter>
+    </ClInclude>
+    <ClInclude Include="TileMapManager.h">
+      <Filter>Engine\02. Manager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -373,12 +387,23 @@
     <ClCompile Include="TextureObject.cpp">
       <Filter>Engine\03. Object</Filter>
     </ClCompile>
-    <ClCompile Include="Slider.cpp" />
+    <ClCompile Include="RollingItem.cpp">
+      <Filter>Engine\09.Slot</Filter>
+    </ClCompile>
     <ClCompile Include="SlotReel.cpp">
       <Filter>Engine\09.Slot</Filter>
     </ClCompile>
-    <ClCompile Include="RollingItem.cpp">
-      <Filter>Engine\09.Slot</Filter>
+    <ClCompile Include="Tile.cpp">
+      <Filter>Engine\03. Object\Tile</Filter>
+    </ClCompile>
+    <ClCompile Include="TileMap.cpp">
+      <Filter>Engine\03. Object\Tile</Filter>
+    </ClCompile>
+    <ClCompile Include="Slider.cpp">
+      <Filter>Engine\07. UI\UIElement</Filter>
+    </ClCompile>
+    <ClCompile Include="TileMapManager.cpp">
+      <Filter>Engine\02. Manager</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -5,6 +5,8 @@ enum class Layer
 	BACKGROUND,
 	// 밑에 변경 가능
 	PLAYER,
+	RollItem,
+	Slot,
 	ENEMY,
 	PROJECTILE,
 	Weapon,
@@ -49,4 +51,13 @@ enum class CanvasType
 	InGame,
 	Tutorial,
 	Credit
+};
+
+enum class TileType
+{
+	Ground = '1',
+	Grass = '2',
+	Trunk_Left = '3',
+	Trunk_Right = '4',
+	Leaves = '5'
 };

@@ -205,6 +205,9 @@
     <ClInclude Include="TestWeapon2.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="TextureObject.h" />
+    <ClInclude Include="Tile.h" />
+    <ClInclude Include="TileMap.h" />
+    <ClInclude Include="TileMapManager.h" />
     <ClInclude Include="TimeManager.h" />
     <ClInclude Include="TitleCanvas.h" />
     <ClInclude Include="Trajectory.h" />
@@ -256,6 +259,9 @@
     <ClCompile Include="TestWeapon2.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="TextureObject.cpp" />
+    <ClCompile Include="Tile.cpp" />
+    <ClCompile Include="TileMap.cpp" />
+    <ClCompile Include="TileMapManager.cpp" />
     <ClCompile Include="TimeManager.cpp" />
     <ClCompile Include="TitleCanvas.cpp" />
     <ClCompile Include="Trajectory.cpp" />

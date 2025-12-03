@@ -20,11 +20,11 @@ void WeaponHolderComponent::Init()
 void WeaponHolderComponent::LateUpdate()
 {
 	Object* owner = GetOwner();
+
 	Vec2 pos = owner->GetPos();
 	pos.x += 20.f;
 
 	m_pCurrentWeapon->SetPos(pos + m_pCurrentWeapon->GetOffSetPos());
-
 }
 
 void WeaponHolderComponent::Render(HDC hDC)
