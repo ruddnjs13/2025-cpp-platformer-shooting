@@ -25,4 +25,5 @@ private:
 	// 그룹 간의 충돌체크 배열
 	UINT m_objectLayer[(UINT)Layer::END];
 	std::unordered_map<ULONGLONG, bool> m_mapCollisionInfo;
+	std::unordered_map<ULONGLONG, std::pair<Collider*, Collider*>> m_physicsCollisionInfo;
 };

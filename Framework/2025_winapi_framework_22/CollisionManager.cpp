@@ -54,7 +54,36 @@ void CollisionManager::CheckReset()
 
 void CollisionManager::PhysicsResolve()
 {
-	const float penetration = 0.00001000;
+	// 일단 충돌 정보를 가져올 수는 있지만 콜라이더를 가져올 수 없으니
+	// 콜라이더를 먼저 가져올 수 있어야함.
+	// 그러려면 이전과 같은 작업 필요.
+	// 충돌체에 콜라이더만 가지는 맵을 만들어야함?
+
+	// 모든 충돌체들을 순회
+	for (auto iter = m_mapCollisionInfo.begin(); iter != m_mapCollisionInfo.end();)
+	{
+		// 충돌체가 아니라면 패스
+		if (!iter->second)
+		{
+			++iter;
+			continue;
+		}
+
+		// 충돌체 가져오기
+		Collider* left = m_physicsCollisionInfo[iter->first].first;
+		Collider* right = m_physicsCollisionInfo[iter->first].second;
+
+		if (left == nullptr || right == nullptr)
+		{
+			++iter;
+			continue;
+		}
+
+		Vec2 lPos = left->GetUpdatedPos();
+		Vec2 rPos = right->GetUpdatedPos();
+
+		// 이제 깊이 검사를 해야하는데 깊이를 어떻게 알지?
+	}
 }
 
 void CollisionManager::CollisionLayerUpdate(Layer _left, Layer _right)
@@ -100,6 +129,7 @@ void CollisionManager::CollisionLayerUpdate(Layer _left, Layer _right)
 						pLeftCollider->ExitCollision(pRightCollider);
 						pRightCollider->ExitCollision(pLeftCollider);
 						iter->second = false;
+						m_physicsCollisionInfo[iter->first] = { nullptr, nullptr };
 					}
 					else
 					{
@@ -114,6 +144,7 @@ void CollisionManager::CollisionLayerUpdate(Layer _left, Layer _right)
 						pLeftCollider->EnterCollision(pRightCollider);
 						pRightCollider->EnterCollision(pLeftCollider);
 						iter->second = true;
+						m_physicsCollisionInfo[iter->first] = { pLeftCollider, pRightCollider };
 					}
 				}
 			}
@@ -124,6 +155,7 @@ void CollisionManager::CollisionLayerUpdate(Layer _left, Layer _right)
 					pLeftCollider->ExitCollision(pRightCollider);
 					pRightCollider->ExitCollision(pLeftCollider);
 					iter->second = false;
+					m_physicsCollisionInfo[iter->first] = { nullptr, nullptr };
 				}
 			}
 		}
