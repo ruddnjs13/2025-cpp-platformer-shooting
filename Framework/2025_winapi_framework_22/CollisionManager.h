@@ -16,6 +16,7 @@ public:
 	void Update();
 	void CheckLayer(Layer _left, Layer _right);
 	void CheckReset();
+	void PhysicsResolve();
 private:
 	void CollisionLayerUpdate(Layer _left, Layer _right);
 	bool IsCollision(Collider* _left, Collider* _right);

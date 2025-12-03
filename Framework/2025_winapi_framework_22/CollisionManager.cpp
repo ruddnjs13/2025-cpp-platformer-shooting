@@ -52,6 +52,11 @@ void CollisionManager::CheckReset()
 	memset(m_objectLayer, 0, sizeof(UINT) * (UINT)Layer::END);
 }
 
+void CollisionManager::PhysicsResolve()
+{
+	const float penetration = 0.00001000;
+}
+
 void CollisionManager::CollisionLayerUpdate(Layer _left, Layer _right)
 {
 	std::shared_ptr<Scene> pCurrentScene = GET_SINGLE(SceneManager)->GetCurScene();
