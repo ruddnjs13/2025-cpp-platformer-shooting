@@ -50,3 +50,12 @@ enum class CanvasType
 	Tutorial,
 	Credit
 };
+
+enum class TileType
+{
+	Ground = 1,
+	Grass = 2,
+	Trunk_Left = 3,
+	Trunk_Right = 4,
+	Leaves = 5
+};

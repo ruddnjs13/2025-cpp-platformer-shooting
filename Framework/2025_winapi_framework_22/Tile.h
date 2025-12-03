@@ -4,7 +4,5 @@
 class Tile :
     public Object
 {
-
-
 };
 
