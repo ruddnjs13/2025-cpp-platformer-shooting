@@ -25,7 +25,6 @@ private:
 
 	SlotReel* slotReel;
 
-	WeaponHolderComponent* m_pWeaponHolder = nullptr;
 
 	Texture* m_pTex = nullptr;
 };

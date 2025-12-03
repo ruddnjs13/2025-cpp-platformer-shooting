@@ -33,23 +33,11 @@ TestPlayer::TestPlayer()
 	);
 	animator->Play(L"JiwooFront");
 
-	m_pWeaponHolder = AddComponent<WeaponHolderComponent>();
-
 	Vec2 pos = GetPos();
 	pos.y -= GetSize().y / 2.f;
 	pos.x += 10.f;
 
 	Vec2 angle = Vec2(0.f, 0.f);
-
-	m_pWeaponHolder->ChangeWeapon(new TestWeapon(),
-		{ pos },
-		{ 20.f,20.f });
-
-	
-
-
-	GET_SINGLE(SceneManager)->GetCurScene()->AddObject(m_pWeaponHolder->GetCurrentWeapon(), Layer::ENEMY);
-	weaponCount = 0;
 
 }
 
@@ -76,41 +64,13 @@ void TestPlayer::Update()
 	float factor = scaleSpeed + scaleDelta;
 	Scale({ factor, factor });
 
-	
-	if(GET_KEYDOWN(KEY_TYPE::L))
-	{
-		Vec2 pos = GetPos();
-		pos.y -= GetSize().y / 2.f;
-		pos.x += 10.f;
-		Vec2 angle = Vec2(0.f, 0.f);
-		
-		m_pWeaponHolder->ChangeWeapon(new TestWeapon2(),
-			{ pos },
-			{ 20.f,20.f });
 
-
-		GET_SINGLE(SceneManager)->GetCurScene()->AddObject(m_pWeaponHolder->GetCurrentWeapon(), Layer::Weapon);
-	}
-
-	if (GET_KEYDOWN(KEY_TYPE::K))
-	{
-		Vec2 pos = GetPos();
-		pos.y -= GetSize().y / 2.f;
-		pos.x += 10.f;
-		Vec2 angle = Vec2(0.f, 0.f);
-
-		m_pWeaponHolder->ChangeWeapon(new TestWeapon(),
-			{ pos },
-			{ 20.f,20.f });
-
-
-		GET_SINGLE(SceneManager)->GetCurScene()->AddObject(m_pWeaponHolder->GetCurrentWeapon(), Layer::Weapon);
-	}
 
 	if (GET_KEYDOWN(KEY_TYPE::P))
 	{
 
 		slotReel = new SlotReel();
+		slotReel->SetSize({60, 60});
 
 		Vec2 pos = GetPos();
 
@@ -118,13 +78,12 @@ void TestPlayer::Update()
 
 		slotReel->SetPos(pos);
 
-		slotReel->SetSize({60, 60});
 
 		slotReel->SlotRolling();
 
-		GET_SINGLE(SceneManager)->GetCurScene()->AddObject(slotReel, Layer::Weapon);
+		slotReel->SetOwner(this);
 
-
+		GET_SINGLE(SceneManager)->GetCurScene()->AddObject(slotReel, Layer::Slot);
 	}
 }
 

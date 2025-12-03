@@ -5,6 +5,8 @@ enum class Layer
 	BACKGROUND,
 	// 밑에 변경 가능
 	PLAYER,
+	RollItem,
+	Slot,
 	ENEMY,
 	PROJECTILE,
 	Weapon,
