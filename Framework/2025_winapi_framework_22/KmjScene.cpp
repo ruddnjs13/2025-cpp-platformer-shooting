@@ -21,6 +21,7 @@ void KmjScene::Init()
 
 	GET_SINGLE(CollisionManager)->CheckLayer(Layer::Boom, Layer::DEFAULT);
 	GET_SINGLE(CollisionManager)->CheckLayer(Layer::PROJECTILE, Layer::DEFAULT);
+	GET_SINGLE(CollisionManager)->CheckLayer(Layer::Slot, Layer::RollItem);
 }
 
 void KmjScene::Update()

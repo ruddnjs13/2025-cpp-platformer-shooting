@@ -199,6 +199,7 @@ void ResourceManager::RegisterTexture()
 	LoadTexture(L"Gun1Bullet", L"Texture\\Bullet1.bmp");
 	LoadTexture(L"Explosion", L"Texture\\Explosion.bmp");
 	LoadTexture(L"AimLine", L"Texture\\Aimming.bmp");
+	LoadTexture(L"Test2", L"Texture\\RoolRetTest.bmp");
 }
 
 void ResourceManager::LoadTexture(const wstring& _key, const wstring& _path)
