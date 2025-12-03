@@ -41,8 +41,8 @@ using std::wstring;
 #define WINDOW_WIDTH 1280
 #define WINDOW_HEIGHT 720
 #define Action std::function<void()>
-#define MAP_WIDTH 40
-#define MAP_HEIGHT 25
+#define MAP_WIDTH 41
+#define MAP_HEIGHT 26
 
 // 메모리 릭
 #ifdef _DEBUG

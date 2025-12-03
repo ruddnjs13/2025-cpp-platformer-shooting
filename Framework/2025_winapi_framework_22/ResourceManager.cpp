@@ -200,6 +200,15 @@ void ResourceManager::RegisterTexture()
 	LoadTexture(L"Explosion", L"Texture\\Explosion.bmp");
 	LoadTexture(L"AimLine", L"Texture\\Aimming.bmp");
 	LoadTexture(L"Test2", L"Texture\\RoolRetTest.bmp");
+
+	// 타일맵 텍스쳐
+	LoadTexture(L"Ground", L"Texture\\Ground.bmp");
+	LoadTexture(L"Grass", L"Texture\\Grass.bmp");
+	LoadTexture(L"Trunk_Left", L"Texture\\Trunk_Left.bmp");
+	LoadTexture(L"Trunk_Right", L"Texture\\Trunk_Right.bmp");
+	LoadTexture(L"Leaves", L"Texture\\Leaves.bmp");
+
+	//
 }
 
 void ResourceManager::LoadTexture(const wstring& _key, const wstring& _path)

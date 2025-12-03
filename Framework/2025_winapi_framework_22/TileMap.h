@@ -4,8 +4,12 @@
 class TileMap
 {
 public:
+	TileMap();
+	~TileMap();
+
+public:
 	char map[MAP_HEIGHT][MAP_WIDTH];
 public:
-	void LoadMap(char map[MAP_HEIGHT][MAP_WIDTH], std::string mapFileName);
+	void LoadMap(std::string mapFileName);
 };
 

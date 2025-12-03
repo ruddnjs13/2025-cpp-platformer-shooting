@@ -1,12 +1,21 @@
 #include "pch.h"
 #include "TileMap.h"
 
-void TileMap::LoadMap(char map[MAP_HEIGHT][MAP_WIDTH], std::string mapFileName)
+TileMap::TileMap()
+{
+}
+
+TileMap::~TileMap()
+{
+}
+
+void TileMap::LoadMap(std::string mapFileName)
 {
 	std::ifstream mapFile(mapFileName);
 
 	if (mapFile.is_open())
 	{
+		cout << "¿­¸²";
 		for (int i = 0; i < MAP_HEIGHT; i++)
 		{
 			mapFile.getline(map[i], MAP_WIDTH);
