@@ -219,7 +219,12 @@
       <Filter>Engine\03. Object</Filter>
     </ClInclude>
     <ClInclude Include="Slider.h" />
-    <ClInclude Include="SlotReel.h" />
+    <ClInclude Include="SlotReel.h">
+      <Filter>Engine\09.Slot</Filter>
+    </ClInclude>
+    <ClInclude Include="RollingItem.h">
+      <Filter>Engine\09.Slot</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="2025_winapi_framework_22.rc">
@@ -369,6 +374,11 @@
       <Filter>Engine\03. Object</Filter>
     </ClCompile>
     <ClCompile Include="Slider.cpp" />
-    <ClCompile Include="SlotReel.cpp" />
+    <ClCompile Include="SlotReel.cpp">
+      <Filter>Engine\09.Slot</Filter>
+    </ClCompile>
+    <ClCompile Include="RollingItem.cpp">
+      <Filter>Engine\09.Slot</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
