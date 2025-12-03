@@ -11,9 +11,9 @@ public:
 
 public:
 	void Update() override;
-	void Rotate() override;
+	void Rotate();
 	void Render(HDC _hdc) override;
-	void Shoot() override;
+	void Shoot();
 
 
 private:

@@ -9,17 +9,15 @@ class Weapon
 {
 public:
 	Weapon();
-	virtual ~Weapon();
+	~Weapon();
 
 public:
-	virtual void SetOwner(Object* _owner) { m_owner = _owner; }
-	virtual void Update() abstract;
-	virtual void Rotate() abstract;
-	virtual void Render(HDC _hdc) abstract;
-	virtual void Shoot() abstract;
+	void Update() override;
+	void Render(HDC _hdc) override;
 
 public:
 	void SetRotation(Vec2 _angle);
+	void SetOwner(Object* _owner) { m_owner = _owner; }
 	//Vec2 GetAngle() const { return m_angle; }
 
 	void SetPos(Vec2 _pos) { m_pos = _pos; }
