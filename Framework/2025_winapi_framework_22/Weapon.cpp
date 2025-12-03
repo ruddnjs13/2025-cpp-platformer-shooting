@@ -12,6 +12,14 @@ Weapon::~Weapon()
 
 }
 
+void Weapon::Update()
+{
+}
+
+void Weapon::Render(HDC _hdc)
+{
+}
+
 void Weapon::SetRotation(Vec2 _angle)
 {
 	

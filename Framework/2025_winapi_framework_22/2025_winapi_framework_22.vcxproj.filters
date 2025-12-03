@@ -56,8 +56,8 @@
     <Filter Include="Engine\07. UI\UIElement">
       <UniqueIdentifier>{91d94f7c-a74e-4816-b5be-c9d2e07a4c36}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engine\03. Object\Tile">
-      <UniqueIdentifier>{bc6e07f4-ca0c-4e90-9884-a685eb53d8d4}</UniqueIdentifier>
+    <Filter Include="Engine\09.Slot">
+      <UniqueIdentifier>{d92dbc5b-b773-4190-803a-983f69ef646b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -219,14 +219,11 @@
       <Filter>Engine\03. Object</Filter>
     </ClInclude>
     <ClInclude Include="Slider.h" />
-    <ClInclude Include="Tile.h">
-      <Filter>Engine\03. Object\Tile</Filter>
+    <ClInclude Include="SlotReel.h">
+      <Filter>Engine\09.Slot</Filter>
     </ClInclude>
-    <ClInclude Include="TileMapManager.h">
-      <Filter>Engine\02. Manager</Filter>
-    </ClInclude>
-    <ClInclude Include="TileMap.h">
-      <Filter>Engine\03. Object\Tile</Filter>
+    <ClInclude Include="RollingItem.h">
+      <Filter>Engine\09.Slot</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -377,14 +374,11 @@
       <Filter>Engine\03. Object</Filter>
     </ClCompile>
     <ClCompile Include="Slider.cpp" />
-    <ClCompile Include="Tile.cpp">
-      <Filter>Engine\03. Object\Tile</Filter>
+    <ClCompile Include="SlotReel.cpp">
+      <Filter>Engine\09.Slot</Filter>
     </ClCompile>
-    <ClCompile Include="TileMapManager.cpp">
-      <Filter>Engine\02. Manager</Filter>
-    </ClCompile>
-    <ClCompile Include="TileMap.cpp">
-      <Filter>Engine\03. Object\Tile</Filter>
+    <ClCompile Include="RollingItem.cpp">
+      <Filter>Engine\09.Slot</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

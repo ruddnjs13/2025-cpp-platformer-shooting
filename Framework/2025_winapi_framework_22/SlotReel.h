@@ -1,6 +1,7 @@
 #pragma once
 #include "Object.h"
 #include "Weapon.h"
+#include "RollingItem.h"
 class Texture;
 
 class SlotReel 
@@ -16,17 +17,18 @@ public:
     void Render(HDC _hdc) override;
 
 public:
-    Weapon SlotRolling();
+    Weapon* SlotRolling();
     void SetOffset(Vec2 newOffset) { m_offsetPos = newOffset; }
     Vec2 GetOffset() { return m_offsetPos; }
     Object* GetOwner() { return m_owner; }
     void SetOwner(Object* owner) { m_owner = owner; }
 
 private:
-    Weapon selectWeapon;
-      Object* m_owner;
-      Vec2 m_offsetPos;
-      Texture* m_pTex;
+    vector<RollingItem*> rollingVec;
+    Weapon* selectWeapon;
+    Object* m_owner;
+    Vec2 m_offsetPos;
+    Texture* m_pTex;
 };
 
 
