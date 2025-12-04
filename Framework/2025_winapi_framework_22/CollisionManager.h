@@ -16,7 +16,7 @@ public:
 	void Update();
 	void CheckLayer(Layer _left, Layer _right);
 	void CheckReset();
-	void PhysicsResolve();
+	void PhysicsResolve(Collider* _left, Collider* _right);
 private:
 	void CollisionLayerUpdate(Layer _left, Layer _right);
 	bool IsCollision(Collider* _left, Collider* _right);
@@ -25,5 +25,4 @@ private:
 	// 그룹 간의 충돌체크 배열
 	UINT m_objectLayer[(UINT)Layer::END];
 	std::unordered_map<ULONGLONG, bool> m_mapCollisionInfo;
-	std::unordered_map<ULONGLONG, std::pair<Collider*, Collider*>> m_physicsCollisionInfo;
 };

@@ -3,6 +3,7 @@
 
 class Trajectory;
 class TextureObject;
+class Weapon;
 
 class WeaponTrajectory :
     public Component
@@ -17,11 +18,16 @@ public:
 	void SetTrajectoryDir(Vec2 angle);
 	void SetTrajectoryPos(Vec2 pos);
 	void SetTrajectorySize(Vec2 size);
+	void StoreAngleValue(float _angleValue) { angleValue = _angleValue; }
 
 public:
-	void ShowTrajectory(Vec2 angle, Vec2 pos, Vec2 size, Object* owner);
+	void ShowTrajectory(float _angleValue, Vec2 angle, Vec2 pos, Vec2 size, Object* owner, Weapon* _weapon);
 	
+public:
+	float angleValue = 0;
+	bool isShoot = true;
 private:
+	Weapon* weapon;
 	std::vector<TextureObject*> m_TextureObjects;
 	Trajectory* m_Trajectory = nullptr;
 };

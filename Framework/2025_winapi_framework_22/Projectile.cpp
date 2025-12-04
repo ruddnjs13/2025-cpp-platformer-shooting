@@ -39,6 +39,6 @@ Projectile::~Projectile()
 void Projectile::Update()
 {
 	//Translate({cosf(m_angle) * 500.f * fDT, sinf(m_angle) * 500.f * fDT});
-	Translate({ m_dir.x * 500.f * fDT, m_dir.y * 500.f * fDT});
+	//Translate({ m_dir.x * 500.f * fDT, m_dir.y * 500.f * fDT});
 }
 

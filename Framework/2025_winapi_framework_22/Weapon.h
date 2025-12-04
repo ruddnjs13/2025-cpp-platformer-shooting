@@ -18,6 +18,9 @@ public:
 public:
 	void SetRotation(Vec2 _angle);
 	void SetOwner(Object* _owner) { m_owner = _owner; }
+	void StartAngle(float x, float shootPosx);
+	void SetAngleToPositon();
+	void SetAngleToPosition2();
 	//Vec2 GetAngle() const { return m_angle; }
 
 	void SetPos(Vec2 _pos) { m_pos = _pos; }
@@ -37,13 +40,20 @@ public:
 	Object* GetOwner()  { return m_owner; }
 
 	void SetShootAngle(float angle);
+	void SetIsRotation(bool _isRotation) { isRotation = _isRotation; }
+	void SetPlayerCount(int _playerNum);
 
+public:
+	int m_playerCount = 0;
+	bool isRotation = true;
 protected:
+	Vec2 m_angleMovePos;
 	Vec2 m_offsetPos;
-	bool isShoot = true; 
 	Vec2 m_angle;
 	WeaponTrajectory* m_weaponTrajectory;
+	float m_angleValue = 0;
 private:
+	bool isShoot = true; 
 	Object* m_owner;
 	Vec2 m_pos;
 	Vec2 m_size;

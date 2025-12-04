@@ -17,20 +17,32 @@ Player::Player()
 	//wstring path = GET_SINGLE(ResourceManager)->GetResPath();
 	//path += L"Texture\\plane.bmp";
 	//m_pTex->Load(path);
-	m_pTex = GET_SINGLE(ResourceManager)->GetTexture(L"Jiwoo");
-	AddComponent<Collider>();
-	AddComponent<Rigidbody>();
+	m_pTex = GET_SINGLE(ResourceManager)->GetTexture(L"PlayerIdle");
+	Collider* c = AddComponent<Collider>();
+	c->SetSize({ 40.f,50.f });
+	c->SetName(L"Player");
+		AddComponent<Rigidbody>();
 	//GetComponent<Rigidbody>()->SetUseGravity(false);
 	auto* animator = AddComponent<Animator>();
 	animator->CreateAnimation
-	(L"JiwooFront",
+	(L"PlayerIdle",
 		m_pTex, 
-		{0.f,150.f},
-		{50.f,50.f},
-		{50.f,0.f},
-		5,0.1f
+		{0.f,0.f},
+		{16.f,16.f},
+		{16.f,0.f},
+		6,0.1f
 	);
-	animator->Play(L"JiwooFront");
+	animator->Play(L"PlayerIdle");
+	m_pTex = GET_SINGLE(ResourceManager)->GetTexture(L"PlayerWalk");
+	animator->CreateAnimation
+	(
+		L"PlayerRun",
+		m_pTex,
+		{ 0.f,0.f },
+		{ 16.f,16.f },
+		{ 16.f,0.f },
+		6, 0.1f
+	);
 }
 
 Player::~Player()
@@ -89,7 +101,7 @@ void Player::StayCollision(Collider* _other)
 }
 
 void Player::EnterCollision(Collider* _other)
-{
+{	
 	if (_other->GetName() == L"Floor")
 	{
 		Rigidbody* rb = GetComponent<Rigidbody>();
@@ -100,11 +112,47 @@ void Player::EnterCollision(Collider* _other)
 
 void Player::ExitCollision(Collider* _other)
 {
+	if (_other->GetName() == L"Floor")
+	{
+		Rigidbody* rb = GetComponent<Rigidbody>();
+		rb->SetGrounded(false);
+	}
+}
+
+void Player::ChangeState(PlayerState _newState)
+{
+	m_prevState = m_state;
+	m_state = _newState;
+
+	switch (m_state)
+	{
+	case PlayerState::IDLE:
+	{
+		m_pTex = GET_SINGLE(ResourceManager)->GetTexture(L"PlayerIdle");
+		Animator* animator = GetComponent<Animator>();
+		animator->Play(L"PlayerIdle");
+	}
+	break;
+	case PlayerState::RUN:
+	{
+		m_pTex = GET_SINGLE(ResourceManager)->GetTexture(L"PlayerWalk");
+		Animator* animator = GetComponent<Animator>();
+		animator->Play(L"PlayerRun");
+	}
+	break;
+	case PlayerState::JUMP:
+		break;
+	case PlayerState::DIE:
+		break;
+	default:
+		break;
+	}
 }
 
 
 void Player::Update()
 {
+	Rigidbody* rb = GetComponent<Rigidbody>();
 	//Vec2 pos = GetPos();
 
 	//if (GET_KEY(KEY_TYPE::W))
@@ -127,7 +175,7 @@ void Player::Update()
 		if (GET_KEY(KEY_TYPE::S)) angle -= 0.1f;
 		if (GET_KEYDOWN(KEY_TYPE::SPACE))
 		{
-			Rigidbody* rb = GetComponent<Rigidbody>();
+			rb = GetComponent<Rigidbody>();
 			if (rb->IsGrounded())
 			{
 				Jump();
@@ -149,7 +197,7 @@ void Player::Update()
 		if (GET_KEY(KEY_TYPE::DOWN)) angle -= 0.1f;
 		if (GET_KEY(KEY_TYPE::RSHIFT))
 		{
-			Rigidbody* rb = GetComponent<Rigidbody>();
+			rb = GetComponent<Rigidbody>();
 			if (rb->IsGrounded())
 			{
 				Jump();
@@ -160,6 +208,14 @@ void Player::Update()
 			CreateProjectile();
 			GET_SINGLE(TurnManager)->ChangeTurn(TurnType::Player1);
 		}
+	}
+	if (m_state != PlayerState::RUN && dir.Length() > 0.f)
+	{
+		ChangeState(PlayerState::RUN);
+	}
+	else if (m_state != PlayerState::IDLE && dir.Length() == 0.f)
+	{
+		ChangeState(PlayerState::IDLE);
 	}
 	Translate({dir.x * fDT * 200.f, dir.y * fDT * 200.f});
 	Angle(angle);

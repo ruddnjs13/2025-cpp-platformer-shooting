@@ -63,6 +63,8 @@ public:
 		}
 		return component;
 	}
+
+
 private:
 	bool m_isDie;
 	Vec2 m_pos;

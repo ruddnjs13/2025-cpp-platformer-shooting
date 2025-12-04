@@ -49,23 +49,26 @@ void WeaponTrajectory::SetTrajectorySize(Vec2 size)
 }
 
 
-void WeaponTrajectory::ShowTrajectory(Vec2 angle, Vec2 pos, Vec2 size, Object* owner)
+void WeaponTrajectory::ShowTrajectory(float _angleValue,Vec2 angle, Vec2 pos, Vec2 size, Object* owner, Weapon* _weapon)
 {
-    if (m_TextureObjects.size() < 6)
-        m_TextureObjects.resize(6, nullptr);
+    weapon = _weapon;
+
+    StoreAngleValue(_angleValue);
+
+    if (m_TextureObjects.size() < 1)
+        m_TextureObjects.resize(1, nullptr);
 
     if (m_Trajectory != nullptr)
     {
-        GET_SINGLE(SceneManager)->RequestDestroy(m_Trajectory);
+        GET_SINGLE(SceneManager)->GetCurScene()->RequestDestroy(m_Trajectory);
         m_Trajectory = nullptr;
     }
 
-
-    for (int i = 0; i < 6; i++)
+    for (int i = 0; i < 1; i++)
     {
         if (m_TextureObjects[i] != nullptr)
         {
-            GET_SINGLE(SceneManager)->RequestDestroy(m_TextureObjects[i]);
+            GET_SINGLE(SceneManager)->GetCurScene()->RequestDestroy(m_TextureObjects[i]);
             m_TextureObjects[i] = nullptr;
         }
     }
@@ -79,23 +82,45 @@ void WeaponTrajectory::ShowTrajectory(Vec2 angle, Vec2 pos, Vec2 size, Object* o
 
     GET_SINGLE(SceneManager)->GetCurScene()->AddObject(m_Trajectory, Layer::PROJECTILE);
 
-
     std::thread([this]()
         {
-            for (int i = 0; i < 6; ++i)
+            for (int i = 0; i < 1; ++i)
             {
-                std::this_thread::sleep_for(std::chrono::milliseconds(100));
+                std::this_thread::sleep_for(std::chrono::milliseconds(80));
 
-                cout << GetOwner()->GetPos().x << endl;
+                if (m_Trajectory == nullptr)
+                    continue;
+
                 TextureObject* textureObject = new TextureObject;
-                Vec2 pos = m_Trajectory->GetPos();
+
+                Vec2 pos = m_Trajectory->GetPos(); 
                 Weapon* owner = dynamic_cast<Weapon*>(GetOwner());
-                textureObject->SetOffset(pos - owner->GetOwner()->GetPos());
-                textureObject->SetOwner(owner->GetOwner());
-                textureObject->SetSize({ 20, 20 });
+
+                if (owner && owner->GetOwner())
+                {
+                    textureObject->SetOffset(pos - owner->GetOwner()->GetPos());
+                    textureObject->SetOwner(owner->GetOwner());
+                    textureObject->SetAngleValue(angleValue);
+                }
+                else
+                {
+                    textureObject->SetOffset({ 0, 0 });
+                    textureObject->SetOwner(nullptr);
+                    textureObject->SetAngleValue(angleValue);
+                }
+
+                textureObject->SetSize({ 30, 30 });
                 m_TextureObjects[i] = textureObject;
+
                 GET_SINGLE(SceneManager)->GetCurScene()->AddObject(textureObject, Layer::PROJECTILE);
             }
+
+            std::this_thread::sleep_for(std::chrono::milliseconds(30));
+            if (weapon)
+                weapon->isRotation = true;
+            
+
         }).detach();
 }
+
 
