@@ -2,6 +2,7 @@
 #include "Object.h"
 #include "TurnManager.h"
 
+class SlotReel;
 class Texture;
 class Player :
     public Object
@@ -27,6 +28,7 @@ public:
 		}
 		m_turnType = _turnType; 
 	}
+	void SetWeaponCount(int count) { weaponCount = count; }
 private:
 	void CreateProjectile();
 	bool CheckPlayerTurn(TurnType _checkType)
@@ -37,6 +39,10 @@ private:
 	}
 	void Jump();
 private:
+
+	int weaponCount = 0;
+
+	SlotReel* slotReel = nullptr;
 	Texture* m_pTex;
 	TurnType m_turnType;
 	PlayerState m_state;

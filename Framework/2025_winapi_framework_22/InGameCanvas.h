@@ -9,7 +9,6 @@ class InGameCanvas :
     void Init() override;
 
 private:
-    Image* background;
     Slider* p1_HpBar;
     Slider* p2_HpBar;
 };

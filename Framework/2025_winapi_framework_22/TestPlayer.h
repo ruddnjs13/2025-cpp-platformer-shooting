@@ -25,7 +25,6 @@ private:
 
 	SlotReel* slotReel = nullptr;
 
-
 	Texture* m_pTex = nullptr;
 };
 

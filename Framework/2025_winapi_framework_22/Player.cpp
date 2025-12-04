@@ -11,6 +11,7 @@
 #include "Animation.h"
 #include "Rigidbody.h"
 #include "Weapon.h"
+#include "SlotReel.h"
 Player::Player()
 {
 	//m_pTex = new Texture;
@@ -19,7 +20,7 @@ Player::Player()
 	//m_pTex->Load(path);
 	m_pTex = GET_SINGLE(ResourceManager)->GetTexture(L"PlayerIdle");
 	Collider* c = AddComponent<Collider>();
-	c->SetSize({ 40.f,50.f });
+	c->SetSize({ 28,28 });
 	c->SetName(L"Player");
 		AddComponent<Rigidbody>();
 	//GetComponent<Rigidbody>()->SetUseGravity(false);
@@ -114,8 +115,9 @@ void Player::ExitCollision(Collider* _other)
 {
 	if (_other->GetName() == L"Floor")
 	{
+		/*std::wcout << _other->GetName();
 		Rigidbody* rb = GetComponent<Rigidbody>();
-		rb->SetGrounded(false);
+		rb->SetGrounded(false);*/
 	}
 }
 
@@ -229,6 +231,34 @@ void Player::Update()
 	//	scaleDelta -= scaleSpeed * fDT;
 	//float factor = scaleSpeed + scaleDelta;
 	//Scale({ factor, factor });
+
+
+	if (GET_KEYDOWN(KEY_TYPE::P) && CheckPlayerTurn(m_turnType))
+	{
+		if (slotReel != nullptr)
+		{
+			GET_SINGLE(SceneManager)->GetCurScene()->RequestDestroy(slotReel);
+			slotReel = nullptr;
+		}
+
+		slotReel = new SlotReel();
+		slotReel->SetSize({ 60, 60 });
+
+		Vec2 pos = GetPos();
+
+		pos.y -= 60;
+
+		slotReel->SetPos(pos);
+
+
+		int turnNum = m_turnType == TurnType::Player1 ? 1 : 2;
+
+		slotReel->SlotRolling(turnNum);
+
+		slotReel->SetOwner(this);
+
+		GET_SINGLE(SceneManager)->GetCurScene()->AddObject(slotReel, Layer::Slot);
+	}
 }
 
 
@@ -254,5 +284,7 @@ void Player::Jump()
 	Vec2 jumpPower{ 0, -50 };
 	rb->AddImpulse(jumpPower * 5);
 }
+
+
 
 
