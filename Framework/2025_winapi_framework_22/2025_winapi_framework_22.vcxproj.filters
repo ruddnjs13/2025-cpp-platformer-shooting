@@ -59,6 +59,15 @@
     <Filter Include="Engine\09.Slot">
       <UniqueIdentifier>{d92dbc5b-b773-4190-803a-983f69ef646b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\03. Object\Tile">
+      <UniqueIdentifier>{b800b88d-26dd-4c1b-9dd5-b9fc2e057706}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\07. UI\Canvas">
+      <UniqueIdentifier>{fd94b140-7e1b-4978-9a3f-482336c28151}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\04. Scene\BuildScene">
+      <UniqueIdentifier>{dbe20a0f-b0b0-4841-8cf4-306ec70c4f25}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="2025_winapi_framework_22.h">
@@ -176,9 +185,6 @@
     <ClInclude Include="TestWeapon.h">
       <Filter>Engine\03. Object\Weapon\Test</Filter>
     </ClInclude>
-    <ClInclude Include="Canvas.h">
-      <Filter>Engine\07. UI</Filter>
-    </ClInclude>
     <ClInclude Include="UIManager.h">
       <Filter>Engine\02. Manager</Filter>
     </ClInclude>
@@ -193,9 +199,6 @@
     </ClInclude>
     <ClInclude Include="Bomb.h">
       <Filter>Engine\03. Object\Weapon</Filter>
-    </ClInclude>
-    <ClInclude Include="TitleCanvas.h">
-      <Filter>Engine\07. UI</Filter>
     </ClInclude>
     <ClInclude Include="UIElement.h">
       <Filter>Engine\07. UI\UIElement</Filter>
@@ -218,12 +221,36 @@
     <ClInclude Include="TextureObject.h">
       <Filter>Engine\03. Object</Filter>
     </ClInclude>
-    <ClInclude Include="Slider.h" />
+    <ClInclude Include="RollingItem.h">
+      <Filter>Engine\09.Slot</Filter>
+    </ClInclude>
     <ClInclude Include="SlotReel.h">
       <Filter>Engine\09.Slot</Filter>
     </ClInclude>
-    <ClInclude Include="RollingItem.h">
-      <Filter>Engine\09.Slot</Filter>
+    <ClInclude Include="Tile.h">
+      <Filter>Engine\03. Object\Tile</Filter>
+    </ClInclude>
+    <ClInclude Include="TileMap.h">
+      <Filter>Engine\03. Object\Tile</Filter>
+    </ClInclude>
+    <ClInclude Include="TileMapManager.h">
+      <Filter>Engine\02. Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Background.h" />
+    <ClInclude Include="Canvas.h">
+      <Filter>Engine\07. UI\Canvas</Filter>
+    </ClInclude>
+    <ClInclude Include="InGameCanvas.h">
+      <Filter>Engine\07. UI\Canvas</Filter>
+    </ClInclude>
+    <ClInclude Include="TitleCanvas.h">
+      <Filter>Engine\07. UI\Canvas</Filter>
+    </ClInclude>
+    <ClInclude Include="Slider.h">
+      <Filter>Engine\07. UI\UIElement</Filter>
+    </ClInclude>
+    <ClInclude Include="TitleScene.h">
+      <Filter>Engine\04. Scene\BuildScene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -333,9 +360,6 @@
     <ClCompile Include="TestWeapon.cpp">
       <Filter>Engine\03. Object\Weapon\Test</Filter>
     </ClCompile>
-    <ClCompile Include="Canvas.cpp">
-      <Filter>Engine\07. UI</Filter>
-    </ClCompile>
     <ClCompile Include="UIManager.cpp">
       <Filter>Engine\02. Manager</Filter>
     </ClCompile>
@@ -350,9 +374,6 @@
     </ClCompile>
     <ClCompile Include="Bomb.cpp">
       <Filter>Engine\03. Object\Weapon</Filter>
-    </ClCompile>
-    <ClCompile Include="TitleCanvas.cpp">
-      <Filter>Engine\07. UI</Filter>
     </ClCompile>
     <ClCompile Include="UIElement.cpp">
       <Filter>Engine\07. UI\UIElement</Filter>
@@ -373,12 +394,36 @@
     <ClCompile Include="TextureObject.cpp">
       <Filter>Engine\03. Object</Filter>
     </ClCompile>
-    <ClCompile Include="Slider.cpp" />
+    <ClCompile Include="RollingItem.cpp">
+      <Filter>Engine\09.Slot</Filter>
+    </ClCompile>
     <ClCompile Include="SlotReel.cpp">
       <Filter>Engine\09.Slot</Filter>
     </ClCompile>
-    <ClCompile Include="RollingItem.cpp">
-      <Filter>Engine\09.Slot</Filter>
+    <ClCompile Include="Tile.cpp">
+      <Filter>Engine\03. Object\Tile</Filter>
+    </ClCompile>
+    <ClCompile Include="TileMap.cpp">
+      <Filter>Engine\03. Object\Tile</Filter>
+    </ClCompile>
+    <ClCompile Include="Slider.cpp">
+      <Filter>Engine\07. UI\UIElement</Filter>
+    </ClCompile>
+    <ClCompile Include="TileMapManager.cpp">
+      <Filter>Engine\02. Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Background.cpp" />
+    <ClCompile Include="Canvas.cpp">
+      <Filter>Engine\07. UI\Canvas</Filter>
+    </ClCompile>
+    <ClCompile Include="InGameCanvas.cpp">
+      <Filter>Engine\07. UI\Canvas</Filter>
+    </ClCompile>
+    <ClCompile Include="TitleCanvas.cpp">
+      <Filter>Engine\07. UI\Canvas</Filter>
+    </ClCompile>
+    <ClCompile Include="TitleScene.cpp">
+      <Filter>Engine\04. Scene\BuildScene</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

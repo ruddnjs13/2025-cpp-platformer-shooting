@@ -160,8 +160,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="2025_winapi_framework_22.h" />
+    <ClInclude Include="Background.h" />
     <ClInclude Include="Button.h" />
     <ClInclude Include="Image.h" />
+    <ClInclude Include="InGameCanvas.h" />
     <ClInclude Include="MyAction.h" />
     <ClInclude Include="Animation.h" />
     <ClInclude Include="Animator.h" />
@@ -205,8 +207,12 @@
     <ClInclude Include="TestWeapon2.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="TextureObject.h" />
+    <ClInclude Include="Tile.h" />
+    <ClInclude Include="TileMap.h" />
+    <ClInclude Include="TileMapManager.h" />
     <ClInclude Include="TimeManager.h" />
     <ClInclude Include="TitleCanvas.h" />
+    <ClInclude Include="TitleScene.h" />
     <ClInclude Include="Trajectory.h" />
     <ClInclude Include="TurnManager.h" />
     <ClInclude Include="UIElement.h" />
@@ -219,6 +225,7 @@
   <ItemGroup>
     <ClCompile Include="Animation.cpp" />
     <ClCompile Include="Animator.cpp" />
+    <ClCompile Include="Background.cpp" />
     <ClCompile Include="BaseWindow.cpp" />
     <ClCompile Include="Bomb.cpp" />
     <ClCompile Include="Bullet.cpp" />
@@ -233,6 +240,7 @@
     <ClCompile Include="Floor.cpp" />
     <ClCompile Include="GDISelector.cpp" />
     <ClCompile Include="Image.cpp" />
+    <ClCompile Include="InGameCanvas.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="IscScene.cpp" />
     <ClCompile Include="KmjScene.cpp" />
@@ -256,8 +264,12 @@
     <ClCompile Include="TestWeapon2.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="TextureObject.cpp" />
+    <ClCompile Include="Tile.cpp" />
+    <ClCompile Include="TileMap.cpp" />
+    <ClCompile Include="TileMapManager.cpp" />
     <ClCompile Include="TimeManager.cpp" />
     <ClCompile Include="TitleCanvas.cpp" />
+    <ClCompile Include="TitleScene.cpp" />
     <ClCompile Include="Trajectory.cpp" />
     <ClCompile Include="TurnManager.cpp" />
     <ClCompile Include="UIElement.cpp" />

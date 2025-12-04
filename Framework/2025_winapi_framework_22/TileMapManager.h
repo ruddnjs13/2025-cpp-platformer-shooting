@@ -1,15 +1,15 @@
 #pragma once
-#include "tileson.hpp"
-
-tson::Tileson t;
-
+#include "TileMap.h"
+#include "Scene.h"
 
 class TileMapManager
 {
-private:
-	std::unordered_map<wstring, std::unique_ptr<tson::Map>> maps;
+	DECLARE_SINGLE(TileMapManager)
 public:
-	void LoadAllMap();
-	void LoadMap(wstring mapName, wstring mapFileName);
-};
+	std::map<wstring, TileMap*> maps;
+public:
+	void LoadAllTileMap();
+	void LoadTileMap(wstring mapName, std::string fileName);
 
+	void SetRandomTileMapToScene(Scene* targetScene);
+};
