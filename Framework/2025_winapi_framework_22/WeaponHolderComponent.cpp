@@ -19,19 +19,22 @@ void WeaponHolderComponent::Init()
 
 void WeaponHolderComponent::LateUpdate()
 {
-	Object* owner = GetOwner();
+	if (m_pCurrentWeapon != nullptr)
+	{
+		Object* owner = GetOwner();
 
-	Vec2 pos = owner->GetPos();
-	pos.x += 20.f;
+		Vec2 pos = owner->GetPos();
+		pos.x += 20.f;
 
-	m_pCurrentWeapon->SetPos(pos + m_pCurrentWeapon->GetOffSetPos());
+		m_pCurrentWeapon->SetPos(pos + m_pCurrentWeapon->GetOffSetPos());
+	}
 }
 
 void WeaponHolderComponent::Render(HDC hDC)
 {
 }
 
-void WeaponHolderComponent::ChangeWeapon(Weapon* weapon, Vec2 pos, Vec2 size)
+void WeaponHolderComponent::ChangeWeapon(Weapon* weapon, Vec2 pos, Vec2 size,int playerNum)
 {
 	if (m_pCurrentWeapon != nullptr)
 	{
@@ -43,7 +46,18 @@ void WeaponHolderComponent::ChangeWeapon(Weapon* weapon, Vec2 pos, Vec2 size)
 
 	SetWeaponPos(pos);
 	SetWeaponSize(size);
+
+	m_pCurrentWeapon->SetPlayerCount(playerNum);
 	m_pCurrentWeapon->SetOwner(GetOwner());
+}
+
+void WeaponHolderComponent::DestroyWeapon()
+{
+	if (m_pCurrentWeapon != nullptr)
+	{
+		GET_SINGLE(SceneManager)->RequestDestroy(m_pCurrentWeapon);
+		m_pCurrentWeapon = nullptr;
+	}
 }
 
 

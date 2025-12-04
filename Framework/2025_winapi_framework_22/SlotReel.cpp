@@ -13,7 +13,6 @@
 
 SlotReel::SlotReel()
 {
-	m_pTex = GET_SINGLE(ResourceManager)->GetTexture(L"Test2");
 	srand(static_cast<unsigned int>(time(nullptr)));
 
 	auto* col = AddComponent<Collider>();
@@ -26,14 +25,14 @@ SlotReel::SlotReel()
 	
 	m_pWeaponHolder = AddComponent<WeaponHolderComponent>();
 
-	m_pWeaponHolder->ChangeWeapon(new TestWeapon(),
-		{ pos },
-		{ 20.f,20.f });
+	//m_pWeaponHolder->ChangeWeapon(new TestWeapon(),
+	//	{ pos },
+	//	{ 20.f,20.f });
 }
 
 SlotReel::~SlotReel()
 {
-
+	m_pWeaponHolder->DestroyWeapon();
 }
 
 void SlotReel::Update()
@@ -43,19 +42,55 @@ void SlotReel::Update()
 
 void SlotReel::Render(HDC _hdc)
 {
-	Vec2 pos = GetPos();
-	Vec2 size = GetSize();
-	LONG width = m_pTex->GetWidth();
-	LONG height = m_pTex->GetHeight();
-	
-	::TransparentBlt(_hdc
-		, (int)(pos.x - size.x / 2)
-		, (int)(pos.y - size.y / 2)
-		, size.x
-		, size.y
-		, m_pTex->GetTextureDC()
-		, 0, 0, width, height,
-		RGB(255, 0, 255));
+	if (m_pTex != NULL)
+	{
+		Vec2 pos = GetPos();
+		Vec2 size = GetSize();
+		LONG width = m_pTex->GetWidth();
+		LONG height = m_pTex->GetHeight();
+		
+		::TransparentBlt(_hdc
+			, (int)(pos.x - size.x / 2)
+			, (int)(pos.y - size.y / 2)
+			, size.x
+			, size.y
+			, m_pTex->GetTextureDC()
+			, 0, 0, width, height,
+			RGB(255, 0, 255));
+	}
+
+}
+
+void SlotReel::SetRollingTexture(RollingItem* rollItem,wstring textureName, Vec2 offsetPos, float speed)
+{
+	rollItem->SetSize({ 25,25 });
+	rollItem->SetPos(offsetPos);
+	rollItem->SetTexture(textureName);
+	rollItem->SetDownSpeed(speed);
+}
+
+void SlotReel::SetStartTexture(RollingItem* rollItem, wstring textureName, Vec2 offsetPos)
+{
+	rollItem->SetSize({ 25,25 });
+	rollItem->SetPos(offsetPos);
+	rollItem->SetTexture(textureName);
+}
+
+void SlotReel::MakeWeapon(Weapon* targetWeapon, int _playerNum)
+{
+	m_pWeaponHolder->SetOwner(GetOwner());
+	Vec2 pos = GetOwner()->GetPos();
+	pos.y -= GetOwner()->GetSize().y / 2.f;
+	pos.x += 10.f;
+	Vec2 angle = Vec2(0.f, 0.f);
+
+	m_pWeaponHolder->ChangeWeapon(targetWeapon,
+		{ pos },
+		{ 20.f,20.f }
+	, _playerNum);
+
+
+	GET_SINGLE(SceneManager)->GetCurScene()->AddObject(m_pWeaponHolder->GetCurrentWeapon(), Layer::Weapon);
 }
 
 void SlotReel::EnterCollision(Collider* _other)
@@ -70,8 +105,11 @@ void SlotReel::ExitCollision(Collider* _other)
 {
 }
 
-void SlotReel::SlotRolling()
+void SlotReel::SlotRolling(int _playerNum)
 {
+	SetPlayerNum(_playerNum);
+	m_pTex = GET_SINGLE(ResourceManager)->GetTexture(L"Test2");
+
 	rollingVec.clear();
 
 	int randoCnt = rand() % 50 + 26;
@@ -80,26 +118,19 @@ void SlotReel::SlotRolling()
 
 	for (int i = 0; i < 3; i++)
 	{
-		
 		int randoCnt = rand() % 3 + 1;
 		RollingItem* rollingItem = new RollingItem;
 
 		switch (randoCnt)
 		{
 		case 1:
-			rollingItem->SetSize({ 25,25 });
-			rollingItem->SetPos(offsetPos);
-			rollingItem->SetTexture(L"Plane");
+			SetStartTexture(rollingItem, L"Gun1", offsetPos);
 			break;
 		case 2:
-			rollingItem->SetSize({ 25,25 });
-			rollingItem->SetPos(offsetPos);
-			rollingItem->SetTexture(L"Bullet");
+			SetStartTexture(rollingItem, L"Bullet", offsetPos);
 			break;
 		case 3:
-			rollingItem->SetSize({ 25,25 });
-			rollingItem->SetPos(offsetPos);
-			rollingItem->SetTexture(L"Jiwoo");
+			SetStartTexture(rollingItem, L"Gun1", offsetPos);
 			break;
 		}
 		GET_SINGLE(SceneManager)->GetCurScene()->AddObject(rollingItem, Layer::DEFAULT);
@@ -111,34 +142,56 @@ void SlotReel::SlotRolling()
 
 	std::thread([this]()
 		{
-			std::this_thread::sleep_for(std::chrono::milliseconds(100));
+			std::this_thread::sleep_for(std::chrono::milliseconds(200));
 			int randomInt = rand() % 50 + 26;
 			Vec2 offsetPoss = GetPos();
 			offsetPoss.y -= 60;
 			float speed = 100;
 			int responTime = 250;
+			int storeValue = 0;
+			int playerNum = GetPlayerNum();
 
-	
 			for (int i = 0; i < 25; ++i)
 			{
 				std::this_thread::sleep_for(std::chrono::milliseconds(responTime));
 
-				GET_SINGLE(SceneManager)->RequestDestroy(rollingVec[0]);
+				if (rollingVec.size() >= 3)
+				{
+					GET_SINGLE(SceneManager)->GetCurScene()->RequestDestroy(rollingVec[0]);
 
-				rollingVec[0] = rollingVec[1];
-				rollingVec[1] = rollingVec[2];
+					rollingVec[0] = rollingVec[1];
+					rollingVec[1] = rollingVec[2];
+				}
+				else
+				{
+					if (rollingVec.size() >= 1)
+					{
+						GET_SINGLE(SceneManager)->GetCurScene()->RequestDestroy(rollingVec[0]);
+					}
+
+					if (rollingVec.size() >= 2)
+					{
+						rollingVec[0] = rollingVec[1];
+					}
+
+					if (rollingVec.size() >= 3)
+					{
+						rollingVec[1] = rollingVec[2];
+					}
+				}
 
 				if (speed <= 15)
 				{
 					speed = 0;
 				}
 
-				for (int i = 0; i < rollingVec.size()-1; i++)
+				for (int i = 0; i < rollingVec.size() - 1; i++)
 				{
-					rollingVec[i]->SetDownSpeed(speed);
+					if (rollingVec[i])
+					{
+						rollingVec[i]->SetDownSpeed(speed);
+					}
 				}
-
-
 
 				RollingItem* rollingItems = new RollingItem;
 
@@ -146,92 +199,63 @@ void SlotReel::SlotRolling()
 				switch (randomTexture)
 				{
 				case 1:
-					rollingItems->SetSize({ 25,25 });
-					rollingItems->SetPos(offsetPoss);
-					rollingItems->SetTexture(L"Bullet");
-					rollingItems->SetDownSpeed(speed);
+					SetRollingTexture(rollingItems, L"Bullet", offsetPoss, speed);
 					break;
 				case 2:
-					rollingItems->SetSize({ 25,25 });
-					rollingItems->SetPos(offsetPoss);
-					rollingItems->SetTexture(L"Gun1");
-					rollingItems->SetDownSpeed(speed);
+					SetRollingTexture(rollingItems, L"Gun1", offsetPoss, speed);
 					break;
 				case 3:
-					rollingItems->SetSize({ 25,25 });
-					rollingItems->SetPos(offsetPoss);
-					rollingItems->SetTexture(L"Bullet");
-					rollingItems->SetDownSpeed(speed);
+					SetRollingTexture(rollingItems, L"Bullet", offsetPoss, speed);
 					break;
 				}
 				GET_SINGLE(SceneManager)->GetCurScene()->AddObject(rollingItems, Layer::RollItem);
 
+
+				if (rollingVec.size() < 3)
+				{
+					rollingVec.resize(3, nullptr);
+				}
 				rollingVec[2] = rollingItems;
 
-				speed -= 4;
-				responTime += 50;
+				speed -= 4.1f;
+				responTime += 49;
 
-				
+				if (i == 22)
+				{
+					storeValue = randomTexture;
+				}
 
 				if (i == 24)
 				{
-				
-					switch (randomTexture)
+					switch (storeValue)
 					{
 					case 1:
-					{
-						m_pWeaponHolder->SetOwner(GetOwner());
-						Vec2 pos = GetOwner()->GetPos();
-						pos.y -= GetOwner()->GetSize().y / 2.f;
-						pos.x += 10.f;
-						Vec2 angle = Vec2(0.f, 0.f);
-				
-						m_pWeaponHolder->ChangeWeapon(new TestWeapon(),
-							{ pos },
-							{ 20.f,20.f });
-				
-				
-						GET_SINGLE(SceneManager)->GetCurScene()->AddObject(m_pWeaponHolder->GetCurrentWeapon(), Layer::Weapon);
-					}
+						MakeWeapon(new TestWeapon, playerNum);
 						break;
 					case 2:
-					{
-						m_pWeaponHolder->SetOwner(GetOwner());
-						Vec2 pos = GetOwner()->GetPos();
-						pos.y -= GetOwner()->GetSize().y / 2.f;
-						pos.x += 10.f;
-						Vec2 angle = Vec2(0.f, 0.f);
-				
-						m_pWeaponHolder->ChangeWeapon(new TestWeapon2(),
-							{ pos },
-							{ 20.f,20.f });
-				
-				
-						GET_SINGLE(SceneManager)->GetCurScene()->AddObject(m_pWeaponHolder->GetCurrentWeapon(), Layer::Weapon);
-					}
+						MakeWeapon(new TestWeapon2, playerNum);
 						break;
 					case 3:
-					{
-						m_pWeaponHolder->SetOwner(GetOwner());
-						Vec2 pos = GetOwner()->GetPos();
-						pos.y -= GetOwner()->GetSize().y / 2.f;
-						pos.x += 10.f;
-						Vec2 angle = Vec2(0.f, 0.f);
-				
-						m_pWeaponHolder->ChangeWeapon(new TestWeapon(),
-							{ pos },
-							{ 20.f,20.f });
-				
-				
-						GET_SINGLE(SceneManager)->GetCurScene()->AddObject(m_pWeaponHolder->GetCurrentWeapon(), Layer::Weapon);
-					}
+						MakeWeapon(new TestWeapon, playerNum);
 						break;
 					}
+
+					for (int i = 0; i < rollingVec.size() - 1; i++)
+					{
+						if (rollingVec[i])
+						{
+							GET_SINGLE(SceneManager)->GetCurScene()->RequestDestroy(rollingVec[i]);
+							rollingVec[i] = nullptr;
+						}
+					}
+
+					std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+					m_pTex = NULL;
 				}
-				
 			}
 		}).detach();
 }
+
 
 
 

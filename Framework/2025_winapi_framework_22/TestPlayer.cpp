@@ -48,8 +48,7 @@ TestPlayer::~TestPlayer()
 void TestPlayer::Update()
 {
 	Vec2 dir = {};
-	if (GET_KEY(KEY_TYPE::W)) dir.y -= 1.f;
-	if (GET_KEY(KEY_TYPE::S)) dir.y += 1.f;
+
 	if (GET_KEY(KEY_TYPE::A)) dir.x -= 1.f;
 	if (GET_KEY(KEY_TYPE::D)) dir.x += 1.f;
 	Translate({ dir.x * fDT * 200.f, dir.y * fDT * 200.f });
@@ -68,18 +67,23 @@ void TestPlayer::Update()
 
 	if (GET_KEYDOWN(KEY_TYPE::P))
 	{
+		if (slotReel != nullptr)
+		{
+			GET_SINGLE(SceneManager)->GetCurScene()->RequestDestroy(slotReel);
+			slotReel = nullptr;
+		}
 
 		slotReel = new SlotReel();
 		slotReel->SetSize({60, 60});
 
 		Vec2 pos = GetPos();
 
-		pos.y -= 10;
+		pos.y -= 60;
 
 		slotReel->SetPos(pos);
 
 
-		slotReel->SlotRolling();
+		slotReel->SlotRolling(2);
 
 		slotReel->SetOwner(this);
 
