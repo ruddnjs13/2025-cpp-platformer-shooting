@@ -2,6 +2,7 @@
 #include "Object.h"
 #include "Texture.h"
 
+class Texture;
 class TextureObject;
 
 class Trajectory :
@@ -28,6 +29,7 @@ public:
 		m_dir.Normalize();
 	}
 private:
+	Texture* m_pTex;
 	float m_angle;
 	Vec2 m_dir;
 	float m_speed;

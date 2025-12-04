@@ -16,7 +16,8 @@ public:
 	void Render(HDC hDC) override;
 
 public:
-	void ChangeWeapon(Weapon* weapon, Vec2 pos, Vec2 size);
+	void ChangeWeapon(Weapon* weapon, Vec2 pos, Vec2 size, int playerNum);
+	void DestroyWeapon();
 	Weapon* GetCurrentWeapon() const { return m_pCurrentWeapon; }
 
 private:
