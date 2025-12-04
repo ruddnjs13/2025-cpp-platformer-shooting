@@ -151,13 +151,18 @@ void SlotReel::SlotRolling(int _playerNum)
 			int storeValue = 0;
 			int playerNum = GetPlayerNum();
 
+			vector<RollingItem*> rollingItem;
+
 			for (int i = 0; i < 25; ++i)
 			{
 				std::this_thread::sleep_for(std::chrono::milliseconds(responTime));
 
 				if (rollingVec.size() >= 3)
 				{
-					GET_SINGLE(SceneManager)->GetCurScene()->RequestDestroy(rollingVec[0]);
+
+					rollingItem.push_back(rollingVec[0]);
+
+					///GET_SINGLE(SceneManager)->GetCurScene()->RequestDestroy(rollingVec[0]);
 
 					rollingVec[0] = rollingVec[1];
 					rollingVec[1] = rollingVec[2];
@@ -248,6 +253,12 @@ void SlotReel::SlotRolling(int _playerNum)
 							rollingVec[i] = nullptr;
 						}
 					}
+
+					for (int i = 0; i < rollingItem.size(); ++i)
+					{
+						GET_SINGLE(SceneManager)->GetCurScene()->RequestDestroy(rollingItem[i]);
+					}
+					rollingItem.clear();
 
 					std::this_thread::sleep_for(std::chrono::milliseconds(1000));
 					m_pTex = NULL;

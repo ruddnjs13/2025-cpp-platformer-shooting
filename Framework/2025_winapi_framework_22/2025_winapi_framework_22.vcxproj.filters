@@ -252,6 +252,7 @@
     <ClInclude Include="TitleScene.h">
       <Filter>Engine\04. Scene\BuildScene</Filter>
     </ClInclude>
+    <ClInclude Include="TestPlayer2.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="2025_winapi_framework_22.rc">
@@ -425,5 +426,6 @@
     <ClCompile Include="TitleScene.cpp">
       <Filter>Engine\04. Scene\BuildScene</Filter>
     </ClCompile>
+    <ClCompile Include="TestPlayer2.cpp" />
   </ItemGroup>
 </Project>

@@ -202,6 +202,7 @@
     <ClInclude Include="Defines.h" />
     <ClInclude Include="TestBullet.h" />
     <ClInclude Include="TestPlayer.h" />
+    <ClInclude Include="TestPlayer2.h" />
     <ClInclude Include="TestScene.h" />
     <ClInclude Include="TestWeapon.h" />
     <ClInclude Include="TestWeapon2.h" />
@@ -259,6 +260,7 @@
     <ClCompile Include="SlotReel.cpp" />
     <ClCompile Include="TestBullet.cpp" />
     <ClCompile Include="TestPlayer.cpp" />
+    <ClCompile Include="TestPlayer2.cpp" />
     <ClCompile Include="TestScene.cpp" />
     <ClCompile Include="TestWeapon.cpp" />
     <ClCompile Include="TestWeapon2.cpp" />
