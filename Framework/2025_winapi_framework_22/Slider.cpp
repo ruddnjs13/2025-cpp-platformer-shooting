@@ -1,13 +1,10 @@
 #include "pch.h"
 #include "Slider.h"
 
-void Slider::Init(Texture* boarderTexture, Texture* fillTexture, Texture* handleTexture)
+void Slider::Init(Texture* boarderTexture, Texture* fillTexture)
 {
-
-
 	boarder = boarderTexture;
 	fillBar = fillTexture;
-	handle = handleTexture;
 }
 
 void Slider::Update()

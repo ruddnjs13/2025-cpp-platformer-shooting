@@ -193,7 +193,7 @@ void ResourceManager::RegisterTexture()
 	LoadTexture(L"StartBtn_Hover", L"Texture\\StartBtn_Hover.bmp");
 	LoadTexture(L"GuideBtn", L"Texture\\GuideBtn.bmp");
 	LoadTexture(L"GuideBtn_Hover", L"Texture\\GuideBtn_Hover.bmp");
-	LoadTexture(L"Background", L"Texture\\background.bmp");
+	//LoadTexture(L"Background", L"Texture\\background.bmp");
 	//LoadTexture(L"Gun1", L"Texture\\Revolver.bmp");
 	LoadTexture(L"Gun1", L"Texture\\GGG.bmp");
 	LoadTexture(L"Gun1Bullet", L"Texture\\Bullet1.bmp");
@@ -207,6 +207,7 @@ void ResourceManager::RegisterTexture()
 	LoadTexture(L"Trunk_Left", L"Texture\\Trunk_Left.bmp");
 	LoadTexture(L"Trunk_Right", L"Texture\\Trunk_Right.bmp");
 	LoadTexture(L"Leaves", L"Texture\\Leaves.bmp");
+	LoadTexture(L"Background", L"Texture\\Background.bmp");
 
 	//
 }

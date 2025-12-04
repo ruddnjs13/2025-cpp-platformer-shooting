@@ -5,11 +5,14 @@
 #include "Player.h"
 #include "Floor.h"
 #include "CollisionManager.h"
+#include "ResourceManager.h"
+#include "Background.h"
+
 
 void LkwScene::Init()
 {
 	//GET_SINGLE(UIManager)->SetCanvas(CanvasType::Title);
-	GET_SINGLE(TileMapManager)->LoadAllTileMap();
+	GET_SINGLE(UIManager)->SetCanvas(CanvasType::InGame);
 	GET_SINGLE(TileMapManager)->SetRandomTileMapToScene(this);
 
 	Player* pPlayer1 = Spawn<Player>(Layer::PLAYER, { 300, 300 }, { 100, 100 });
@@ -19,6 +22,12 @@ void LkwScene::Init()
 
 	GET_SINGLE(TurnManager)->ChangeTurn(TurnType::Player1);
 	GET_SINGLE(CollisionManager)->CheckLayer(Layer::PLAYER, Layer::DEFAULT);
+
+
+
+	Background* background = Spawn<Background>(Layer::BACKGROUND, { WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2 }, { WINDOW_WIDTH, WINDOW_HEIGHT });
+
+	background->Init(GET_SINGLE(ResourceManager)->GetTexture(L"Background"));
 	
 
 }

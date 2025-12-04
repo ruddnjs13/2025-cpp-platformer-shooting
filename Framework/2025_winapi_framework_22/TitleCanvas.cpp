@@ -16,7 +16,7 @@ void TitleCanvas::Init()
 	startBtn->SetPos({ WINDOW_WIDTH / 2,WINDOW_HEIGHT / 8 * 5 });
 	startBtn->SetSize({200,50});
 
-	startBtn->OnClickEvt.AddListener(std::bind(&TitleCanvas::GotoTitle,this));
+	startBtn->OnClickEvt.AddListener(std::bind(&TitleCanvas::GotoInGame,this));
 
 	Texture* guideTexture = GET_SINGLE(ResourceManager)->GetTexture(L"GuideBtn");
 	Texture* guideHoverTexture = GET_SINGLE(ResourceManager)->GetTexture(L"GuideBtn_Hover");
@@ -25,7 +25,7 @@ void TitleCanvas::Init()
 	guideBtn->SetPos({ WINDOW_WIDTH / 2,WINDOW_HEIGHT / 8 * 6 });
 	guideBtn->SetSize({ 200,50 });
 
-	guideBtn->OnClickEvt.AddListener(std::bind(&TitleCanvas::GotoTitle, this));
+	guideBtn->OnClickEvt.AddListener(std::bind(&TitleCanvas::GotoInGame, this));
 
 	Texture* exitTexture = GET_SINGLE(ResourceManager)->GetTexture(L"ExitBtn");
 	Texture* exitHoverTexture = GET_SINGLE(ResourceManager)->GetTexture(L"ExitBtn_Hover");
@@ -34,7 +34,7 @@ void TitleCanvas::Init()
 	exitBtn->SetPos({ WINDOW_WIDTH / 2,WINDOW_HEIGHT / 8*7 });
 	exitBtn->SetSize({ 200,50 });
 
-	exitBtn->OnClickEvt.AddListener(std::bind(&TitleCanvas::GotoTitle, this));
+	exitBtn->OnClickEvt.AddListener(std::bind(&TitleCanvas::GotoInGame, this));
 
 	backgroundPanel = new Image();
 	Texture* backgroundTexture = GET_SINGLE(ResourceManager)->GetTexture(L"Background");
@@ -52,7 +52,7 @@ void TitleCanvas::Init()
 
 }
 
-void TitleCanvas::GotoTitle()
+void TitleCanvas::GotoInGame()
 {
-	GET_SINGLE(SceneManager)->LoadScene(L"TestScene");
+	GET_SINGLE(SceneManager)->LoadScene(L"LkwScene");
 }
