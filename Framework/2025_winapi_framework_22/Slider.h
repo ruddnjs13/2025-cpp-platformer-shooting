@@ -8,7 +8,7 @@ class Slider :
     public Image
 {
 public:
-    void Init(Texture* boarderText, Texture* fillTexture, Texture* handleTexture);
+    void Init(Texture* boarderText, Texture* fillTexture);
     // UIElement을(를) 통해 상속됨
     void Update() override;
     void Render(HDC _hdc) override;
@@ -22,6 +22,5 @@ public:
 public:
     Texture* boarder;
     Texture* fillBar;
-    Texture* handle;
 };
 

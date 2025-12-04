@@ -5,6 +5,7 @@
 #include "SceneManager.h"
 #include "ResourceManager.h"
 #include "CollisionManager.h"
+#include "TileMapManager.h"
 #include "UIManager.h"
 bool Core::Init(HWND _hWnd)
 {
@@ -33,6 +34,8 @@ bool Core::Init(HWND _hWnd)
         return false;
     GET_SINGLE(SceneManager)->Init();
     GET_SINGLE(UIManager)->Init();
+    GET_SINGLE(TileMapManager)->LoadAllTileMap();
+
 
     return true;
 }
