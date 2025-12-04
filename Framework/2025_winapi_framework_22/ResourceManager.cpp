@@ -209,6 +209,11 @@ void ResourceManager::RegisterTexture()
 	LoadTexture(L"Leaves", L"Texture\\Leaves.bmp");
 	LoadTexture(L"Background", L"Texture\\Background.bmp");
 
+	
+	LoadTexture(L"Fill_Red", L"Texture\\Fill_Red.bmp");
+	LoadTexture(L"Fill_Blue", L"Texture\\Fill_Blue.bmp");
+	LoadTexture(L"Boarder", L"Texture\\Boarder.bmp");
+
 	//
 }
 
