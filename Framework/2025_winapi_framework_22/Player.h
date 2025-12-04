@@ -17,6 +17,7 @@ public:
 	void EnterCollision(Collider* _other)override;
 	void StayCollision(Collider* _other) override;
 	void ExitCollision(Collider* _other) override;
+	void ChangeState(PlayerState _newState);
 	void SetPlayerTurn(TurnType _turnType) 
 	{
 		if (_turnType != TurnType::Player1 && _turnType != TurnType::Player2)
@@ -38,5 +39,7 @@ private:
 private:
 	Texture* m_pTex;
 	TurnType m_turnType;
+	PlayerState m_state;
+	PlayerState m_prevState;
 };
 

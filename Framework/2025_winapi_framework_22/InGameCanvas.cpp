@@ -10,5 +10,10 @@ void InGameCanvas::Init()
 	background->SetSize({WINDOW_WIDTH,WINDOW_HEIGHT});
 	background->Init(GET_SINGLE(ResourceManager)->GetTexture(L"Backround"));
 
+	p1_HpBar = new Slider();
+
+	//p1_HpBar->Init(GET_SINGLE(ResourceManager)->GetTexture(L"")
+
+
 	AddUIElement(background);
 }
