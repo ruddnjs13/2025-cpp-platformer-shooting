@@ -4,6 +4,7 @@
 #include "TestScene.h"
 #include "LkwScene.h"
 #include "KmjScene.h"
+#include "TitleScene.h"
 #include "IscScene.h"
 #include "Collider.h"
 #include "Object.h"
@@ -19,6 +20,7 @@ void SceneManager::Init()
 	RegisterScene(L"KmjScene", std::make_shared<KmjScene>());
 	RegisterScene(L"IscScene", std::make_shared<IscScene>());
 	RegisterScene(L"TestScene", std::make_shared<TestScene>());
+	RegisterScene(L"TitleScene", std::make_shared<TitleScene>());
 	// Scene 추가
 	
 	// 로드
@@ -45,7 +47,7 @@ void SceneManager::Update()
 
 	if (GET_KEY((KEY_TYPE::NUM_1)))
 	{
-		LoadScene(L"LkwScene");
+		LoadScene(L"TitleScene");
 	}
 	else if (GET_KEY((KEY_TYPE::NUM_2)))
 	{	

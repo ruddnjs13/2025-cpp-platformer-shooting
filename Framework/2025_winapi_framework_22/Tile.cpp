@@ -46,5 +46,9 @@ void Tile::Render(HDC _hdc)
         curSize.y/2,
         RGB(255,0,255)
     );
+}
 
+void Tile::SetCollSize(Vec2 size)
+{
+    GetComponent<Collider>()->SetSize(size);
 }

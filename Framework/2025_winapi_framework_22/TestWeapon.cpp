@@ -16,9 +16,8 @@ TestWeapon::TestWeapon()
 
 	m_weaponTrajectory = AddComponent<WeaponTrajectory>();
 
-	m_angle.x = 1.f;
-	m_angle.y = 0.f;
-	
+
+	SetShootAngle(m_angleValue);
 }
 
 TestWeapon::~TestWeapon()
@@ -30,22 +29,100 @@ void TestWeapon::Update()
 	if (GET_KEYDOWN(KEY_TYPE::SPACE))
 		Shoot();
 
-	if (GET_KEYDOWN(KEY_TYPE::Q))
+	if (GET_KEY(KEY_TYPE::W) && isRotation == true)
 	{
-		if (m_angle.y == 0.f)
+		cout << m_playerCount << endl;
+
+		isRotation = false;
+		if (m_playerCount == 1)
 		{
-			cout << "야ㅕ기디임마";
-			m_angle.y = -0.5f;
+			m_angleValue += 5;
+			if (m_angleValue >= 75)
+			{
+				m_angleValue = 75;
+			}
+
+			Vec2 pos = GetPos();
+			pos.y -= GetSize().y / 2.f;
+
+			//pos.y + 10.f;
+			//pos.x + 30.f;
+
+
+			m_weaponTrajectory->ShowTrajectory(m_angleValue,m_angle, pos, { 20.f,20.f }, GetOwner(), this);
+
+			SetShootAngle(m_angleValue);
 		}
-		else
+		else if(m_playerCount == 2)
 		{
-			m_angle.x = 0.3f;
-			m_angle.y = -0.5f;
-			float a = std::atan2(m_angle.y, m_angle.x);
-			cout << a << endl;
+			cout << "2" << endl;
+
+			m_angleValue -= 5;
+
+			if (m_angleValue <= -75)
+			{
+				m_angleValue = -75;
+			}
+
+			Vec2 pos = GetPos();
+			pos.y -= GetSize().y / 2.f;
+
+			//pos.y + 10.f;
+			//pos.x + 30.f;
+
+
+			m_weaponTrajectory->ShowTrajectory(m_angleValue,m_angle, pos, { 20.f,20.f }, GetOwner(), this);
+
+			SetShootAngle(-m_angleValue);
 		}
 	}
 
+	if (GET_KEY(KEY_TYPE::S) && isRotation == true)
+	{
+		cout << m_playerCount << endl;
+
+		isRotation = false;
+		if (m_playerCount == 1)
+		{
+			m_angleValue -= 5;
+			if (m_angleValue <= 0)
+			{
+				m_angleValue = 0;
+			}
+
+			Vec2 pos = GetPos();
+			pos.y -= GetSize().y / 2.f;
+
+			//pos.y + 10.f;
+			//pos.x + 30.f;
+
+
+			m_weaponTrajectory->ShowTrajectory(m_angleValue, m_angle, pos, { 20.f,20.f }, GetOwner(), this);
+
+			SetShootAngle(m_angleValue);
+		}
+		else if (m_playerCount == 2)
+		{
+			cout << "2" << endl;
+
+			m_angleValue += 5;
+			if (m_angleValue >= 0)
+			{
+				m_angleValue = 0;
+			}
+
+			Vec2 pos = GetPos();
+			pos.y -= GetSize().y / 2.f;
+
+			//pos.y + 10.f;
+			//pos.x + 30.f;
+
+
+			m_weaponTrajectory->ShowTrajectory(m_angleValue, m_angle, pos, { 20.f,20.f }, GetOwner(), this);
+
+			SetShootAngle(-m_angleValue);
+		}
+	}
 }
 
 void TestWeapon::Rotate()
@@ -60,14 +137,18 @@ void TestWeapon::Render(HDC _hdc)
 	LONG width = m_pTex->GetWidth();
 	LONG height = m_pTex->GetHeight();
 
+	HDC texDC = m_pTex->GetRotateTextureDC(m_angleValue, 0, 0, width, height);
+
+
 	::TransparentBlt(_hdc
 		, (int)(pos.x - size.x / 2)
 		, (int)(pos.y - size.y / 2)
 		, size.x
 		, size.y
-		, m_pTex->GetTextureDC()
+		, texDC
 		, 0, 0, width, height,
 		RGB(255, 0, 255));
+
 }
 
 void TestWeapon::Shoot()
@@ -88,13 +169,13 @@ void TestWeapon::Shoot()
 
 	GetOwner()->SetPos(vec);
 
-	m_offsetPos.x -= 1.f;
-
-	std::thread([this]()
-		{
-			std::this_thread::sleep_for(std::chrono::milliseconds(500));
-			m_offsetPos.y += 1.f;
-		}).detach();
+	//m_offsetPos.x -= 1.f;
+	//
+	//std::thread([this]()
+	//	{
+	//		std::this_thread::sleep_for(std::chrono::milliseconds(500));
+	//		m_offsetPos.y += 1.f;
+	//	}).detach();
 
 	
 }

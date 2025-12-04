@@ -11,6 +11,7 @@ TileMap::~TileMap()
 
 void TileMap::LoadMap(std::string mapFileName)
 {
+
 	std::ifstream mapFile(mapFileName);
 
 	if (mapFile.is_open())

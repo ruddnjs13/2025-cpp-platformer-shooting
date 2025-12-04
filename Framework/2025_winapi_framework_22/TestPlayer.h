@@ -23,7 +23,7 @@ public:
 private:
 	int weaponCount = 0;
 
-	SlotReel* slotReel;
+	SlotReel* slotReel = nullptr;
 
 
 	Texture* m_pTex = nullptr;

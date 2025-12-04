@@ -22,8 +22,10 @@ public:
 	Vec2 GetOffset() { return m_offsetPos; }
 	Object* GetOwner() { return m_owner; }
 	void SetOwner(Object* owner) { m_owner = owner; }
+	void SetAngleValue(float angle) { m_angleValue = angle; }
 	
 private:
+	float m_angleValue = 0;
 	Object* m_owner;
 	Vec2 m_offsetPos;
 	Texture* m_pTex;

@@ -16,6 +16,8 @@ public:
 
     void Render(HDC _hdc) override;
 
+    void SetCollSize(Vec2 size);
+
 private:
     Texture* m_Texture;
 };

@@ -2,10 +2,12 @@
 #include "TileMapManager.h"
 #include "ResourceManager.h"
 #include "Tile.h"
+#include <filesystem>
+
 
 void TileMapManager::LoadAllTileMap()
 {
-	LoadTileMap(L"Map1", "D:/github/2025-cpp-platformer-shooting/Framework/Output/build/Resource/Map/Map1.txt");
+	LoadTileMap(L"Map1", "Resource/Map/Map1.txt");
 }
 
 void TileMapManager::LoadTileMap(wstring mapName, std::string fileName)
@@ -37,10 +39,12 @@ void TileMapManager::SetRandomTileMapToScene(Scene* targetScene)
 			else if (maps[mapName]->map[i][j] == (char)TileType::Trunk_Left)
 			{
 				tile = new Tile(GET_SINGLE(ResourceManager)->GetTexture(L"Trunk_Left"));
+				tile->SetCollSize({ TILE_WIDTH / 2,TILE_HEIGHT });
 			}
 			else if (maps[mapName]->map[i][j] == (char)TileType::Trunk_Right)
 			{
 				tile = new Tile(GET_SINGLE(ResourceManager)->GetTexture(L"Trunk_Right"));
+				tile->SetCollSize({ TILE_WIDTH / 2,TILE_WIDTH });
 			}
 			else if (maps[mapName]->map[i][j] == (char)TileType::Leaves)
 			{
@@ -49,8 +53,8 @@ void TileMapManager::SetRandomTileMapToScene(Scene* targetScene)
 
 			if (tile != nullptr)
 			{
-				tile->SetPos({ 16 + 32 * j,16 + 32 * i });
-				tile->SetSize({ 32,32 });
+				tile->SetPos({TILE_WIDTH / 2 + TILE_WIDTH * j, TILE_HEIGHT * i });
+				tile->SetSize({ TILE_WIDTH,TILE_HEIGHT });
 				targetScene->AddObject(tile, Layer::DEFAULT);
 			}
 		}

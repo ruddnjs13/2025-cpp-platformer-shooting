@@ -1,8 +1,8 @@
 #pragma once
 enum class Layer
 {
-	DEFAULT,
 	BACKGROUND,
+	DEFAULT,
 	// 밑에 변경 가능
 	PLAYER,
 	RollItem,
@@ -49,6 +49,7 @@ enum class CanvasType
 {
 	Title,
 	InGame,
+	Segging,
 	Tutorial,
 	Credit
 };

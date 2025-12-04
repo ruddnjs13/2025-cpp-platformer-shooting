@@ -1,11 +1,13 @@
 #include "pch.h"
 #include "UIManager.h"
 #include "TitleCanvas.h"
+#include "InGameCanvas.h"
 
 void UIManager::Init()
 {
 	m_curCanvas = nullptr;
 
+	RegisterCanvas(CanvasType::InGame, std::make_shared<InGameCanvas>());
 	RegisterCanvas(CanvasType::Title, std::make_shared<TitleCanvas>());
 }
 

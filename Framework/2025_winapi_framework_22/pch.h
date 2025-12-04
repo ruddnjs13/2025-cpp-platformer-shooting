@@ -43,6 +43,8 @@ using std::wstring;
 #define Action std::function<void()>
 #define MAP_WIDTH 41
 #define MAP_HEIGHT 26
+#define TILE_WIDTH 32
+#define TILE_HEIGHT 32
 
 // 메모리 릭
 #ifdef _DEBUG

@@ -30,15 +30,48 @@ void TestWeapon2::Update()
 	if (GET_KEYDOWN(KEY_TYPE::SPACE) )
 		Shoot();
 
-	if (GET_KEYDOWN(KEY_TYPE::Q))
+	if (GET_KEYDOWN(KEY_TYPE::Q) && isRotation == true)
 	{
-		Vec2 pos = GetPos();
-		pos.y -= GetSize().y / 2.f;
-		pos.y += 10.f;
-		pos.x += 30.f;
-		m_weaponTrajectory->ShowTrajectory(m_angle, pos, { 20.f,20.f }, GetOwner());
-		
-		SetShootAngle(45);
+		isRotation = false;
+
+		if (m_playerCount == 1)
+		{
+			m_angleValue += 5;
+			if (m_angleValue >= 85)
+			{
+				m_angleValue = 85;
+			}
+
+			Vec2 pos = GetPos();
+			pos.y -= GetSize().y / 2.f;
+
+			pos.y += 10.f;
+			pos.x += 30.f;
+
+
+			m_weaponTrajectory->ShowTrajectory(m_angleValue,m_angle, pos, { 20.f,20.f }, GetOwner(), this);
+
+			SetShootAngle(m_angleValue);
+		}
+		else
+		{
+			m_angleValue += 5;
+			if (m_angleValue >= 85)
+			{
+				m_angleValue = 85;
+			}
+
+			Vec2 pos = GetPos();
+			pos.y -= GetSize().y / 2.f;
+
+			pos.y += 10.f;
+			pos.x += 30.f;
+
+
+			m_weaponTrajectory->ShowTrajectory(m_angleValue,m_angle, pos, { 20.f,20.f }, GetOwner(), this);
+
+			SetShootAngle(m_angleValue);
+		}
 	}
 }
 
@@ -54,12 +87,15 @@ void TestWeapon2::Render(HDC _hdc)
 	LONG width = m_pTex->GetWidth();
 	LONG height = m_pTex->GetHeight();
 
+	HDC texDC = m_pTex->GetRotateTextureDC(m_angleValue, 0, 0, width, height);
+
+
 	::TransparentBlt(_hdc
 		, (int)(pos.x - size.x / 2)
 		, (int)(pos.y - size.y / 2)
 		, size.x
 		, size.y
-		, m_pTex->GetTextureDC()
+		, texDC
 		, 0, 0, width, height,
 		RGB(255, 0, 255));
 
@@ -86,11 +122,11 @@ void TestWeapon2::Shoot()
 
 	GetOwner()->SetPos(vec);
 
-	m_offsetPos.x -= 1.f;
-
-	std::thread([this]()
-		{
-			std::this_thread::sleep_for(std::chrono::milliseconds(500));
-			m_offsetPos.x += 1.f;
-		}).detach();
+	//m_offsetPos.x -= 1.f;
+	//
+	//std::thread([this]()
+	//	{
+	//		std::this_thread::sleep_for(std::chrono::milliseconds(500));
+	//		m_offsetPos.x += 1.f;
+	//	}).detach();
 }
