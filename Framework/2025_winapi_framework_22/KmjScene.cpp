@@ -4,18 +4,23 @@
 #include "TestWeapon.h"
 #include "KmjScene.h"
 #include "TestPlayer.h"
+#include "TestPlayer2.h"
 #include "Floor.h"
 #include "CollisionManager.h"
 
 void KmjScene::Init()
 {
 
-
-
 	Object* obj = new TestPlayer;
 	obj->SetPos({ WINDOW_WIDTH / 2, 300 });
 	obj->SetSize({ 100.f, 100.f });
 	AddObject(obj, Layer::PLAYER);
+
+	Object* obj2 = new TestPlayer2;
+	obj2->SetPos({ WINDOW_WIDTH / 2, 300 });
+	obj2->SetSize({ 100.f, 100.f });
+	AddObject(obj2, Layer::PLAYER);
+
 
 	Spawn<Floor>(Layer::DEFAULT, { WINDOW_WIDTH / 2, 600 }, { 100.f,100.f });
 
