@@ -14,6 +14,11 @@ enum class Layer
 	END
 };
 
+enum class PlayerState
+{
+	IDLE, RUN, JUMP, DIE
+};
+
 enum class PenType
 {
 	RED, GREEN, END

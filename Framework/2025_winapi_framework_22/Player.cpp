@@ -33,6 +33,16 @@ Player::Player()
 		6,0.1f
 	);
 	animator->Play(L"PlayerIdle");
+	m_pTex = GET_SINGLE(ResourceManager)->GetTexture(L"PlayerWalk");
+	animator->CreateAnimation
+	(
+		L"PlayerRun",
+		m_pTex,
+		{ 0.f,0.f },
+		{ 16.f,16.f },
+		{ 16.f,0.f },
+		6, 0.1f
+	);
 }
 
 Player::~Player()
@@ -109,6 +119,36 @@ void Player::ExitCollision(Collider* _other)
 	}
 }
 
+void Player::ChangeState(PlayerState _newState)
+{
+	m_prevState = m_state;
+	m_state = _newState;
+
+	switch (m_state)
+	{
+	case PlayerState::IDLE:
+	{
+		m_pTex = GET_SINGLE(ResourceManager)->GetTexture(L"PlayerIdle");
+		Animator* animator = GetComponent<Animator>();
+		animator->Play(L"PlayerIdle");
+	}
+	break;
+	case PlayerState::RUN:
+	{
+		m_pTex = GET_SINGLE(ResourceManager)->GetTexture(L"PlayerWalk");
+		Animator* animator = GetComponent<Animator>();
+		animator->Play(L"PlayerRun");
+	}
+	break;
+	case PlayerState::JUMP:
+		break;
+	case PlayerState::DIE:
+		break;
+	default:
+		break;
+	}
+}
+
 
 void Player::Update()
 {
@@ -168,6 +208,14 @@ void Player::Update()
 			CreateProjectile();
 			GET_SINGLE(TurnManager)->ChangeTurn(TurnType::Player1);
 		}
+	}
+	if (m_state != PlayerState::RUN && dir.Length() > 0.f)
+	{
+		ChangeState(PlayerState::RUN);
+	}
+	else if (m_state != PlayerState::IDLE && dir.Length() == 0.f)
+	{
+		ChangeState(PlayerState::IDLE);
 	}
 	Translate({dir.x * fDT * 200.f, dir.y * fDT * 200.f});
 	Angle(angle);
