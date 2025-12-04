@@ -15,8 +15,9 @@
 #include "TestWeapon2.h"
 #include "TestWeapon.h"
 #include "TurnManager.h"
+#include "TestPlayer2.h"
 
-TestPlayer::TestPlayer()
+TestPlayer2::TestPlayer2()
 {
 	m_pTex = GET_SINGLE(ResourceManager)->GetTexture(L"Jiwoo");
 	AddComponent<Collider>();
@@ -24,33 +25,32 @@ TestPlayer::TestPlayer()
 
 	auto* animator = AddComponent<Animator>();
 	animator->CreateAnimation
-	(L"JiwooFront",
+	(L"JiwooFront2",
 		m_pTex,
 		{ 0.f,150.f },
 		{ 50.f,50.f },
 		{ 50.f,0.f },
 		5, 0.1f
 	);
-	animator->Play(L"JiwooFront");
+	animator->Play(L"JiwooFront2");
 
 	Vec2 pos = GetPos();
 	pos.y -= GetSize().y / 2.f;
 	pos.x += 10.f;
 
 	Vec2 angle = Vec2(0.f, 0.f);
-
 }
 
-TestPlayer::~TestPlayer()
+TestPlayer2::~TestPlayer2()
 {
 }
 
-void TestPlayer::Update()
+void TestPlayer2::Update()
 {
 	Vec2 dir = {};
 
-	if (GET_KEY(KEY_TYPE::A)) dir.x -= 1.f;
-	if (GET_KEY(KEY_TYPE::D)) dir.x += 1.f;
+	if (GET_KEY(KEY_TYPE::LEFT)) dir.x -= 1.f;
+	if (GET_KEY(KEY_TYPE::RIGHT)) dir.x += 1.f;
 	Translate({ dir.x * fDT * 200.f, dir.y * fDT * 200.f });
 
 	// Q, E 크게 작게 
@@ -65,7 +65,7 @@ void TestPlayer::Update()
 
 
 
-	if (GET_KEYDOWN(KEY_TYPE::P))
+	if (GET_KEYDOWN(KEY_TYPE::L))
 	{
 		if (slotReel != nullptr)
 		{
@@ -74,7 +74,7 @@ void TestPlayer::Update()
 		}
 
 		slotReel = new SlotReel();
-		slotReel->SetSize({60, 60});
+		slotReel->SetSize({ 60, 60 });
 
 		Vec2 pos = GetPos();
 
@@ -83,7 +83,7 @@ void TestPlayer::Update()
 		slotReel->SetPos(pos);
 
 
-		slotReel->SlotRolling(1);
+		slotReel->SlotRolling(2);
 
 		slotReel->SetOwner(this);
 
@@ -91,19 +91,18 @@ void TestPlayer::Update()
 	}
 }
 
-void TestPlayer::Render(HDC _hdc)
-{
-	ComponentRender(_hdc);
-}
-
-void TestPlayer::EnterCollision(Collider* _other)
+void TestPlayer2::Render(HDC _hdc)
 {
 }
 
-void TestPlayer::StayCollision(Collider* _other)
+void TestPlayer2::EnterCollision(Collider* _other)
 {
 }
 
-void TestPlayer::ExitCollision(Collider* _other)
+void TestPlayer2::StayCollision(Collider* _other)
+{
+}
+
+void TestPlayer2::ExitCollision(Collider* _other)
 {
 }
