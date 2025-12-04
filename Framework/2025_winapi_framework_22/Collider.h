@@ -12,7 +12,7 @@ public:
     void LateUpdate() override;
     void Render(HDC _hDC) override;
 public:
-    void EnterCollision(Collider* _other); //충돌진입
+    void EnterCollision(Collider* _other); // 충돌진입
     void StayCollision(Collider* _other); // 충돌중
     void ExitCollision(Collider* _other); // 충돌해제
 public:

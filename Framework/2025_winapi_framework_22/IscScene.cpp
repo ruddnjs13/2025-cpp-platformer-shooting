@@ -8,14 +8,15 @@
 
 void IscScene::Init()
 {
-	Player* pPlayer1 = Spawn<Player>(Layer::PLAYER, { 300, 300 }, { 100, 100 });
-	Player* pPlayer2 = Spawn<Player>(Layer::PLAYER, { 500, 500 }, { 100, 100 });
+	Player* pPlayer1 = Spawn<Player>(Layer::PLAYER, { 300, 300 }, { 50, 50 });
+	Player* pPlayer2 = Spawn<Player>(Layer::PLAYER, { 500, 300 }, { 50, 50 });
 	Spawn<Floor>(Layer::DEFAULT, { WINDOW_WIDTH / 2, 600 }, { 100.f,100.f });
 	pPlayer1->SetPlayerTurn(TurnType::Player1);
 	pPlayer2->SetPlayerTurn(TurnType::Player2);
 	
 	GET_SINGLE(TurnManager)->ChangeTurn(TurnType::Player1);
 	GET_SINGLE(CollisionManager)->CheckLayer(Layer::PLAYER, Layer::DEFAULT);
+	GET_SINGLE(CollisionManager)->CheckLayer(Layer::PLAYER, Layer::PLAYER);
 }
 
 void IscScene::Update()

@@ -48,7 +48,6 @@ void Core::MainUpdate()
         {
             GET_SINGLE(SceneManager)->FixedUpdate(fixedDT);
             GET_SINGLE(CollisionManager)->Update();
-			GET_SINGLE(CollisionManager)->PhysicsResolve();
             accmulator -= fixedDT;
         }
     }

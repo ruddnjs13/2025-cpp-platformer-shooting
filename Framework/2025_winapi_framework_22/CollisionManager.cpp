@@ -4,6 +4,7 @@
 #include "Scene.h"
 #include "Object.h"
 #include "Collider.h"
+#include "Rigidbody.h"
 void CollisionManager::Update()
 {
 	for (UINT Row = 0; Row < (UINT)Layer::END; ++Row)
@@ -52,38 +53,160 @@ void CollisionManager::CheckReset()
 	memset(m_objectLayer, 0, sizeof(UINT) * (UINT)Layer::END);
 }
 
-void CollisionManager::PhysicsResolve()
+void CollisionManager::PhysicsResolve(Collider* _left, Collider* _right)
 {
-	// 일단 충돌 정보를 가져올 수는 있지만 콜라이더를 가져올 수 없으니
-	// 콜라이더를 먼저 가져올 수 있어야함.
-	// 그러려면 이전과 같은 작업 필요.
-	// 충돌체에 콜라이더만 가지는 맵을 만들어야함?
+	// 일정 수치를 넘으면 물리처리를 할 수 있게 상수값 정해주기. (안하면 지글발생)
+	float const penetrationThreshold = 0.001f;
 
-	// 모든 충돌체들을 순회
-	//for (auto iter = m_mapCollisionInfo.begin(); iter != m_mapCollisionInfo.end();)
-	//{
-	//	// 충돌체가 아니라면 패스
-	//	if (!iter->second)
-	//	{
-	//		++iter;
-	//		continue;
-	//	}
+	// 콜라이더를 가져왔으니 이제 얘네가 얼마만큼 깊이 침범했는지를 알아야겠지?
+	// 충돌 깊이를 구해 일단.
 
-	//	// 충돌체 가져오기
-	//	Collider* left = m_physicsCollisionInfo[iter->first].first;
-	//	Collider* right = m_physicsCollisionInfo[iter->first].second;
 
-	//	if (left == nullptr || right == nullptr)
-	//	{
-	//		++iter;
-	//		continue;
-	//	}
+	Vec2 leftPos = _left->GetUpdatedPos();
+	Vec2 rightPos = _right->GetUpdatedPos();
 
-	//	Vec2 lPos = left->GetUpdatedPos();
-	//	Vec2 rPos = right->GetUpdatedPos();
+	Vec2 leftSize = _left->GetSize();
+	Vec2 rightSize = _right->GetSize();
+	
+	float overlapX = (leftSize.x / 2 + rightSize.x / 2) - std::abs(leftPos.x - rightPos.x);
+	float overlapY = (leftSize.y / 2 + rightSize.y / 2) - std::abs(leftPos.y - rightPos.y);
 
-	//	// 이제 깊이 검사를 해야하는데 깊이를 어떻게 알지?
-	//}
+	Rigidbody* leftRb = _left->GetOwner()->GetComponent<Rigidbody>();
+	Rigidbody* rightRb = _right->GetOwner()->GetComponent<Rigidbody>();
+
+	bool leftKinematic = leftRb == nullptr || leftRb->IsKinematic();
+	bool rightKinematic = rightRb == nullptr || rightRb->IsKinematic();
+
+	// 침범을 하지 않았으므로 무시
+	if (overlapX <= 0 || overlapY <= 0)
+		return;
+
+	// 지정해둔 침범 임계치보다 작으면 무시
+	if (overlapX < penetrationThreshold && overlapY < penetrationThreshold)
+		return;
+
+	// 둘 다 정적 오브젝트면 패스
+	if (leftKinematic && rightKinematic)
+		return;
+
+	// Y축으로 더 깊이 침범하면 X축 방향으로 밀기
+	if (overlapX < overlapY)
+	{
+
+		// 왼쪽 물체만 정적일 때
+		if (leftKinematic && !rightKinematic)
+		{
+			// right를 기준으로 왼쪽이면 -로 오른쪽이면 +로 밀기
+			int dir = (rightPos.x > leftPos.x) ? -1 : 1;
+			Object* rightObj = _right->GetOwner();
+
+			rightObj->SetPos({ rightPos.x - (overlapX * dir), rightPos.y });
+		}
+		// 아니고 오른쪽 물체만 정적일 때
+		else if (!leftKinematic && rightKinematic)
+		{
+			//left를 기준으로 왼쪽이면 -로 오른쪽이면 +로 밀기
+			int dir = (leftPos.x > rightPos.x) ? -1 : 1;
+			Object* leftObj = _left->GetOwner();
+
+			leftObj->SetPos({ leftPos.x - (overlapX * dir), leftPos.y });
+		}
+		// 둘 다 정적이 아닐 때
+		else
+		{
+			//left를 기준으로 작용 반작용
+			int dir = (leftPos.x > rightPos.x) ? -1 : 1;
+			Object* leftObj = _left->GetOwner();
+			Object* rightObj = _right->GetOwner();
+
+			leftObj->SetPos({ leftPos.x - (overlapX / 2.f * dir), leftPos.y });
+			rightObj->SetPos({ rightPos.x + (overlapX / 2.f * dir), rightPos.y });
+		}
+	}
+	else // X축으로 더 깊이 침범하면 Y축 방향으로 밀기
+	{
+		// x와 다르게 y는 dir만으로는 못함.
+		// 때문에 이전에 Rigidbody의 속도를 이용해 판단.
+		float leftVy = leftRb ? leftRb->GetVelocity().y : 0.f;
+		float rightVy = rightRb ? rightRb->GetVelocity().y : 0.f;
+
+		// Left가 위의 있는지
+		bool isLeft = (leftPos.y < rightPos.y);
+		int dir = isLeft ? -1 : 1;
+
+		// 왼쪽 물체만 정적일 때
+		if (leftKinematic && !rightKinematic)
+		{
+			// 오른쪽 물체가 아래로 떨어지고 있을 때
+			Object* rightObj = _right->GetOwner();
+			if (rightVy < 0 && isLeft)
+			{
+				// 땅 충돌 처리
+				rightObj->SetPos({ rightPos.x, rightPos.y + (overlapY * dir)});
+
+				rightRb->SetGrounded(true);
+				rightRb->SetVelocity({ rightRb->GetVelocity().x, 0.f });
+			}
+			// 오른쪽 물체가 천장에 머리 박았을 때
+			else if (rightVy > 0 && !isLeft)
+			{
+				// 천장 처리
+				rightObj->SetPos({ rightPos.x, rightPos.y + (overlapY * dir)});
+
+				rightRb->SetVelocity({ rightRb->GetVelocity().x, 0.f });
+			}
+		}
+		// 아니고 오른쪽 물체만 정적일 때
+		else if (!leftKinematic && rightKinematic)
+		{
+			// 왼쪽 물체가 아래로 떨어지고 있을 때
+			Object* leftObj = _left->GetOwner();
+			if (leftVy > 0 && !isLeft)
+			{
+				// 땅 충돌 처리
+				leftObj->SetPos({ leftPos.x, leftPos.y + (overlapY * dir)});
+
+				leftRb->SetGrounded(true);
+				leftRb->SetVelocity({ leftRb->GetVelocity().x, 0.f });
+			}
+			// 왼쪽 물체가 천장에 머리 박았을 때
+			else if (leftVy < 0 && isLeft)
+			{
+				// 천장 처리
+				leftObj->SetPos({ leftPos.x, leftPos.y + ( overlapY * dir) });
+
+				leftRb->SetVelocity({ leftRb->GetVelocity().x, 0.f });
+			}
+		}
+		// 둘 다 정적이 아닐 때
+		else
+		{
+			Object* leftObj = _left->GetOwner();
+			Object* rightObj = _right->GetOwner();
+
+			// 두 물체가 올라탈 때
+			if (leftVy > 0 && isLeft)
+			{
+				// 왼쪽 물체가 오른쪽 물체 위에 올라탐
+				leftObj->SetPos({ leftPos.x, (leftPos.y - overlapY / 2.f)});
+				rightObj->SetPos({ rightPos.x, (rightPos.y + overlapY / 2.f)});
+
+				leftRb->SetGrounded(true);
+				leftRb->SetVelocity({ leftRb->GetVelocity().x, 0.f });
+			}
+			else if (rightVy > 0 && !isLeft)
+			{
+				// 오른쪽 물체가 왼쪽 물체 위에 올라탐
+				leftObj->SetPos({ leftPos.x, (leftPos.y + overlapY / 2.f)});
+				rightObj->SetPos({ rightPos.x, (rightPos.y - overlapY / 2.f)});
+
+				rightRb->SetGrounded(true);
+				rightRb->SetVelocity({ rightRb->GetVelocity().x, 0.f });
+			}
+		}
+		
+	}
+
 }
 
 void CollisionManager::CollisionLayerUpdate(Layer _left, Layer _right)
@@ -121,6 +244,7 @@ void CollisionManager::CollisionLayerUpdate(Layer _left, Layer _right)
 			// 충돌여부 확인
 			if (IsCollision(pLeftCollider, pRightCollider))
 			{
+				PhysicsResolve(pLeftCollider, pRightCollider);
 				// 이전에도 충돌중
 				if (iter->second)
 				{
@@ -128,8 +252,7 @@ void CollisionManager::CollisionLayerUpdate(Layer _left, Layer _right)
 					{
 						pLeftCollider->ExitCollision(pRightCollider);
 						pRightCollider->ExitCollision(pLeftCollider);
-						iter->second = false;
-						m_physicsCollisionInfo[iter->first] = { nullptr, nullptr };
+						iter->second = false;						
 					}
 					else
 					{
@@ -143,8 +266,7 @@ void CollisionManager::CollisionLayerUpdate(Layer _left, Layer _right)
 					{
 						pLeftCollider->EnterCollision(pRightCollider);
 						pRightCollider->EnterCollision(pLeftCollider);
-						iter->second = true;
-						m_physicsCollisionInfo[iter->first] = { pLeftCollider, pRightCollider };
+						iter->second = true;						
 					}
 				}
 			}
@@ -155,7 +277,6 @@ void CollisionManager::CollisionLayerUpdate(Layer _left, Layer _right)
 					pLeftCollider->ExitCollision(pRightCollider);
 					pRightCollider->ExitCollision(pLeftCollider);
 					iter->second = false;
-					m_physicsCollisionInfo[iter->first] = { nullptr, nullptr };
 				}
 			}
 		}
