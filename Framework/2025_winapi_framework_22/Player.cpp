@@ -161,6 +161,19 @@ void Player::ChangeState(PlayerState _newState)
 }
 
 
+void Player::Hit(int damage)
+{
+	if (m_hp - damage <= 0)
+	{
+		m_hp = 0;
+		ChangeState(PlayerState::DIE);
+	}
+	else
+	{
+		m_hp -= damage;
+	}
+}
+
 void Player::Update()
 {
 	Rigidbody* rb = GetComponent<Rigidbody>();
