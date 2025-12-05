@@ -224,11 +224,6 @@ void Player::Update()
 				Jump();
 			}
 		}
-		if (GET_KEYDOWN(KEY_TYPE::ENTER))
-		{
-			CreateProjectile();
-			GET_SINGLE(TurnManager)->ChangeTurn(TurnType::Player1);
-		}
 
 		if (GET_KEY(KEY_TYPE::RSHIFT))
 		{
@@ -256,10 +251,7 @@ void Player::Update()
 	//float factor = scaleSpeed + scaleDelta;
 	//Scale({ factor, factor });
 
-	
-	cout << GET_SINGLE(TurnManager)->GetCurPlayer() << endl;
-
-	if (GET_KEYDOWN(KEY_TYPE::P) && GET_SINGLE(TurnManager)->GetCurrentTurn() == TurnType::Select 
+	if (GET_SINGLE(TurnManager)->GetCurrentTurn() == TurnType::Select 
 		&& GET_SINGLE(TurnManager)->GetCurPlayer() == playerCount && isCanSlotReel == true)
 	{
 		isCanSlotReel = false;
