@@ -93,6 +93,15 @@ void SlotReel::MakeWeapon(Weapon* targetWeapon, int _playerNum)
 	GET_SINGLE(SceneManager)->GetCurScene()->AddObject(m_pWeaponHolder->GetCurrentWeapon(), Layer::Weapon);
 }
 
+void SlotReel::DestroyWeapon()
+{
+	std::thread([this]()
+		{
+			std::this_thread::sleep_for(std::chrono::milliseconds(100));
+			m_pWeaponHolder->DestroyWeapon();
+		}).detach();
+}
+
 void SlotReel::EnterCollision(Collider* _other)
 {
 }

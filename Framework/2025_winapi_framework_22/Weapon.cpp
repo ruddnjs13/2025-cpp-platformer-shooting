@@ -60,12 +60,12 @@ void Weapon::SetPlayerCount(int _playerNum)
 	if (_playerNum == 1)
 	{
 		m_playerCount = _playerNum;
-		StartAngle(1, 20);
+		StartAngle(1, 10);
 	}
 	else if(_playerNum ==2)
 	{
 		m_playerCount = _playerNum;
-		StartAngle(-1,-65);
+		StartAngle(-1,-50);
 	}
 
 }

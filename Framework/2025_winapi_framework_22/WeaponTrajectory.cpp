@@ -48,6 +48,27 @@ void WeaponTrajectory::SetTrajectorySize(Vec2 size)
 	m_Trajectory->SetSize(size);
 }
 
+void WeaponTrajectory::DestoryTrajectory()
+{
+    if (m_TextureObjects.size() < 1)
+        m_TextureObjects.resize(1, nullptr);
+
+    if (m_Trajectory != nullptr)
+    {
+        GET_SINGLE(SceneManager)->GetCurScene()->RequestDestroy(m_Trajectory);
+        m_Trajectory = nullptr;
+    }
+
+    for (int i = 0; i < 1; i++)
+    {
+        if (m_TextureObjects[i] != nullptr)
+        {
+            GET_SINGLE(SceneManager)->GetCurScene()->RequestDestroy(m_TextureObjects[i]);
+            m_TextureObjects[i] = nullptr;
+        }
+    }
+}
+
 
 void WeaponTrajectory::ShowTrajectory(float _angleValue,Vec2 angle, Vec2 pos, Vec2 size, Object* owner, Weapon* _weapon)
 {
