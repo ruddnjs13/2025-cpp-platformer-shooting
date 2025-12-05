@@ -19,7 +19,7 @@ public:
 	void SetTrajectoryPos(Vec2 pos);
 	void SetTrajectorySize(Vec2 size);
 	void StoreAngleValue(float _angleValue) { angleValue = _angleValue; }
-
+	void DestoryTrajectory();
 public:
 	void ShowTrajectory(float _angleValue, Vec2 angle, Vec2 pos, Vec2 size, Object* owner, Weapon* _weapon);
 	

@@ -22,7 +22,7 @@ Player::Player()
 	Collider* c = AddComponent<Collider>();
 	c->SetSize({ 28,28 });
 	c->SetName(L"Player");
-		AddComponent<Rigidbody>();
+	auto * r = AddComponent<Rigidbody>();
 	//GetComponent<Rigidbody>()->SetUseGravity(false);
 	auto* animator = AddComponent<Animator>();
 	animator->CreateAnimation
@@ -44,6 +44,11 @@ Player::Player()
 		{ 16.f,0.f },
 		6, 0.1f
 	);
+
+	GET_SINGLE(TurnManager)->RaiseEvent(TurnType::Waiting, [this]()
+		{
+			cout << "waiting" << endl;
+		});
 }
 
 Player::~Player()
@@ -105,8 +110,10 @@ void Player::EnterCollision(Collider* _other)
 {	
 	if (_other->GetName() == L"Floor")
 	{
+		collCnt++;
 		Rigidbody* rb = GetComponent<Rigidbody>();
 		rb->SetGrounded(true);
+		cout << collCnt;
 	}
 }
 
@@ -115,9 +122,11 @@ void Player::ExitCollision(Collider* _other)
 {
 	if (_other->GetName() == L"Floor")
 	{
-		/*std::wcout << _other->GetName();
+		collCnt--;
+		std::wcout << _other->GetName();
+		cout << collCnt;
 		Rigidbody* rb = GetComponent<Rigidbody>();
-		rb->SetGrounded(false);*/
+		rb->SetGrounded(collCnt > 0);
 	}
 }
 
@@ -173,8 +182,8 @@ void Player::Update()
 	{
 		if (GET_KEY(KEY_TYPE::A)) dir.x -= 1.f;
 		if (GET_KEY(KEY_TYPE::D)) dir.x += 1.f;
-		if (GET_KEY(KEY_TYPE::W)) angle += 0.1f;
-		if (GET_KEY(KEY_TYPE::S)) angle -= 0.1f;
+		//if (GET_KEY(KEY_TYPE::W)) angle += 0.1f;
+		//if (GET_KEY(KEY_TYPE::S)) angle -= 0.1f;
 		if (GET_KEYDOWN(KEY_TYPE::SPACE))
 		{
 			rb = GetComponent<Rigidbody>();
@@ -189,14 +198,18 @@ void Player::Update()
 		{
 			GET_SINGLE(TurnManager)->ChangeTurn(TurnType::Player2);
 		}
+		if (GET_KEY(KEY_TYPE::RSHIFT))
+		{
+			slotReel->DestroyWeapon();
+		}
 		
 	}
 	else if (CheckPlayerTurn(TurnType::Player2))
 	{
 		if (GET_KEY(KEY_TYPE::LEFT)) dir.x -= 1.f;
 		if (GET_KEY(KEY_TYPE::RIGHT)) dir.x += 1.f;
-		if (GET_KEY(KEY_TYPE::UP)) angle += 0.1f;
-		if (GET_KEY(KEY_TYPE::DOWN)) angle -= 0.1f;
+		//if (GET_KEY(KEY_TYPE::UP)) angle += 0.1f;
+		//if (GET_KEY(KEY_TYPE::DOWN)) angle -= 0.1f;
 		if (GET_KEY(KEY_TYPE::RSHIFT))
 		{
 			rb = GetComponent<Rigidbody>();
@@ -210,6 +223,11 @@ void Player::Update()
 			CreateProjectile();
 			GET_SINGLE(TurnManager)->ChangeTurn(TurnType::Player1);
 		}
+
+		if (GET_KEY(KEY_TYPE::RSHIFT))
+		{
+			slotReel->DestroyWeapon();
+		}
 	}
 	if (m_state != PlayerState::RUN && dir.Length() > 0.f)
 	{
@@ -220,7 +238,7 @@ void Player::Update()
 		ChangeState(PlayerState::IDLE);
 	}
 	Translate({dir.x * fDT * 200.f, dir.y * fDT * 200.f});
-	Angle(angle);
+	//Angle(angle);
 
 	// Q, E 크게 작게 
 	//float scaleDelta = 0.f;

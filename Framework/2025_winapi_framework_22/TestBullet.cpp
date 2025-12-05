@@ -57,7 +57,7 @@ void TestBullet::BurstBullet()
 	pos.y -= GetSize().y / 2.f;
 
 	proj->SetPos(pos);
-	proj->SetSize({ 50.f,50.f });
+	proj->SetSize({ 70.f,70.f });
 
 	GET_SINGLE(SceneManager)->GetCurScene()->AddObject(proj, Layer::Boom);
 }

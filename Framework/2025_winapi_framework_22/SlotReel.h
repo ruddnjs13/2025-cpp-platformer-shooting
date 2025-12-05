@@ -20,6 +20,7 @@ public:
     void SetRollingTexture(RollingItem* rollItem,wstring textureName, Vec2 offsetPos, float speed);
     void SetStartTexture(RollingItem* rollItem, wstring textureName, Vec2 offsetPos);
     void MakeWeapon(Weapon* targetWeapon, int _playerNum);
+    void DestroyWeapon();
     void EnterCollision(Collider* _other)override;
     void StayCollision(Collider* _other) override;
     void ExitCollision(Collider* _other) override;

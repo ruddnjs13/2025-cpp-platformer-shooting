@@ -22,11 +22,12 @@ TestWeapon::TestWeapon()
 
 TestWeapon::~TestWeapon()
 {
+	m_weaponTrajectory->DestoryTrajectory();
 }
 
 void TestWeapon::Update()
 {
-	if (GET_KEYDOWN(KEY_TYPE::SPACE))
+	if (GET_KEYDOWN(KEY_TYPE::RSHIFT))
 		Shoot();
 
 	if (GET_KEY(KEY_TYPE::W) && isRotation == true)

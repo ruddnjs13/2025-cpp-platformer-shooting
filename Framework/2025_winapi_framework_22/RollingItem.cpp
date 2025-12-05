@@ -41,7 +41,6 @@ void RollingItem::Render(HDC _hdc)
 			RGB(255, 0, 255));
 	}
 
-
 }
 void RollingItem::SetDownSpeed(float _speed)
 {

@@ -16,6 +16,7 @@ Bomb::Bomb()
 	col->SetTrigger(true);
 	col->SetSize({50.f, 50.f});
 	FadeOut();
+
 }
 
 Bomb::~Bomb()
