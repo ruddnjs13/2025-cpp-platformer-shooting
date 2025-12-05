@@ -5,6 +5,7 @@
 #include "TestWeapon.h"
 #include "RollingItem.h"
 #include "TestWeapon2.h"
+#include "TurnManager.h"
 #include "SceneManager.h"
 #include "Collider.h"
 #include "WeaponHolderComponent.h"
@@ -214,7 +215,7 @@ void SlotReel::SlotRolling(int _playerNum)
 
 				int randomTexture = rand() % 4 + 1;
 
-				if (i == 22)
+				if (i == 19)
 				{
 					storeValue = randomTexture;
 				}
@@ -282,7 +283,7 @@ void SlotReel::SlotRolling(int _playerNum)
 						GET_SINGLE(SceneManager)->GetCurScene()->RequestDestroy(rollingItem[i]);
 					}
 					rollingItem.clear();
-
+					GET_SINGLE(TurnManager)->ChangeTurn(TurnType::Play);
 					std::this_thread::sleep_for(std::chrono::milliseconds(1000));
 					m_pTex = NULL;
 				}
