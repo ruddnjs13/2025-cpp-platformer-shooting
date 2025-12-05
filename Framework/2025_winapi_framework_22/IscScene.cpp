@@ -4,12 +4,12 @@
 #include "Player.h"
 #include "TurnManager.h"
 #include "Floor.h"
-#include "CollisionManager.h"
+#include "CollisionManager.h"3
 
 void IscScene::Init()
 {
-	Player* pPlayer1 = Spawn<Player>(Layer::PLAYER, { 300, 300 }, { 50, 50 });
-	Player* pPlayer2 = Spawn<Player>(Layer::PLAYER, { 500, 300 }, { 50, 50 });
+	Player* pPlayer1 = Spawn<Player>(Layer::PLAYER, { 300, 500 }, { 28, 28 });
+	Player* pPlayer2 = Spawn<Player>(Layer::PLAYER, { 500, 300 }, { 28, 28 });
 	Spawn<Floor>(Layer::DEFAULT, { WINDOW_WIDTH / 2, 600 }, { 100.f,100.f });
 	pPlayer1->SetPlayerTurn(TurnType::Player1);
 	pPlayer2->SetPlayerTurn(TurnType::Player2);
