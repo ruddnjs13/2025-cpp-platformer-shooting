@@ -24,14 +24,14 @@ void LkwScene::Init()
 
 	GET_SINGLE(TurnManager)->ChangeTurn(TurnType::Player1);
 	GET_SINGLE(CollisionManager)->CheckLayer(Layer::PLAYER, Layer::DEFAULT);
+	GET_SINGLE(CollisionManager)->CheckLayer(Layer::PROJECTILE, Layer::DEFAULT);
+	GET_SINGLE(CollisionManager)->CheckLayer(Layer::Boom, Layer::DEFAULT);
 	GET_SINGLE(CollisionManager)->CheckLayer(Layer::PLAYER, Layer::PLAYER);
-
+	GET_SINGLE(CollisionManager)->CheckLayer(Layer::Slot, Layer::RollItem);
 
 	Background* background = Spawn<Background>(Layer::BACKGROUND, { WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2 }, { WINDOW_WIDTH, WINDOW_HEIGHT });
 
 	background->Init(GET_SINGLE(ResourceManager)->GetTexture(L"Background"));
-	
-
 }
 
 void LkwScene::Update()

@@ -47,5 +47,7 @@ private:
 	TurnType m_turnType;
 	PlayerState m_state;
 	PlayerState m_prevState;
+
+	int collCnt = 0;
 };
 
