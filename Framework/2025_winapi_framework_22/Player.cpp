@@ -45,9 +45,9 @@ Player::Player()
 		6, 0.1f
 	);
 
-	GET_SINGLE(TurnManager)->RaiseEvent(TurnType::Waiting, [this]()
+	GET_SINGLE(TurnManager)->RaiseEvent(TurnType::Select, [this]()
 		{
-			cout << "waiting" << endl;
+			
 		});
 }
 
@@ -178,8 +178,12 @@ void Player::Update()
 
 	Vec2 dir = {};
 	double angle = GetAngle();
-	if (CheckPlayerTurn(TurnType::Player1))
+
+
+
+	if (CheckPlayerTurn(TurnType::Player1) && GET_SINGLE(TurnManager)->GetCurrentTurn() == TurnType::Player1)
 	{
+		isCanSlotReel = true;
 		if (GET_KEY(KEY_TYPE::A)) dir.x -= 1.f;
 		if (GET_KEY(KEY_TYPE::D)) dir.x += 1.f;
 		//if (GET_KEY(KEY_TYPE::W)) angle += 0.1f;
@@ -194,6 +198,7 @@ void Player::Update()
 			}
 			
 		}
+
 		if (GET_KEYDOWN(KEY_TYPE::F))
 		{
 			GET_SINGLE(TurnManager)->ChangeTurn(TurnType::Player2);
@@ -204,8 +209,9 @@ void Player::Update()
 		}
 		
 	}
-	else if (CheckPlayerTurn(TurnType::Player2))
+	else if (CheckPlayerTurn(TurnType::Player2) && GET_SINGLE(TurnManager)->GetCurrentTurn() == TurnType::Player2)
 	{
+		isCanSlotReel = true;
 		if (GET_KEY(KEY_TYPE::LEFT)) dir.x -= 1.f;
 		if (GET_KEY(KEY_TYPE::RIGHT)) dir.x += 1.f;
 		//if (GET_KEY(KEY_TYPE::UP)) angle += 0.1f;
@@ -217,11 +223,6 @@ void Player::Update()
 			{
 				Jump();
 			}
-		}
-		if (GET_KEYDOWN(KEY_TYPE::ENTER))
-		{
-			CreateProjectile();
-			GET_SINGLE(TurnManager)->ChangeTurn(TurnType::Player1);
 		}
 
 		if (GET_KEY(KEY_TYPE::RSHIFT))
@@ -250,31 +251,32 @@ void Player::Update()
 	//float factor = scaleSpeed + scaleDelta;
 	//Scale({ factor, factor });
 
-
-	if (GET_KEYDOWN(KEY_TYPE::P) && CheckPlayerTurn(m_turnType))
+	if (GET_SINGLE(TurnManager)->GetCurrentTurn() == TurnType::Select 
+		&& GET_SINGLE(TurnManager)->GetCurPlayer() == playerCount && isCanSlotReel == true)
 	{
+		isCanSlotReel = false;
 		if (slotReel != nullptr)
 		{
 			GET_SINGLE(SceneManager)->GetCurScene()->RequestDestroy(slotReel);
 			slotReel = nullptr;
 		}
-
+	
 		slotReel = new SlotReel();
 		slotReel->SetSize({ 60, 60 });
-
+	
 		Vec2 pos = GetPos();
-
+	
 		pos.y -= 60;
-
+	
 		slotReel->SetPos(pos);
-
-
+	
+	
 		int turnNum = m_turnType == TurnType::Player1 ? 1 : 2;
-
+	
 		slotReel->SlotRolling(turnNum);
-
+	
 		slotReel->SetOwner(this);
-
+	
 		GET_SINGLE(SceneManager)->GetCurScene()->AddObject(slotReel, Layer::Slot);
 	}
 }

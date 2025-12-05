@@ -62,7 +62,7 @@
         std::thread([this]() 
             {
             std::this_thread::sleep_for(std::chrono::seconds(2));
-            ChangeTurn(TurnType::Play); 
+            ChangeTurn(TurnType::Select); 
             }).detach();
     }
 

@@ -28,50 +28,101 @@ TestWeapon2::~TestWeapon2()
 
 void TestWeapon2::Update()
 {
-	if (GET_KEYDOWN(KEY_TYPE::LSHIFT) )
+	if (GET_KEYDOWN(KEY_TYPE::RSHIFT))
 		Shoot();
 
-	if (GET_KEYDOWN(KEY_TYPE::Q) && isRotation == true)
+	if (GET_KEY(KEY_TYPE::W) && isRotation == true)
 	{
-		isRotation = false;
+		cout << m_playerCount << endl;
 
+		isRotation = false;
 		if (m_playerCount == 1)
 		{
 			m_angleValue += 5;
-			if (m_angleValue >= 85)
+			if (m_angleValue >= 75)
 			{
-				m_angleValue = 85;
+				m_angleValue = 75;
 			}
 
 			Vec2 pos = GetPos();
 			pos.y -= GetSize().y / 2.f;
 
-			pos.y += 10.f;
-			pos.x += 30.f;
+			//pos.y + 10.f;
+			//pos.x + 30.f;
 
 
-			m_weaponTrajectory->ShowTrajectory(m_angleValue,m_angle, pos, { 20.f,20.f }, GetOwner(), this);
+			m_weaponTrajectory->ShowTrajectory(m_angleValue, m_angle, pos, { 20.f,20.f }, GetOwner(), this);
 
 			SetShootAngle(m_angleValue);
 		}
-		else
+		else if (m_playerCount == 2)
 		{
-			m_angleValue += 5;
-			if (m_angleValue >= 85)
+			cout << "2" << endl;
+
+			m_angleValue -= 5;
+
+			if (m_angleValue <= -75)
 			{
-				m_angleValue = 85;
+				m_angleValue = -75;
 			}
 
 			Vec2 pos = GetPos();
 			pos.y -= GetSize().y / 2.f;
 
-			pos.y += 10.f;
-			pos.x += 30.f;
+			//pos.y + 10.f;
+			//pos.x + 30.f;
 
 
-			m_weaponTrajectory->ShowTrajectory(m_angleValue,m_angle, pos, { 20.f,20.f }, GetOwner(), this);
+			m_weaponTrajectory->ShowTrajectory(m_angleValue, m_angle, pos, { 20.f,20.f }, GetOwner(), this);
+
+			SetShootAngle(-m_angleValue);
+		}
+	}
+
+	if (GET_KEY(KEY_TYPE::S) && isRotation == true)
+	{
+		cout << m_playerCount << endl;
+
+		isRotation = false;
+		if (m_playerCount == 1)
+		{
+			m_angleValue -= 5;
+			if (m_angleValue <= 0)
+			{
+				m_angleValue = 0;
+			}
+
+			Vec2 pos = GetPos();
+			pos.y -= GetSize().y / 2.f;
+
+			//pos.y + 10.f;
+			//pos.x + 30.f;
+
+
+			m_weaponTrajectory->ShowTrajectory(m_angleValue, m_angle, pos, { 20.f,20.f }, GetOwner(), this);
 
 			SetShootAngle(m_angleValue);
+		}
+		else if (m_playerCount == 2)
+		{
+			cout << "2" << endl;
+
+			m_angleValue += 5;
+			if (m_angleValue >= 0)
+			{
+				m_angleValue = 0;
+			}
+
+			Vec2 pos = GetPos();
+			pos.y -= GetSize().y / 2.f;
+
+			//pos.y + 10.f;
+			//pos.x + 30.f;
+
+
+			m_weaponTrajectory->ShowTrajectory(m_angleValue, m_angle, pos, { 20.f,20.f }, GetOwner(), this);
+
+			SetShootAngle(-m_angleValue);
 		}
 	}
 }

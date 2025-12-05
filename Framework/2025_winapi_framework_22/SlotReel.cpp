@@ -5,6 +5,7 @@
 #include "TestWeapon.h"
 #include "RollingItem.h"
 #include "TestWeapon2.h"
+#include "TurnManager.h"
 #include "SceneManager.h"
 #include "Collider.h"
 #include "WeaponHolderComponent.h"
@@ -13,7 +14,7 @@
 
 SlotReel::SlotReel()
 {
-	srand(static_cast<unsigned int>(time(nullptr)));
+
 
 	auto* col = AddComponent<Collider>();
 	col->SetName(L"Rolling");
@@ -116,6 +117,7 @@ void SlotReel::ExitCollision(Collider* _other)
 
 void SlotReel::SlotRolling(int _playerNum)
 {
+	srand(static_cast<unsigned int>(time(nullptr)));
 	SetPlayerNum(_playerNum);
 	m_pTex = GET_SINGLE(ResourceManager)->GetTexture(L"Test2");
 
@@ -209,7 +211,17 @@ void SlotReel::SlotRolling(int _playerNum)
 
 				RollingItem* rollingItems = new RollingItem;
 
-				int randomTexture = rand() % 3 + 1;
+				srand(static_cast<unsigned int>(time(nullptr)));
+
+				int randomTexture = rand() % 4 + 1;
+
+				if (i == 19)
+				{
+					storeValue = randomTexture;
+				}
+
+				cout << randomTexture << endl;
+
 				switch (randomTexture)
 				{
 				case 1:
@@ -221,6 +233,10 @@ void SlotReel::SlotRolling(int _playerNum)
 				case 3:
 					SetRollingTexture(rollingItems, L"Bullet", offsetPoss, speed);
 					break;
+				case 4:
+					SetRollingTexture(rollingItems, L"Gun1", offsetPoss, speed);
+					break;
+
 				}
 				GET_SINGLE(SceneManager)->GetCurScene()->AddObject(rollingItems, Layer::RollItem);
 
@@ -234,10 +250,6 @@ void SlotReel::SlotRolling(int _playerNum)
 				speed -= 4.1f;
 				responTime += 49;
 
-				if (i == 22)
-				{
-					storeValue = randomTexture;
-				}
 
 				if (i == 24)
 				{
@@ -251,6 +263,9 @@ void SlotReel::SlotRolling(int _playerNum)
 						break;
 					case 3:
 						MakeWeapon(new TestWeapon, playerNum);
+						break;
+					case 4:
+						MakeWeapon(new TestWeapon2, playerNum);
 						break;
 					}
 
@@ -268,7 +283,7 @@ void SlotReel::SlotRolling(int _playerNum)
 						GET_SINGLE(SceneManager)->GetCurScene()->RequestDestroy(rollingItem[i]);
 					}
 					rollingItem.clear();
-
+					GET_SINGLE(TurnManager)->ChangeTurn(TurnType::Play);
 					std::this_thread::sleep_for(std::chrono::milliseconds(1000));
 					m_pTex = NULL;
 				}

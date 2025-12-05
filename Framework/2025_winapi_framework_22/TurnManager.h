@@ -12,13 +12,14 @@ public:
     void ChangeTurn(TurnType _nextTurn);
 	TurnType GetCurrentTurn() const { return m_curTurn; }
     void ClearEvents();
+    int GetCurPlayer() { return m_CurPlayer; }
 private:
     void Invoke(TurnType _turn);
     void ChangingTurnCondition();
     void WaitingTurnUpdate();
 private:
     std::map<TurnType, std::vector<Action>> m_eventMap;
-	TurnType m_curTurn = TurnType::Select;
-	int m_CurPlayer = 1;
+	TurnType m_curTurn = TurnType::Waiting;
+	int m_CurPlayer = 0;
 	float m_waitTimer = 0.f;
 };
