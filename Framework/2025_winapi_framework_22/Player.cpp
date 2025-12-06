@@ -9,6 +9,7 @@
 #include "Collider.h"
 #include "Animator.h"
 #include "Animation.h"
+#include "Health.h"
 #include "Rigidbody.h"
 #include "Weapon.h"
 #include "SlotReel.h"
@@ -23,6 +24,8 @@ Player::Player()
 	c->SetSize({ 28,28 });
 	c->SetName(L"Player");
 	auto * r = AddComponent<Rigidbody>();
+	auto* health = AddComponent<Health>();
+	health->SetHealth(100);
 	//GetComponent<Rigidbody>()->SetUseGravity(false);
 	auto* animator = AddComponent<Animator>();
 	animator->CreateAnimation
@@ -33,7 +36,7 @@ Player::Player()
 		{16.f,0.f},
 		6,0.1f
 	);
-	animator->Play(L"PlayerIdle");
+	//animator->Play(L"PlayerIdle");
 	m_pTex = GET_SINGLE(ResourceManager)->GetTexture(L"PlayerWalk");
 	animator->CreateAnimation
 	(
@@ -44,10 +47,21 @@ Player::Player()
 		{ 16.f,0.f },
 		6, 0.1f
 	);
+	m_pTex = GET_SINGLE(ResourceManager)->GetTexture(L"PlayerDie");
+	animator->CreateAnimation
+	(
+		L"PlayerDie",
+		m_pTex,
+		{ 0.f,0.f },
+		{ 16.f,16.f },
+		{ 16.f,0.f },
+		4, 0.1f
+	);
+	animator->Play(L"PlayerDie");
 
-	GET_SINGLE(TurnManager)->RaiseEvent(TurnType::Waiting, [this]()
+	GET_SINGLE(TurnManager)->RaiseEvent(TurnType::Select, [this]()
 		{
-			cout << "waiting" << endl;
+			
 		});
 }
 
@@ -134,35 +148,36 @@ void Player::ChangeState(PlayerState _newState)
 {
 	m_prevState = m_state;
 	m_state = _newState;
+	Animator* animator = GetComponent<Animator>();
 
 	switch (m_state)
 	{
 	case PlayerState::IDLE:
 	{
 		m_pTex = GET_SINGLE(ResourceManager)->GetTexture(L"PlayerIdle");
-		Animator* animator = GetComponent<Animator>();
 		animator->Play(L"PlayerIdle");
 	}
 	break;
 	case PlayerState::RUN:
 	{
 		m_pTex = GET_SINGLE(ResourceManager)->GetTexture(L"PlayerWalk");
-		Animator* animator = GetComponent<Animator>();
 		animator->Play(L"PlayerRun");
 	}
 	break;
 	case PlayerState::JUMP:
 		break;
 	case PlayerState::DIE:
+		m_pTex = GET_SINGLE(ResourceManager)->GetTexture(L"PlayerDie");
+		animator->Play(L"PlayerDie", PlayMode::Once);
 		break;
 	default:
 		break;
 	}
 }
 
-
 void Player::Update()
 {
+	Health* health = GetComponent<Health>();
 	Rigidbody* rb = GetComponent<Rigidbody>();
 	//Vec2 pos = GetPos();
 
@@ -178,8 +193,12 @@ void Player::Update()
 
 	Vec2 dir = {};
 	double angle = GetAngle();
-	if (CheckPlayerTurn(TurnType::Player1))
+
+
+
+	if (CheckPlayerTurn(TurnType::Player1) && GET_SINGLE(TurnManager)->GetCurrentTurn() == TurnType::Player1)
 	{
+		isCanSlotReel = true;
 		if (GET_KEY(KEY_TYPE::A)) dir.x -= 1.f;
 		if (GET_KEY(KEY_TYPE::D)) dir.x += 1.f;
 		//if (GET_KEY(KEY_TYPE::W)) angle += 0.1f;
@@ -194,6 +213,7 @@ void Player::Update()
 			}
 			
 		}
+
 		if (GET_KEYDOWN(KEY_TYPE::F))
 		{
 			GET_SINGLE(TurnManager)->ChangeTurn(TurnType::Player2);
@@ -204,8 +224,9 @@ void Player::Update()
 		}
 		
 	}
-	else if (CheckPlayerTurn(TurnType::Player2))
+	else if (CheckPlayerTurn(TurnType::Player2) && GET_SINGLE(TurnManager)->GetCurrentTurn() == TurnType::Player2)
 	{
+		isCanSlotReel = true;
 		if (GET_KEY(KEY_TYPE::LEFT)) dir.x -= 1.f;
 		if (GET_KEY(KEY_TYPE::RIGHT)) dir.x += 1.f;
 		//if (GET_KEY(KEY_TYPE::UP)) angle += 0.1f;
@@ -218,26 +239,25 @@ void Player::Update()
 				Jump();
 			}
 		}
-		if (GET_KEYDOWN(KEY_TYPE::ENTER))
-		{
-			CreateProjectile();
-			GET_SINGLE(TurnManager)->ChangeTurn(TurnType::Player1);
-		}
 
 		if (GET_KEY(KEY_TYPE::RSHIFT))
 		{
 			slotReel->DestroyWeapon();
 		}
 	}
-	if (m_state != PlayerState::RUN && dir.Length() > 0.f)
+	if (!health->IsDead())
 	{
-		ChangeState(PlayerState::RUN);
-	}
-	else if (m_state != PlayerState::IDLE && dir.Length() == 0.f)
-	{
-		ChangeState(PlayerState::IDLE);
+		if (m_state != PlayerState::RUN && dir.Length() > 0.f)
+		{
+			ChangeState(PlayerState::RUN);
+		}
+		else if (m_state != PlayerState::IDLE && dir.Length() == 0.f)
+		{
+			ChangeState(PlayerState::IDLE);
+		}
 	}
 	Translate({dir.x * fDT * 200.f, dir.y * fDT * 200.f});
+	m_pTex->SetFlipped(dir.x < 0.f);
 	//Angle(angle);
 
 	// Q, E 크게 작게 
@@ -250,31 +270,32 @@ void Player::Update()
 	//float factor = scaleSpeed + scaleDelta;
 	//Scale({ factor, factor });
 
-
-	if (GET_KEYDOWN(KEY_TYPE::P) && CheckPlayerTurn(m_turnType))
+	if (GET_SINGLE(TurnManager)->GetCurrentTurn() == TurnType::Select 
+		&& GET_SINGLE(TurnManager)->GetCurPlayer() == playerCount && isCanSlotReel == true)
 	{
+		isCanSlotReel = false;
 		if (slotReel != nullptr)
 		{
 			GET_SINGLE(SceneManager)->GetCurScene()->RequestDestroy(slotReel);
 			slotReel = nullptr;
 		}
-
+	
 		slotReel = new SlotReel();
 		slotReel->SetSize({ 60, 60 });
-
+	
 		Vec2 pos = GetPos();
-
+	
 		pos.y -= 60;
-
+	
 		slotReel->SetPos(pos);
-
-
+	
+	
 		int turnNum = m_turnType == TurnType::Player1 ? 1 : 2;
-
+	
 		slotReel->SlotRolling(turnNum);
-
+	
 		slotReel->SetOwner(this);
-
+	
 		GET_SINGLE(SceneManager)->GetCurScene()->AddObject(slotReel, Layer::Slot);
 	}
 }

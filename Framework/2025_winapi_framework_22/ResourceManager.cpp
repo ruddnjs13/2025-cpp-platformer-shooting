@@ -202,6 +202,7 @@ void ResourceManager::RegisterTexture()
 	LoadTexture(L"Test2", L"Texture\\RoolRetTest.bmp");
 	LoadTexture(L"PlayerWalk", L"Texture\\PlayerWalk.bmp");
 	LoadTexture(L"PlayerIdle", L"Texture\\PlayerIdle.bmp");
+	LoadTexture(L"PlayerDie", L"Texture\\PlayerDie.bmp");
 	LoadTexture(L"Player", L"Texture\\TestPlayer.bmp");
 
 	// 타일맵 텍스쳐

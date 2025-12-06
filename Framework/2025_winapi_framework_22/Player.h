@@ -19,7 +19,7 @@ public:
 	void StayCollision(Collider* _other) override;
 	void ExitCollision(Collider* _other) override;
 	void ChangeState(PlayerState _newState);
-	void SetPlayerTurn(TurnType _turnType) 
+	void SetPlayerTurn(TurnType _turnType, int _playerCount)
 	{
 		if (_turnType != TurnType::Player1 && _turnType != TurnType::Player2)
 		{
@@ -27,6 +27,8 @@ public:
 			return;
 		}
 		m_turnType = _turnType; 
+		playerCount = _playerCount;
+
 	}
 	void SetWeaponCount(int count) { weaponCount = count; }
 private:
@@ -38,7 +40,11 @@ private:
 		return curTurn == m_turnType && m_turnType == _checkType;
 	}
 	void Jump();
-private:
+	void StartSlotRell();
+public:
+	int playerCount = 0;
+	bool isCanSlotReel = true;
+private:	
 
 	int weaponCount = 0;
 
@@ -47,7 +53,7 @@ private:
 	TurnType m_turnType;
 	PlayerState m_state;
 	PlayerState m_prevState;
-
+		
 	int collCnt = 0;
 };
 

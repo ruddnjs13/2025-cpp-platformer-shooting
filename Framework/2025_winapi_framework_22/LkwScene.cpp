@@ -19,10 +19,12 @@ void LkwScene::Init()
 
 	Player* pPlayer1 = Spawn<Player>(Layer::PLAYER, { 300, 300 }, { 32, 32 });
 	Player* pPlayer2 = Spawn<Player>(Layer::PLAYER, { 500, 300 }, { 32, 32 });
-	pPlayer1->SetPlayerTurn(TurnType::Player1);
-	pPlayer2->SetPlayerTurn(TurnType::Player2);
+	pPlayer1->SetPlayerTurn(TurnType::Player1 , 1);
+	pPlayer2->SetPlayerTurn(TurnType::Player2, 2);
+	
 
-	GET_SINGLE(TurnManager)->ChangeTurn(TurnType::Player1);
+	GET_SINGLE(TurnManager)->ChangeTurn(TurnType::Waiting);
+
 	GET_SINGLE(CollisionManager)->CheckLayer(Layer::PLAYER, Layer::DEFAULT);
 	GET_SINGLE(CollisionManager)->CheckLayer(Layer::PROJECTILE, Layer::DEFAULT);
 	GET_SINGLE(CollisionManager)->CheckLayer(Layer::Boom, Layer::DEFAULT);
