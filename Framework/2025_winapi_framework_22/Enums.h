@@ -44,6 +44,7 @@ enum class TurnType
 	Select,
 	Play,
 	Waiting,
+	TurnEnd,
 	GameEnd,
 
 	Player1,

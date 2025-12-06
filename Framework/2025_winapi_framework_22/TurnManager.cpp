@@ -29,6 +29,14 @@
 
     void TurnManager::ChangingTurnCondition()
     {
+        if (m_curTurn == TurnType::TurnEnd)
+        {
+            std::thread([this]()
+                {
+                    std::this_thread::sleep_for(std::chrono::seconds(5));
+                    ChangeTurn(TurnType::Waiting);
+                }).detach();
+        }
         if (m_curTurn == TurnType::Waiting)
         {
             m_waitTimer = 0;
