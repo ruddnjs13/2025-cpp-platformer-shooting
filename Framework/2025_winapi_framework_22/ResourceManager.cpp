@@ -211,6 +211,12 @@ void ResourceManager::RegisterTexture()
 	LoadTexture(L"Trunk_Right", L"Texture\\Trunk_Right.bmp");
 	LoadTexture(L"Leaves", L"Texture\\Leaves.bmp");
 	LoadTexture(L"Background", L"Texture\\Background.bmp");
+	LoadTexture(L"Yellow_Ground", L"Texture\\Ground_2.bmp");
+	LoadTexture(L"Bridge", L"Texture\\Bridge.bmp");
+	LoadTexture(L"Yellow_Grass", L"Texture\\Yellow_Grass.bmp");
+	LoadTexture(L"Yellow_Leaves", L"Texture\\Yellow_Leaves.bmp");
+	LoadTexture(L"Blue_Grass", L"Texture\\Blue_Grass.bmp");
+	LoadTexture(L"Blue_Ground", L"Texture\\Blue_Ground.bmp");
 
 	
 	LoadTexture(L"Fill_Red", L"Texture\\Fill_Red.bmp");

@@ -8,6 +8,8 @@
 void TileMapManager::LoadAllTileMap()
 {
 	LoadTileMap(L"Map1", "Resource/Map/Map1.txt");
+	LoadTileMap(L"Map2", "Resource/Map/Map2.txt");
+	LoadTileMap(L"Map3", "Resource/Map/Map3.txt");
 }
 
 void TileMapManager::LoadTileMap(wstring mapName, std::string fileName)
@@ -19,45 +21,121 @@ void TileMapManager::LoadTileMap(wstring mapName, std::string fileName)
 	maps.insert(std::make_pair(mapName,map));
 }
 
-void TileMapManager::SetRandomTileMapToScene(Scene* targetScene)
+void TileMapManager::SetTileMapToScene(Scene* targetScene, wstring mapName)
 {
-	wstring mapName = L"Map1";
 
-	for (int i = 0; i < MAP_HEIGHT; ++i)
+	if (mapName == L"Map1")
 	{
-		for (int j = 0; j < MAP_WIDTH; ++j)
+		for (int i = 0; i < MAP_HEIGHT; ++i)
 		{
-			Tile* tile = nullptr;
-			if (maps[mapName]->map[i][j] == (char)TileType::Ground)
+			for (int j = 0; j < MAP_WIDTH; ++j)
 			{
-				tile = new Tile(GET_SINGLE(ResourceManager)->GetTexture(L"Ground"));
-			}
-			else if (maps[mapName]->map[i][j] == (char)TileType::Grass)
-			{
-				tile = new Tile(GET_SINGLE(ResourceManager)->GetTexture(L"Grass"));
-			}
-			else if (maps[mapName]->map[i][j] == (char)TileType::Trunk_Left)
-			{
-				tile = new Tile(GET_SINGLE(ResourceManager)->GetTexture(L"Trunk_Left"));
-				tile->SetCollSize({ TILE_WIDTH / 2,TILE_HEIGHT });
-			}
-			else if (maps[mapName]->map[i][j] == (char)TileType::Trunk_Right)
-			{
-				tile = new Tile(GET_SINGLE(ResourceManager)->GetTexture(L"Trunk_Right"));
-				tile->SetCollSize({ TILE_WIDTH / 2,TILE_WIDTH });
-			}
-			else if (maps[mapName]->map[i][j] == (char)TileType::Leaves)
-			{
-				tile = new Tile(GET_SINGLE(ResourceManager)->GetTexture(L"Leaves"));
-			}
+				Tile* tile = nullptr;
+				if (maps[mapName]->map[i][j] == (char)TileType::Ground)
+				{
+					tile = new Tile(GET_SINGLE(ResourceManager)->GetTexture(L"Ground"));
+				}
+				else if (maps[mapName]->map[i][j] == (char)TileType::Grass)
+				{
+					tile = new Tile(GET_SINGLE(ResourceManager)->GetTexture(L"Grass"));
+				}
+				else if (maps[mapName]->map[i][j] == (char)TileType::Trunk_Left)
+				{
+					tile = new Tile(GET_SINGLE(ResourceManager)->GetTexture(L"Trunk_Left"));
+					tile->SetCollSize({ TILE_WIDTH / 2,TILE_HEIGHT });
+				}
+				else if (maps[mapName]->map[i][j] == (char)TileType::Trunk_Right)
+				{
+					tile = new Tile(GET_SINGLE(ResourceManager)->GetTexture(L"Trunk_Right"));
+					tile->SetCollSize({ TILE_WIDTH / 2,TILE_WIDTH });
+				}
+				else if (maps[mapName]->map[i][j] == (char)TileType::Leaves)
+				{
+					tile = new Tile(GET_SINGLE(ResourceManager)->GetTexture(L"Leaves"));
+				}
 
-			if (tile != nullptr)
-			{
-				tile->SetPos({TILE_WIDTH / 2 + TILE_WIDTH * j, TILE_HEIGHT * i });
-				tile->SetSize({ TILE_WIDTH,TILE_HEIGHT });
-				targetScene->AddObject(tile, Layer::DEFAULT);
+				if (tile != nullptr)
+				{
+					tile->SetPos({ TILE_WIDTH / 2 + TILE_WIDTH * j, TILE_HEIGHT * i -64});
+					tile->SetSize({ TILE_WIDTH,TILE_HEIGHT });
+					targetScene->AddObject(tile, Layer::DEFAULT);
+				}
 			}
 		}
 	}
+	else if (mapName == L"Map2")
+	{
+		for (int i = 0; i < MAP_HEIGHT; ++i)
+		{
+			for (int j = 0; j < MAP_WIDTH; ++j)
+			{
+				Tile* tile = nullptr;
+				if (maps[mapName]->map[i][j] == (char)TileType::Ground)
+				{
+					tile = new Tile(GET_SINGLE(ResourceManager)->GetTexture(L"Yellow_Ground"));
+				}
+				else if (maps[mapName]->map[i][j] == (char)TileType::Grass)
+				{
+					tile = new Tile(GET_SINGLE(ResourceManager)->GetTexture(L"Yellow_Grass"));
+				}
+				else if (maps[mapName]->map[i][j] == (char)TileType::Trunk_Left)
+				{
+					tile = new Tile(GET_SINGLE(ResourceManager)->GetTexture(L"Trunk_Left"));
+					tile->SetCollSize({ TILE_WIDTH / 2,TILE_HEIGHT });
+				}
+				else if (maps[mapName]->map[i][j] == (char)TileType::Trunk_Right)
+				{
+					tile = new Tile(GET_SINGLE(ResourceManager)->GetTexture(L"Trunk_Right"));
+					tile->SetCollSize({ TILE_WIDTH / 2,TILE_WIDTH });
+				}
+				else if (maps[mapName]->map[i][j] == (char)TileType::Leaves)
+				{
+					tile = new Tile(GET_SINGLE(ResourceManager)->GetTexture(L"Yellow_Leaves"));
+				}
+				else if (maps[mapName]->map[i][j] == (char)TileType::Bridge)
+				{
+					tile = new Tile(GET_SINGLE(ResourceManager)->GetTexture(L"Bridge"));
+				}
+
+				if (tile != nullptr)
+				{
+					tile->SetPos({ TILE_WIDTH / 2 + TILE_WIDTH * j, TILE_HEIGHT * i -64});
+					tile->SetSize({ TILE_WIDTH,TILE_HEIGHT });
+					targetScene->AddObject(tile, Layer::DEFAULT);
+				}
+			}
+		}
+	}
+	else if (mapName == L"Map3")
+	{
+		for (int i = 0; i < MAP_HEIGHT; ++i)
+		{
+			for (int j = 0; j < MAP_WIDTH; ++j)
+			{
+				Tile* tile = nullptr;
+				if (maps[mapName]->map[i][j] == (char)TileType::Ground)
+				{
+					tile = new Tile(GET_SINGLE(ResourceManager)->GetTexture(L"Blue_Ground"));
+				}
+				else if (maps[mapName]->map[i][j] == (char)TileType::Grass)
+				{
+					tile = new Tile(GET_SINGLE(ResourceManager)->GetTexture(L"Blue_Grass"));
+				}
+				else if (maps[mapName]->map[i][j] == (char)TileType::Bridge)
+				{
+					tile = new Tile(GET_SINGLE(ResourceManager)->GetTexture(L"Bridge"));
+				}
+
+				if (tile != nullptr)
+				{
+					tile->SetPos({ TILE_WIDTH / 2 + TILE_WIDTH * j, TILE_HEIGHT * i-64});
+					tile->SetSize({ TILE_WIDTH,TILE_HEIGHT });
+					targetScene->AddObject(tile, Layer::DEFAULT);
+				}
+			}
+		}
+	}
+
+	
 }
 

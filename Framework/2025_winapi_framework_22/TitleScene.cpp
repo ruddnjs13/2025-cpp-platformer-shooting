@@ -7,6 +7,6 @@
 void TitleScene::Init()
 {
 	GET_SINGLE(UIManager)->SetCanvas(CanvasType::Title);
-	GET_SINGLE(TileMapManager)->SetRandomTileMapToScene(this);
+	//GET_SINGLE(TileMapManager)->SetTileMapToScene(this);
 
 }

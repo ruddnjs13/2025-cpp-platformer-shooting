@@ -11,5 +11,5 @@ public:
 	void LoadAllTileMap();
 	void LoadTileMap(wstring mapName, std::string fileName);
 
-	void SetRandomTileMapToScene(Scene* targetScene);
+	void SetTileMapToScene(Scene* targetScene, wstring mapName);
 };

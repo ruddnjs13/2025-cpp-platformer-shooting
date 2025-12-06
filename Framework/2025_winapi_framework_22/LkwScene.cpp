@@ -15,7 +15,7 @@ void LkwScene::Init()
 {
 	//GET_SINGLE(UIManager)->SetCanvas(CanvasType::Title);
 	GET_SINGLE(UIManager)->SetCanvas(CanvasType::InGame);
-	GET_SINGLE(TileMapManager)->SetRandomTileMapToScene(this);
+	GET_SINGLE(TileMapManager)->SetTileMapToScene(this,L"Map3");
 
 	Player* pPlayer1 = Spawn<Player>(Layer::PLAYER, { 300, 300 }, { 32, 32 });
 	Player* pPlayer2 = Spawn<Player>(Layer::PLAYER, { 500, 300 }, { 32, 32 });
