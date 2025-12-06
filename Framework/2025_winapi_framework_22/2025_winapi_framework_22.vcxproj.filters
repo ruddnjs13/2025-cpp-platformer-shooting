@@ -253,6 +253,9 @@
       <Filter>Engine\04. Scene\BuildScene</Filter>
     </ClInclude>
     <ClInclude Include="TestPlayer2.h" />
+    <ClInclude Include="Health.h">
+      <Filter>Engine\06. Component</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="2025_winapi_framework_22.rc">
@@ -427,5 +430,8 @@
       <Filter>Engine\04. Scene\BuildScene</Filter>
     </ClCompile>
     <ClCompile Include="TestPlayer2.cpp" />
+    <ClCompile Include="Health.cpp">
+      <Filter>Engine\06. Component</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

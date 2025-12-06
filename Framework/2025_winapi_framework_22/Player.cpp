@@ -9,6 +9,7 @@
 #include "Collider.h"
 #include "Animator.h"
 #include "Animation.h"
+#include "Health.h"
 #include "Rigidbody.h"
 #include "Weapon.h"
 #include "SlotReel.h"
@@ -23,6 +24,8 @@ Player::Player()
 	c->SetSize({ 28,28 });
 	c->SetName(L"Player");
 	auto * r = AddComponent<Rigidbody>();
+	auto* health = AddComponent<Health>();
+	health->SetHealth(100);
 	//GetComponent<Rigidbody>()->SetUseGravity(false);
 	auto* animator = AddComponent<Animator>();
 	animator->CreateAnimation
@@ -33,7 +36,7 @@ Player::Player()
 		{16.f,0.f},
 		6,0.1f
 	);
-	animator->Play(L"PlayerIdle");
+	//animator->Play(L"PlayerIdle");
 	m_pTex = GET_SINGLE(ResourceManager)->GetTexture(L"PlayerWalk");
 	animator->CreateAnimation
 	(
@@ -44,6 +47,17 @@ Player::Player()
 		{ 16.f,0.f },
 		6, 0.1f
 	);
+	m_pTex = GET_SINGLE(ResourceManager)->GetTexture(L"PlayerDie");
+	animator->CreateAnimation
+	(
+		L"PlayerDie",
+		m_pTex,
+		{ 0.f,0.f },
+		{ 16.f,16.f },
+		{ 16.f,0.f },
+		4, 0.1f
+	);
+	animator->Play(L"PlayerDie");
 
 	GET_SINGLE(TurnManager)->RaiseEvent(TurnType::Select, [this]()
 		{
@@ -134,48 +148,36 @@ void Player::ChangeState(PlayerState _newState)
 {
 	m_prevState = m_state;
 	m_state = _newState;
+	Animator* animator = GetComponent<Animator>();
 
 	switch (m_state)
 	{
 	case PlayerState::IDLE:
 	{
 		m_pTex = GET_SINGLE(ResourceManager)->GetTexture(L"PlayerIdle");
-		Animator* animator = GetComponent<Animator>();
 		animator->Play(L"PlayerIdle");
 	}
 	break;
 	case PlayerState::RUN:
 	{
 		m_pTex = GET_SINGLE(ResourceManager)->GetTexture(L"PlayerWalk");
-		Animator* animator = GetComponent<Animator>();
 		animator->Play(L"PlayerRun");
 	}
 	break;
 	case PlayerState::JUMP:
 		break;
 	case PlayerState::DIE:
+		m_pTex = GET_SINGLE(ResourceManager)->GetTexture(L"PlayerDie");
+		animator->Play(L"PlayerDie", PlayMode::Once);
 		break;
 	default:
 		break;
 	}
 }
 
-
-void Player::Hit(int damage)
-{
-	if (m_hp - damage <= 0)
-	{
-		m_hp = 0;
-		ChangeState(PlayerState::DIE);
-	}
-	else
-	{
-		m_hp -= damage;
-	}
-}
-
 void Player::Update()
 {
+	Health* health = GetComponent<Health>();
 	Rigidbody* rb = GetComponent<Rigidbody>();
 	//Vec2 pos = GetPos();
 
@@ -243,15 +245,19 @@ void Player::Update()
 			slotReel->DestroyWeapon();
 		}
 	}
-	if (m_state != PlayerState::RUN && dir.Length() > 0.f)
+	if (!health->IsDead())
 	{
-		ChangeState(PlayerState::RUN);
-	}
-	else if (m_state != PlayerState::IDLE && dir.Length() == 0.f)
-	{
-		ChangeState(PlayerState::IDLE);
+		if (m_state != PlayerState::RUN && dir.Length() > 0.f)
+		{
+			ChangeState(PlayerState::RUN);
+		}
+		else if (m_state != PlayerState::IDLE && dir.Length() == 0.f)
+		{
+			ChangeState(PlayerState::IDLE);
+		}
 	}
 	Translate({dir.x * fDT * 200.f, dir.y * fDT * 200.f});
+	m_pTex->SetFlipped(dir.x < 0.f);
 	//Angle(angle);
 
 	// Q, E 크게 작게 

@@ -21,7 +21,7 @@ HDC& Texture::GetRotateTextureDC(const double angle, int sx, int sy, int sw, int
     float rad = angle * (PI / 180);
     rad *= -1;
 
-    float sinA = std::sin(rad);
+    float sinA = std::sin(rad); 
     float cosA = std::cos(rad);
 
     POINT points[4];
@@ -104,10 +104,19 @@ HDC& Texture::GetRotateTextureDC(const double angle, int sx, int sy, int sw, int
     ::BitBlt(m_rotHDC,
         ((sw - (maxX - minX)) / 2),
         ((sh - (maxY - minY)) / 2),
-        maxX - minX,
-        maxY - minY,
+        (maxX - minX),
+        (maxY - minY),
         memDC,
         0, 0, SRCCOPY);
+
+    if (_isFlipped)
+    {
+        ::StretchBlt(m_rotHDC,
+            0, 0, sw, sh,
+            m_rotHDC,
+            sw, 0, -sw, sh,
+			SRCCOPY);
+    }
 
     DeleteDC(memDC);
     DeleteObject(brush);

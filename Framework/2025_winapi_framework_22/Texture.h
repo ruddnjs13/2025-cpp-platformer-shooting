@@ -11,6 +11,7 @@ public:
     LONG GetHeight() const { return m_bitInfo.bmHeight; }
     const HDC& GetTextureDC() const { return m_hDC;  }
     HDC& GetRotateTextureDC(const double angle, int sx, int sy, int sw, int sh);
+	void SetFlipped(bool _flipped) { _isFlipped = _flipped; }
 public:
     void Load(const wstring& _filePath);
 private:
@@ -18,5 +19,6 @@ private:
     HDC     m_hDC;
 	HDC     m_rotHDC;
     BITMAP  m_bitInfo;
+	bool _isFlipped = false;
 };
 

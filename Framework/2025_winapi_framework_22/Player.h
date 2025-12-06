@@ -44,7 +44,7 @@ private:
 public:
 	int playerCount = 0;
 	bool isCanSlotReel = true;
-private:
+private:	
 
 	int weaponCount = 0;
 
@@ -53,8 +53,7 @@ private:
 	TurnType m_turnType;
 	PlayerState m_state;
 	PlayerState m_prevState;
-	
-	int m_hp;
+		
 	int collCnt = 0;
 };
 
