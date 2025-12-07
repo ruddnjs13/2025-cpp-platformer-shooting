@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "Weapon.h"
+#include "Texture.h"
 #include "ResourceManager.h"
 
 Weapon::Weapon()
@@ -19,6 +20,7 @@ void Weapon::Update()
 void Weapon::Render(HDC _hdc)
 {
 }
+
 
 void Weapon::SetRotation(Vec2 _angle)
 {

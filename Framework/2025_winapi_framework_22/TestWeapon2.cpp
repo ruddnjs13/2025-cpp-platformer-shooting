@@ -28,6 +28,8 @@ TestWeapon2::~TestWeapon2()
 
 void TestWeapon2::Update()
 {
+	WeaponFlip();
+
 	if (GET_KEYDOWN(KEY_TYPE::RSHIFT) && isShoot == true && m_playerCount == 1)
 		Shoot();
 
@@ -126,6 +128,31 @@ void TestWeapon2::Update()
 
 void TestWeapon2::Rotate()
 {
+}
+
+void TestWeapon2::WeaponFlip()
+{
+	if (isFlip && m_playerCount == 1)
+	{
+		m_pTex->SetFlipped(true);
+		StartAngle(-1, -50);
+	}
+	else if (isFlip == false && m_playerCount == 1)
+	{
+		m_pTex->SetFlipped(false);
+		StartAngle(1, 10);
+	}
+
+	if (isFlip && m_playerCount == 2)
+	{
+		m_pTex->SetFlipped(false);
+		StartAngle(-1, -50);
+	}
+	else if (isFlip == false && m_playerCount == 2)
+	{
+		m_pTex->SetFlipped(true);
+		StartAngle(1, 10);
+	}
 }
 
 void TestWeapon2::Render(HDC _hdc)

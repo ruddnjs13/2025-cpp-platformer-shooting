@@ -270,6 +270,11 @@ void Player::Update()
 	if (dir.x != 0.f) 
 		m_isFlipped = dir.x < 0.f;
 
+	if (slotReel != nullptr)
+	{
+		slotReel->WeaponFliper(m_isFlipped, playerCount);
+	}
+
 	// Q, E 크게 작게 
 	//float scaleDelta = 0.f;
 	//float scaleSpeed = 1.f;
