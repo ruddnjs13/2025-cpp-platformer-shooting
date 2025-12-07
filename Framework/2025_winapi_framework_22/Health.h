@@ -1,5 +1,6 @@
 #pragma once
 #include "Component.h"
+#include "MyAction.h"
 
 class Health
 	: public Component
@@ -17,5 +18,6 @@ public:
 private:
 	int m_health;
 	bool m_isDead = false;
+	MyAction<int> OnHealthChanged;
 };
 
