@@ -4,6 +4,7 @@
 #include "ResourceManager.h"
 #include "TurnManager.h"
 #include "SceneManager.h"
+#include "Health.h"
 #include "Texture.h"
 #include <thread>
 
@@ -21,7 +22,7 @@ Bomb::Bomb()
 
 Bomb::~Bomb()
 {
-	GET_SINGLE(TurnManager)->ChangeTurn(TurnType::Waiting);
+	
 }
 
 void Bomb::Update()
@@ -49,19 +50,15 @@ void Bomb::Render(HDC _hdc)
 
 void Bomb::EnterCollision(Collider* _other)
 {
-	if (_other->IsTrigger())
+
+	if (_other->GetName() == L"Player")
 	{
-		if (_other->GetName() == L"Player")
-		{
-			//플레이어 데미지 처리
-		}
-	}
-	else
+		_other->GetOwner()->GetComponent<Health>()->TakeDamage(100);
+	}	
+
+	if(_other->GetName() == L"Floor")
 	{
-		if(_other->GetName() == L"Floor")
-		{
-			GET_SINGLE(SceneManager)->RequestDestroy(_other->GetOwner());
-		}
+		GET_SINGLE(SceneManager)->RequestDestroy(_other->GetOwner());
 	}
 }
 
