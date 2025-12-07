@@ -8,8 +8,12 @@ class InGameCanvas :
     // Canvas을(를) 통해 상속됨
     void Init() override;
 
+    void Update() override;
+
 private:
     Slider* p1_HpBar;
     Slider* p2_HpBar;
+    Slider* p1_SteminaBar;
+    Slider* p2_SteminaBar;
 };
 
