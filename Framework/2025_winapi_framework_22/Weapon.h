@@ -16,6 +16,12 @@ public:
 	void Render(HDC _hdc) override;
 
 public:
+
+	void SetFliper(bool _isFlip, int _playerCount) {
+		isFlip = _isFlip;
+		m_playerCount = _playerCount;
+	};
+
 	void SetRotation(Vec2 _angle);
 	void SetOwner(Object* _owner) { m_owner = _owner; }
 	void StartAngle(float x, float shootPosx);
@@ -44,6 +50,7 @@ public:
 	void SetPlayerCount(int _playerNum);
 
 public:
+	bool isFlip = false;
 	int m_playerCount = 0;
 	bool isRotation = true;
 	bool isShoot = true; 

@@ -1,5 +1,5 @@
 #pragma once
-#include <functional>
+#include "MyAction.h"
 #include <map>
 
 
@@ -13,10 +13,14 @@ public:
 	TurnType GetCurrentTurn() const { return m_curTurn; }
     void ClearEvents();
     int GetCurPlayer() { return m_CurPlayer; }
+    void SendTurnName();
 private:
     void Invoke(TurnType _turn);
     void ChangingTurnCondition();
     void WaitingTurnUpdate();
+
+public:
+    MyAction<void> turnEvt;
 private:
     std::map<TurnType, std::vector<Action>> m_eventMap;
 	TurnType m_curTurn = TurnType::Waiting;

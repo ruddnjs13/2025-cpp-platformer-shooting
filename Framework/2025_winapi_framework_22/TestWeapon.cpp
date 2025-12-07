@@ -20,13 +20,42 @@ TestWeapon::TestWeapon()
 	SetShootAngle(m_angleValue);
 }
 
+
+
 TestWeapon::~TestWeapon()
 {
 	m_weaponTrajectory->DestoryTrajectory();
 }
 
+void TestWeapon::WeaponFlip()
+{
+	if (isFlip && m_playerCount == 1)
+	{
+		m_pTex->SetFlipped(true);
+		StartAngle(-1, -50);
+	}
+	else if (isFlip == false && m_playerCount == 1)
+	{
+		m_pTex->SetFlipped(false);
+		StartAngle(1, 10);
+	}
+
+	if (isFlip && m_playerCount == 2)
+	{
+		StartAngle(-1, -50);
+		m_pTex->SetFlipped(false);
+	}
+	else if (isFlip == false && m_playerCount == 2)
+	{
+		m_pTex->SetFlipped(true);
+		StartAngle(1, 10);
+	}
+}
+
 void TestWeapon::Update()
 {
+	WeaponFlip();
+
 	if (GET_KEYDOWN(KEY_TYPE::RSHIFT) && isShoot == true && m_playerCount == 1)
 		Shoot();
 
@@ -156,6 +185,17 @@ void TestWeapon::Shoot()
 	TestBullet* proj = new TestBullet;
 	Vec2 pos = GetPos();
 	pos.y -= GetSize().y / 2.f;
+
+	if (m_playerCount == 1)
+	{
+		pos.y += 10.f;
+		pos.x += 30.f;
+	}
+	else if (m_playerCount == 2)
+	{
+		pos.y -= 10.f;
+		pos.x -= 30.f;
+	}
 	proj->SetPos(pos);
 	proj->SetSize({ 10.f,10.f });
 	proj->SetDir(m_angle);
