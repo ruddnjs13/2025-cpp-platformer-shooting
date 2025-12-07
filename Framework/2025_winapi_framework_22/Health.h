@@ -9,6 +9,7 @@ public:
 	Health();
 	~Health();
 public:
+	MyAction<int> OnHealthChanged;
 	void Init() override;
 	void LateUpdate() override;
 	void Render(HDC hDC) override;
@@ -18,6 +19,5 @@ public:
 private:
 	int m_health;
 	bool m_isDead = false;
-	MyAction<int> OnHealthChanged;
 };
 
