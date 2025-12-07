@@ -201,6 +201,11 @@ void Player::Update()
 	if (CheckPlayerTurn(TurnType::Player1) && GET_SINGLE(TurnManager)->GetCurrentTurn() == TurnType::Player1)
 	{
 
+		if (GET_KEY(KEY_TYPE::RSHIFT))
+		{
+			slotReel->DestroyWeapon();
+		}
+
 		isCanSlotReel = true;
 		if (m_stamina > 0)
 		{
@@ -213,7 +218,6 @@ void Player::Update()
 				rb = GetComponent<Rigidbody>();
 				if (rb->IsGrounded())
 				{
-					AddStamina(-10);
 					Jump();
 					//CreateProjectile();
 				}
@@ -221,19 +225,17 @@ void Player::Update()
 			}
 		}
 
-		if (GET_KEYDOWN(KEY_TYPE::F))
-		{
-			GET_SINGLE(TurnManager)->ChangeTurn(TurnType::Player2);
-		}
-		if (GET_KEY(KEY_TYPE::RSHIFT))
-		{
-			slotReel->DestroyWeapon();
-		}
 		
 	}
 	else if (CheckPlayerTurn(TurnType::Player2) && GET_SINGLE(TurnManager)->GetCurrentTurn() == TurnType::Player2)
 	{
 		isCanSlotReel = true;
+
+		if (GET_KEY(KEY_TYPE::ENTER))
+		{
+			slotReel->DestroyWeapon();
+		}
+
 		if (m_stamina > 0)
 		{
 			if (GET_KEY(KEY_TYPE::LEFT)) dir.x -= 1.f;
@@ -245,16 +247,11 @@ void Player::Update()
 				rb = GetComponent<Rigidbody>();
 				if (rb->IsGrounded())
 				{
-					AddStamina(-10);
 					Jump();
 				}
 			}
 		}
 
-		if (GET_KEY(KEY_TYPE::RSHIFT))
-		{
-			slotReel->DestroyWeapon();
-		}
 	}
 	if (m_state != PlayerState::RUN && dir.Length() > 0.f)
 	{
@@ -265,7 +262,6 @@ void Player::Update()
 		ChangeState(PlayerState::IDLE);
 	}
 	Translate({dir.x * fDT * 200.f, dir.y * fDT * 200.f});
-	if (std::abs(dir.x) > 0.f) AddStamina(-0.1f);
 	if (dir.x != 0.f) isFlipped = dir.x < 0.f;
 	m_pTex->SetFlipped(isFlipped);
 	if (health->IsDead())

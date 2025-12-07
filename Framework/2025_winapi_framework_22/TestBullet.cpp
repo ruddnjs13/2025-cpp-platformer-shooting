@@ -62,35 +62,6 @@ void TestBullet::BurstBullet()
 	GET_SINGLE(SceneManager)->GetCurScene()->AddObject(proj, Layer::Boom);
 }
 
-void Bullet::EnterCollision(Collider* _other)
-{
-	if (_other->IsTrigger())
-	{
-		if (_other->GetName() == L"Floor")
-		{
-			BurstBullet();
-			GET_SINGLE(SceneManager)->RequestDestroy(this);
-		}
-	}
-	else
-	{
-		if (_other->GetName() == L"Floor")
-		{
-			BurstBullet();
-			GET_SINGLE(SceneManager)->RequestDestroy(this);
-		}
-	}
-}
-
-void Bullet::StayCollision(Collider* _other)
-{
-
-}
-
-void Bullet::ExitCollision(Collider* _other)
-{
-
-}
 
 void TestBullet::Rotate()
 {
