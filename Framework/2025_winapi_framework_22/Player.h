@@ -1,6 +1,8 @@
 #pragma once
 #include "Object.h"
 #include "TurnManager.h"
+#include "MyAction.h"
+
 
 class SlotReel;
 class Texture;
@@ -11,9 +13,17 @@ public:
 	Player();
 	~Player();
 public:
+	MyAction<float> OnStaminaChanged;
 	//virtual void Update();
 	//virtual void Render(HDC _hdc);
 	void SetStamina(float _stamina) { m_stamina = _stamina; }
+	void AddStamina(float _delta)
+	{
+		m_stamina += _delta;
+		if (m_stamina < 0.f) m_stamina = 0.f;
+		if (m_stamina > 100.f) m_stamina = 100.f;
+		OnStaminaChanged.Invoke(m_stamina);
+	}
 	const float GetStamina() const { m_stamina; }
 	void Update() override;
 	void Render(HDC _hdc) override;
