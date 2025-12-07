@@ -186,6 +186,8 @@
     <ClInclude Include="IscScene.h" />
     <ClInclude Include="KmjScene.h" />
     <ClInclude Include="LkwScene.h" />
+    <ClInclude Include="Nail.h" />
+    <ClInclude Include="Nailgun.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Player.h" />
@@ -249,6 +251,8 @@
     <ClCompile Include="KmjScene.cpp" />
     <ClCompile Include="LkwScene.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Nail.cpp" />
+    <ClCompile Include="Nailgun.cpp" />
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Projectile.cpp" />

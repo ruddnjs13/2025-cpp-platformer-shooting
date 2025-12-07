@@ -181,6 +181,7 @@ void Player::Update()
 	Health* health = GetComponent<Health>();
 	if (health->IsDead()) return;
 	Rigidbody* rb = GetComponent<Rigidbody>();
+
 	//Vec2 pos = GetPos();
 
 	//if (GET_KEY(KEY_TYPE::W))
@@ -194,8 +195,7 @@ void Player::Update()
 	//SetPos(pos);
 
 	Vec2 dir = {};
-	double angle = GetAngle();
-
+	static bool isFlipped = false;
 
 
 	if (CheckPlayerTurn(TurnType::Player1) && GET_SINGLE(TurnManager)->GetCurrentTurn() == TurnType::Player1)
@@ -213,7 +213,7 @@ void Player::Update()
 				rb = GetComponent<Rigidbody>();
 				if (rb->IsGrounded())
 				{
-					m_stamina -= 10;
+					AddStamina(-10);
 					Jump();
 					//CreateProjectile();
 				}
@@ -245,7 +245,7 @@ void Player::Update()
 				rb = GetComponent<Rigidbody>();
 				if (rb->IsGrounded())
 				{
-					m_stamina -= 10;
+					AddStamina(-10);
 					Jump();
 				}
 			}
@@ -265,9 +265,14 @@ void Player::Update()
 		ChangeState(PlayerState::IDLE);
 	}
 	Translate({dir.x * fDT * 200.f, dir.y * fDT * 200.f});
-	if (std::abs(dir.x) > 0.f) m_stamina -= 0.1f;
-	m_pTex->SetFlipped(dir.x < 0.f);
-	//Angle(angle);
+	if (std::abs(dir.x) > 0.f) AddStamina(-0.1f);
+	if (dir.x != 0.f) isFlipped = dir.x < 0.f;
+	m_pTex->SetFlipped(isFlipped);
+	if (health->IsDead())
+	{
+		ChangeState(PlayerState::DIE);
+	}
+	
 
 	// Q, E 크게 작게 
 	//float scaleDelta = 0.f;
