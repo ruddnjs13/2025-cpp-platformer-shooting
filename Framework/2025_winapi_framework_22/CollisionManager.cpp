@@ -56,7 +56,7 @@ void CollisionManager::CheckReset()
 void CollisionManager::PhysicsResolve(Collider* _left, Collider* _right)
 {
 	// 일정 수치를 넘으면 물리처리를 할 수 있게 상수값 정해주기. (안하면 지글발생)
-	float const penetrationThreshold = 0.001f;
+	float const penetrationThreshold = 0.0001f;
 
 	// 콜라이더를 가져왔으니 이제 얘네가 얼마만큼 깊이 침범했는지를 알아야겠지?
 	// 충돌 깊이를 구해 일단.
@@ -132,23 +132,22 @@ void CollisionManager::PhysicsResolve(Collider* _left, Collider* _right)
 
 		// Left가 위의 있는지
 		bool isLeft = (leftPos.y < rightPos.y);
-		int dir = isLeft ? -1 : 1;
+		int dir = isLeft ? 1 : -1;
 
 		// 왼쪽 물체만 정적일 때
 		if (leftKinematic && !rightKinematic)
 		{
 			// 오른쪽 물체가 아래로 떨어지고 있을 때
 			Object* rightObj = _right->GetOwner();
-			if (rightVy < 0 && !isLeft)
+			if (rightVy > 0 && !isLeft)
 			{
 				// 땅 충돌 처리
 				rightObj->SetPos({ rightPos.x, rightPos.y + (overlapY * dir)});
 
-				rightRb->SetGrounded(true);
 				rightRb->SetVelocity({ rightRb->GetVelocity().x, 0.f });
 			}
 			// 오른쪽 물체가 천장에 머리 박았을 때
-			else if (rightVy > 0 && isLeft)
+			else if (rightVy < 0 && isLeft)
 			{
 				// 천장 처리
 				rightObj->SetPos({ rightPos.x, rightPos.y + (overlapY * dir)});
