@@ -200,6 +200,7 @@ void Player::Update()
 
 	if (CheckPlayerTurn(TurnType::Player1) && GET_SINGLE(TurnManager)->GetCurrentTurn() == TurnType::Player1)
 	{
+
 		isCanSlotReel = true;
 		if (m_stamina > 0)
 		{
@@ -265,7 +266,6 @@ void Player::Update()
 	}
 	Translate({dir.x * fDT * 200.f, dir.y * fDT * 200.f});
 	if (std::abs(dir.x) > 0.f) m_stamina -= 0.1f;
-	cout << "stamina: " << m_stamina << endl;
 	m_pTex->SetFlipped(dir.x < 0.f);
 	//Angle(angle);
 

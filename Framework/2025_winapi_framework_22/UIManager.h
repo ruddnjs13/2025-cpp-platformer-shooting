@@ -15,7 +15,7 @@ public:
 	void SetCanvas(const CanvasType canvasType);
 
 public:
-	const std::shared_ptr<const Canvas>& GetCurCanvas() const
+	const std::shared_ptr<Canvas>& GetCurCanvas() const
 	{
 		return m_curCanvas;
 	}
