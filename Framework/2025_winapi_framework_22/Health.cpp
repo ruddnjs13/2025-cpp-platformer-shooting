@@ -30,4 +30,5 @@ void Health::TakeDamage(int damage)
 		m_health = 0;
 		m_isDead = true;
 	}
+	OnHealthChanged.Invoke(m_health);
 }

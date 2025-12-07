@@ -13,6 +13,8 @@ public:
 public:
 	//virtual void Update();
 	//virtual void Render(HDC _hdc);
+	void SetStamina(float _stamina) { m_stamina = _stamina; }
+	const float GetStamina() const { m_stamina; }
 	void Update() override;
 	void Render(HDC _hdc) override;
 	void EnterCollision(Collider* _other)override;
@@ -47,6 +49,7 @@ public:
 private:	
 
 	int weaponCount = 0;
+	float m_stamina = 0;
 
 	SlotReel* slotReel = nullptr;
 	Texture* m_pTex;

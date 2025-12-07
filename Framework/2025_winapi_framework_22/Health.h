@@ -1,5 +1,6 @@
 #pragma once
 #include "Component.h"
+#include "MyAction.h"
 
 class Health
 	: public Component
@@ -8,6 +9,7 @@ public:
 	Health();
 	~Health();
 public:
+	MyAction<int> OnHealthChanged;
 	void Init() override;
 	void LateUpdate() override;
 	void Render(HDC hDC) override;
