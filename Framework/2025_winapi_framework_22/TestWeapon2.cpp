@@ -157,8 +157,17 @@ void TestWeapon2::Shoot()
 	TestBullet* proj = new TestBullet;
 	Vec2 pos = GetPos();
 	pos.y -= GetSize().y / 2.f;
-	pos.y += 10.f;
-	pos.x += 30.f;
+
+	if (m_playerCount == 1)
+	{
+		pos.y += 10.f;
+		pos.x += 30.f;
+	}
+	else if (m_playerCount == 2)
+	{
+		pos.y -= 10.f;
+		pos.x -= 30.f;
+	}
 	proj->SetPos(pos);
 	proj->SetSize({ 10.f,10.f });
 	proj->SetDir(m_angle);
