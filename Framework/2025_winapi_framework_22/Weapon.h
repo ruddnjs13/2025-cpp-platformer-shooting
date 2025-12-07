@@ -46,6 +46,7 @@ public:
 public:
 	int m_playerCount = 0;
 	bool isRotation = true;
+	bool isShoot = true; 
 protected:
 	Vec2 m_angleMovePos;
 	Vec2 m_offsetPos;
@@ -53,7 +54,6 @@ protected:
 	WeaponTrajectory* m_weaponTrajectory;
 	float m_angleValue = 0;
 private:
-	bool isShoot = true; 
 	Object* m_owner;
 	Vec2 m_pos;
 	Vec2 m_size;

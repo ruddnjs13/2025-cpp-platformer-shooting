@@ -28,7 +28,7 @@ TestWeapon2::~TestWeapon2()
 
 void TestWeapon2::Update()
 {
-	if (GET_KEYDOWN(KEY_TYPE::RSHIFT))
+	if (GET_KEYDOWN(KEY_TYPE::RSHIFT) && isShoot == true)
 		Shoot();
 
 	if (GET_KEY(KEY_TYPE::W) && isRotation == true)
@@ -156,7 +156,7 @@ void TestWeapon2::Render(HDC _hdc)
 
 void TestWeapon2::Shoot()
 {
-
+	isShoot = false;
 	TestBullet* proj = new TestBullet;
 	Vec2 pos = GetPos();
 	pos.y -= GetSize().y / 2.f;
