@@ -135,7 +135,5 @@ void TileMapManager::SetTileMapToScene(Scene* targetScene, wstring mapName)
 			}
 		}
 	}
-
-	
 }
 

@@ -187,12 +187,7 @@ void ResourceManager::RegisterTexture()
 	LoadTexture(L"Plane", L"Texture\\plane.bmp");
 	LoadTexture(L"Bullet", L"Texture\\Bullet.bmp");
 	LoadTexture(L"Jiwoo", L"Texture\\jiwoo.bmp");
-	LoadTexture(L"ExitBtn", L"Texture\\ExitBtn.bmp");
-	LoadTexture(L"ExitBtn_Hover", L"Texture\\ExitBtn_Hover.bmp");
-	LoadTexture(L"StartBtn", L"Texture\\StartBtn.bmp");
-	LoadTexture(L"StartBtn_Hover", L"Texture\\StartBtn_Hover.bmp");
-	LoadTexture(L"GuideBtn", L"Texture\\GuideBtn.bmp");
-	LoadTexture(L"GuideBtn_Hover", L"Texture\\GuideBtn_Hover.bmp");
+	
 	//LoadTexture(L"Background", L"Texture\\background.bmp");
 	//LoadTexture(L"Gun1", L"Texture\\Revolver.bmp");
 	LoadTexture(L"Gun1", L"Texture\\GGG.bmp");
@@ -219,10 +214,17 @@ void ResourceManager::RegisterTexture()
 	LoadTexture(L"Blue_Grass", L"Texture\\Blue_Grass.bmp");
 	LoadTexture(L"Blue_Ground", L"Texture\\Blue_Ground.bmp");
 
-	
+	// ui ÅØ½ºÃÄ
 	LoadTexture(L"Fill_Red", L"Texture\\Fill_Red.bmp");
 	LoadTexture(L"Fill_Blue", L"Texture\\Fill_Blue.bmp");
+	LoadTexture(L"Fill_Yellow", L"Texture\\Fill_Yellow.bmp");
 	LoadTexture(L"Boarder", L"Texture\\Boarder.bmp");
+	LoadTexture(L"ExitBtn", L"Texture\\ExitBtn.bmp");
+	LoadTexture(L"ExitBtn_Hover", L"Texture\\ExitBtn_Hover.bmp");
+	LoadTexture(L"StartBtn", L"Texture\\StartBtn.bmp");
+	LoadTexture(L"StartBtn_Hover", L"Texture\\StartBtn_Hover.bmp");
+	LoadTexture(L"GuideBtn", L"Texture\\GuideBtn.bmp");
+	LoadTexture(L"GuideBtn_Hover", L"Texture\\GuideBtn_Hover.bmp");
 
 	//
 }

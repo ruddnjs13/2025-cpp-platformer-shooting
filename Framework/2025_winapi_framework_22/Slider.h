@@ -13,10 +13,10 @@ public:
     void Update() override;
     void Render(HDC _hdc) override;
 public:
-    void SetValue(float amount);
+    void SetValue(float value);
 
 public:
-    float maxValue = 10;
+    float maxValue = 100;
     float minValue = 0;
     float currentValue = 0;
 public:
