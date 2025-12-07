@@ -25,6 +25,7 @@ public:
 		OnStaminaChanged.Invoke(m_stamina);
 	}
 	const float GetStamina() const { m_stamina; }
+	const bool IsFlipped() const { return m_isFlipped; }
 	void Update() override;
 	void Render(HDC _hdc) override;
 	void EnterCollision(Collider* _other)override;
