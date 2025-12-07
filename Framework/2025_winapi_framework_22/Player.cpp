@@ -72,6 +72,7 @@ Player::~Player()
 }
 void Player::Render(HDC _hdc)
 {
+	m_pTex->SetFlipped(m_isFlipped);
 	Vec2 pos = GetPos();
 	Vec2 size = GetSize();
 	//RECT_RENDER(_hdc, pos.x, pos.y, size.x, size.y);
@@ -179,6 +180,11 @@ void Player::ChangeState(PlayerState _newState)
 void Player::Update()
 {
 	Health* health = GetComponent<Health>();
+	if (health->IsDead() && m_state != PlayerState::DIE)
+	{
+		ChangeState(PlayerState::DIE);
+		return;
+	}
 	if (health->IsDead()) return;
 	Rigidbody* rb = GetComponent<Rigidbody>();
 
@@ -195,7 +201,6 @@ void Player::Update()
 	//SetPos(pos);
 
 	Vec2 dir = {};
-	static bool isFlipped = false;
 
 
 	if (CheckPlayerTurn(TurnType::Player1) && GET_SINGLE(TurnManager)->GetCurrentTurn() == TurnType::Player1)
@@ -262,13 +267,8 @@ void Player::Update()
 		ChangeState(PlayerState::IDLE);
 	}
 	Translate({dir.x * fDT * 200.f, dir.y * fDT * 200.f});
-	if (dir.x != 0.f) isFlipped = dir.x < 0.f;
-	m_pTex->SetFlipped(isFlipped);
-	if (health->IsDead())
-	{
-		ChangeState(PlayerState::DIE);
-	}
-	
+	if (dir.x != 0.f) 
+		m_isFlipped = dir.x < 0.f;
 
 	// Q, E 크게 작게 
 	//float scaleDelta = 0.f;

@@ -24,8 +24,7 @@ void Health::Render(HDC hDC)
 void Health::TakeDamage(int damage)
 {
 	m_health -= damage; 
-	
-	if (m_health < 0)
+	if (m_health <= 0)
 	{
 		m_health = 0;
 		m_isDead = true;

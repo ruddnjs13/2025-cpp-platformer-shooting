@@ -60,6 +60,7 @@ private:
 
 	int weaponCount = 0;
 	float m_stamina = 0;
+	bool m_isFlipped = false;
 
 	SlotReel* slotReel = nullptr;
 	Texture* m_pTex;
