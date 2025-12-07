@@ -27,6 +27,7 @@ Player::Player()
 	auto* health = AddComponent<Health>();
 	health->SetHealth(100);
 	//GetComponent<Rigidbody>()->SetUseGravity(false);
+	SetStamina(100);
 	auto* animator = AddComponent<Animator>();
 	animator->CreateAnimation
 	(L"PlayerIdle",
@@ -178,6 +179,7 @@ void Player::ChangeState(PlayerState _newState)
 void Player::Update()
 {
 	Health* health = GetComponent<Health>();
+	if (health->IsDead()) return;
 	Rigidbody* rb = GetComponent<Rigidbody>();
 	//Vec2 pos = GetPos();
 
@@ -199,19 +201,23 @@ void Player::Update()
 	if (CheckPlayerTurn(TurnType::Player1) && GET_SINGLE(TurnManager)->GetCurrentTurn() == TurnType::Player1)
 	{
 		isCanSlotReel = true;
-		if (GET_KEY(KEY_TYPE::A)) dir.x -= 1.f;
-		if (GET_KEY(KEY_TYPE::D)) dir.x += 1.f;
-		//if (GET_KEY(KEY_TYPE::W)) angle += 0.1f;
-		//if (GET_KEY(KEY_TYPE::S)) angle -= 0.1f;
-		if (GET_KEYDOWN(KEY_TYPE::SPACE))
+		if (m_stamina > 0)
 		{
-			rb = GetComponent<Rigidbody>();
-			if (rb->IsGrounded())
+			if (GET_KEY(KEY_TYPE::A)) dir.x -= 1.f;
+			if (GET_KEY(KEY_TYPE::D)) dir.x += 1.f;
+			//if (GET_KEY(KEY_TYPE::W)) angle += 0.1f;
+			//if (GET_KEY(KEY_TYPE::S)) angle -= 0.1f;
+			if (GET_KEYDOWN(KEY_TYPE::SPACE))
 			{
-				Jump();
-				//CreateProjectile();
-			}
+				rb = GetComponent<Rigidbody>();
+				if (rb->IsGrounded())
+				{
+					m_stamina -= 10;
+					Jump();
+					//CreateProjectile();
+				}
 			
+			}
 		}
 
 		if (GET_KEYDOWN(KEY_TYPE::F))
@@ -227,16 +233,20 @@ void Player::Update()
 	else if (CheckPlayerTurn(TurnType::Player2) && GET_SINGLE(TurnManager)->GetCurrentTurn() == TurnType::Player2)
 	{
 		isCanSlotReel = true;
-		if (GET_KEY(KEY_TYPE::LEFT)) dir.x -= 1.f;
-		if (GET_KEY(KEY_TYPE::RIGHT)) dir.x += 1.f;
-		//if (GET_KEY(KEY_TYPE::UP)) angle += 0.1f;
-		//if (GET_KEY(KEY_TYPE::DOWN)) angle -= 0.1f;
-		if (GET_KEY(KEY_TYPE::RSHIFT))
+		if (m_stamina > 0)
 		{
-			rb = GetComponent<Rigidbody>();
-			if (rb->IsGrounded())
+			if (GET_KEY(KEY_TYPE::LEFT)) dir.x -= 1.f;
+			if (GET_KEY(KEY_TYPE::RIGHT)) dir.x += 1.f;
+			//if (GET_KEY(KEY_TYPE::UP)) angle += 0.1f;
+			//if (GET_KEY(KEY_TYPE::DOWN)) angle -= 0.1f;
+			if (GET_KEY(KEY_TYPE::RSHIFT))
 			{
-				Jump();
+				rb = GetComponent<Rigidbody>();
+				if (rb->IsGrounded())
+				{
+					m_stamina -= 10;
+					Jump();
+				}
 			}
 		}
 
@@ -245,18 +255,17 @@ void Player::Update()
 			slotReel->DestroyWeapon();
 		}
 	}
-	if (!health->IsDead())
+	if (m_state != PlayerState::RUN && dir.Length() > 0.f)
 	{
-		if (m_state != PlayerState::RUN && dir.Length() > 0.f)
-		{
-			ChangeState(PlayerState::RUN);
-		}
-		else if (m_state != PlayerState::IDLE && dir.Length() == 0.f)
-		{
-			ChangeState(PlayerState::IDLE);
-		}
+		ChangeState(PlayerState::RUN);
+	}
+	else if (m_state != PlayerState::IDLE && dir.Length() == 0.f)
+	{
+		ChangeState(PlayerState::IDLE);
 	}
 	Translate({dir.x * fDT * 200.f, dir.y * fDT * 200.f});
+	if (std::abs(dir.x) > 0.f) m_stamina -= 0.1f;
+	cout << "stamina: " << m_stamina << endl;
 	m_pTex->SetFlipped(dir.x < 0.f);
 	//Angle(angle);
 
