@@ -10,7 +10,7 @@ class InGameCanvas :
 
     void Update() override;
 
-private:
+public:
     Slider* p1_HpBar;
     Slider* p2_HpBar;
     Slider* p1_SteminaBar;

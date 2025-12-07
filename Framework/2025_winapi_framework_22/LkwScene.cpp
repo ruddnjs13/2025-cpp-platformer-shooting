@@ -8,6 +8,8 @@
 #include "ResourceManager.h"
 #include "Background.h"
 #include "InputManager.h"
+#include "InGameCanvas.h"
+#include "Health.h"
 
 
 
@@ -15,13 +17,13 @@ void LkwScene::Init()
 {
 	//GET_SINGLE(UIManager)->SetCanvas(CanvasType::Title);
 	GET_SINGLE(UIManager)->SetCanvas(CanvasType::InGame);
-	GET_SINGLE(TileMapManager)->SetTileMapToScene(this,L"Map3");
+	GET_SINGLE(TileMapManager)->SetTileMapToScene(this, L"Map1");
 
 	Player* pPlayer1 = Spawn<Player>(Layer::PLAYER, { 300, 300 }, { 32, 32 });
 	Player* pPlayer2 = Spawn<Player>(Layer::PLAYER, { 500, 300 }, { 32, 32 });
-	pPlayer1->SetPlayerTurn(TurnType::Player1 , 1);
+	pPlayer1->SetPlayerTurn(TurnType::Player1, 1);
 	pPlayer2->SetPlayerTurn(TurnType::Player2, 2);
-	
+
 
 	GET_SINGLE(TurnManager)->ChangeTurn(TurnType::Waiting);
 
@@ -34,6 +36,15 @@ void LkwScene::Init()
 	Background* background = Spawn<Background>(Layer::BACKGROUND, { WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2 }, { WINDOW_WIDTH, WINDOW_HEIGHT });
 
 	background->Init(GET_SINGLE(ResourceManager)->GetTexture(L"Background"));
+
+	auto curCanvas = UIManager::GetInst()->GetCurCanvas();
+	auto inGameCanvas = std::dynamic_pointer_cast<InGameCanvas>(curCanvas);
+
+	pPlayer1->GetComponent<Health>()->OnHealthChanged.AddListener(
+		std::bind(&Slider::SetValue, inGameCanvas->p1_HpBar, std::placeholders::_1));
+
+	pPlayer2->GetComponent<Health>()->OnHealthChanged.AddListener(
+		std::bind(&Slider::SetValue, inGameCanvas->p2_HpBar, std::placeholders::_1));
 }
 
 void LkwScene::Update()
