@@ -44,9 +44,35 @@ void Nailgun::Shoot()
 
 	GetOwner()->SetPos(vec);
 }
+void Nailgun::WeaponFlip()
+{
+	if (isFlip && m_playerCount == 1)
+	{
+		m_pTex->SetFlipped(true);
+		StartAngle(-1, -50);
+	}
+	else if (isFlip == false && m_playerCount == 1)
+	{
+		m_pTex->SetFlipped(false);
+		StartAngle(1, 10);
+	}
+
+	if (isFlip && m_playerCount == 2)
+	{
+		m_pTex->SetFlipped(false);
+		StartAngle(-1, -50);
+	}
+	else if (isFlip == false && m_playerCount == 2)
+	{
+		StartAngle(1, 10);
+		m_pTex->SetFlipped(true);
+	}
+}
 
 void Nailgun::Update()
 {
+	WeaponFlip();
+
 	if (GET_KEYDOWN(KEY_TYPE::RSHIFT) && isShoot)
 		Shoot();
 

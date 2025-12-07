@@ -15,6 +15,7 @@ public:
 
 
 public:
+    void WeaponFliper(bool isFlip , int playerCount);
     void Update() override;
     void Render(HDC _hdc) override;
     void SetRollingTexture(RollingItem* rollItem,wstring textureName, Vec2 offsetPos, float speed);

@@ -10,12 +10,14 @@ public:
 	~TestWeapon2();
 
 public:
+	void WeaponFlip();
 	void Update() override;
 	void Rotate();
 	void Render(HDC _hdc) override;
 	void Shoot();
-private:
 
+
+private:
 	Texture* m_pTex;
 };
 
