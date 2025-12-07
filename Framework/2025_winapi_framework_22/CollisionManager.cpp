@@ -144,10 +144,11 @@ void CollisionManager::PhysicsResolve(Collider* _left, Collider* _right)
 				// 땅 충돌 처리
 				rightObj->SetPos({ rightPos.x, rightPos.y + (overlapY * dir)});
 
+				rightRb->SetGrounded(true);
 				rightRb->SetVelocity({ rightRb->GetVelocity().x, 0.f });
 			}
 			// 오른쪽 물체가 천장에 머리 박았을 때
-			else if (rightVy < 0 && isLeft)
+			else if (rightVy > 0 && isLeft)
 			{
 				// 천장 처리
 				rightObj->SetPos({ rightPos.x, rightPos.y + (overlapY * dir)});

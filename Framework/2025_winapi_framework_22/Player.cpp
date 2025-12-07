@@ -128,8 +128,6 @@ void Player::EnterCollision(Collider* _other)
 	{
 		collCnt++;
 		Rigidbody* rb = GetComponent<Rigidbody>();
-		rb->SetGrounded(true);
-		cout << collCnt;
 	}
 }
 
@@ -139,10 +137,8 @@ void Player::ExitCollision(Collider* _other)
 	if (_other->GetName() == L"Floor")
 	{
 		collCnt--;
-		std::wcout << _other->GetName();
-		cout << collCnt;
 		Rigidbody* rb = GetComponent<Rigidbody>();
-		rb->SetGrounded(collCnt > 0);
+		//rb->SetGrounded(collCnt > 0);
 	}
 }
 
@@ -223,6 +219,7 @@ void Player::Update()
 				rb = GetComponent<Rigidbody>();
 				if (rb->IsGrounded())
 				{
+					AddStamina(-10);
 					Jump();
 					//CreateProjectile();
 				}
@@ -252,6 +249,7 @@ void Player::Update()
 				rb = GetComponent<Rigidbody>();
 				if (rb->IsGrounded())
 				{
+					AddStamina(-10);
 					Jump();
 				}
 			}
@@ -269,6 +267,8 @@ void Player::Update()
 	Translate({dir.x * fDT * 200.f, dir.y * fDT * 200.f});
 	if (dir.x != 0.f) 
 		m_isFlipped = dir.x < 0.f;
+	if (std::abs(dir.x > 0.f))
+		AddStamina(-0.1f);
 
 	if (slotReel != nullptr)
 	{
