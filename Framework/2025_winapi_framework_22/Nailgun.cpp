@@ -1,18 +1,18 @@
 #include "pch.h"
-#include "TestWeapon.h"
 #include "ResourceManager.h"
 #include "Projectile.h"
 #include "InputManager.h"
 #include "Texture.h"
 #include "TestBullet.h"
+#include "Nail.h"
 #include "WeaponTrajectory.h"
 #include "SceneManager.h"
+#include "Nailgun.h"
 #include <thread>
 
-
-TestWeapon::TestWeapon()
+Nailgun::Nailgun()
 {
-	m_pTex = GET_SINGLE(ResourceManager)->GetTexture(L"Bullet");
+	m_pTex = GET_SINGLE(ResourceManager)->GetTexture(L"NailGun");
 
 	m_weaponTrajectory = AddComponent<WeaponTrajectory>();
 
@@ -20,14 +20,34 @@ TestWeapon::TestWeapon()
 	SetShootAngle(m_angleValue);
 }
 
-TestWeapon::~TestWeapon()
+Nailgun::~Nailgun()
 {
 	m_weaponTrajectory->DestoryTrajectory();
 }
 
-void TestWeapon::Update()
+void Nailgun::Shoot()
 {
-	if (GET_KEYDOWN(KEY_TYPE::RSHIFT) && isShoot == true)
+	isShoot = false;
+	Nail* proj = new Nail;
+	Vec2 pos = GetPos();
+	pos.y -= GetSize().y / 2.f;
+	proj->SetPos(pos);
+	proj->SetSize({ 30.f,30.f });
+	proj->SetDir(m_angle);
+
+
+	GET_SINGLE(SceneManager)->GetCurScene()->AddObject(proj, Layer::PROJECTILE);
+
+	Vec2 vec = GetOwner()->GetPos();
+
+	vec.x -= 4.f;
+
+	GetOwner()->SetPos(vec);
+}
+
+void Nailgun::Update()
+{
+	if (GET_KEYDOWN(KEY_TYPE::RSHIFT) && isShoot)
 		Shoot();
 
 	if (GET_KEY(KEY_TYPE::W) && isRotation == true)
@@ -50,11 +70,11 @@ void TestWeapon::Update()
 			//pos.x + 30.f;
 
 
-			m_weaponTrajectory->ShowTrajectory(m_angleValue,m_angle, pos, { 20.f,20.f }, GetOwner(), this);
+			m_weaponTrajectory->ShowTrajectory(m_angleValue, m_angle, pos, { 20.f,20.f }, GetOwner(), this);
 
 			SetShootAngle(m_angleValue);
 		}
-		else if(m_playerCount == 2)
+		else if (m_playerCount == 2)
 		{
 			cout << "2" << endl;
 
@@ -68,11 +88,8 @@ void TestWeapon::Update()
 			Vec2 pos = GetPos();
 			pos.y -= GetSize().y / 2.f;
 
-			//pos.y + 10.f;
-			//pos.x + 30.f;
 
-
-			m_weaponTrajectory->ShowTrajectory(m_angleValue,m_angle, pos, { 20.f,20.f }, GetOwner(), this);
+			m_weaponTrajectory->ShowTrajectory(m_angleValue, m_angle, pos, { 20.f,20.f }, GetOwner(), this);
 
 			SetShootAngle(-m_angleValue);
 		}
@@ -94,9 +111,6 @@ void TestWeapon::Update()
 			Vec2 pos = GetPos();
 			pos.y -= GetSize().y / 2.f;
 
-			//pos.y + 10.f;
-			//pos.x + 30.f;
-
 
 			m_weaponTrajectory->ShowTrajectory(m_angleValue, m_angle, pos, { 20.f,20.f }, GetOwner(), this);
 
@@ -115,9 +129,6 @@ void TestWeapon::Update()
 			Vec2 pos = GetPos();
 			pos.y -= GetSize().y / 2.f;
 
-			//pos.y + 10.f;
-			//pos.x + 30.f;
-
 
 			m_weaponTrajectory->ShowTrajectory(m_angleValue, m_angle, pos, { 20.f,20.f }, GetOwner(), this);
 
@@ -126,58 +137,6 @@ void TestWeapon::Update()
 	}
 }
 
-void TestWeapon::Rotate()
+void Nailgun::Render(HDC _hdc)
 {
-}
-
-void TestWeapon::Render(HDC _hdc)
-{
-	Vec2 pos = GetPos();
-	Vec2 size = GetSize();
-
-	LONG width = m_pTex->GetWidth();
-	LONG height = m_pTex->GetHeight();
-
-	HDC texDC = m_pTex->GetRotateTextureDC(m_angleValue, 0, 0, width, height);
-
-
-	::TransparentBlt(_hdc
-		, (int)(pos.x - size.x / 2)
-		, (int)(pos.y - size.y / 2)
-		, size.x
-		, size.y
-		, texDC
-		, 0, 0, width, height,
-		RGB(255, 0, 255));
-
-}
-
-void TestWeapon::Shoot()
-{
-	isShoot = false;
-	TestBullet* proj = new TestBullet;
-	Vec2 pos = GetPos();
-	pos.y -= GetSize().y / 2.f;
-	proj->SetPos(pos);
-	proj->SetSize({ 30.f,30.f });
-	proj->SetDir(m_angle);
-
-
-	GET_SINGLE(SceneManager)->GetCurScene()->AddObject(proj, Layer::PROJECTILE);
-
-	Vec2 vec = GetOwner()->GetPos();
-
-	vec.x -= 4.f;
-
-	GetOwner()->SetPos(vec);
-
-	//m_offsetPos.x -= 1.f;
-	//
-	//std::thread([this]()
-	//	{
-	//		std::this_thread::sleep_for(std::chrono::milliseconds(500));
-	//		m_offsetPos.y += 1.f;
-	//	}).detach();
-
-	
 }
