@@ -11,6 +11,7 @@ public:
 	~TestWeapon();
 
 public:
+	void WeaponFlip();
 	void Update() override;
 	void Rotate();
 	void Render(HDC _hdc) override;

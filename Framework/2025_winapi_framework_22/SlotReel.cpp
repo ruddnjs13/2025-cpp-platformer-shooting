@@ -36,6 +36,15 @@ SlotReel::~SlotReel()
 	m_pWeaponHolder->DestroyWeapon();
 }
 
+
+void SlotReel::WeaponFliper(bool isFlip, int playerCount)
+{
+	if (m_pWeaponHolder->GetCurrentWeapon() != nullptr)
+	{
+		m_pWeaponHolder->GetCurrentWeapon()->SetFliper(isFlip, playerCount);
+	}
+}
+
 void SlotReel::Update()
 {
 
@@ -102,6 +111,7 @@ void SlotReel::DestroyWeapon()
 			m_pWeaponHolder->DestroyWeapon();
 		}).detach();
 }
+
 
 void SlotReel::EnterCollision(Collider* _other)
 {

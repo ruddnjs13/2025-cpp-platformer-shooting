@@ -22,6 +22,8 @@
     {
 	    m_curTurn = _nextTurn;
 
+        turnEvt.Invoke();
+        
         ChangingTurnCondition();
 
 	    Invoke(m_curTurn);
@@ -86,6 +88,29 @@
         }
 
         m_eventMap.clear();
+    }
+
+    void TurnManager::SendTurnName()
+    {
+        switch (m_curTurn)
+        {
+        case TurnType::Select:
+            break;
+        case TurnType::Play:
+            break;
+        case TurnType::Waiting:
+            break;
+        case TurnType::TurnEnd:
+            break;
+        case TurnType::GameEnd:
+            break;
+        case TurnType::Player1:
+            break;
+        case TurnType::Player2:
+            break;
+        default:
+            break;
+        }
     }
 
     /// <summary>
