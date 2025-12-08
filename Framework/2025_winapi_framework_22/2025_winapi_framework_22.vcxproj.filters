@@ -53,9 +53,6 @@
     <Filter Include="Engine\03. Object\Weapon\Test">
       <UniqueIdentifier>{7866a8dc-ee3e-408b-a1fe-32e5c36efa44}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engine\07. UI\UIElement">
-      <UniqueIdentifier>{91d94f7c-a74e-4816-b5be-c9d2e07a4c36}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Engine\09.Slot">
       <UniqueIdentifier>{d92dbc5b-b773-4190-803a-983f69ef646b}</UniqueIdentifier>
     </Filter>
@@ -67,6 +64,9 @@
     </Filter>
     <Filter Include="Engine\04. Scene\BuildScene">
       <UniqueIdentifier>{dbe20a0f-b0b0-4841-8cf4-306ec70c4f25}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\07. UI\UIElement">
+      <UniqueIdentifier>{91d94f7c-a74e-4816-b5be-c9d2e07a4c36}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -256,6 +256,9 @@
     <ClInclude Include="Health.h">
       <Filter>Engine\06. Component</Filter>
     </ClInclude>
+    <ClInclude Include="Nail.h" />
+    <ClInclude Include="Nailgun.h" />
+    <ClInclude Include="MatchScoreUI.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="2025_winapi_framework_22.rc">
@@ -433,5 +436,8 @@
     <ClCompile Include="Health.cpp">
       <Filter>Engine\06. Component</Filter>
     </ClCompile>
+    <ClCompile Include="Nail.cpp" />
+    <ClCompile Include="Nailgun.cpp" />
+    <ClCompile Include="MatchScoreUI.cpp" />
   </ItemGroup>
 </Project>
