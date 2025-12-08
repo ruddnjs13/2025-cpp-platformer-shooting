@@ -138,7 +138,7 @@ void Player::ExitCollision(Collider* _other)
 	{
 		collCnt--;
 		Rigidbody* rb = GetComponent<Rigidbody>();
-		//rb->SetGrounded(collCnt > 0);
+		rb->SetGrounded(collCnt > 0);
 	}
 }
 
@@ -175,6 +175,7 @@ void Player::ChangeState(PlayerState _newState)
 
 void Player::Update()
 {
+
 	Health* health = GetComponent<Health>();
 	if (health->IsDead() && m_state != PlayerState::DIE)
 	{
