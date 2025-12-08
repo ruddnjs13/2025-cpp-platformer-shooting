@@ -56,7 +56,8 @@ void CollisionManager::CheckReset()
 void CollisionManager::PhysicsResolve(Collider* _left, Collider* _right)
 {
 	// 일정 수치를 넘으면 물리처리를 할 수 있게 상수값 정해주기. (안하면 지글발생)
-	float const penetrationThreshold = 0.0001f;
+	float const penetrationThreshold = 0.001f;
+	float const someThreshold = 0.01f;
 
 	// 콜라이더를 가져왔으니 이제 얘네가 얼마만큼 깊이 침범했는지를 알아야겠지?
 	// 충돌 깊이를 구해 일단.
@@ -70,6 +71,8 @@ void CollisionManager::PhysicsResolve(Collider* _left, Collider* _right)
 	
 	float overlapX = (leftSize.x / 2 + rightSize.x / 2) - std::abs(leftPos.x - rightPos.x);
 	float overlapY = (leftSize.y / 2 + rightSize.y / 2) - std::abs(leftPos.y - rightPos.y);
+	float percentX = overlapX * 0.8f;
+	float percentY = overlapY * 0.8f;
 
 	Rigidbody* leftRb = _left->GetOwner()->GetComponent<Rigidbody>();
 	Rigidbody* rightRb = _right->GetOwner()->GetComponent<Rigidbody>();
@@ -100,7 +103,7 @@ void CollisionManager::PhysicsResolve(Collider* _left, Collider* _right)
 			int dir = (rightPos.x > leftPos.x) ? -1 : 1;
 			Object* rightObj = _right->GetOwner();
 
-			rightObj->SetPos({ rightPos.x - (overlapX * dir), rightPos.y });
+			rightObj->SetPos({ rightPos.x - (percentX * dir), rightPos.y });
 		}
 		// 아니고 오른쪽 물체만 정적일 때
 		else if (!leftKinematic && rightKinematic)
@@ -109,7 +112,7 @@ void CollisionManager::PhysicsResolve(Collider* _left, Collider* _right)
 			int dir = (leftPos.x > rightPos.x) ? -1 : 1;
 			Object* leftObj = _left->GetOwner();
 
-			leftObj->SetPos({ leftPos.x - (overlapX * dir), leftPos.y });
+			leftObj->SetPos({ leftPos.x - (percentX * dir), leftPos.y });
 		}
 		// 둘 다 정적이 아닐 때
 		else
@@ -119,8 +122,8 @@ void CollisionManager::PhysicsResolve(Collider* _left, Collider* _right)
 			Object* leftObj = _left->GetOwner();
 			Object* rightObj = _right->GetOwner();
 
-			leftObj->SetPos({ leftPos.x - (overlapX / 2.f * dir), leftPos.y });
-			rightObj->SetPos({ rightPos.x + (overlapX / 2.f * dir), rightPos.y });
+			leftObj->SetPos({ leftPos.x - (percentX / 2.f * dir), leftPos.y });
+			rightObj->SetPos({ rightPos.x + (percentX / 2.f * dir), rightPos.y });
 		}
 	}
 	else // X축으로 더 깊이 침범하면 Y축 방향으로 밀기
@@ -142,17 +145,19 @@ void CollisionManager::PhysicsResolve(Collider* _left, Collider* _right)
 			if (rightVy > 0 && !isLeft)
 			{
 				// 땅 충돌 처리
-				rightObj->SetPos({ rightPos.x, rightPos.y + (overlapY * dir)});
+				rightObj->SetPos({ rightPos.x, rightPos.y + (percentY * dir)});
 
-				rightRb->SetGrounded(true);
+				if (overlapX > 1)
+					rightRb->SetGrounded(true);
 				rightRb->SetVelocity({ rightRb->GetVelocity().x, 0.f });
 			}
 			// 오른쪽 물체가 천장에 머리 박았을 때
 			else if (rightVy < 0 && isLeft)
 			{
 				// 천장 처리
-				rightObj->SetPos({ rightPos.x, rightPos.y + (overlapY * dir)});
+				rightObj->SetPos({ rightPos.x, rightPos.y + (percentY * dir)});
 
+				rightRb->SetGrounded(false);
 				rightRb->SetVelocity({ rightRb->GetVelocity().x, 0.f });
 			}
 		}
@@ -164,17 +169,19 @@ void CollisionManager::PhysicsResolve(Collider* _left, Collider* _right)
 			if (leftVy > 0 && !isLeft)
 			{
 				// 땅 충돌 처리
-				leftObj->SetPos({ leftPos.x, leftPos.y + (overlapY * dir)});
+				leftObj->SetPos({ leftPos.x, leftPos.y + (percentY * dir)});
 
-				leftRb->SetGrounded(true);
+				if (overlapX > 1)
+					leftRb->SetGrounded(true);
 				leftRb->SetVelocity({ leftRb->GetVelocity().x, 0.f });
 			}
 			// 왼쪽 물체가 천장에 머리 박았을 때
 			else if (leftVy < 0 && isLeft)
 			{
 				// 천장 처리
-				leftObj->SetPos({ leftPos.x, leftPos.y + ( overlapY * dir) });
+				leftObj->SetPos({ leftPos.x, leftPos.y + (percentY * dir) });
 
+				rightRb->SetGrounded(false);
 				leftRb->SetVelocity({ leftRb->GetVelocity().x, 0.f });
 			}
 		}
@@ -188,23 +195,23 @@ void CollisionManager::PhysicsResolve(Collider* _left, Collider* _right)
 			if (leftVy > 0 && isLeft)
 			{
 				// 왼쪽 물체가 오른쪽 물체 위에 올라탐
-				leftObj->SetPos({ leftPos.x, (leftPos.y - overlapY / 2.f)});
-				rightObj->SetPos({ rightPos.x, (rightPos.y + overlapY / 2.f)});
+				leftObj->SetPos({ leftPos.x, (leftPos.y - percentY / 2.f)});
+				rightObj->SetPos({ rightPos.x, (rightPos.y + percentY / 2.f)});
 
-				leftRb->SetGrounded(true);
+				if (overlapX > 1)
+					leftRb->SetGrounded(true);
 				leftRb->SetVelocity({ leftRb->GetVelocity().x, 0.f });
 			}
 			else if (rightVy > 0 && !isLeft)
 			{
 				// 오른쪽 물체가 왼쪽 물체 위에 올라탐
-				leftObj->SetPos({ leftPos.x, (leftPos.y + overlapY / 2.f)});
-				rightObj->SetPos({ rightPos.x, (rightPos.y - overlapY / 2.f)});
+				leftObj->SetPos({ leftPos.x, (leftPos.y + percentY / 2.f)});
+				rightObj->SetPos({ rightPos.x, (rightPos.y - percentY / 2.f)});
 
 				rightRb->SetGrounded(true);
 				rightRb->SetVelocity({ rightRb->GetVelocity().x, 0.f });
 			}
 		}
-		
 	}
 
 }
