@@ -1,7 +1,9 @@
 #pragma once
 #include "Canvas.h"
-#include "Image.h"
-#include "Slider.h"
+
+class Slider;
+class Image;
+
 class InGameCanvas :
     public Canvas
 {
@@ -15,5 +17,6 @@ public:
     Slider* p2_HpBar;
     Slider* p1_SteminaBar;
     Slider* p2_SteminaBar;
+
 };
 

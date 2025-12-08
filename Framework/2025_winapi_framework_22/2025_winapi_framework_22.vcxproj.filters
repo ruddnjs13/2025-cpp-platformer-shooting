@@ -258,6 +258,7 @@
     </ClInclude>
     <ClInclude Include="Nail.h" />
     <ClInclude Include="Nailgun.h" />
+    <ClInclude Include="MatchScoreUI.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="2025_winapi_framework_22.rc">
@@ -437,5 +438,6 @@
     </ClCompile>
     <ClCompile Include="Nail.cpp" />
     <ClCompile Include="Nailgun.cpp" />
+    <ClCompile Include="MatchScoreUI.cpp" />
   </ItemGroup>
 </Project>

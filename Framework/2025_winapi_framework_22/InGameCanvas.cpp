@@ -2,6 +2,8 @@
 #include "InGameCanvas.h"
 #include "ResourceManager.h"
 #include "InputManager.h"
+#include "Image.h"
+#include "Slider.h"
 
 
 void InGameCanvas::Init()
