@@ -217,10 +217,12 @@ void ResourceManager::RegisterTexture()
 	LoadTexture(L"Blue_Ground", L"Texture\\Blue_Ground.bmp");
 
 	// ui ÅØ½ºÃÄ
-	LoadTexture(L"Fill_Red", L"Texture\\Fill_Red.bmp");
-	LoadTexture(L"Fill_Blue", L"Texture\\Fill_Blue.bmp");
-	LoadTexture(L"Fill_Yellow", L"Texture\\Fill_Yellow.bmp");
-	LoadTexture(L"Boarder", L"Texture\\Boarder.bmp");
+	LoadTexture(L"HpFill", L"Texture\\Hp_Fill.bmp");
+	LoadTexture(L"SteminaFill", L"Texture\\SteminaFill.bmp");
+
+	LoadTexture(L"P1_Boarder", L"Texture\\P1_Boarder.bmp");
+	LoadTexture(L"P2_Boarder", L"Texture\\P2_Boarder.bmp");
+
 	LoadTexture(L"ExitBtn", L"Texture\\ExitBtn.bmp");
 	LoadTexture(L"ExitBtn_Hover", L"Texture\\ExitBtn_Hover.bmp");
 	LoadTexture(L"StartBtn", L"Texture\\StartBtn.bmp");

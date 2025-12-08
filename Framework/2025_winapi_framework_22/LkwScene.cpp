@@ -46,6 +46,12 @@ void LkwScene::Init()
 
 	pPlayer2->GetComponent<Health>()->OnHealthChanged.AddListener(
 		std::bind(&Slider::SetValue, inGameCanvas->p2_HpBar, std::placeholders::_1));
+
+	pPlayer1->OnStaminaChanged.AddListener(
+		std::bind(&Slider::SetValue, inGameCanvas->p1_SteminaBar, std::placeholders::_1));
+
+	pPlayer2->OnStaminaChanged.AddListener(
+		std::bind(&Slider::SetValue, inGameCanvas->p2_SteminaBar, std::placeholders::_1));
 }
 
 void LkwScene::Update()
