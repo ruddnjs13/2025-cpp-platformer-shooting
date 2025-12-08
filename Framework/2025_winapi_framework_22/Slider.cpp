@@ -20,12 +20,22 @@ void Slider::Render(HDC _hdc)
 
     float ratio = (currentValue / maxValue);
 
-    DrawTexture(_hdc, curPos, curSize, boarder);
-    DrawTextureClipped(_hdc, curPos, curSize, fillBar, ratio);
+    if(!isNotBoarder)
+        DrawTexture(_hdc, curPos, curSize, boarder);
+    if(isReverse)
+        DrawTextureClipped(_hdc, fillPos, fillSize, fillBar, ratio,true);
+    else
+        DrawTextureClipped(_hdc, fillPos, fillSize, fillBar, ratio);
 }
 
 void Slider::SetValue(float value)
 {
-    currentValue = std::clamp(value, minValue, maxValue);
+    currentValue = (float)std::clamp(value, minValue, maxValue);
 
+}
+
+void Slider::SetFill(Vec2 pos, Vec2 size)
+{
+    fillPos = pos;
+    fillSize = size;
 }
