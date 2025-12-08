@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "Collider.h"
 #include "Texture.h"
+#include "WindManager.h"
 #include "ResourceManager.h"
 #include "SceneManager.h"
 #include "Nail.h"
@@ -19,7 +20,8 @@ Nail::~Nail()
 
 void Nail::Update()
 {
-	Translate({ m_dir.x * 500.f * fDT, m_dir.y * 500.f * fDT });
+	m_speed += GET_SINGLE(WindManager)->m_windPower;
+	Translate({ m_dir.x * m_speed * fDT, m_dir.y * m_speed * fDT });
 }
 
 void Nail::Render(HDC _hdc)

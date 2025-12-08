@@ -70,7 +70,7 @@ void TestWeapon::Update()
 		cout << m_playerCount << endl;
 
 		isRotation = false;
-		m_angleValue += 5;
+		m_angleValue += 1;
 		if (m_angleValue >= 75)
 		{
 			m_angleValue = 75;
@@ -82,15 +82,20 @@ void TestWeapon::Update()
 		//pos.y + 10.f;
 		//pos.x + 30.f;
 
-
-		m_weaponTrajectory->ShowTrajectory(m_angleValue,m_angle, pos, { 20.f,20.f }, GetOwner(), this);
-
 		SetShootAngle(m_angleValue);
+
+
+		std::thread([this]()
+			{
+				std::this_thread::sleep_for(std::chrono::milliseconds(30));
+				isRotation = true;
+			}).detach();
+
 	}
 	if (GET_KEY(KEY_TYPE::UP) && isRotation == true && m_playerCount == 2)
 	{
 		isRotation = false;
-		m_angleValue -= 5;
+		m_angleValue -= 1;
 
 		if (m_angleValue <= -75)
 		{
@@ -104,19 +109,24 @@ void TestWeapon::Update()
 		//pos.x + 30.f;
 
 
-		m_weaponTrajectory->ShowTrajectory(m_angleValue, m_angle, pos, { 20.f,20.f }, GetOwner(), this);
-
 		SetShootAngle(-m_angleValue);
+
+		std::thread([this]()
+			{
+				std::this_thread::sleep_for(std::chrono::milliseconds(30));
+				isRotation = true;
+			}).detach();
+
 	}
 
 	if (GET_KEY(KEY_TYPE::S) && isRotation == true && m_playerCount == 1)
 	{
 
 		isRotation = false;
-		m_angleValue -= 5;
-		if (m_angleValue <= 0)
+		m_angleValue -= 1;
+		if (m_angleValue <= -45)
 		{
-			m_angleValue = 0;
+			m_angleValue = -45;
 		}
 
 		Vec2 pos = GetPos();
@@ -126,18 +136,23 @@ void TestWeapon::Update()
 		//pos.x + 30.f;
 
 
-		m_weaponTrajectory->ShowTrajectory(m_angleValue, m_angle, pos, { 20.f,20.f }, GetOwner(), this);
-
 		SetShootAngle(m_angleValue);
+
+		std::thread([this]()
+			{
+				std::this_thread::sleep_for(std::chrono::milliseconds(30));
+				isRotation = true;
+			}).detach();
+
 	
 	}
 	if (GET_KEY(KEY_TYPE::DOWN) && isRotation && m_playerCount == 2)
 	{
 		isRotation = false;
-		m_angleValue += 5;
-		if (m_angleValue >= 0)
+		m_angleValue += 1;
+		if (m_angleValue >= -45)
 		{
-			m_angleValue = 0;
+			m_angleValue = -45;
 		}
 
 		Vec2 pos = GetPos();
@@ -146,10 +161,15 @@ void TestWeapon::Update()
 		//pos.y + 10.f;
 		//pos.x + 30.f;
 
-
-		m_weaponTrajectory->ShowTrajectory(m_angleValue, m_angle, pos, { 20.f,20.f }, GetOwner(), this);
-
 		SetShootAngle(-m_angleValue);
+
+
+		std::thread([this]()
+			{
+				std::this_thread::sleep_for(std::chrono::milliseconds(30));
+				isRotation = true;
+			}).detach();
+
 	}
 }
 

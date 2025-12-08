@@ -31,6 +31,16 @@ void Nailgun::Shoot()
 	Nail* proj = new Nail;
 	Vec2 pos = GetPos();
 	pos.y -= GetSize().y / 2.f;
+	if (m_playerCount == 1)
+	{
+		pos.y += 10.f;
+		pos.x += 30.f;
+	}
+	else if (m_playerCount == 2)
+	{
+		pos.y -= 10.f;
+		pos.x -= 30.f;
+	}
 	proj->SetPos(pos);
 	proj->SetSize({ 30.f,30.f });
 	proj->SetDir(m_angle);
@@ -96,7 +106,7 @@ void Nailgun::Update()
 			//pos.x + 30.f;
 
 
-			m_weaponTrajectory->ShowTrajectory(m_angleValue, m_angle, pos, { 20.f,20.f }, GetOwner(), this);
+			m_weaponTrajectory->ShowTrajectory(m_angleValue, m_angle, pos, { 20.f,20.f }, GetOwner(), this, isFlip);
 
 			SetShootAngle(m_angleValue);
 		}
@@ -115,7 +125,7 @@ void Nailgun::Update()
 			pos.y -= GetSize().y / 2.f;
 
 
-			m_weaponTrajectory->ShowTrajectory(m_angleValue, m_angle, pos, { 20.f,20.f }, GetOwner(), this);
+			m_weaponTrajectory->ShowTrajectory(m_angleValue, m_angle, pos, { 20.f,20.f }, GetOwner(), this, isFlip);
 
 			SetShootAngle(-m_angleValue);
 		}
@@ -138,7 +148,7 @@ void Nailgun::Update()
 			pos.y -= GetSize().y / 2.f;
 
 
-			m_weaponTrajectory->ShowTrajectory(m_angleValue, m_angle, pos, { 20.f,20.f }, GetOwner(), this);
+			m_weaponTrajectory->ShowTrajectory(m_angleValue, m_angle, pos, { 20.f,20.f }, GetOwner(), this, isFlip);
 
 			SetShootAngle(m_angleValue);
 		}
@@ -156,7 +166,7 @@ void Nailgun::Update()
 			pos.y -= GetSize().y / 2.f;
 
 
-			m_weaponTrajectory->ShowTrajectory(m_angleValue, m_angle, pos, { 20.f,20.f }, GetOwner(), this);
+			m_weaponTrajectory->ShowTrajectory(m_angleValue, m_angle, pos, { 20.f,20.f }, GetOwner(), this, isFlip);
 
 			SetShootAngle(-m_angleValue);
 		}

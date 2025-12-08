@@ -35,6 +35,6 @@ protected:
 	float m_angle;
 	Vec2 m_dir;
 	float m_damage;
-	float m_speed;
+	float m_speed = 500;
 };
 
