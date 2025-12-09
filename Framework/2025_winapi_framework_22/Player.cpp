@@ -215,10 +215,11 @@ void Player::Update()
 	if (CheckPlayerTurn(TurnType::Player1) && GET_SINGLE(TurnManager)->GetCurrentTurn() == TurnType::Player1)
 	{
 
-		/*if (GET_KEY(KEY_TYPE::RSHIFT))
+		if (GET_KEYDOWN(KEY_TYPE::RSHIFT) && m_isDestroy)
 		{
+			m_isDestroy = false;
 			slotReel->DestroyWeapon();
-		}*/
+		}
 
 		isCanSlotReel = true;
 		if (m_stamina > 0)
@@ -226,8 +227,6 @@ void Player::Update()
 			if (GET_KEY(KEY_TYPE::A)) dir.x -= 1.f;
 			if (GET_KEY(KEY_TYPE::D)) dir.x += 1.f;
 			
-			//if (GET_KEY(KEY_TYPE::W)) angle += 0.1f;
-			//if (GET_KEY(KEY_TYPE::S)) angle -= 0.1f;
 
 			if (GET_KEYDOWN(KEY_TYPE::SPACE))
 			{
@@ -236,7 +235,6 @@ void Player::Update()
 				{
 					AddStamina(-10);
 					Jump();
-					//CreateProjectile();
 				}
 			
 			}
@@ -247,8 +245,9 @@ void Player::Update()
 	else if (CheckPlayerTurn(TurnType::Player2) && GET_SINGLE(TurnManager)->GetCurrentTurn() == TurnType::Player2)
 	{
 
-		if (GET_KEY(KEY_TYPE::ENTER))
+		if (GET_KEYDOWN(KEY_TYPE::ENTER) &&m_isDestroy)
 		{
+			m_isDestroy = false;
 			slotReel->DestroyWeapon();
 		}
 
@@ -305,6 +304,8 @@ void Player::Update()
 	if (GET_SINGLE(TurnManager)->GetCurrentTurn() == TurnType::Select 
 		&& GET_SINGLE(TurnManager)->GetCurPlayer() == playerCount && isCanSlotReel == true)
 	{
+		m_isDestroy = true;
+
 		isCanSlotReel = false;
 		if (slotReel != nullptr)
 		{

@@ -15,7 +15,6 @@ Bullet::Bullet()
 
 Bullet::~Bullet()
 {
-	GET_SINGLE(TurnManager)->ChangeTurn(TurnType::Waiting);
 }
 
 void Bullet::EnterCollision(Collider* _other)
@@ -25,7 +24,6 @@ void Bullet::EnterCollision(Collider* _other)
 		_other->GetOwner()->GetComponent<Health>()->TakeDamage(m_damage);
 		BurstBullet();
 		DestoyThis();
-		DestroyOther(_other);
 	}
 
 	if (_other->GetName() == L"Floor")

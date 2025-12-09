@@ -16,12 +16,6 @@ Nail::Nail()
 	col->SetSize({ 15,15 });
 	m_damage = 20;
 	m_speed = 600;
-
-	std::thread([this]()
-		{
-			std::this_thread::sleep_for(std::chrono::milliseconds(3000));
-			DestoyThis();
-		});
 }
 
 Nail::~Nail()

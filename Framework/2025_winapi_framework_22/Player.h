@@ -63,7 +63,7 @@ private:
 	float m_stamina = 0;
 	float m_maxStamina = 0;
 	bool m_isFlipped = false;
-
+	bool m_isDestroy = false;
 	SlotReel* slotReel = nullptr;
 	Texture* m_pTex;
 	TurnType m_turnType;
