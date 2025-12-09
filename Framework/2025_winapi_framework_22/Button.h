@@ -13,6 +13,7 @@ public:
     void Render(HDC _hdc) override;
 public:
     void OnClick();
+    void ClearAllEvents() override;
 public:
     void OnMouseEnter();
     void OnMouseExit();

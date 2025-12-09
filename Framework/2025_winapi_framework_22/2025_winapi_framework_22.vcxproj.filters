@@ -322,6 +322,12 @@
     <ClInclude Include="TestWeapon.h">
       <Filter>Engine\03. Object\Gun\Basic\BasicGun2</Filter>
     </ClInclude>
+    <ClInclude Include="GameManager.h">
+      <Filter>Engine\02. Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="MatchScoreUI.h">
+      <Filter>Engine\07. UI\UIElement</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="2025_winapi_framework_22.rc">
@@ -537,6 +543,12 @@
     </ClCompile>
     <ClCompile Include="TestWeapon.cpp">
       <Filter>Engine\03. Object\Gun\Basic\BasicGun2</Filter>
+    </ClCompile>
+    <ClCompile Include="GameManager.cpp">
+      <Filter>Engine\02. Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="MatchScoreUI.cpp">
+      <Filter>Engine\07. UI\UIElement</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

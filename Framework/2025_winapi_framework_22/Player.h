@@ -14,6 +14,7 @@ public:
 	~Player();
 public:
 	MyAction<float> OnStaminaChanged;
+	MyAction<int> onDeadEvent;
 	//virtual void Update();
 	//virtual void Render(HDC _hdc);
 	void SetStamina(float _stamina) { m_maxStamina = _stamina;  m_stamina = _stamina; }
@@ -69,6 +70,5 @@ private:
 	TurnType m_turnType;
 	PlayerState m_state;
 	PlayerState m_prevState;
-	MyAction<int> onDeadEvent;
 };
 

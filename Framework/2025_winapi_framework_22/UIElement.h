@@ -13,6 +13,7 @@ public:
 	void SetSize(Vec2 _size) { m_size = _size; }
 	const Vec2& GetPos() const { return m_pos; }
 	const Vec2& GetSize() const { return m_size; }
+	virtual void ClearAllEvents();
 
 public:
 	Vec2 m_pos;

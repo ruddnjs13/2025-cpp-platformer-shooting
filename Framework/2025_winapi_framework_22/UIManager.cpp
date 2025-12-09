@@ -18,7 +18,6 @@ void UIManager::Update()
 	m_curCanvas->Update();
 }
 
-
 void UIManager::Render(HDC _hdc)
 {
 	if (m_curCanvas == nullptr)
