@@ -42,11 +42,11 @@ void TestWeapon::WeaponFlip()
 	if (isFlip && m_playerCount == 2)
 	{
 		StartAngle(-1, -50);
-		m_pTex->SetFlipped(false);
+		m_pTex->SetFlipped(true);
 	}
 	else if (isFlip == false && m_playerCount == 2)
 	{
-		m_pTex->SetFlipped(true);
+		m_pTex->SetFlipped(false);
 		StartAngle(1, 10);
 	}
 }
@@ -69,6 +69,7 @@ void TestWeapon::Update()
 		cout << m_playerCount << endl;
 
 		isRotation = false;
+
 		m_angleValue += 1;
 		if (m_angleValue >= 75)
 		{
@@ -78,11 +79,7 @@ void TestWeapon::Update()
 		Vec2 pos = GetPos();
 		pos.y -= GetSize().y / 2.f;
 
-		//pos.y + 10.f;
-		//pos.x + 30.f;
-
 		SetShootAngle(m_angleValue);
-
 
 		std::thread([this]()
 			{
@@ -91,24 +88,22 @@ void TestWeapon::Update()
 			}).detach();
 
 	}
+
 	if (GET_KEY(KEY_TYPE::UP) && isRotation == true && m_playerCount == 2)
 	{
 		isRotation = false;
-		m_angleValue -= 1;
 
-		if (m_angleValue <= -75)
+		m_angleValue += 1;
+
+		if (m_angleValue >= 75)
 		{
-			m_angleValue = -75;
+			m_angleValue = 75;
 		}
 
 		Vec2 pos = GetPos();
 		pos.y -= GetSize().y / 2.f;
+		SetShootAngle(m_angleValue);
 
-		//pos.y + 10.f;
-		//pos.x + 30.f;
-
-
-		SetShootAngle(-m_angleValue);
 
 		std::thread([this]()
 			{
@@ -122,7 +117,9 @@ void TestWeapon::Update()
 	{
 
 		isRotation = false;
+
 		m_angleValue -= 1;
+
 		if (m_angleValue <= -45)
 		{
 			m_angleValue = -45;
@@ -131,11 +128,9 @@ void TestWeapon::Update()
 		Vec2 pos = GetPos();
 		pos.y -= GetSize().y / 2.f;
 
-		//pos.y + 10.f;
-		//pos.x + 30.f;
-
 
 		SetShootAngle(m_angleValue);
+
 
 		std::thread([this]()
 			{
@@ -143,13 +138,14 @@ void TestWeapon::Update()
 				isRotation = true;
 			}).detach();
 
-	
 	}
+
 	if (GET_KEY(KEY_TYPE::DOWN) && isRotation && m_playerCount == 2)
 	{
 		isRotation = false;
-		m_angleValue += 1;
-		if (m_angleValue >= -45)
+		m_angleValue -= 1;
+
+		if (m_angleValue <= -45)
 		{
 			m_angleValue = -45;
 		}
@@ -157,11 +153,7 @@ void TestWeapon::Update()
 		Vec2 pos = GetPos();
 		pos.y -= GetSize().y / 2.f;
 
-		//pos.y + 10.f;
-		//pos.x + 30.f;
-
-		SetShootAngle(-m_angleValue);
-
+		SetShootAngle(m_angleValue);
 
 		std::thread([this]()
 			{
