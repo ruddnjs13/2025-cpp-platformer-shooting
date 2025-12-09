@@ -190,17 +190,33 @@ void ResourceManager::RegisterTexture()
 	
 	//LoadTexture(L"Background", L"Texture\\background.bmp");
 	//LoadTexture(L"Gun1", L"Texture\\Revolver.bmp");
-	LoadTexture(L"Gun1", L"Texture\\GGG.bmp");
-	LoadTexture(L"NailGun", L"Texture\\NailGun.bmp");
-	LoadTexture(L"Nail", L"Texture\\Nail.bmp");
-	LoadTexture(L"Gun1Bullet", L"Texture\\Bullet1.bmp");
-	LoadTexture(L"Explosion", L"Texture\\Explosion.bmp");
 	LoadTexture(L"AimLine", L"Texture\\Aimming.bmp");
 	LoadTexture(L"Test2", L"Texture\\RoolRetTest.bmp");
 	LoadTexture(L"PlayerWalk", L"Texture\\PlayerWalk.bmp");
 	LoadTexture(L"PlayerIdle", L"Texture\\PlayerIdle.bmp");
 	LoadTexture(L"PlayerDie", L"Texture\\PlayerDie.bmp");
 	LoadTexture(L"Player", L"Texture\\TestPlayer.bmp");
+
+	//총 텍스쳐
+	LoadTexture(L"Gun1", L"Texture\\Revolver.bmp");
+	LoadTexture(L"AK47", L"Texture\\AK47.bmp");
+	LoadTexture(L"Bazooka", L"Texture\\bazooka.bmp");
+	LoadTexture(L"Rocket", L"Texture\\Rocket.bmp");
+	LoadTexture(L"RazerGun", L"Texture\\RazerGun.bmp");
+	LoadTexture(L"PizzaGun", L"Texture\\pizzaBox.bmp");
+	LoadTexture(L"NailGun", L"Texture\\NailGun.bmp");
+	LoadTexture(L"Sniper", L"Texture\\sniper.bmp");
+
+
+	//총알 텍스쳐
+	LoadTexture(L"Nail", L"Texture\\Nail.bmp");
+	LoadTexture(L"Explosion", L"Texture\\Explosion.bmp");
+	LoadTexture(L"Bullet1", L"Texture\\Bullet1.bmp");
+	LoadTexture(L"BazookaBullet", L"Texture\\Bullet2.bmp");
+	LoadTexture(L"RocketBullet", L"Texture\\Bullet3.bmp");
+	LoadTexture(L"SniperBullet", L"Texture\\Bullet4.bmp");
+	LoadTexture(L"EnergyBullet", L"Texture\\Bullet5.bmp");
+	LoadTexture(L"Pizza", L"Texture\\pizza.bmp");
 
 	// 타일맵 텍스쳐
 	LoadTexture(L"Ground", L"Texture\\Ground.bmp");

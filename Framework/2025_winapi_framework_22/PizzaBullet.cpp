@@ -9,12 +9,16 @@
 
 PizzaBullet::PizzaBullet()
 {
-	m_pTex = GET_SINGLE(ResourceManager)->GetTexture(L"Gun1Bullet");
+	m_pTex = GET_SINGLE(ResourceManager)->GetTexture(L"Pizza");
 	auto* col = AddComponent<Collider>();
 	AddComponent<Rigidbody>();
 	col->SetName(L"PlayerBullet");
 	col->SetTrigger(true);
 	col->SetSize({ 15,15 });
+
+	m_damage = -20;
+
+	m_speed = 300;
 }
 
 PizzaBullet::~PizzaBullet()

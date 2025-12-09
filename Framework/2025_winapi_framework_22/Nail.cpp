@@ -13,6 +13,8 @@ Nail::Nail()
 	col->SetName(L"PlayerBullet");
 	col->SetTrigger(true);
 	col->SetSize({ 15,15 });
+	m_damage = 20;
+	m_speed = 600;
 }
 
 Nail::~Nail()

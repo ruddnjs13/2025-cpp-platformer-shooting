@@ -19,6 +19,7 @@ TestWeapon2::TestWeapon2()
 
 	m_angle.x = 1.f;
 	m_angle.y = 0.f;
+	
 }
 
 TestWeapon2::~TestWeapon2()
@@ -209,7 +210,7 @@ void TestWeapon2::Shoot()
 		pos.x -= 30.f;
 	}
 	proj->SetPos(pos);
-	proj->SetSize({ 10.f,10.f });
+	proj->SetSize({ 20.f,20.f });
 	proj->SetDir(m_angle);
 
 	GET_SINGLE(SceneManager)->GetCurScene()->AddObject(proj, Layer::PROJECTILE);

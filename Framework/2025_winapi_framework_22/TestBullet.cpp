@@ -14,12 +14,14 @@
 
 TestBullet::TestBullet()
 {
-	m_pTex = GET_SINGLE(ResourceManager)->GetTexture(L"Gun1Bullet");
+	m_pTex = GET_SINGLE(ResourceManager)->GetTexture(L"Bullet1");
 	auto* col = AddComponent<Collider>();
 	AddComponent<Rigidbody>();
 	col->SetName(L"PlayerBullet");
 	col->SetTrigger(true);
-	col->SetSize({ 15,15 });
+	col->SetSize({ 20,20 });
+	m_angle = 20;
+	m_speed = 500;
 }
 
 TestBullet::~TestBullet()

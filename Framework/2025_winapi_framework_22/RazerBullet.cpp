@@ -9,12 +9,16 @@
 
 RazerBullet::RazerBullet()
 {
-	m_pTex = GET_SINGLE(ResourceManager)->GetTexture(L"Gun1Bullet");
+	m_pTex = GET_SINGLE(ResourceManager)->GetTexture(L"EnergyBullet");
 	auto* col = AddComponent<Collider>();
 	AddComponent<Rigidbody>();
 	col->SetName(L"PlayerBullet");
 	col->SetTrigger(true);
 	col->SetSize({ 15,15 });
+
+	m_speed = 400;
+
+	m_damage = 25;
 }
 
 RazerBullet::~RazerBullet()
@@ -60,6 +64,6 @@ void RazerBullet::DestoyThis()
 
 void RazerBullet::DestroyOther(Collider* _other)
 {
-	GET_SINGLE(SceneManager)->RequestDestroy(_other->GetOwner());
+	//GET_SINGLE(SceneManager)->RequestDestroy(_other->GetOwner());
 }
 

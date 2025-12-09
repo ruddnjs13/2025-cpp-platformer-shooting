@@ -9,11 +9,13 @@
 
 BazukaBullet::BazukaBullet()
 {
-	m_pTex = GET_SINGLE(ResourceManager)->GetTexture(L"Nail");
+	m_pTex = GET_SINGLE(ResourceManager)->GetTexture(L"BazookaBullet");
 	auto* col = AddComponent<Collider>();
 	col->SetName(L"PlayerBullet");
 	col->SetTrigger(true);
-	col->SetSize({ 15,15 });
+	col->SetSize({ 25,25 });
+	m_damage = 40;
+	m_speed = 300;
 }
 
 BazukaBullet::~BazukaBullet()

@@ -9,7 +9,7 @@
 
 RazerGun::RazerGun()
 {
-	m_pTex = GET_SINGLE(ResourceManager)->GetTexture(L"NailGun");
+	m_pTex = GET_SINGLE(ResourceManager)->GetTexture(L"RazerGun");
 
 
 	SetShootAngle(m_angleValue);

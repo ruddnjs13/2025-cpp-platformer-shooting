@@ -32,11 +32,12 @@ public:
 		m_dir = _dir;
 		m_dir.Normalize();
 	}
+public:
+	float m_angle;
+	float m_speed = 500; 
 
 protected:
-	float m_angle;
 	Vec2 m_dir;
 	float m_damage;
-	float m_speed = 500;
 };
 

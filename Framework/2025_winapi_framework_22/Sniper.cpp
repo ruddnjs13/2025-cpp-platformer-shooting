@@ -9,7 +9,7 @@
 
 Sniper::Sniper()
 {
-	m_pTex = GET_SINGLE(ResourceManager)->GetTexture(L"NailGun");
+	m_pTex = GET_SINGLE(ResourceManager)->GetTexture(L"Sniper");
 
 
 	SetShootAngle(m_angleValue);

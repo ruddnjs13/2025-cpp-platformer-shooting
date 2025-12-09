@@ -8,10 +8,12 @@
 
 Rocket::Rocket()
 {
-	m_pTex = GET_SINGLE(ResourceManager)->GetTexture(L"NailGun");
+	m_pTex = GET_SINGLE(ResourceManager)->GetTexture(L"Rocket");
 
 
 	SetShootAngle(m_angleValue);
+
+
 }
 
 Rocket::~Rocket()
@@ -177,7 +179,7 @@ void Rocket::Shoot()
 					pos.x -= 30.f;
 				}
 				proj->SetPos(pos);
-				proj->SetSize({ 30.f,30.f });
+				proj->SetSize({ 25.f,25.f });
 				proj->SetDir(m_angle);
 
 
