@@ -8,3 +8,7 @@ UIElement::UIElement()
 UIElement::~UIElement()
 {
 }
+
+void UIElement::ClearAllEvents()
+{
+}

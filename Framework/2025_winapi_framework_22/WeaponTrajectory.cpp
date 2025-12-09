@@ -94,6 +94,7 @@ void WeaponTrajectory::ShowTrajectory(float _angleValue,Vec2 angle, Vec2 pos, Ve
         }
     }
 
+
     Trajectory* trajectory = new Trajectory();
     m_Trajectory = trajectory;
 

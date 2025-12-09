@@ -29,5 +29,11 @@ private:
 	std::shared_ptr<Scene> m_curScene;
 	std::unordered_map<wstring, std::shared_ptr<Scene>> m_mapScene;
 
+private:
+	std::wstring m_pendingScene;  // 다음 프레임에 로드할 씬 이름
+
+public:
+	void RequestLoadScene(const std::wstring& _name) { m_pendingScene = _name; }
+
 };
 

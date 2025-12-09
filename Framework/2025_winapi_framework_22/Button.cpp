@@ -33,16 +33,16 @@ void Button::Update()
 		&& mousePos.y >= curPos.y - halfHeight)
 	{
 		OnMouseEnter();
+		if (!_isClicked &&_isHovered && GET_KEYDOWN(KEY_TYPE::LBUTTON))
+		{
+			OnClick();
+			return;
+		}
 	}
 	else
 	{
 		OnMouseExit();
 	}
-	if (GET_KEYDOWN(KEY_TYPE::LBUTTON))
-	{
-		OnClick();
-	}
-	
 }
 
 void Button::Render(HDC _hdc)
@@ -53,9 +53,19 @@ void Button::Render(HDC _hdc)
 void Button::OnClick()
 {
 	if (_isClicked) return;
+	cout << "OnCliick";
 
+	if (OnClickEvt.HasListener())
+	{
+		OnClickEvt.Invoke();
+	}
 	_isClicked = true;
-	OnClickEvt.Invoke();
+	return;
+}
+
+void Button::ClearAllEvents()
+{
+	OnClickEvt.Clear();
 }
 
 void Button::OnMouseEnter()
@@ -63,8 +73,6 @@ void Button::OnMouseEnter()
 	if (_isHovered) return;
 	_isHovered = true;
 	cout << "È£¹öµÊ";
-
-	SetSize({ GetSize().x * 1.1f, GetSize().y * 1.1f });
 
 	if (m_hoverTexture == NULL) return;
 	m_texture = m_hoverTexture;
@@ -75,9 +83,7 @@ void Button::OnMouseExit()
 {
 	if (!_isHovered) return;
 	_isHovered = false;
-
-	SetSize({ GetSize().x * (1/1.1f), GetSize().y * (1/ 1.1f) });
-
+	_isClicked = false;
 
 	if (m_defaultTexture == NULL) return;
 	m_texture = m_defaultTexture;

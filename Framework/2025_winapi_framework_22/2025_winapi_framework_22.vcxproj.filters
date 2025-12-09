@@ -26,9 +26,6 @@
     <Filter Include="Engine\05. Resource">
       <UniqueIdentifier>{ed8ee0bd-ee5a-4316-9c1b-bcf8650f2315}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engine\06. Component">
-      <UniqueIdentifier>{4d70ad19-6a7a-4c2c-ab61-d0375b041d62}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Engine\07. UI">
       <UniqueIdentifier>{4b713974-f916-4d9b-ab8f-9590d01e4d5d}</UniqueIdentifier>
     </Filter>
@@ -37,12 +34,6 @@
     </Filter>
     <Filter Include="Engine\99. Headers">
       <UniqueIdentifier>{9c79175f-d50d-42ff-89d7-1b1d459f4f93}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Engine\06. Component\Animation">
-      <UniqueIdentifier>{a9e988cb-adc6-4d67-84d1-9b50ef9a2f8a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Engine\06. Component\Physics">
-      <UniqueIdentifier>{099b472c-b9ea-4835-9579-a2730ed97b04}</UniqueIdentifier>
     </Filter>
     <Filter Include="Engine\02. Manager\Framework">
       <UniqueIdentifier>{b4df280d-99d4-4098-9967-569d0836c34f}</UniqueIdentifier>
@@ -67,6 +58,15 @@
     </Filter>
     <Filter Include="Engine\07. UI\UIElement">
       <UniqueIdentifier>{91d94f7c-a74e-4816-b5be-c9d2e07a4c36}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\06. Component">
+      <UniqueIdentifier>{4d70ad19-6a7a-4c2c-ab61-d0375b041d62}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\06. Component\Animation">
+      <UniqueIdentifier>{a9e988cb-adc6-4d67-84d1-9b50ef9a2f8a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\06. Component\Physics">
+      <UniqueIdentifier>{099b472c-b9ea-4835-9579-a2730ed97b04}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -258,7 +258,12 @@
     </ClInclude>
     <ClInclude Include="Nail.h" />
     <ClInclude Include="Nailgun.h" />
-    <ClInclude Include="MatchScoreUI.h" />
+    <ClInclude Include="MatchScoreUI.h">
+      <Filter>Engine\07. UI\UIElement</Filter>
+    </ClInclude>
+    <ClInclude Include="GameManager.h">
+      <Filter>Engine\02. Manager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="2025_winapi_framework_22.rc">
@@ -438,6 +443,11 @@
     </ClCompile>
     <ClCompile Include="Nail.cpp" />
     <ClCompile Include="Nailgun.cpp" />
-    <ClCompile Include="MatchScoreUI.cpp" />
+    <ClCompile Include="MatchScoreUI.cpp">
+      <Filter>Engine\07. UI\UIElement</Filter>
+    </ClCompile>
+    <ClCompile Include="GameManager.cpp">
+      <Filter>Engine\02. Manager</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

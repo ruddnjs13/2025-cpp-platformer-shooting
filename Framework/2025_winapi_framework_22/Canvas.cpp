@@ -13,18 +13,24 @@ Canvas::~Canvas()
 void Canvas::Update()
 {
 	for (auto element : _vecUIElement)
-		element->Update();
+		if(element !=nullptr)
+			element->Update();
 }
 
 void Canvas::Render(HDC dc)
 {
 	for (auto element : _vecUIElement)
-		element->Render(dc);
+		if (element != nullptr)
+			element->Render(dc);
 }
 
 void Canvas::Release()
 {
-
+	for (auto element : _vecUIElement)
+	{
+		SAFE_DELETE(element);
+	}
+	_vecUIElement.clear();
 }
 
 void Canvas::AddUIElement(UIElement* uiElement)
@@ -38,7 +44,3 @@ void Canvas::RemoveOjbect(UIElement* uiElement)
 	SAFE_DELETE(*iter);
 	_vecUIElement.erase(iter);
 }
-
-
-
-
