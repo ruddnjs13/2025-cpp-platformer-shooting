@@ -102,7 +102,7 @@ void SlotReel::MakeWeapon(Weapon* targetWeapon, int _playerNum)
 
 	m_pWeaponHolder->ChangeWeapon(targetWeapon,
 		{ pos },
-		{ 30.f,30.f }
+		{ 40.f,40.f }
 	, _playerNum);
 
 
@@ -135,7 +135,7 @@ void SlotReel::SlotRolling(int _playerNum)
 {
 	srand(static_cast<unsigned int>(time(nullptr)));
 	SetPlayerNum(_playerNum);
-	m_pTex = GET_SINGLE(ResourceManager)->GetTexture(L"Test2");
+	m_pTex = GET_SINGLE(ResourceManager)->GetTexture(L"Slot");
 
 	rollingVec.clear();
 

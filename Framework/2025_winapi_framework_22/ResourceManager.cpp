@@ -196,6 +196,7 @@ void ResourceManager::RegisterTexture()
 	LoadTexture(L"PlayerIdle", L"Texture\\PlayerIdle.bmp");
 	LoadTexture(L"PlayerDie", L"Texture\\PlayerDie.bmp");
 	LoadTexture(L"Player", L"Texture\\TestPlayer.bmp");
+	LoadTexture(L"Slot", L"Texture\\Slot.bmp");
 
 	//ÃÑ ÅØ½ºÃÄ
 	LoadTexture(L"Gun1", L"Texture\\Revolver.bmp");

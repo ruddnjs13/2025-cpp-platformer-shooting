@@ -297,7 +297,7 @@ void Player::Update()
 		}
 	
 		slotReel = new SlotReel();
-		slotReel->SetSize({ 60, 60 });
+		slotReel->SetSize({ 100, 100 });
 	
 		Vec2 pos = GetPos();
 	
