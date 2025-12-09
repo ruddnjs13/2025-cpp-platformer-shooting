@@ -15,7 +15,7 @@
 
 Bazuka::Bazuka()
 {
-	m_pTex = GET_SINGLE(ResourceManager)->GetTexture(L"NailGun");
+	m_pTex = GET_SINGLE(ResourceManager)->GetTexture(L"Bazooka");
 
 	SetShootAngle(m_angleValue);
 }

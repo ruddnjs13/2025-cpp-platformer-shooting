@@ -10,12 +10,15 @@
 
 RocketBullet::RocketBullet()
 {
-	m_pTex = GET_SINGLE(ResourceManager)->GetTexture(L"Gun1Bullet");
+	m_pTex = GET_SINGLE(ResourceManager)->GetTexture(L"RocketBullet");
 	auto* col = AddComponent<Collider>();
 	AddComponent<Rigidbody>();
 	col->SetName(L"PlayerBullet");
 	col->SetTrigger(true);
-	col->SetSize({ 15,15 });
+	col->SetSize({ 25,25 });
+
+	m_damage = 10;
+	m_speed = 500;
 }
 
 RocketBullet::~RocketBullet()

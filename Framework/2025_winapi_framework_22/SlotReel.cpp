@@ -5,6 +5,12 @@
 #include "TestWeapon.h"
 #include "RollingItem.h"
 #include "TestWeapon2.h"
+#include "Nailgun.h"
+#include "RazerGun.h"
+#include "PizzeGun.h"
+#include "Rocket.h"
+#include "Bazuka.h"
+#include "Sniper.h"
 #include "TurnManager.h"
 #include "SceneManager.h"
 #include "Collider.h"
@@ -148,10 +154,10 @@ void SlotReel::SlotRolling(int _playerNum)
 			SetStartTexture(rollingItem, L"Gun1", offsetPos);
 			break;
 		case 2:
-			SetStartTexture(rollingItem, L"Bullet", offsetPos);
+			SetStartTexture(rollingItem, L"AK47", offsetPos);
 			break;
 		case 3:
-			SetStartTexture(rollingItem, L"Gun1", offsetPos);
+			SetStartTexture(rollingItem, L"RazerGun", offsetPos);
 			break;
 		}
 		GET_SINGLE(SceneManager)->GetCurScene()->AddObject(rollingItem, Layer::DEFAULT);
@@ -223,7 +229,7 @@ void SlotReel::SlotRolling(int _playerNum)
 
 				srand(static_cast<unsigned int>(time(nullptr)));
 
-				int randomTexture = rand() % 4 + 1;
+				int randomTexture = rand() % 8 + 1;
 
 				if (i == 19)
 				{
@@ -235,16 +241,28 @@ void SlotReel::SlotRolling(int _playerNum)
 				switch (randomTexture)
 				{
 				case 1:
-					SetRollingTexture(rollingItems, L"Bullet", offsetPoss, speed);
+					SetRollingTexture(rollingItems, L"Gun1", offsetPoss, speed);
 					break;
 				case 2:
-					SetRollingTexture(rollingItems, L"Gun1", offsetPoss, speed);
+					SetRollingTexture(rollingItems, L"AK47", offsetPoss, speed);
 					break;
 				case 3:
-					SetRollingTexture(rollingItems, L"Bullet", offsetPoss, speed);
+					SetRollingTexture(rollingItems, L"Bazooka", offsetPoss, speed);
 					break;
 				case 4:
-					SetRollingTexture(rollingItems, L"Gun1", offsetPoss, speed);
+					SetRollingTexture(rollingItems, L"Rocket", offsetPoss, speed);
+					break;
+				case 5:
+					SetRollingTexture(rollingItems, L"RazerGun", offsetPoss, speed);
+					break;
+				case 6:
+					SetRollingTexture(rollingItems, L"PizzaGun", offsetPoss, speed);
+					break;
+				case 7:
+					SetRollingTexture(rollingItems, L"NailGun", offsetPoss, speed);
+					break;
+				case 8:
+					SetRollingTexture(rollingItems, L"Sniper", offsetPoss, speed);
 					break;
 
 				}
@@ -272,10 +290,22 @@ void SlotReel::SlotRolling(int _playerNum)
 						MakeWeapon(new TestWeapon2, playerNum);
 						break;
 					case 3:
-						MakeWeapon(new TestWeapon, playerNum);
+						MakeWeapon(new Bazuka, playerNum);
 						break;
 					case 4:
-						MakeWeapon(new TestWeapon2, playerNum);
+						MakeWeapon(new Rocket, playerNum);
+						break;
+					case 5:
+						MakeWeapon(new RazerGun, playerNum);
+						break;
+					case 6:
+						MakeWeapon(new PizzeGun, playerNum);
+						break;
+					case 7:
+						MakeWeapon(new Nailgun, playerNum);
+						break;
+					case 8:
+						MakeWeapon(new Sniper, playerNum);
 						break;
 					}
 

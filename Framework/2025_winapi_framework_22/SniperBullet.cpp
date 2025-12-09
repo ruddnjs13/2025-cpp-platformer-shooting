@@ -8,12 +8,15 @@
 
 SniperBullet::SniperBullet()
 {
-	m_pTex = GET_SINGLE(ResourceManager)->GetTexture(L"Gun1Bullet");
+	m_pTex = GET_SINGLE(ResourceManager)->GetTexture(L"SniperBullet");
 	auto* col = AddComponent<Collider>();
 	AddComponent<Rigidbody>();
 	col->SetName(L"PlayerBullet");
 	col->SetTrigger(true);
 	col->SetSize({ 15,15 });
+
+	m_damage = 10;
+	m_speed = 600;
 }
 
 SniperBullet::~SniperBullet()

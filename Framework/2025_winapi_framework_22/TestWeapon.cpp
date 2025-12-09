@@ -12,10 +12,9 @@
 
 TestWeapon::TestWeapon()
 {
-	m_pTex = GET_SINGLE(ResourceManager)->GetTexture(L"Bullet");
+	m_pTex = GET_SINGLE(ResourceManager)->GetTexture(L"AK47");
 
 	m_weaponTrajectory = AddComponent<WeaponTrajectory>();
-
 
 	SetShootAngle(m_angleValue);
 }
@@ -223,7 +222,7 @@ void TestWeapon::Shoot()
 					pos.x -= 30.f;
 				}
 				proj->SetPos(pos);
-				proj->SetSize({ 10.f,10.f });
+				proj->SetSize({ 20.f,20.f });
 				proj->SetDir(m_angle);
 
 

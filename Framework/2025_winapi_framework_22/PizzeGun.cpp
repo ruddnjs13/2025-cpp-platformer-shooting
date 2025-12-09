@@ -9,7 +9,7 @@
 
 PizzeGun::PizzeGun()
 {
-	m_pTex = GET_SINGLE(ResourceManager)->GetTexture(L"NailGun");
+	m_pTex = GET_SINGLE(ResourceManager)->GetTexture(L"PizzaGun");
 
 
 	SetShootAngle(m_angleValue);
@@ -40,9 +40,9 @@ void PizzeGun::Update()
 		isRotation = false;
 
 		m_angleValue += 1;
-		if (m_angleValue >= 75)
+		if (m_angleValue >= 90)
 		{
-			m_angleValue = 75;
+			m_angleValue = 90;
 		}
 
 		Vec2 pos = GetPos();
@@ -64,9 +64,9 @@ void PizzeGun::Update()
 
 		m_angleValue += 1;
 
-		if (m_angleValue >= 75)
+		if (m_angleValue >= 90)
 		{
-			m_angleValue = 75;
+			m_angleValue = 90;
 		}
 
 		Vec2 pos = GetPos();
