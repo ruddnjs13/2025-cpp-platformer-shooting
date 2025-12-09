@@ -149,9 +149,9 @@ void Nailgun::Update()
 
 		m_angleValue -= 1;
 
-		if (m_angleValue <= 0)
+		if (m_angleValue <= -45)
 		{
-			m_angleValue = 0;
+			m_angleValue = -45;
 		}
 
 		Vec2 pos = GetPos();
@@ -195,4 +195,23 @@ void Nailgun::Update()
 
 void Nailgun::Render(HDC _hdc)
 {
+	Vec2 pos = GetPos();
+	Vec2 size = GetSize();
+
+	LONG width = m_pTex->GetWidth();
+	LONG height = m_pTex->GetHeight();
+
+	HDC texDC = m_pTex->GetRotateTextureDC(m_angleValue, 0, 0, width, height);
+
+
+	::TransparentBlt(_hdc
+		, (int)(pos.x - size.x / 2)
+		, (int)(pos.y - size.y / 2)
+		, size.x
+		, size.y
+		, texDC
+		, 0, 0, width, height,
+		RGB(255, 0, 255));
+
+	ComponentRender(_hdc);
 }
