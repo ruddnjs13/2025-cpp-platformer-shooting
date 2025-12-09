@@ -19,7 +19,7 @@ bool GameManager::MatchWin()
 		player2_Score++;
 		isGameOver = true;
 	}
-	else if(!player1_Die && player1_Die)
+	else if(!player1_Die && player2_Die)
 	{
 		player1_Score++;
 		isGameOver = true;
@@ -36,7 +36,7 @@ bool GameManager::MatchWin()
 
 void GameManager::GameOver()
 {
-	GET_SINGLE(SceneManager)->LoadScene(L"LkwScene");
+	GET_SINGLE(SceneManager)->RequestLoadScene(L"LkwScene");
 }
 
 void GameManager::SetPlayerDead(int idx)
