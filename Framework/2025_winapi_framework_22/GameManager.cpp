@@ -7,25 +7,26 @@ void GameManager::Reset()
 {
 	player1_Die = false;
 	player2_Die = false;
-
-	matchScoreUI->SetScore(player1_Score, player2_Score);
 }
 
-void GameManager::MatchWin()
+bool GameManager::MatchWin()
 {
-	if (!player1_Die && !player2_Die) return;
+	if (!player1_Die && !player2_Die) return false;
 
 	if (player1_Die && player2_Die)
 	{
 		GameOver(3);
+		return true;
 	}
 	else if (player1_Die && !player2_Die)
 	{
 		GameOver(2);
+		return true;
 	}
 	else
 	{
 		GameOver(1);
+		return true;
 	}
 
 	matchScoreUI->SetScore(player1_Score, player2_Score);
@@ -53,5 +54,11 @@ void GameManager::SetPlayerDead(int idx)
 		player1_Die = true;
 	else
 		player2_Die = true;
+}
+
+void GameManager::SetMatchScoreUI(MatchScoreUI* matchscoreUI)
+{
+	matchScoreUI = matchscoreUI;
+	matchScoreUI->SetScore(player1_Score, player2_Score);
 }
 

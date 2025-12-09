@@ -5,6 +5,7 @@
 #include "Image.h"
 #include "Slider.h"
 #include "MatchScoreUI.h"
+#include "GameManager.h"
 
 
 void InGameCanvas::Init()
@@ -48,6 +49,9 @@ void InGameCanvas::Init()
 		);
 	matchScoreUI->SetPos({ 640,80 });
 	matchScoreUI->SetSize({ 100,100 });
+
+	GET_SINGLE(GameManager)->SetMatchScoreUI(matchScoreUI);
+
 	
 	AddUIElement(matchScoreUI);
 	AddUIElement(p1_HpBar);
@@ -69,5 +73,4 @@ void InGameCanvas::Release()
 void InGameCanvas::Update()
 {
 	Canvas::Update();
-	
 }

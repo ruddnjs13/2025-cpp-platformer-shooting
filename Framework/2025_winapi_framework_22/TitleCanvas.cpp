@@ -64,5 +64,4 @@ void TitleCanvas::Release()
     guideBtn = nullptr;
     exitBtn = nullptr;
     backgroundPanel = nullptr;
-
 }

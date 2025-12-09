@@ -9,9 +9,9 @@ void MatchScoreUI::Render(HDC _hdc)
 	Vec2 p1_pos = { curPos.x - 60, curPos.y };
 	Vec2 p2_pos = { curPos.x + 60, curPos.y };
 
+	DrawTexture(_hdc, p1_pos, curSize, p1_textures[p1_ScoreIdx],RGB(255,0,255));
+	DrawTexture(_hdc, p2_pos, curSize, p2_textures[p2_ScoreIdx],RGB(255, 0, 255));
 	DrawTexture(_hdc, curPos, curSize, m_texture);
-	DrawTexture(_hdc, p1_pos, curSize, p1_textures[p1_ScoreIdx]);
-	DrawTexture(_hdc, p2_pos, curSize, p2_textures[p2_ScoreIdx]);
 }
 
 void MatchScoreUI::InitScoreTexture(Texture* p1_Zero, Texture* p1_One, Texture* p1_Two, Texture* p2_Zero, Texture* p2_One, Texture* p2_Two)
