@@ -12,10 +12,9 @@
 
 TestWeapon::TestWeapon()
 {
-	m_pTex = GET_SINGLE(ResourceManager)->GetTexture(L"Bullet");
+	m_pTex = GET_SINGLE(ResourceManager)->GetTexture(L"AK47");
 
 	m_weaponTrajectory = AddComponent<WeaponTrajectory>();
-
 
 	SetShootAngle(m_angleValue);
 }
@@ -70,7 +69,7 @@ void TestWeapon::Update()
 		cout << m_playerCount << endl;
 
 		isRotation = false;
-		m_angleValue += 5;
+		m_angleValue += 1;
 		if (m_angleValue >= 75)
 		{
 			m_angleValue = 75;
@@ -82,15 +81,20 @@ void TestWeapon::Update()
 		//pos.y + 10.f;
 		//pos.x + 30.f;
 
-
-		m_weaponTrajectory->ShowTrajectory(m_angleValue,m_angle, pos, { 20.f,20.f }, GetOwner(), this);
-
 		SetShootAngle(m_angleValue);
+
+
+		std::thread([this]()
+			{
+				std::this_thread::sleep_for(std::chrono::milliseconds(30));
+				isRotation = true;
+			}).detach();
+
 	}
 	if (GET_KEY(KEY_TYPE::UP) && isRotation == true && m_playerCount == 2)
 	{
 		isRotation = false;
-		m_angleValue -= 5;
+		m_angleValue -= 1;
 
 		if (m_angleValue <= -75)
 		{
@@ -104,19 +108,24 @@ void TestWeapon::Update()
 		//pos.x + 30.f;
 
 
-		m_weaponTrajectory->ShowTrajectory(m_angleValue, m_angle, pos, { 20.f,20.f }, GetOwner(), this);
-
 		SetShootAngle(-m_angleValue);
+
+		std::thread([this]()
+			{
+				std::this_thread::sleep_for(std::chrono::milliseconds(30));
+				isRotation = true;
+			}).detach();
+
 	}
 
 	if (GET_KEY(KEY_TYPE::S) && isRotation == true && m_playerCount == 1)
 	{
 
 		isRotation = false;
-		m_angleValue -= 5;
-		if (m_angleValue <= 0)
+		m_angleValue -= 1;
+		if (m_angleValue <= -45)
 		{
-			m_angleValue = 0;
+			m_angleValue = -45;
 		}
 
 		Vec2 pos = GetPos();
@@ -126,18 +135,23 @@ void TestWeapon::Update()
 		//pos.x + 30.f;
 
 
-		m_weaponTrajectory->ShowTrajectory(m_angleValue, m_angle, pos, { 20.f,20.f }, GetOwner(), this);
-
 		SetShootAngle(m_angleValue);
+
+		std::thread([this]()
+			{
+				std::this_thread::sleep_for(std::chrono::milliseconds(30));
+				isRotation = true;
+			}).detach();
+
 	
 	}
 	if (GET_KEY(KEY_TYPE::DOWN) && isRotation && m_playerCount == 2)
 	{
 		isRotation = false;
-		m_angleValue += 5;
-		if (m_angleValue >= 0)
+		m_angleValue += 1;
+		if (m_angleValue >= -45)
 		{
-			m_angleValue = 0;
+			m_angleValue = -45;
 		}
 
 		Vec2 pos = GetPos();
@@ -146,10 +160,15 @@ void TestWeapon::Update()
 		//pos.y + 10.f;
 		//pos.x + 30.f;
 
-
-		m_weaponTrajectory->ShowTrajectory(m_angleValue, m_angle, pos, { 20.f,20.f }, GetOwner(), this);
-
 		SetShootAngle(-m_angleValue);
+
+
+		std::thread([this]()
+			{
+				std::this_thread::sleep_for(std::chrono::milliseconds(30));
+				isRotation = true;
+			}).detach();
+
 	}
 }
 
@@ -182,40 +201,41 @@ void TestWeapon::Render(HDC _hdc)
 void TestWeapon::Shoot()
 {
 	isShoot = false;
-	TestBullet* proj = new TestBullet;
-	Vec2 pos = GetPos();
-	pos.y -= GetSize().y / 2.f;
+	std::thread([this]()
+		{
+			for (int i = 0; i < 3; i++)
+			{
+				std::this_thread::sleep_for(std::chrono::milliseconds(500));
 
-	if (m_playerCount == 1)
-	{
-		pos.y += 10.f;
-		pos.x += 30.f;
-	}
-	else if (m_playerCount == 2)
-	{
-		pos.y -= 10.f;
-		pos.x -= 30.f;
-	}
-	proj->SetPos(pos);
-	proj->SetSize({ 10.f,10.f });
-	proj->SetDir(m_angle);
+				TestBullet* proj = new TestBullet;
+				Vec2 pos = GetPos();
+				pos.y -= GetSize().y / 2.f;
+
+				if (m_playerCount == 1)
+				{
+					pos.y += 10.f;
+					pos.x += 30.f;
+				}
+				else if (m_playerCount == 2)
+				{
+					pos.y -= 10.f;
+					pos.x -= 30.f;
+				}
+				proj->SetPos(pos);
+				proj->SetSize({ 20.f,20.f });
+				proj->SetDir(m_angle);
 
 
-	GET_SINGLE(SceneManager)->GetCurScene()->AddObject(proj, Layer::PROJECTILE);
+				GET_SINGLE(SceneManager)->GetCurScene()->AddObject(proj, Layer::PROJECTILE);
 
-	Vec2 vec = GetOwner()->GetPos();
+				Vec2 vec = GetOwner()->GetPos();
 
-	vec.x -= 4.f;
+				vec.x -= 4.f;
 
-	GetOwner()->SetPos(vec);
+				GetOwner()->SetPos(vec);
+			}
+			isRotation = true;
+		}).detach();
 
-	//m_offsetPos.x -= 1.f;
-	//
-	//std::thread([this]()
-	//	{
-	//		std::this_thread::sleep_for(std::chrono::milliseconds(500));
-	//		m_offsetPos.y += 1.f;
-	//	}).detach();
 
-	
 }

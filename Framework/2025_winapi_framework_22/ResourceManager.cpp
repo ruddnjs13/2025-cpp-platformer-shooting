@@ -190,17 +190,33 @@ void ResourceManager::RegisterTexture()
 	
 	//LoadTexture(L"Background", L"Texture\\background.bmp");
 	//LoadTexture(L"Gun1", L"Texture\\Revolver.bmp");
-	LoadTexture(L"Gun1", L"Texture\\GGG.bmp");
-	LoadTexture(L"NailGun", L"Texture\\NailGun.bmp");
-	LoadTexture(L"Nail", L"Texture\\Nail.bmp");
-	LoadTexture(L"Gun1Bullet", L"Texture\\Bullet1.bmp");
-	LoadTexture(L"Explosion", L"Texture\\Explosion.bmp");
 	LoadTexture(L"AimLine", L"Texture\\Aimming.bmp");
 	LoadTexture(L"Test2", L"Texture\\RoolRetTest.bmp");
 	LoadTexture(L"PlayerWalk", L"Texture\\PlayerWalk.bmp");
 	LoadTexture(L"PlayerIdle", L"Texture\\PlayerIdle.bmp");
 	LoadTexture(L"PlayerDie", L"Texture\\PlayerDie.bmp");
 	LoadTexture(L"Player", L"Texture\\TestPlayer.bmp");
+
+	//ÃÑ ÅØ½ºÃÄ
+	LoadTexture(L"Gun1", L"Texture\\Revolver.bmp");
+	LoadTexture(L"AK47", L"Texture\\AK47.bmp");
+	LoadTexture(L"Bazooka", L"Texture\\bazooka.bmp");
+	LoadTexture(L"Rocket", L"Texture\\Rocket.bmp");
+	LoadTexture(L"RazerGun", L"Texture\\RazerGun.bmp");
+	LoadTexture(L"PizzaGun", L"Texture\\pizzaBox.bmp");
+	LoadTexture(L"NailGun", L"Texture\\NailGun.bmp");
+	LoadTexture(L"Sniper", L"Texture\\sniper.bmp");
+
+
+	//ÃÑ¾Ë ÅØ½ºÃÄ
+	LoadTexture(L"Nail", L"Texture\\Nail.bmp");
+	LoadTexture(L"Explosion", L"Texture\\Explosion.bmp");
+	LoadTexture(L"Bullet1", L"Texture\\Bullet1.bmp");
+	LoadTexture(L"BazookaBullet", L"Texture\\Bullet2.bmp");
+	LoadTexture(L"RocketBullet", L"Texture\\Bullet3.bmp");
+	LoadTexture(L"SniperBullet", L"Texture\\Bullet4.bmp");
+	LoadTexture(L"EnergyBullet", L"Texture\\Bullet5.bmp");
+	LoadTexture(L"Pizza", L"Texture\\pizza.bmp");
 
 	// Å¸ÀÏ¸Ê ÅØ½ºÃÄ
 	LoadTexture(L"Ground", L"Texture\\Ground.bmp");
@@ -229,6 +245,14 @@ void ResourceManager::RegisterTexture()
 	LoadTexture(L"StartBtn_Hover", L"Texture\\StartBtn_Hover.bmp");
 	LoadTexture(L"GuideBtn", L"Texture\\GuideBtn.bmp");
 	LoadTexture(L"GuideBtn_Hover", L"Texture\\GuideBtn_Hover.bmp");
+
+	LoadTexture(L"One_Red", L"Texture\\One_Red.bmp");
+	LoadTexture(L"Two_Red", L"Texture\\Two_Red.bmp");
+	LoadTexture(L"One_Blue", L"Texture\\One_Blue.bmp");
+	LoadTexture(L"Two_Red", L"Texture\\Two_Blue.bmp");
+	LoadTexture(L"Zero_Red", L"Texture\\Zero_Red.bmp");
+	LoadTexture(L"Zero_Blue", L"Texture\\Zero_Blue.bmp");
+	LoadTexture(L"Colon", L"Texture\\Colon.bmp");
 
 	//
 }

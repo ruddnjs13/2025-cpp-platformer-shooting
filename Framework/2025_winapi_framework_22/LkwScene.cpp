@@ -10,6 +10,7 @@
 #include "InputManager.h"
 #include "InGameCanvas.h"
 #include "Health.h"
+#include "Slider.h"
 
 
 

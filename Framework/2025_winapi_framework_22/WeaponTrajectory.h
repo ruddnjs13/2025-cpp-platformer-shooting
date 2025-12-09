@@ -21,7 +21,7 @@ public:
 	void StoreAngleValue(float _angleValue) { angleValue = _angleValue; }
 	void DestoryTrajectory();
 public:
-	void ShowTrajectory(float _angleValue, Vec2 angle, Vec2 pos, Vec2 size, Object* owner, Weapon* _weapon);
+	void ShowTrajectory(float _angleValue, Vec2 angle, Vec2 pos, Vec2 size, Object* owner, Weapon* _weapon, bool isFlip);
 	
 public:
 	float angleValue = 0;

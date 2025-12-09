@@ -1,32 +1,34 @@
 #include "pch.h"
-#include "Collider.h"
-#include "Texture.h"
-#include "WindManager.h"
-#include "ResourceManager.h"
 #include "SceneManager.h"
-#include "Nail.h"
+#include "SniperBullet.h"
+#include "ResourceManager.h"
+#include "Rigidbody.h"
+#include "Texture.h"
+#include "Collider.h"
 
-Nail::Nail()
+SniperBullet::SniperBullet()
 {
-	m_pTex = GET_SINGLE(ResourceManager)->GetTexture(L"Nail");
+	m_pTex = GET_SINGLE(ResourceManager)->GetTexture(L"SniperBullet");
 	auto* col = AddComponent<Collider>();
+	AddComponent<Rigidbody>();
 	col->SetName(L"PlayerBullet");
 	col->SetTrigger(true);
 	col->SetSize({ 15,15 });
-	m_damage = 20;
+
+	m_damage = 10;
 	m_speed = 600;
 }
 
-Nail::~Nail()
+SniperBullet::~SniperBullet()
 {
 }
 
-void Nail::Update()
-{         
+void SniperBullet::Update()
+{
 	Translate({ m_dir.x * m_speed * fDT, m_dir.y * m_speed * fDT });
 }
 
-void Nail::Render(HDC _hdc)
+void SniperBullet::Render(HDC _hdc)
 {
 	Vec2 pos = GetPos();
 	Vec2 size = GetSize();
@@ -44,20 +46,19 @@ void Nail::Render(HDC _hdc)
 		RGB(255, 0, 255));
 }
 
-void Nail::BurstBullet()
+void SniperBullet::BurstBullet()
 {
 }
 
-void Nail::Rotate()
+void SniperBullet::Rotate()
 {
 }
 
-void Nail::DestoyThis()
+void SniperBullet::DestoyThis()
 {
 	GET_SINGLE(SceneManager)->RequestDestroy(this);
 }
 
-void Nail::DestroyOther(Collider* _other)
+void SniperBullet::DestroyOther(Collider* _other)
 {
 }
-

@@ -13,6 +13,8 @@ public:
 	virtual void Render(HDC _hdc) abstract;
 	virtual void BurstBullet() abstract;	
 	virtual void Rotate() abstract;
+	virtual void DestoyThis() abstract;
+	virtual void DestroyOther(Collider* _other) abstract;
 	void EnterCollision(Collider* _other)override;
 	void StayCollision(Collider* _other) override;
 	void ExitCollision(Collider* _other) override;
@@ -30,11 +32,12 @@ public:
 		m_dir = _dir;
 		m_dir.Normalize();
 	}
+public:
+	float m_angle;
+	float m_speed = 500; 
 
 protected:
-	float m_angle;
 	Vec2 m_dir;
 	float m_damage;
-	float m_speed;
 };
 

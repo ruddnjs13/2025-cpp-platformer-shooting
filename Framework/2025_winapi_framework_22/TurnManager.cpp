@@ -1,6 +1,7 @@
     #include "pch.h"
     #include "TurnManager.h"
     #include <iostream>
+#include "WindManager.h"
 #include <thread>
 
 
@@ -27,6 +28,13 @@
         ChangingTurnCondition();
 
 	    Invoke(m_curTurn);
+
+        srand(static_cast<unsigned>(time(nullptr)));
+
+        int randomInt = (rand() % 61) - 30;
+
+        GET_SINGLE(WindManager)->SetWind(randomInt);
+
     }
 
     void TurnManager::ChangingTurnCondition()

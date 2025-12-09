@@ -53,6 +53,9 @@
     <Filter Include="Engine\03. Object\Weapon\Test">
       <UniqueIdentifier>{7866a8dc-ee3e-408b-a1fe-32e5c36efa44}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\07. UI\UIElement">
+      <UniqueIdentifier>{91d94f7c-a74e-4816-b5be-c9d2e07a4c36}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Engine\09.Slot">
       <UniqueIdentifier>{d92dbc5b-b773-4190-803a-983f69ef646b}</UniqueIdentifier>
     </Filter>
@@ -65,8 +68,32 @@
     <Filter Include="Engine\04. Scene\BuildScene">
       <UniqueIdentifier>{dbe20a0f-b0b0-4841-8cf4-306ec70c4f25}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engine\07. UI\UIElement">
-      <UniqueIdentifier>{91d94f7c-a74e-4816-b5be-c9d2e07a4c36}</UniqueIdentifier>
+    <Filter Include="Engine\03. Object\Gun">
+      <UniqueIdentifier>{72695492-0799-4a1e-8043-b6cfc77ce957}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\03. Object\Gun\Bazuka">
+      <UniqueIdentifier>{c39c4b28-1c45-4553-8ee0-d2f4a8125723}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\03. Object\Gun\NailGurn">
+      <UniqueIdentifier>{52acf942-53c7-4825-ae90-0b3180adcbb6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\03. Object\Gun\Basic">
+      <UniqueIdentifier>{f4fe73f6-0178-4d54-87cf-f17133e2e0b2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\03. Object\Gun\RazerGun">
+      <UniqueIdentifier>{c26e3c4b-247a-4037-b5ec-2e41a543e6a8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\03. Object\Gun\Sniper">
+      <UniqueIdentifier>{72ef7f56-b7ba-413b-8f3e-3d331a6d0f98}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\03. Object\Gun\PizzaGun">
+      <UniqueIdentifier>{125f5a39-e2d4-4cdc-9fef-bd4e815d2a57}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\03. Object\Gun\grenade launcher">
+      <UniqueIdentifier>{e2087255-3bb7-4395-a668-efcb1211727b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\03. Object\Gun\Basic\BasicGun2">
+      <UniqueIdentifier>{88443c25-4c0b-4961-8660-fdb278e30433}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -179,20 +206,11 @@
     <ClInclude Include="Bullet.h">
       <Filter>Engine\03. Object\Weapon</Filter>
     </ClInclude>
-    <ClInclude Include="TestBullet.h">
-      <Filter>Engine\03. Object\Weapon\Test</Filter>
-    </ClInclude>
-    <ClInclude Include="TestWeapon.h">
-      <Filter>Engine\03. Object\Weapon\Test</Filter>
-    </ClInclude>
     <ClInclude Include="UIManager.h">
       <Filter>Engine\02. Manager</Filter>
     </ClInclude>
     <ClInclude Include="WeaponHolderComponent.h">
       <Filter>Engine\06. Component</Filter>
-    </ClInclude>
-    <ClInclude Include="TestWeapon2.h">
-      <Filter>Engine\03. Object\Weapon\Test</Filter>
     </ClInclude>
     <ClInclude Include="TestPlayer.h">
       <Filter>Engine\03. Object\Weapon\Test</Filter>
@@ -256,8 +274,54 @@
     <ClInclude Include="Health.h">
       <Filter>Engine\06. Component</Filter>
     </ClInclude>
-    <ClInclude Include="Nail.h" />
-    <ClInclude Include="Nailgun.h" />
+    <ClInclude Include="WindManager.h">
+      <Filter>Engine\02. Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Bazuka.h">
+      <Filter>Engine\03. Object\Gun\Bazuka</Filter>
+    </ClInclude>
+    <ClInclude Include="BazukaBullet.h">
+      <Filter>Engine\03. Object\Gun\Bazuka</Filter>
+    </ClInclude>
+    <ClInclude Include="Nail.h">
+      <Filter>Engine\03. Object\Gun\NailGurn</Filter>
+    </ClInclude>
+    <ClInclude Include="Nailgun.h">
+      <Filter>Engine\03. Object\Gun\NailGurn</Filter>
+    </ClInclude>
+    <ClInclude Include="Rocket.h">
+      <Filter>Engine\03. Object\Gun\grenade launcher</Filter>
+    </ClInclude>
+    <ClInclude Include="TestBullet.h">
+      <Filter>Engine\03. Object\Gun\Basic</Filter>
+    </ClInclude>
+    <ClInclude Include="TestWeapon2.h">
+      <Filter>Engine\03. Object\Gun\Basic</Filter>
+    </ClInclude>
+    <ClInclude Include="RocketBullet.h">
+      <Filter>Engine\03. Object\Gun\grenade launcher</Filter>
+    </ClInclude>
+    <ClInclude Include="RazerGun.h">
+      <Filter>Engine\03. Object\Gun\RazerGun</Filter>
+    </ClInclude>
+    <ClInclude Include="RazerBullet.h">
+      <Filter>Engine\03. Object\Gun\RazerGun</Filter>
+    </ClInclude>
+    <ClInclude Include="SniperBullet.h">
+      <Filter>Engine\03. Object\Gun\Sniper</Filter>
+    </ClInclude>
+    <ClInclude Include="Sniper.h">
+      <Filter>Engine\03. Object\Gun\Sniper</Filter>
+    </ClInclude>
+    <ClInclude Include="PizzaBullet.h">
+      <Filter>Engine\03. Object\Gun\PizzaGun</Filter>
+    </ClInclude>
+    <ClInclude Include="PizzeGun.h">
+      <Filter>Engine\03. Object\Gun\PizzaGun</Filter>
+    </ClInclude>
+    <ClInclude Include="TestWeapon.h">
+      <Filter>Engine\03. Object\Gun\Basic\BasicGun2</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="2025_winapi_framework_22.rc">
@@ -360,12 +424,6 @@
     <ClCompile Include="Bullet.cpp">
       <Filter>Engine\03. Object\Weapon</Filter>
     </ClCompile>
-    <ClCompile Include="TestBullet.cpp">
-      <Filter>Engine\03. Object\Weapon\Test</Filter>
-    </ClCompile>
-    <ClCompile Include="TestWeapon.cpp">
-      <Filter>Engine\03. Object\Weapon\Test</Filter>
-    </ClCompile>
     <ClCompile Include="UIManager.cpp">
       <Filter>Engine\02. Manager</Filter>
     </ClCompile>
@@ -373,9 +431,6 @@
       <Filter>Engine\06. Component</Filter>
     </ClCompile>
     <ClCompile Include="TestPlayer.cpp">
-      <Filter>Engine\03. Object\Weapon\Test</Filter>
-    </ClCompile>
-    <ClCompile Include="TestWeapon2.cpp">
       <Filter>Engine\03. Object\Weapon\Test</Filter>
     </ClCompile>
     <ClCompile Include="Bomb.cpp">
@@ -435,7 +490,53 @@
     <ClCompile Include="Health.cpp">
       <Filter>Engine\06. Component</Filter>
     </ClCompile>
-    <ClCompile Include="Nail.cpp" />
-    <ClCompile Include="Nailgun.cpp" />
+    <ClCompile Include="WindManager.cpp">
+      <Filter>Engine\02. Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Bazuka.cpp">
+      <Filter>Engine\03. Object\Gun\Bazuka</Filter>
+    </ClCompile>
+    <ClCompile Include="BazukaBullet.cpp">
+      <Filter>Engine\03. Object\Gun\Bazuka</Filter>
+    </ClCompile>
+    <ClCompile Include="Nail.cpp">
+      <Filter>Engine\03. Object\Gun\NailGurn</Filter>
+    </ClCompile>
+    <ClCompile Include="Nailgun.cpp">
+      <Filter>Engine\03. Object\Gun\NailGurn</Filter>
+    </ClCompile>
+    <ClCompile Include="Rocket.cpp">
+      <Filter>Engine\03. Object\Gun\grenade launcher</Filter>
+    </ClCompile>
+    <ClCompile Include="TestBullet.cpp">
+      <Filter>Engine\03. Object\Gun\Basic</Filter>
+    </ClCompile>
+    <ClCompile Include="TestWeapon2.cpp">
+      <Filter>Engine\03. Object\Gun\Basic</Filter>
+    </ClCompile>
+    <ClCompile Include="RocketBullet.cpp">
+      <Filter>Engine\03. Object\Gun\grenade launcher</Filter>
+    </ClCompile>
+    <ClCompile Include="RazerGun.cpp">
+      <Filter>Engine\03. Object\Gun\RazerGun</Filter>
+    </ClCompile>
+    <ClCompile Include="RazerBullet.cpp">
+      <Filter>Engine\03. Object\Gun\RazerGun</Filter>
+    </ClCompile>
+    <ClCompile Include="SniperBullet.cpp">
+      <Filter>Engine\03. Object\Gun\Sniper</Filter>
+    </ClCompile>
+    <ClCompile Include="Sniper.cpp">
+      <Filter>Engine\03. Object\Gun\Sniper</Filter>
+    </ClCompile>
+    <ClCompile Include="PizzaBullet.cpp">
+      <Filter>Engine\03. Object\Gun\PizzaGun</Filter>
+    </ClCompile>
+    <ClCompile Include="PizzeGun.cpp">
+      <Filter>Engine\03. Object\Gun\PizzaGun</Filter>
+    </ClCompile>
+    <ClCompile Include="TestWeapon.cpp">
+      <Filter>Engine\03. Object\Gun\Basic\BasicGun2</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

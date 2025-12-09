@@ -6,7 +6,7 @@ class Image :
 {
 public:
 	void Init(Texture* texture);
-	void Update() override;
+	virtual void Update() override;
 	void Render(HDC _hdc) override;
 
 	inline void DrawTexture(

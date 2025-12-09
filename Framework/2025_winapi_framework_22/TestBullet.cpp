@@ -7,17 +7,21 @@
 #include "Rigidbody.h"
 #include "SceneManager.h"
 #include "TurnManager.h"
+#include "WindManager.h"
 #include "InputManager.h"
 #include "Rigidbody.h"
 #include "Bomb.h"
 
 TestBullet::TestBullet()
 {
-	m_pTex = GET_SINGLE(ResourceManager)->GetTexture(L"Gun1Bullet");
+	m_pTex = GET_SINGLE(ResourceManager)->GetTexture(L"Bullet1");
 	auto* col = AddComponent<Collider>();
 	AddComponent<Rigidbody>();
 	col->SetName(L"PlayerBullet");
 	col->SetTrigger(true);
+	col->SetSize({ 20,20 });
+	m_angle = 20;
+	m_speed = 500;
 }
 
 TestBullet::~TestBullet()
@@ -42,28 +46,30 @@ void TestBullet::Render(HDC _hdc)
 		, 0, 0, width, height,
 		RGB(255, 0, 255));
 
-	ComponentRender(_hdc);
 }
 
 void TestBullet::Update()
 {
-	Translate({ m_dir.x * 500.f * fDT, m_dir.y * 500.f * fDT });
+	m_speed + GET_SINGLE(WindManager)->m_windPower;
+	Translate({ m_dir.x * m_speed* fDT, m_dir.y * m_speed * fDT });
 }
 
 void TestBullet::BurstBullet()
 {
-	Bomb* proj = new Bomb;
-	Vec2 pos = GetPos();
-	pos.y -= GetSize().y / 2.f;
-
-	proj->SetPos(pos);
-	proj->SetSize({ 70.f,70.f });
-
-	GET_SINGLE(SceneManager)->GetCurScene()->AddObject(proj, Layer::Boom);
+	
 }
 
 
 void TestBullet::Rotate()
 {
 
+}
+
+void TestBullet::DestoyThis()
+{
+	GET_SINGLE(SceneManager)->RequestDestroy(this);
+}
+
+void TestBullet::DestroyOther(Collider* _other)
+{
 }
