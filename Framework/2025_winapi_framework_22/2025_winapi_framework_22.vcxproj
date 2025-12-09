@@ -164,9 +164,11 @@
     <ClInclude Include="Bazuka.h" />
     <ClInclude Include="BazukaBullet.h" />
     <ClInclude Include="Button.h" />
+    <ClInclude Include="GameManager.h" />
     <ClInclude Include="Health.h" />
     <ClInclude Include="Image.h" />
     <ClInclude Include="InGameCanvas.h" />
+    <ClInclude Include="MatchScoreUI.h" />
     <ClInclude Include="MyAction.h" />
     <ClInclude Include="Animation.h" />
     <ClInclude Include="Animator.h" />
@@ -255,6 +257,7 @@
     <ClCompile Include="DevScene.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="Floor.cpp" />
+    <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="GDISelector.cpp" />
     <ClCompile Include="Health.cpp" />
     <ClCompile Include="Image.cpp" />
@@ -264,6 +267,7 @@
     <ClCompile Include="KmjScene.cpp" />
     <ClCompile Include="LkwScene.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MatchScoreUI.cpp" />
     <ClCompile Include="Nail.cpp" />
     <ClCompile Include="Nailgun.cpp" />
     <ClCompile Include="Object.cpp" />

@@ -40,6 +40,8 @@
 			functions.erase(handle.it);
 		}
 
+		
+
 		// 葛电 备刀 格废 秦力
 		void Clear()
 		{
@@ -50,6 +52,11 @@
 		{
 			for (auto& fn : functions)
 				fn(args...);
+		}
+
+		bool HasListener()
+		{
+			return !functions.empty();
 		}
 
 	private:
@@ -94,7 +101,12 @@
 		void Invoke()
 		{
 			for (auto& fn : functions)
-				fn();
+				if (fn) fn();
+		}
+
+		bool HasListener()
+		{
+			return !functions.empty();
 		}
 
 	private:

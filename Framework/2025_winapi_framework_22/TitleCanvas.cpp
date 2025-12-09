@@ -5,54 +5,63 @@
 
 void TitleCanvas::Init()
 {
-	startBtn = new Button();
-	guideBtn = new Button();
-	exitBtn = new Button();
+    startBtn = new Button();
+    guideBtn = new Button();
+    exitBtn = new Button();
 
-	Texture* startTexture = GET_SINGLE(ResourceManager)->GetTexture(L"StartBtn");
-	Texture* startHoverTexture = GET_SINGLE(ResourceManager)->GetTexture(L"StartBtn_Hover");
-	startBtn->Init(startTexture, startHoverTexture);
+    {
+        Texture* tex = GET_SINGLE(ResourceManager)->GetTexture(L"StartBtn");
+        Texture* texHover = GET_SINGLE(ResourceManager)->GetTexture(L"StartBtn_Hover");
+        startBtn->Init(tex, texHover);
+        startBtn->SetPos({ WINDOW_WIDTH / 2, WINDOW_HEIGHT / 8 * 5 });
+        startBtn->SetSize({ 200, 50 });
 
-	startBtn->SetPos({ WINDOW_WIDTH / 2,WINDOW_HEIGHT / 8 * 5 });
-	startBtn->SetSize({200,50});
+        startBtnHandle = startBtn->OnClickEvt.AddListener([]() {
+            GET_SINGLE(SceneManager)->RequestLoadScene(L"LkwScene");
+            });
+    }
 
-	startBtn->OnClickEvt.AddListener(std::bind(&TitleCanvas::GotoInGame,this));
+    {
+        Texture* tex = GET_SINGLE(ResourceManager)->GetTexture(L"GuideBtn");
+        Texture* texHover = GET_SINGLE(ResourceManager)->GetTexture(L"GuideBtn_Hover");
+        guideBtn->Init(tex, texHover);
+        guideBtn->SetPos({ WINDOW_WIDTH / 2, WINDOW_HEIGHT / 8 * 6 });
+        guideBtn->SetSize({ 200, 50 });
 
-	Texture* guideTexture = GET_SINGLE(ResourceManager)->GetTexture(L"GuideBtn");
-	Texture* guideHoverTexture = GET_SINGLE(ResourceManager)->GetTexture(L"GuideBtn_Hover");
-	guideBtn->Init(guideTexture, guideHoverTexture);
+    }
 
-	guideBtn->SetPos({ WINDOW_WIDTH / 2,WINDOW_HEIGHT / 8 * 6 });
-	guideBtn->SetSize({ 200,50 });
+    {
+        Texture* tex = GET_SINGLE(ResourceManager)->GetTexture(L"ExitBtn");
+        Texture* texHover = GET_SINGLE(ResourceManager)->GetTexture(L"ExitBtn_Hover");
+        exitBtn->Init(tex, texHover);
+        exitBtn->SetPos({ WINDOW_WIDTH / 2, WINDOW_HEIGHT / 8 * 7 });
+        exitBtn->SetSize({ 200, 50 });
 
-	guideBtn->OnClickEvt.AddListener(std::bind(&TitleCanvas::GotoInGame, this));
+        exitBtnHandle = exitBtn->OnClickEvt.AddListener([]() {
+            PostQuitMessage(0);
+            });
+    }
 
-	Texture* exitTexture = GET_SINGLE(ResourceManager)->GetTexture(L"ExitBtn");
-	Texture* exitHoverTexture = GET_SINGLE(ResourceManager)->GetTexture(L"ExitBtn_Hover");
-	exitBtn->Init(exitTexture, exitHoverTexture);
+    backgroundPanel = new Image();
+    Texture* backgroundTex = GET_SINGLE(ResourceManager)->GetTexture(L"Background");
+    backgroundPanel->Init(backgroundTex);
+    backgroundPanel->SetPos({ WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2 });
+    backgroundPanel->SetSize({ WINDOW_WIDTH, WINDOW_HEIGHT });
 
-	exitBtn->SetPos({ WINDOW_WIDTH / 2,WINDOW_HEIGHT / 8*7 });
-	exitBtn->SetSize({ 200,50 });
-
-	exitBtn->OnClickEvt.AddListener(std::bind(&TitleCanvas::GotoInGame, this));
-
-	backgroundPanel = new Image();
-	Texture* backgroundTexture = GET_SINGLE(ResourceManager)->GetTexture(L"Background");
-	backgroundPanel->Init(backgroundTexture);
-
-	backgroundPanel->SetPos({WINDOW_WIDTH/2,WINDOW_HEIGHT/2});
-	backgroundPanel->SetSize({WINDOW_WIDTH,WINDOW_HEIGHT});
-
-	AddUIElement(backgroundPanel);
-
-	AddUIElement(startBtn);
-	AddUIElement(guideBtn);
-	AddUIElement(exitBtn);
-
-
+    AddUIElement(backgroundPanel);
+    AddUIElement(startBtn);
+    AddUIElement(guideBtn);
+    AddUIElement(exitBtn);
 }
 
-void TitleCanvas::GotoInGame()
+void TitleCanvas::Release()
 {
-	GET_SINGLE(SceneManager)->LoadScene(L"LkwScene");
+    startBtn->OnClickEvt.RemoveListener(startBtnHandle);
+    exitBtn->OnClickEvt.RemoveListener(exitBtnHandle);
+
+    Canvas::Release();
+    startBtn = nullptr;
+    guideBtn = nullptr;
+    exitBtn = nullptr;
+    backgroundPanel = nullptr;
 }

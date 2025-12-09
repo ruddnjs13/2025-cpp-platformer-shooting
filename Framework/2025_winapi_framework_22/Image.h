@@ -57,7 +57,6 @@ public:
             // 목적지에서도 오른쪽 정렬
             dstX = int(_pos.x + _size.x / 2) - drawWidth;
         }
-
         TransparentBlt(
             _hdc,
             dstX,
@@ -72,7 +71,6 @@ public:
             _colorKey
         );
     }
-
 
 protected:
 	Texture* m_texture = nullptr;

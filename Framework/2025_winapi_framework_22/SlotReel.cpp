@@ -102,7 +102,7 @@ void SlotReel::MakeWeapon(Weapon* targetWeapon, int _playerNum)
 
 	m_pWeaponHolder->ChangeWeapon(targetWeapon,
 		{ pos },
-		{ 20.f,20.f }
+		{ 40.f,40.f }
 	, _playerNum);
 
 
@@ -113,8 +113,9 @@ void SlotReel::DestroyWeapon()
 {
 	std::thread([this]()
 		{
-			std::this_thread::sleep_for(std::chrono::milliseconds(2000));
+			std::this_thread::sleep_for(std::chrono::milliseconds(3000));
 			m_pWeaponHolder->DestroyWeapon();
+			GET_SINGLE(TurnManager)->ChangeTurn(TurnType::Waiting);
 		}).detach();
 }
 
@@ -135,7 +136,7 @@ void SlotReel::SlotRolling(int _playerNum)
 {
 	srand(static_cast<unsigned int>(time(nullptr)));
 	SetPlayerNum(_playerNum);
-	m_pTex = GET_SINGLE(ResourceManager)->GetTexture(L"Test2");
+	m_pTex = GET_SINGLE(ResourceManager)->GetTexture(L"Slot");
 
 	rollingVec.clear();
 
@@ -173,23 +174,30 @@ void SlotReel::SlotRolling(int _playerNum)
 			int randomInt = rand() % 50 + 26;
 			Vec2 offsetPoss = GetPos();
 			offsetPoss.y -= 60;
-			float speed = 100;
-			int responTime = 250;
+			float speed = 150;
+			int responTime = 420;
 			int storeValue = 0;
 			int playerNum = GetPlayerNum();
 
 			vector<RollingItem*> rollingItem;
 
-			for (int i = 0; i < 25; ++i)
+			for (int i = 0; i < 11; ++i)
 			{
+				if (i == 10)
+				{
+					responTime = 2000;
+				}
 				std::this_thread::sleep_for(std::chrono::milliseconds(responTime));
+
+				if (i == 9)
+				{
+					speed = 0;
+				}
 
 				if (rollingVec.size() >= 3)
 				{
 
 					rollingItem.push_back(rollingVec[0]);
-
-					///GET_SINGLE(SceneManager)->GetCurScene()->RequestDestroy(rollingVec[0]);
 
 					rollingVec[0] = rollingVec[1];
 					rollingVec[1] = rollingVec[2];
@@ -231,7 +239,7 @@ void SlotReel::SlotRolling(int _playerNum)
 
 				int randomTexture = rand() % 8 + 1;
 
-				if (i == 19)
+				if (i == 8)
 				{
 					storeValue = randomTexture;
 				}
@@ -275,19 +283,17 @@ void SlotReel::SlotRolling(int _playerNum)
 				}
 				rollingVec[2] = rollingItems;
 
-				speed -= 4.1f;
-				responTime += 49;
 
 
-				if (i == 24)
+				if (i == 10)
 				{
 					switch (storeValue)
 					{
 					case 1:
-						MakeWeapon(new TestWeapon, playerNum);
+						MakeWeapon(new TestWeapon2, playerNum);
 						break;
 					case 2:
-						MakeWeapon(new TestWeapon2, playerNum);
+						MakeWeapon(new TestWeapon, playerNum);
 						break;
 					case 3:
 						MakeWeapon(new Bazuka, playerNum);
@@ -322,6 +328,7 @@ void SlotReel::SlotRolling(int _playerNum)
 					{
 						GET_SINGLE(SceneManager)->GetCurScene()->RequestDestroy(rollingItem[i]);
 					}
+
 					rollingItem.clear();
 					GET_SINGLE(TurnManager)->ChangeTurn(TurnType::Play);
 					std::this_thread::sleep_for(std::chrono::milliseconds(1000));

@@ -32,8 +32,8 @@ bool Core::Init(HWND _hWnd)
  
     if (!GET_SINGLE(ResourceManager)->Init())
         return false;
-    GET_SINGLE(SceneManager)->Init();
     GET_SINGLE(UIManager)->Init();
+    GET_SINGLE(SceneManager)->Init();
     GET_SINGLE(TileMapManager)->LoadAllTileMap();
 
 

@@ -9,6 +9,7 @@
 #include "Background.h"
 #include "InputManager.h"
 #include "InGameCanvas.h"
+#include "GameManager.h"
 #include "Health.h"
 #include "Slider.h"
 
@@ -16,53 +17,88 @@
 
 void LkwScene::Init()
 {
-	//GET_SINGLE(UIManager)->SetCanvas(CanvasType::Title);
-	GET_SINGLE(UIManager)->SetCanvas(CanvasType::InGame);
-	GET_SINGLE(TileMapManager)->SetTileMapToScene(this, L"Map1");
+    GET_SINGLE(UIManager)->SetCanvas(CanvasType::InGame);
+    GET_SINGLE(GameManager)->Reset();
 
-	Player* pPlayer1 = Spawn<Player>(Layer::PLAYER, { 300, 300 }, { 32, 32 });
-	Player* pPlayer2 = Spawn<Player>(Layer::PLAYER, { 500, 300 }, { 32, 32 });
-	pPlayer1->SetPlayerTurn(TurnType::Player1, 1);
-	pPlayer2->SetPlayerTurn(TurnType::Player2, 2);
+    GET_SINGLE(TileMapManager)->SetTileMapToScene(this, L"Map1");
 
+    pPlayer2 = Spawn<Player>(Layer::PLAYER, { 500, 300 }, { 32, 32 });
+    pPlayer1 = Spawn<Player>(Layer::PLAYER, { 300, 300 }, { 32, 32 });
+    pPlayer1->SetPlayerTurn(TurnType::Player1, 1);
+    pPlayer2->SetPlayerTurn(TurnType::Player2, 2);
 
-	GET_SINGLE(TurnManager)->ChangeTurn(TurnType::Waiting);
+    GET_SINGLE(TurnManager)->ChangeTurn(TurnType::Waiting);
 
-	GET_SINGLE(CollisionManager)->CheckLayer(Layer::PLAYER, Layer::DEFAULT);
-	GET_SINGLE(CollisionManager)->CheckLayer(Layer::PROJECTILE, Layer::DEFAULT);
-	GET_SINGLE(CollisionManager)->CheckLayer(Layer::PROJECTILE, Layer::PLAYER);
-	GET_SINGLE(CollisionManager)->CheckLayer(Layer::Boom, Layer::DEFAULT);
-	GET_SINGLE(CollisionManager)->CheckLayer(Layer::PLAYER, Layer::PLAYER);
-	GET_SINGLE(CollisionManager)->CheckLayer(Layer::Slot, Layer::RollItem);
+    GET_SINGLE(CollisionManager)->CheckLayer(Layer::PLAYER, Layer::DEFAULT);
+    GET_SINGLE(CollisionManager)->CheckLayer(Layer::PROJECTILE, Layer::DEFAULT);
+    GET_SINGLE(CollisionManager)->CheckLayer(Layer::PROJECTILE, Layer::PLAYER);
+    GET_SINGLE(CollisionManager)->CheckLayer(Layer::Boom, Layer::DEFAULT);
+    GET_SINGLE(CollisionManager)->CheckLayer(Layer::PLAYER, Layer::PLAYER);
+    GET_SINGLE(CollisionManager)->CheckLayer(Layer::Slot, Layer::RollItem);
 
-	Background* background = Spawn<Background>(Layer::BACKGROUND, { WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2 }, { WINDOW_WIDTH, WINDOW_HEIGHT });
+    Background* background = Spawn<Background>(Layer::BACKGROUND, { WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2 }, { WINDOW_WIDTH, WINDOW_HEIGHT });
+    background->Init(GET_SINGLE(ResourceManager)->GetTexture(L"Background"));
 
-	background->Init(GET_SINGLE(ResourceManager)->GetTexture(L"Background"));
+    auto curCanvas = UIManager::GetInst()->GetCurCanvas();
+    auto inGameCanvas = std::dynamic_pointer_cast<InGameCanvas>(curCanvas);
 
-	auto curCanvas = UIManager::GetInst()->GetCurCanvas();
-	auto inGameCanvas = std::dynamic_pointer_cast<InGameCanvas>(curCanvas);
+    if (inGameCanvas)
+    {
+        p1HealthHandle = pPlayer1->GetComponent<Health>()->OnHealthChanged.AddListener(
+            [inGameCanvas](float value)
+            {
+                if (inGameCanvas && inGameCanvas->p1_HpBar)
+                    inGameCanvas->p1_HpBar->SetValue(value);
+            });
 
-	pPlayer1->GetComponent<Health>()->OnHealthChanged.AddListener(
-		std::bind(&Slider::SetValue, inGameCanvas->p1_HpBar, std::placeholders::_1));
+        p2HealthHandle =  pPlayer2->GetComponent<Health>()->OnHealthChanged.AddListener(
+            [inGameCanvas](float value)
+            {
+                if (inGameCanvas && inGameCanvas->p2_HpBar)
+                    inGameCanvas->p2_HpBar->SetValue(value);
+            });
 
-	pPlayer2->GetComponent<Health>()->OnHealthChanged.AddListener(
-		std::bind(&Slider::SetValue, inGameCanvas->p2_HpBar, std::placeholders::_1));
+        p1SteminaHandle = pPlayer1->OnStaminaChanged.AddListener(
+            [inGameCanvas](float value)
+            {
+                if (inGameCanvas && inGameCanvas->p1_SteminaBar)
+                    inGameCanvas->p1_SteminaBar->SetValue(value);
+            });
 
-	pPlayer1->OnStaminaChanged.AddListener(
-		std::bind(&Slider::SetValue, inGameCanvas->p1_SteminaBar, std::placeholders::_1));
+        p2SteminaHandle = pPlayer2->OnStaminaChanged.AddListener(
+            [inGameCanvas](float value)
+            {
+                if (inGameCanvas && inGameCanvas->p2_SteminaBar)
+                    inGameCanvas->p2_SteminaBar->SetValue(value);
+            });
+    }
 
-	pPlayer2->OnStaminaChanged.AddListener(
-		std::bind(&Slider::SetValue, inGameCanvas->p2_SteminaBar, std::placeholders::_1));
+    p1DeadHandle = pPlayer1->onDeadEvent.AddListener(
+        [](float value) {
+            GET_SINGLE(GameManager)->SetPlayerDead(1);
+        });
+    p2DeadHandle = pPlayer2->onDeadEvent.AddListener(
+        [](float value) {
+            GET_SINGLE(GameManager)->SetPlayerDead(2);
+        });
 }
+
 
 void LkwScene::Update()
 {
+   
+    
 	Scene::Update();
+}
 
-	if (GET_KEYDOWN(KEY_TYPE::Q))
-		GET_SINGLE(TurnManager)->ChangeTurn(TurnType::Select);
-	if (GET_KEYDOWN(KEY_TYPE::W))
-		GET_SINGLE(TurnManager)->ChangeTurn(TurnType::Play);
-	if (GET_KEYDOWN(KEY_TYPE::E))
-		GET_SINGLE(TurnManager)->ChangeTurn(TurnType::Waiting);
+void LkwScene::Release()
+{
+    pPlayer1->onDeadEvent.RemoveListener(p1DeadHandle);
+    pPlayer2->onDeadEvent.RemoveListener(p2DeadHandle);
+
+    pPlayer1->GetComponent<Health>()->OnHealthChanged.RemoveListener(p1HealthHandle);
+    pPlayer1->OnStaminaChanged.RemoveListener(p1SteminaHandle);
+    pPlayer2->GetComponent<Health>()->OnHealthChanged.RemoveListener(p2HealthHandle);
+    pPlayer2->OnStaminaChanged.RemoveListener(p2SteminaHandle);
+    Scene::Release();
 }

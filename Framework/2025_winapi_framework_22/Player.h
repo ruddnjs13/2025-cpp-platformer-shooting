@@ -14,6 +14,7 @@ public:
 	~Player();
 public:
 	MyAction<float> OnStaminaChanged;
+	MyAction<int> onDeadEvent;
 	//virtual void Update();
 	//virtual void Render(HDC _hdc);
 	void SetStamina(float _stamina) { m_maxStamina = _stamina;  m_stamina = _stamina; }
@@ -63,12 +64,11 @@ private:
 	float m_stamina = 0;
 	float m_maxStamina = 0;
 	bool m_isFlipped = false;
-
+	bool m_isDestroy = false;
 	SlotReel* slotReel = nullptr;
 	Texture* m_pTex;
 	TurnType m_turnType;
 	PlayerState m_state;
 	PlayerState m_prevState;
-	MyAction<int> onDeadEvent;
 };
 

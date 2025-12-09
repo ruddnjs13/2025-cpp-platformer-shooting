@@ -2,6 +2,7 @@
     #include "TurnManager.h"
     #include <iostream>
 #include "WindManager.h"
+#include "GameManager.h"
 #include <thread>
 
 
@@ -79,7 +80,11 @@
     { 
         std::thread([this]() 
             {
-            std::this_thread::sleep_for(std::chrono::seconds(2));
+            std::this_thread::sleep_for(std::chrono::seconds(3));
+            if (GET_SINGLE(GameManager)->MatchWin())
+            {
+                GET_SINGLE(GameManager)->GameOver();
+            }
             ChangeTurn(TurnType::Select); 
             }).detach();
     }

@@ -196,6 +196,7 @@ void ResourceManager::RegisterTexture()
 	LoadTexture(L"PlayerIdle", L"Texture\\PlayerIdle.bmp");
 	LoadTexture(L"PlayerDie", L"Texture\\PlayerDie.bmp");
 	LoadTexture(L"Player", L"Texture\\TestPlayer.bmp");
+	LoadTexture(L"Slot", L"Texture\\Slot.bmp");
 
 	//ÃÑ ÅØ½ºÃÄ
 	LoadTexture(L"Gun1", L"Texture\\Revolver.bmp");
@@ -253,6 +254,8 @@ void ResourceManager::RegisterTexture()
 	LoadTexture(L"Zero_Red", L"Texture\\Zero_Red.bmp");
 	LoadTexture(L"Zero_Blue", L"Texture\\Zero_Blue.bmp");
 	LoadTexture(L"Colon", L"Texture\\Colon.bmp");
+	LoadTexture(L"Player1_Win", L"Texture\\Player1Win.bmp");
+	LoadTexture(L"Player2_Win", L"Texture\\Player2Win.bmp");
 
 	//
 }

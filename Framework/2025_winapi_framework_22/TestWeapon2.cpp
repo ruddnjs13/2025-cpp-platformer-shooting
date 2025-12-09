@@ -96,9 +96,9 @@ void TestWeapon2::Update()
 
 		m_angleValue -= 1;
 
-		if (m_angleValue <= 0)
+		if (m_angleValue <= -45)
 		{
-			m_angleValue = 0;
+			m_angleValue = -45;
 		}
 
 		Vec2 pos = GetPos();
