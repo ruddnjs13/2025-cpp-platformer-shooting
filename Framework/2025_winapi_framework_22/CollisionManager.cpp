@@ -79,6 +79,9 @@ void CollisionManager::PhysicsResolve(Collider* _left, Collider* _right)
 	bool leftKinematic = leftRb == nullptr || leftRb->IsKinematic();
 	bool rightKinematic = rightRb == nullptr || rightRb->IsKinematic();
 
+	Vec2 leftVel = leftRb ? leftRb->GetVelocity() : Vec2{0, 0};
+	Vec2 rightVel = rightRb ? rightRb->GetVelocity() : Vec2{ 0, 0 };
+
 	// 침범을 하지 않았으므로 무시
 	if (overlapX <= 0 || overlapY <= 0)
 		return;
@@ -98,16 +101,18 @@ void CollisionManager::PhysicsResolve(Collider* _left, Collider* _right)
 	{
 
 		// 왼쪽 물체만 정적일 때
-		if (leftKinematic && !rightKinematic)
+		if ((leftKinematic || leftVel.x == 0) && !rightKinematic)
 		{
 			// right를 기준으로 왼쪽이면 -로 오른쪽이면 +로 밀기
 			int dir = (rightPos.x > leftPos.x) ? -1 : 1;
-			Object* rightObj = _right->GetOwner();
-
+			
+			Object* rightObj = _right->GetOwner();			
+			
+			//rightRb->SetGrounded(false);
 			rightObj->SetPos({ rightPos.x - (percentX * dir), rightPos.y });
 		}
 		// 아니고 오른쪽 물체만 정적일 때
-		else if (!leftKinematic && rightKinematic)
+		else if (!leftKinematic && (rightKinematic || rightVel.x == 0))
 		{
 			//left를 기준으로 왼쪽이면 -로 오른쪽이면 +로 밀기
 			int dir = (leftPos.x > rightPos.x) ? -1 : 1;
@@ -123,16 +128,16 @@ void CollisionManager::PhysicsResolve(Collider* _left, Collider* _right)
 			Object* leftObj = _left->GetOwner();
 			Object* rightObj = _right->GetOwner();
 
-			leftObj->SetPos({ leftPos.x - (percentX * dir), leftPos.y });
-			//rightObj->SetPos({ rightPos.x + (percentX / 2.f * dir), rightPos.y });
+			leftObj->SetPos({ leftPos.x - (percentX / 2.f* dir), leftPos.y });
+			rightObj->SetPos({ rightPos.x + (percentX / 2.f * dir), rightPos.y });
 		}
 	}
 	else // X축으로 더 깊이 침범하면 Y축 방향으로 밀기
 	{
 		// x와 다르게 y는 dir만으로는 못함.
 		// 때문에 이전에 Rigidbody의 속도를 이용해 판단.
-		float leftVy = leftRb ? leftRb->GetVelocity().y : 0.f;
-		float rightVy = rightRb ? rightRb->GetVelocity().y : 0.f;
+		float leftVy = leftVel.y;
+		float rightVy = rightVel.y;
 
 		// Left가 위의 있는지
 		bool isLeft = (leftPos.y < rightPos.y);
@@ -144,17 +149,14 @@ void CollisionManager::PhysicsResolve(Collider* _left, Collider* _right)
 			// 오른쪽 물체가 아래로 떨어지고 있을 때
 			Object* rightObj = _right->GetOwner();
 
-			if ((rightVy > 0 && !isLeft))
+			if ((rightVy > 0 && !isLeft) || (rightRb->IsGrounded() && overlapY > 0.5f))
 			{
 				// 땅 충돌 처리
 				rightObj->SetPos({ rightPos.x, rightPos.y + (percentY * dir)});
+				
+				rightRb->SetGrounded(true);
 
-				if (overlapX > leftSize.x * 0.03f) // 30%?
-				{
-					cout << "감지이ㅣ" << endl;
-					rightRb->SetGrounded(true);
-				}				
-				rightRb->SetVelocity({ rightRb->GetVelocity().x, 0.f });				
+				rightRb->SetVelocity({ rightRb->GetVelocity().x, 0.f });
 			}
 			// 오른쪽 물체가 천장에 머리 박았을 때
 			else if (rightVy < 0 && isLeft)
