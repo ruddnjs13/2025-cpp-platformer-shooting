@@ -23,5 +23,9 @@ public:
     MyAction<float>::Handle p1SteminaHandle;
     MyAction<float>::Handle p2SteminaHandle;
 
+    MyAction<int>::Handle p1DeadHandle;
+    MyAction<int>::Handle p2DeadHandle;
+
+
 };
 
