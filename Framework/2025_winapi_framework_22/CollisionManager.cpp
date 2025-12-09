@@ -13,7 +13,6 @@ void CollisionManager::Update()
 		{
 			if (m_objectLayer[Row] & (1 << Col))
 			{
-				//int a = 0;
 				CollisionLayerUpdate((Layer)Row, (Layer)Col);
 			}
 		}
@@ -92,6 +91,8 @@ void CollisionManager::PhysicsResolve(Collider* _left, Collider* _right)
 	if (leftKinematic && rightKinematic)
 		return;
 
+	//cout << overlapX << ' ' << overlapY << endl;
+
 	// Y축으로 더 깊이 침범하면 X축 방향으로 밀기
 	if (overlapX < overlapY)
 	{
@@ -122,8 +123,8 @@ void CollisionManager::PhysicsResolve(Collider* _left, Collider* _right)
 			Object* leftObj = _left->GetOwner();
 			Object* rightObj = _right->GetOwner();
 
-			leftObj->SetPos({ leftPos.x - (percentX / 2.f * dir), leftPos.y });
-			rightObj->SetPos({ rightPos.x + (percentX / 2.f * dir), rightPos.y });
+			leftObj->SetPos({ leftPos.x - (percentX * dir), leftPos.y });
+			//rightObj->SetPos({ rightPos.x + (percentX / 2.f * dir), rightPos.y });
 		}
 	}
 	else // X축으로 더 깊이 침범하면 Y축 방향으로 밀기
@@ -142,20 +143,24 @@ void CollisionManager::PhysicsResolve(Collider* _left, Collider* _right)
 		{
 			// 오른쪽 물체가 아래로 떨어지고 있을 때
 			Object* rightObj = _right->GetOwner();
-			if (rightVy > 0 && !isLeft)
+
+			if ((rightVy > 0 && !isLeft))
 			{
 				// 땅 충돌 처리
 				rightObj->SetPos({ rightPos.x, rightPos.y + (percentY * dir)});
 
-				if (overlapX > 1)
+				if (overlapX > leftSize.x * 0.03f) // 30%?
+				{
+					cout << "감지이ㅣ" << endl;
 					rightRb->SetGrounded(true);
-				rightRb->SetVelocity({ rightRb->GetVelocity().x, 0.f });
+				}				
+				rightRb->SetVelocity({ rightRb->GetVelocity().x, 0.f });				
 			}
 			// 오른쪽 물체가 천장에 머리 박았을 때
 			else if (rightVy < 0 && isLeft)
 			{
 				// 천장 처리
-				rightObj->SetPos({ rightPos.x, rightPos.y + (percentY * dir)});
+				rightObj->SetPos({ rightPos.x, rightPos.y + (percentY * dir)});				
 
 				rightRb->SetGrounded(false);
 				rightRb->SetVelocity({ rightRb->GetVelocity().x, 0.f });
@@ -166,17 +171,17 @@ void CollisionManager::PhysicsResolve(Collider* _left, Collider* _right)
 		{
 			// 왼쪽 물체가 아래로 떨어지고 있을 때
 			Object* leftObj = _left->GetOwner();
-			if (leftVy > 0 && !isLeft)
+
+			if (leftVy > 0 && isLeft)
 			{
 				// 땅 충돌 처리
 				leftObj->SetPos({ leftPos.x, leftPos.y + (percentY * dir)});
 
-				if (overlapX > 1)
-					leftRb->SetGrounded(true);
+				leftRb->SetGrounded(true);
 				leftRb->SetVelocity({ leftRb->GetVelocity().x, 0.f });
 			}
 			// 왼쪽 물체가 천장에 머리 박았을 때
-			else if (leftVy < 0 && isLeft)
+			else if (leftVy < 0 && !isLeft)
 			{
 				// 천장 처리
 				leftObj->SetPos({ leftPos.x, leftPos.y + (percentY * dir) });
@@ -198,8 +203,7 @@ void CollisionManager::PhysicsResolve(Collider* _left, Collider* _right)
 				leftObj->SetPos({ leftPos.x, (leftPos.y - percentY / 2.f)});
 				rightObj->SetPos({ rightPos.x, (rightPos.y + percentY / 2.f)});
 
-				if (overlapX > 1)
-					leftRb->SetGrounded(true);
+				leftRb->SetGrounded(true);
 				leftRb->SetVelocity({ leftRb->GetVelocity().x, 0.f });
 			}
 			else if (rightVy > 0 && !isLeft)
@@ -213,7 +217,6 @@ void CollisionManager::PhysicsResolve(Collider* _left, Collider* _right)
 			}
 		}
 	}
-
 }
 
 void CollisionManager::CollisionLayerUpdate(Layer _left, Layer _right)
@@ -231,8 +234,8 @@ void CollisionManager::CollisionLayerUpdate(Layer _left, Layer _right)
 		for (size_t j = 0; j < vecRightLayer.size(); j++)
 		{
 			Collider* pRightCollider = vecRightLayer[j]->GetComponent<Collider>();
-			// 충돌체가 없거나, 자기자신과의 충돌인 경우
-			if (nullptr == pRightCollider || vecLeftLayer[i] == vecRightLayer[j])
+			// 충돌체가 없거나, 자기자신과의 충돌인 경우, 레이어가 같은데 순서가 다른 경우
+			if (nullptr == pRightCollider || vecLeftLayer[i] == vecRightLayer[j] || (_left == _right && j <= i))
 				continue;
 
 			// 두 충돌체로만 만들 수 있는 ID
