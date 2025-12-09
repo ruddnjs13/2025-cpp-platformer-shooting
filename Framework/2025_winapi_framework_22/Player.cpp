@@ -26,8 +26,10 @@ Player::Player()
 	auto * r = AddComponent<Rigidbody>();
 	auto* health = AddComponent<Health>();
 	health->SetHealth(100);
+	//cout << "Init : " << r->GetOwner() << endl;
 	//GetComponent<Rigidbody>()->SetUseGravity(false);
-	SetStamina(100);
+	r->SetFriction(0);
+	SetStamina(1000);
 	auto* animator = AddComponent<Animator>();
 	animator->CreateAnimation
 	(L"PlayerIdle",
@@ -126,19 +128,28 @@ void Player::EnterCollision(Collider* _other)
 {	
 	if (_other->GetName() == L"Floor")
 	{
-		collCnt++;
+		Collider* col = GetComponent<Collider>();
 		Rigidbody* rb = GetComponent<Rigidbody>();
+		float centerX = _other->GetUpdatedPos().x;
+		float disX = std::abs(centerX - GetPos().x);
+		if (disX < centerX * 0.5f)
+		{
+			cout << "땅 충돌!" << endl;
+
+			col->AddGroundCollCnt(1);
+		}
 	}
 }
-
+// 카운트를 매길때 X값 비교를 해서? 해당 거리가 센터를 기준으로 70%부분보다 많으면 카운트?
 
 void Player::ExitCollision(Collider* _other)
 {
 	if (_other->GetName() == L"Floor")
 	{
-		collCnt--;
+		Collider* col = GetComponent<Collider>();
+		col->AddGroundCollCnt(-1);
 		Rigidbody* rb = GetComponent<Rigidbody>();
-		rb->SetGrounded(collCnt > 0);
+		rb->SetGrounded(col->GetGroundCollCnt() > 0);
 	}
 }
 
@@ -167,6 +178,7 @@ void Player::ChangeState(PlayerState _newState)
 	case PlayerState::DIE:
 		m_pTex = GET_SINGLE(ResourceManager)->GetTexture(L"PlayerDie");
 		animator->Play(L"PlayerDie", PlayMode::Once);
+		onDeadEvent.Invoke(playerCount);
 		break;
 	default:
 		break;
@@ -203,18 +215,20 @@ void Player::Update()
 	if (CheckPlayerTurn(TurnType::Player1) && GET_SINGLE(TurnManager)->GetCurrentTurn() == TurnType::Player1)
 	{
 
-		if (GET_KEY(KEY_TYPE::RSHIFT))
+		/*if (GET_KEY(KEY_TYPE::RSHIFT))
 		{
 			slotReel->DestroyWeapon();
-		}
+		}*/
 
 		isCanSlotReel = true;
 		if (m_stamina > 0)
 		{
 			if (GET_KEY(KEY_TYPE::A)) dir.x -= 1.f;
 			if (GET_KEY(KEY_TYPE::D)) dir.x += 1.f;
+			
 			//if (GET_KEY(KEY_TYPE::W)) angle += 0.1f;
 			//if (GET_KEY(KEY_TYPE::S)) angle -= 0.1f;
+
 			if (GET_KEYDOWN(KEY_TYPE::SPACE))
 			{
 				rb = GetComponent<Rigidbody>();
@@ -232,20 +246,20 @@ void Player::Update()
 	}
 	else if (CheckPlayerTurn(TurnType::Player2) && GET_SINGLE(TurnManager)->GetCurrentTurn() == TurnType::Player2)
 	{
-		isCanSlotReel = true;
 
 		if (GET_KEY(KEY_TYPE::ENTER))
 		{
 			slotReel->DestroyWeapon();
 		}
 
+		isCanSlotReel = true;
 		if (m_stamina > 0)
 		{
 			if (GET_KEY(KEY_TYPE::LEFT)) dir.x -= 1.f;
 			if (GET_KEY(KEY_TYPE::RIGHT)) dir.x += 1.f;
 			//if (GET_KEY(KEY_TYPE::UP)) angle += 0.1f;
 			//if (GET_KEY(KEY_TYPE::DOWN)) angle -= 0.1f;
-			if (GET_KEY(KEY_TYPE::RSHIFT))
+			if (GET_KEYDOWN(KEY_TYPE::RSHIFT))
 			{
 				rb = GetComponent<Rigidbody>();
 				if (rb->IsGrounded())
@@ -265,10 +279,12 @@ void Player::Update()
 	{
 		ChangeState(PlayerState::IDLE);
 	}
+	float prevPosX = GetPos().x;
 	Translate({dir.x * fDT * 200.f, dir.y * fDT * 200.f});
 	if (dir.x != 0.f) 
 		m_isFlipped = dir.x < 0.f;
-	if (std::abs(dir.x > 0.f))
+	float nextPosX = GetPos().x;
+	if (prevPosX != nextPosX)
 		AddStamina(-0.1f);
 
 	if (slotReel != nullptr)
@@ -334,6 +350,7 @@ void Player::CreateProjectile()
 
 void Player::Jump()
 {
+	cout << "점프!" << endl;
 	Rigidbody* rb = GetComponent<Rigidbody>();
 	rb->SetGrounded(false);
 	Vec2 jumpPower{ 0, -50 };

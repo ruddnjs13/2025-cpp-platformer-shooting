@@ -16,12 +16,12 @@ public:
 	MyAction<float> OnStaminaChanged;
 	//virtual void Update();
 	//virtual void Render(HDC _hdc);
-	void SetStamina(float _stamina) { m_stamina = _stamina; }
+	void SetStamina(float _stamina) { m_maxStamina = _stamina;  m_stamina = _stamina; }
 	void AddStamina(float _delta)
 	{
 		m_stamina += _delta;
 		if (m_stamina < 0.f) m_stamina = 0.f;
-		if (m_stamina > 100.f) m_stamina = 100.f;
+		if (m_stamina > m_maxStamina) m_stamina = m_maxStamina;
 		OnStaminaChanged.Invoke(m_stamina);
 	}
 	const float GetStamina() const { m_stamina; }
@@ -61,6 +61,7 @@ private:
 
 	int weaponCount = 0;
 	float m_stamina = 0;
+	float m_maxStamina = 0;
 	bool m_isFlipped = false;
 
 	SlotReel* slotReel = nullptr;
@@ -68,7 +69,6 @@ private:
 	TurnType m_turnType;
 	PlayerState m_state;
 	PlayerState m_prevState;
-		
-	int collCnt = 0;
+	MyAction<int> onDeadEvent;
 };
 
