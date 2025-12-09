@@ -70,7 +70,7 @@ void WeaponTrajectory::DestoryTrajectory()
 }
 
 
-void WeaponTrajectory::ShowTrajectory(float _angleValue,Vec2 angle, Vec2 pos, Vec2 size, Object* owner, Weapon* _weapon)
+void WeaponTrajectory::ShowTrajectory(float _angleValue,Vec2 angle, Vec2 pos, Vec2 size, Object* owner, Weapon* _weapon, bool isFlip)
 {
     weapon = _weapon;
 

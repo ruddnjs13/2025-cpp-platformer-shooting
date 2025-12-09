@@ -22,15 +22,17 @@ void Bullet::EnterCollision(Collider* _other)
 {
 	if (_other->GetName() == L"Player")
 	{
-		_other->GetOwner()->GetComponent<Health>()->TakeDamage(100);
+		_other->GetOwner()->GetComponent<Health>()->TakeDamage(m_damage);
 		BurstBullet();
-		GET_SINGLE(SceneManager)->RequestDestroy(this);
+		DestoyThis();
+		DestroyOther(_other);
 	}
 
 	if (_other->GetName() == L"Floor")
 	{
 		BurstBullet();
-		GET_SINGLE(SceneManager)->RequestDestroy(this);
+		DestoyThis();
+		DestroyOther(_other);
 	}
 }
 
