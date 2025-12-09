@@ -1,30 +1,33 @@
 #include "pch.h"
-#include "Collider.h"
-#include "Texture.h"
 #include "WindManager.h"
 #include "ResourceManager.h"
-#include "SceneManager.h"
-#include "Nail.h"
+#include "SceneManager.h";
+#include "Rigidbody.h"
+#include "Texture.h"
+#include "Collider.h"
+#include "RazerBullet.h"
 
-Nail::Nail()
+RazerBullet::RazerBullet()
 {
-	m_pTex = GET_SINGLE(ResourceManager)->GetTexture(L"Nail");
+	m_pTex = GET_SINGLE(ResourceManager)->GetTexture(L"Gun1Bullet");
 	auto* col = AddComponent<Collider>();
+	AddComponent<Rigidbody>();
 	col->SetName(L"PlayerBullet");
 	col->SetTrigger(true);
 	col->SetSize({ 15,15 });
 }
 
-Nail::~Nail()
+RazerBullet::~RazerBullet()
 {
 }
 
-void Nail::Update()
-{         
+void RazerBullet::Update()
+{
+	m_speed + GET_SINGLE(WindManager)->m_windPower;
 	Translate({ m_dir.x * m_speed * fDT, m_dir.y * m_speed * fDT });
 }
 
-void Nail::Render(HDC _hdc)
+void RazerBullet::Render(HDC _hdc)
 {
 	Vec2 pos = GetPos();
 	Vec2 size = GetSize();
@@ -42,20 +45,21 @@ void Nail::Render(HDC _hdc)
 		RGB(255, 0, 255));
 }
 
-void Nail::BurstBullet()
+void RazerBullet::BurstBullet()
 {
 }
 
-void Nail::Rotate()
+void RazerBullet::Rotate()
 {
 }
 
-void Nail::DestoyThis()
+void RazerBullet::DestoyThis()
 {
-	GET_SINGLE(SceneManager)->RequestDestroy(this);
+
 }
 
-void Nail::DestroyOther(Collider* _other)
+void RazerBullet::DestroyOther(Collider* _other)
 {
+	GET_SINGLE(SceneManager)->RequestDestroy(_other->GetOwner());
 }
 

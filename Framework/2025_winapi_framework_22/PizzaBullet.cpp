@@ -1,18 +1,13 @@
 #include "pch.h"
-#include "TestBullet.h"
-#include "ResourceManager.h"
-#include "Object.h"
-#include "Collider.h"
-#include "Texture.h"
-#include "Rigidbody.h"
 #include "SceneManager.h"
-#include "TurnManager.h"
 #include "WindManager.h"
-#include "InputManager.h"
+#include "Texture.h"
+#include "ResourceManager.h"
 #include "Rigidbody.h"
-#include "Bomb.h"
+#include "Collider.h"
+#include "PizzaBullet.h"
 
-TestBullet::TestBullet()
+PizzaBullet::PizzaBullet()
 {
 	m_pTex = GET_SINGLE(ResourceManager)->GetTexture(L"Gun1Bullet");
 	auto* col = AddComponent<Collider>();
@@ -22,12 +17,17 @@ TestBullet::TestBullet()
 	col->SetSize({ 15,15 });
 }
 
-TestBullet::~TestBullet()
+PizzaBullet::~PizzaBullet()
 {
 }
 
+void PizzaBullet::Update()
+{
+	m_speed + GET_SINGLE(WindManager)->m_windPower;
+	Translate({ m_dir.x * m_speed * fDT, m_dir.y * m_speed * fDT });
+}
 
-void TestBullet::Render(HDC _hdc)
+void PizzaBullet::Render(HDC _hdc)
 {
 	Vec2 pos = GetPos();
 	Vec2 size = GetSize();
@@ -43,31 +43,21 @@ void TestBullet::Render(HDC _hdc)
 		, m_pTex->GetTextureDC()
 		, 0, 0, width, height,
 		RGB(255, 0, 255));
-
 }
 
-void TestBullet::Update()
+void PizzaBullet::BurstBullet()
 {
-	m_speed + GET_SINGLE(WindManager)->m_windPower;
-	Translate({ m_dir.x * m_speed* fDT, m_dir.y * m_speed * fDT });
 }
 
-void TestBullet::BurstBullet()
+void PizzaBullet::Rotate()
 {
-	
 }
 
-
-void TestBullet::Rotate()
-{
-
-}
-
-void TestBullet::DestoyThis()
+void PizzaBullet::DestoyThis()
 {
 	GET_SINGLE(SceneManager)->RequestDestroy(this);
 }
 
-void TestBullet::DestroyOther(Collider* _other)
+void PizzaBullet::DestroyOther(Collider* _other)
 {
 }

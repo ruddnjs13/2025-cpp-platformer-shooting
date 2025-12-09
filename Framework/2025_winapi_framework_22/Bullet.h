@@ -13,6 +13,8 @@ public:
 	virtual void Render(HDC _hdc) abstract;
 	virtual void BurstBullet() abstract;	
 	virtual void Rotate() abstract;
+	virtual void DestoyThis() abstract;
+	virtual void DestroyOther(Collider* _other) abstract;
 	void EnterCollision(Collider* _other)override;
 	void StayCollision(Collider* _other) override;
 	void ExitCollision(Collider* _other) override;

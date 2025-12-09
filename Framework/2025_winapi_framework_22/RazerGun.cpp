@@ -1,86 +1,25 @@
 #include "pch.h"
-#include "ResourceManager.h"
-#include "Projectile.h"
 #include "InputManager.h"
-#include "Texture.h"
-#include "TestBullet.h"
-#include "Nail.h"
-#include "WeaponTrajectory.h"
+#include "RazerGun.h"
 #include "SceneManager.h"
-#include "Nailgun.h"
+#include "ResourceManager.h"
+#include "Texture.h"	
+#include "RazerBullet.h"
 #include <thread>
 
-Nailgun::Nailgun()
+RazerGun::RazerGun()
 {
 	m_pTex = GET_SINGLE(ResourceManager)->GetTexture(L"NailGun");
-
-	m_weaponTrajectory = AddComponent<WeaponTrajectory>();
 
 
 	SetShootAngle(m_angleValue);
 }
 
-Nailgun::~Nailgun()
+RazerGun::~RazerGun()
 {
-	m_weaponTrajectory->DestoryTrajectory();
 }
 
-void Nailgun::Shoot()
-{
-	isShoot = false;
-	Nail* proj = new Nail;
-	Vec2 pos = GetPos();
-	pos.y -= GetSize().y / 2.f;
-	if (m_playerCount == 1)
-	{
-		pos.y += 10.f;
-		pos.x += 30.f;
-	}
-	else if (m_playerCount == 2)
-	{
-		pos.y -= 10.f;
-		pos.x -= 30.f;
-	}
-
-	proj->SetPos(pos);
-	proj->SetSize({ 30.f,30.f });
-	proj->SetDir(m_angle);
-
-
-	GET_SINGLE(SceneManager)->GetCurScene()->AddObject(proj, Layer::PROJECTILE);
-
-	Vec2 vec = GetOwner()->GetPos();
-
-	vec.x -= 4.f;
-
-	GetOwner()->SetPos(vec);
-}
-void Nailgun::WeaponFlip()
-{
-	if (isFlip && m_playerCount == 1)
-	{
-		m_pTex->SetFlipped(true);
-		StartAngle(-1, -50);
-	}
-	else if (isFlip == false && m_playerCount == 1)
-	{
-		m_pTex->SetFlipped(false);
-		StartAngle(1, 10);
-	}
-
-	if (isFlip && m_playerCount == 2)
-	{
-		StartAngle(-1, -50);
-		m_pTex->SetFlipped(true);
-	}
-	else if (isFlip == false && m_playerCount == 2)
-	{
-		m_pTex->SetFlipped(false);
-		StartAngle(1, 10);
-	}
-}
-
-void Nailgun::Update()
+void RazerGun::Update()
 {
 	WeaponFlip();
 
@@ -193,6 +132,79 @@ void Nailgun::Update()
 	}
 }
 
-void Nailgun::Render(HDC _hdc)
+void RazerGun::Render(HDC _hdc)
 {
+	Vec2 pos = GetPos();
+	Vec2 size = GetSize();
+
+	LONG width = m_pTex->GetWidth();
+	LONG height = m_pTex->GetHeight();
+
+	HDC texDC = m_pTex->GetRotateTextureDC(m_angleValue, 0, 0, width, height);
+
+
+	::TransparentBlt(_hdc
+		, (int)(pos.x - size.x / 2)
+		, (int)(pos.y - size.y / 2)
+		, size.x
+		, size.y
+		, texDC
+		, 0, 0, width, height,
+		RGB(255, 0, 255));
+}
+
+void RazerGun::Shoot()
+{
+	isShoot = false;
+
+	RazerBullet* proj = new RazerBullet;
+	Vec2 pos = GetPos();
+	pos.y -= GetSize().y / 2.f;
+	if (m_playerCount == 1)
+	{
+		pos.y += 10.f;
+		pos.x += 30.f;
+	}
+	else if (m_playerCount == 2)
+	{
+		pos.y -= 10.f;
+		pos.x -= 30.f;
+	}
+	proj->SetPos(pos);
+	proj->SetSize({ 30.f,30.f });
+	proj->SetDir(m_angle);
+
+
+	GET_SINGLE(SceneManager)->GetCurScene()->AddObject(proj, Layer::PROJECTILE);
+
+	Vec2 vec = GetOwner()->GetPos();
+
+	vec.x -= 4.f;
+
+	GetOwner()->SetPos(vec);
+}
+
+void RazerGun::WeaponFlip()
+{
+	if (isFlip && m_playerCount == 1)
+	{
+		m_pTex->SetFlipped(true);
+		StartAngle(-1, -50);
+	}
+	else if (isFlip == false && m_playerCount == 1)
+	{
+		m_pTex->SetFlipped(false);
+		StartAngle(1, 10);
+	}
+
+	if (isFlip && m_playerCount == 2)
+	{
+		StartAngle(-1, -50);
+		m_pTex->SetFlipped(true);
+	}
+	else if (isFlip == false && m_playerCount == 2)
+	{
+		m_pTex->SetFlipped(false);
+		StartAngle(1, 10);
+	}
 }

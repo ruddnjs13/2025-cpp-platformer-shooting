@@ -3,7 +3,7 @@ class WindManager
 {
 	DECLARE_SINGLE(WindManager);
 public:
-	void SetWind();
+	void SetWind(int windPower);
 
 public:
 	float m_windPower;

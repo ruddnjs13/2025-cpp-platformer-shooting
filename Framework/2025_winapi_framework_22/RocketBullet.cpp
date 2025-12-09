@@ -1,32 +1,34 @@
 #include "pch.h"
-#include "Collider.h"
-#include "Texture.h"
-#include "WindManager.h"
 #include "ResourceManager.h"
+#include "Rigidbody.h"
+#include "WindManager.h"
+#include "Texture.h"
+#include "Collider.h"
 #include "SceneManager.h"
-#include "BazukaBullet.h"
+#include "RocketBullet.h"
 #include "Bomb.h"
 
-BazukaBullet::BazukaBullet()
+RocketBullet::RocketBullet()
 {
-	m_pTex = GET_SINGLE(ResourceManager)->GetTexture(L"Nail");
+	m_pTex = GET_SINGLE(ResourceManager)->GetTexture(L"Gun1Bullet");
 	auto* col = AddComponent<Collider>();
+	AddComponent<Rigidbody>();
 	col->SetName(L"PlayerBullet");
 	col->SetTrigger(true);
 	col->SetSize({ 15,15 });
 }
 
-BazukaBullet::~BazukaBullet()
+RocketBullet::~RocketBullet()
 {
 }
 
-void BazukaBullet::Update()
+void RocketBullet::Update()
 {
-	m_speed + GET_SINGLE(WindManager)->m_windPower;
-	Translate({ m_dir.x * m_speed * fDT, m_dir.y * m_speed * fDT });
+		m_speed + GET_SINGLE(WindManager)->m_windPower;
+		Translate({ m_dir.x * m_speed * fDT, m_dir.y * m_speed * fDT });
 }
 
-void BazukaBullet::Render(HDC _hdc)
+void RocketBullet::Render(HDC _hdc)
 {
 	Vec2 pos = GetPos();
 	Vec2 size = GetSize();
@@ -42,9 +44,11 @@ void BazukaBullet::Render(HDC _hdc)
 		, m_pTex->GetTextureDC()
 		, 0, 0, width, height,
 		RGB(255, 0, 255));
+
+	ComponentRender(_hdc);
 }
 
-void BazukaBullet::BurstBullet()
+void RocketBullet::BurstBullet()
 {
 	Bomb* bomb = new Bomb;
 
@@ -53,21 +57,20 @@ void BazukaBullet::BurstBullet()
 	Vec2 angle = Vec2(0.f, 0.f);
 
 	bomb->SetPos(pos);
-	bomb->SetSize({ 40,40 });
+	bomb->SetSize({ 10,10 });
 
 	GET_SINGLE(SceneManager)->GetCurScene()->AddObject(bomb, Layer::PROJECTILE);
 }
 
-void BazukaBullet::Rotate()
+void RocketBullet::Rotate()
 {
 }
 
-void BazukaBullet::DestoyThis()
+void RocketBullet::DestoyThis()
 {
 	GET_SINGLE(SceneManager)->RequestDestroy(this);
 }
 
-void BazukaBullet::DestroyOther(Collider* _other)
+void RocketBullet::DestroyOther(Collider* _other)
 {
 }
-

@@ -107,7 +107,7 @@ void SlotReel::DestroyWeapon()
 {
 	std::thread([this]()
 		{
-			std::this_thread::sleep_for(std::chrono::milliseconds(100));
+			std::this_thread::sleep_for(std::chrono::milliseconds(2000));
 			m_pWeaponHolder->DestroyWeapon();
 		}).detach();
 }

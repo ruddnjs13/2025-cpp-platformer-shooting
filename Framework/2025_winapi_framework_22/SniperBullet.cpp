@@ -1,18 +1,12 @@
 #include "pch.h"
-#include "TestBullet.h"
-#include "ResourceManager.h"
-#include "Object.h"
-#include "Collider.h"
-#include "Texture.h"
-#include "Rigidbody.h"
 #include "SceneManager.h"
-#include "TurnManager.h"
-#include "WindManager.h"
-#include "InputManager.h"
+#include "SniperBullet.h"
+#include "ResourceManager.h"
 #include "Rigidbody.h"
-#include "Bomb.h"
+#include "Texture.h"
+#include "Collider.h"
 
-TestBullet::TestBullet()
+SniperBullet::SniperBullet()
 {
 	m_pTex = GET_SINGLE(ResourceManager)->GetTexture(L"Gun1Bullet");
 	auto* col = AddComponent<Collider>();
@@ -22,12 +16,16 @@ TestBullet::TestBullet()
 	col->SetSize({ 15,15 });
 }
 
-TestBullet::~TestBullet()
+SniperBullet::~SniperBullet()
 {
 }
 
+void SniperBullet::Update()
+{
+	Translate({ m_dir.x * m_speed * fDT, m_dir.y * m_speed * fDT });
+}
 
-void TestBullet::Render(HDC _hdc)
+void SniperBullet::Render(HDC _hdc)
 {
 	Vec2 pos = GetPos();
 	Vec2 size = GetSize();
@@ -43,31 +41,21 @@ void TestBullet::Render(HDC _hdc)
 		, m_pTex->GetTextureDC()
 		, 0, 0, width, height,
 		RGB(255, 0, 255));
-
 }
 
-void TestBullet::Update()
+void SniperBullet::BurstBullet()
 {
-	m_speed + GET_SINGLE(WindManager)->m_windPower;
-	Translate({ m_dir.x * m_speed* fDT, m_dir.y * m_speed * fDT });
 }
 
-void TestBullet::BurstBullet()
+void SniperBullet::Rotate()
 {
-	
 }
 
-
-void TestBullet::Rotate()
-{
-
-}
-
-void TestBullet::DestoyThis()
+void SniperBullet::DestoyThis()
 {
 	GET_SINGLE(SceneManager)->RequestDestroy(this);
 }
 
-void TestBullet::DestroyOther(Collider* _other)
+void SniperBullet::DestroyOther(Collider* _other)
 {
 }

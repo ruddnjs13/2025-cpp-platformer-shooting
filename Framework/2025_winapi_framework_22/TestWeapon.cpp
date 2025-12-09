@@ -202,40 +202,41 @@ void TestWeapon::Render(HDC _hdc)
 void TestWeapon::Shoot()
 {
 	isShoot = false;
-	TestBullet* proj = new TestBullet;
-	Vec2 pos = GetPos();
-	pos.y -= GetSize().y / 2.f;
+	std::thread([this]()
+		{
+			for (int i = 0; i < 3; i++)
+			{
+				std::this_thread::sleep_for(std::chrono::milliseconds(500));
 
-	if (m_playerCount == 1)
-	{
-		pos.y += 10.f;
-		pos.x += 30.f;
-	}
-	else if (m_playerCount == 2)
-	{
-		pos.y -= 10.f;
-		pos.x -= 30.f;
-	}
-	proj->SetPos(pos);
-	proj->SetSize({ 10.f,10.f });
-	proj->SetDir(m_angle);
+				TestBullet* proj = new TestBullet;
+				Vec2 pos = GetPos();
+				pos.y -= GetSize().y / 2.f;
+
+				if (m_playerCount == 1)
+				{
+					pos.y += 10.f;
+					pos.x += 30.f;
+				}
+				else if (m_playerCount == 2)
+				{
+					pos.y -= 10.f;
+					pos.x -= 30.f;
+				}
+				proj->SetPos(pos);
+				proj->SetSize({ 10.f,10.f });
+				proj->SetDir(m_angle);
 
 
-	GET_SINGLE(SceneManager)->GetCurScene()->AddObject(proj, Layer::PROJECTILE);
+				GET_SINGLE(SceneManager)->GetCurScene()->AddObject(proj, Layer::PROJECTILE);
 
-	Vec2 vec = GetOwner()->GetPos();
+				Vec2 vec = GetOwner()->GetPos();
 
-	vec.x -= 4.f;
+				vec.x -= 4.f;
 
-	GetOwner()->SetPos(vec);
+				GetOwner()->SetPos(vec);
+			}
+			isRotation = true;
+		}).detach();
 
-	//m_offsetPos.x -= 1.f;
-	//
-	//std::thread([this]()
-	//	{
-	//		std::this_thread::sleep_for(std::chrono::milliseconds(500));
-	//		m_offsetPos.y += 1.f;
-	//	}).detach();
 
-	
 }

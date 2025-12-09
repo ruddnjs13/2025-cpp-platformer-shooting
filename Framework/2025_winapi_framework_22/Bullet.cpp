@@ -24,13 +24,15 @@ void Bullet::EnterCollision(Collider* _other)
 	{
 		_other->GetOwner()->GetComponent<Health>()->TakeDamage(100);
 		BurstBullet();
-		GET_SINGLE(SceneManager)->RequestDestroy(this);
+		DestoyThis();
+		DestroyOther(_other);
 	}
 
 	if (_other->GetName() == L"Floor")
 	{
 		BurstBullet();
-		GET_SINGLE(SceneManager)->RequestDestroy(this);
+		DestoyThis();
+		DestroyOther(_other);
 	}
 }
 

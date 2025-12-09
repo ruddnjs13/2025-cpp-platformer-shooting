@@ -11,6 +11,7 @@
 #include "Bazuka.h"
 #include "Nail.h"
 #include <thread>
+#include "BazukaBullet.h"
 
 Bazuka::Bazuka()
 {
@@ -161,7 +162,8 @@ void Bazuka::Render(HDC _hdc)
 void Bazuka::Shoot()
 {
 	isShoot = false;
-	Nail* proj = new Nail;
+
+	BazukaBullet* proj = new BazukaBullet;
 	Vec2 pos = GetPos();
 	pos.y -= GetSize().y / 2.f;
 	if (m_playerCount == 1)

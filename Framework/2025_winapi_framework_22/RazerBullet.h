@@ -1,13 +1,13 @@
 #pragma once
 #include "Bullet.h"
-
 class Texture;
-class Nail :
+
+class RazerBullet :
     public Bullet
 {
 public:
-    Nail();
-    ~Nail();
+    RazerBullet();
+    ~RazerBullet();
 
 public:
     void Update() override;

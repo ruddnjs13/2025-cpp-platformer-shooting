@@ -2,12 +2,13 @@
 #include "Bullet.h"
 
 class Texture;
-class Nail :
+
+class PizzaBullet :
     public Bullet
 {
 public:
-    Nail();
-    ~Nail();
+    PizzaBullet();
+    ~PizzaBullet();
 
 public:
     void Update() override;

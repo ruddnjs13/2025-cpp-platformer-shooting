@@ -1,23 +1,22 @@
 #pragma once
 #include "Bullet.h"
-
-class Texture;
-class Nail :
+class RocketBullet :
     public Bullet
 {
 public:
-    Nail();
-    ~Nail();
+    RocketBullet();
+    ~RocketBullet();
 
 public:
     void Update() override;
     void Render(HDC _hdc) override;
     void BurstBullet() override;
     void Rotate() override;
-
     void DestoyThis() override;
     void DestroyOther(Collider* _other) override;
+
 private:
     Texture* m_pTex;
+
 };
 
