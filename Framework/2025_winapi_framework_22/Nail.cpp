@@ -5,6 +5,7 @@
 #include "ResourceManager.h"
 #include "SceneManager.h"
 #include "Nail.h"
+#include <thread>
 
 Nail::Nail()
 {

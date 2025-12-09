@@ -6,6 +6,7 @@
 #include "Texture.h"
 #include "Collider.h"
 #include "RazerBullet.h"
+#include <thread>
 
 RazerBullet::RazerBullet()
 {
@@ -14,11 +15,12 @@ RazerBullet::RazerBullet()
 	AddComponent<Rigidbody>();
 	col->SetName(L"PlayerBullet");
 	col->SetTrigger(true);
-	col->SetSize({ 15,15 });
+	col->SetSize({ 20,20 });
 
-	m_speed = 400;
+	m_speed = 2000;
 
 	m_damage = 25;
+
 }
 
 RazerBullet::~RazerBullet()
@@ -27,7 +29,6 @@ RazerBullet::~RazerBullet()
 
 void RazerBullet::Update()
 {
-	m_speed + GET_SINGLE(WindManager)->m_windPower;
 	Translate({ m_dir.x * m_speed * fDT, m_dir.y * m_speed * fDT });
 }
 
@@ -64,6 +65,7 @@ void RazerBullet::DestoyThis()
 
 void RazerBullet::DestroyOther(Collider* _other)
 {
-	//GET_SINGLE(SceneManager)->RequestDestroy(_other->GetOwner());
+	GET_SINGLE(SceneManager)->RequestDestroy(_other->GetOwner());
+
 }
 
