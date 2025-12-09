@@ -2,6 +2,7 @@
 #include "GameManager.h"
 #include "UIManager.h"
 #include "MatchScoreUI.h"
+#include "SceneManager.h"
 
 void GameManager::Reset()
 {
@@ -11,41 +12,31 @@ void GameManager::Reset()
 
 bool GameManager::MatchWin()
 {
+	bool isGameOver = false;
 	if (!player1_Die && !player2_Die) return false;
-
-	if (player1_Die && player2_Die)
-	{
-		GameOver(3);
-		return true;
-	}
 	else if (player1_Die && !player2_Die)
 	{
-		GameOver(2);
-		return true;
+		player2_Score++;
+		isGameOver = true;
 	}
-	else
+	else if(!player1_Die && player1_Die)
 	{
-		GameOver(1);
-		return true;
+		player1_Score++;
+		isGameOver = true;
+	}
+	else if (player1_Die && player2_Die)
+	{
+		isGameOver = true;
 	}
 
-	matchScoreUI->SetScore(player1_Score, player2_Score);
+	if(!isGameOver)
+		matchScoreUI->SetScore(player1_Score, player2_Score);
+	return true;
 }
 
-void GameManager::GameOver(int idx)
+void GameManager::GameOver()
 {
-	if (idx == 1)
-	{
-
-	}
-	else if (idx == 2)
-	{
-
-	}
-	if (idx == 3)
-	{
-
-	}
+	GET_SINGLE(SceneManager)->LoadScene(L"LkwScene");
 }
 
 void GameManager::SetPlayerDead(int idx)

@@ -9,7 +9,7 @@ class GameManager
 public:
 	void Reset();
 	bool MatchWin();
-	void GameOver(int idx);
+	void GameOver();
 
 	int GetPlayer1Score(){ return player1_Score; }
 	int GetPlayer2Score(){ return player2_Score; }
@@ -19,8 +19,8 @@ public:
 	void SetMatchScoreUI(MatchScoreUI* matchscoreUI);
 
 public:
-	int player1_Score = 1;
-	int player2_Score = 1;
+	int player1_Score = 0;
+	int player2_Score = 0;
 
 	bool player1_Die = false;
 	bool player2_Die = false;

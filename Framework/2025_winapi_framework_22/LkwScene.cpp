@@ -73,7 +73,14 @@ void LkwScene::Init()
             });
     }
 
-
+    p1DeadHandle = pPlayer1->onDeadEvent.AddListener(
+        [](float value) {
+            GET_SINGLE(GameManager)->SetPlayerDead(1);
+        });
+    p2DeadHandle = pPlayer2->onDeadEvent.AddListener(
+        [](float value) {
+            GET_SINGLE(GameManager)->SetPlayerDead(2);
+        });
 }
 
 
@@ -86,6 +93,9 @@ void LkwScene::Update()
 
 void LkwScene::Release()
 {
+    pPlayer1->onDeadEvent.RemoveListener(p1DeadHandle);
+    pPlayer2->onDeadEvent.RemoveListener(p2DeadHandle);
+
     pPlayer1->GetComponent<Health>()->OnHealthChanged.RemoveListener(p1HealthHandle);
     pPlayer1->OnStaminaChanged.RemoveListener(p1SteminaHandle);
     pPlayer2->GetComponent<Health>()->OnHealthChanged.RemoveListener(p2HealthHandle);
