@@ -45,7 +45,6 @@ void Bomb::Render(HDC _hdc)
 		, 0, 0, width, height,
 		RGB(255, 0, 255));
 
-	ComponentRender(_hdc);
 }
 
 void Bomb::EnterCollision(Collider* _other)
