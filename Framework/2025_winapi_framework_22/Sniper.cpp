@@ -162,7 +162,7 @@ void Sniper::Shoot()
 	pos.y -= GetSize().y / 2.f;
 	if (m_playerCount == 1)
 	{
-		pos.y += 10.f;
+		pos.y -= 10.f;
 		pos.x += 30.f;
 	}
 	else if (m_playerCount == 2)
@@ -171,8 +171,9 @@ void Sniper::Shoot()
 		pos.x -= 30.f;
 	}
 	proj->SetPos(pos);
-	proj->SetSize({ 30.f,30.f });
+	proj->SetSize({ 15,15 });
 	proj->SetDir(m_angle);
+	proj->SetAngleValue(m_angleValue);
 
 
 	GET_SINGLE(SceneManager)->GetCurScene()->AddObject(proj, Layer::PROJECTILE);

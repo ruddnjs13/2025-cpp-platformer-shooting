@@ -205,7 +205,7 @@ void TestWeapon::Shoot()
 
 				if (m_playerCount == 1)
 				{
-					pos.y += 10.f;
+					pos.y -= 10.f;
 					pos.x += 30.f;
 				}
 				else if (m_playerCount == 2)
@@ -216,7 +216,7 @@ void TestWeapon::Shoot()
 				proj->SetPos(pos);
 				proj->SetSize({ 20.f,20.f });
 				proj->SetDir(m_angle);
-
+				proj->SetAngleValue(m_angleValue);
 
 				GET_SINGLE(SceneManager)->GetCurScene()->AddObject(proj, Layer::PROJECTILE);
 

@@ -62,3 +62,24 @@ void Nail::DestroyOther(Collider* _other)
 {
 }
 
+void Nail::BulletFlip()
+{
+	if (isFlip && m_playerCount == 1)
+	{
+		m_pTex->SetFlipped(true);
+	}
+	else if (isFlip == false && m_playerCount == 1)
+	{
+		m_pTex->SetFlipped(false);
+	}
+
+	if (isFlip && m_playerCount == 2)
+	{
+		m_pTex->SetFlipped(true);
+	}
+	else if (isFlip == false && m_playerCount == 2)
+	{
+		m_pTex->SetFlipped(false);
+	}
+}
+

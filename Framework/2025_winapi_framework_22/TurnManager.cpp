@@ -32,7 +32,7 @@
 
         srand(static_cast<unsigned>(time(nullptr)));
 
-        int randomInt = (rand() % 61) - 30;
+        int randomInt = (rand() % 4001) - 2000;
 
         GET_SINGLE(WindManager)->SetWind(randomInt);
 
