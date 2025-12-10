@@ -296,6 +296,7 @@ void Player::Update()
 				if (rb->IsGrounded())
 				{
 					AddStamina(-10);
+					GET_SINGLE(ResourceManager)->Play(L"PlayerJumpSFX");
 					Jump();
 				}
 			
@@ -326,6 +327,7 @@ void Player::Update()
 				if (rb->IsGrounded())
 				{
 					AddStamina(-10);
+					GET_SINGLE(ResourceManager)->Play(L"PlayerJumpSFX");
 					Jump();
 				}
 			}
@@ -413,7 +415,6 @@ void Player::CreateProjectile()
 
 void Player::Jump()
 {
-	cout << "มกวม!" << endl;
 	Rigidbody* rb = GetComponent<Rigidbody>();
 	rb->SetGrounded(false);
 	Vec2 jumpPower{ 0, -50 };

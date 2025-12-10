@@ -7,6 +7,14 @@
 #include "Floor.h"
 #include "CollisionManager.h"3
 
+IscScene::IscScene()
+{
+}
+
+IscScene::~IscScene()
+{
+}
+
 void IscScene::Init()
 {	
 	Player* pPlayer2 = Spawn<Player>(Layer::PLAYER, { 500, 300 }, { 28, 28 });
