@@ -131,7 +131,7 @@ void CollisionManager::PhysicsResolve(Collider* _left, Collider* _right)
 			rightObj->SetPos({ rightPos.x - (percentX * dir), rightPos.y });
 		}
 		// 아니고 오른쪽 물체만 정적일 때
-		else if (!leftKinematic && (rightKinematic || rightVel.x == 0))
+		else if (!leftKinematic && (rightKinematic || (rightVel.x == 0 && rightVel.y == 0 )))
 		{
 			//left를 기준으로 왼쪽이면 -로 오른쪽이면 +로 밀기
 			int dir = (leftPos.x > rightPos.x) ? -1 : 1;
