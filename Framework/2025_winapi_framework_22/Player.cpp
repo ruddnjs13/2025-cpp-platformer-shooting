@@ -23,8 +23,7 @@ Player::Player()
 	Collider* c = AddComponent<Collider>();
 	c->SetSize({ 28,28 });
 	c->SetName(L"Player");
-	SetFlipped(true);
-	SetIsFigures(true);
+	SetIsFigures(false);
 	auto * r = AddComponent<Rigidbody>();
 	auto* health = AddComponent<Health>();
 	health->SetHealth(100);
