@@ -23,6 +23,7 @@ Player::Player()
 	Collider* c = AddComponent<Collider>();
 	c->SetSize({ 28,28 });
 	c->SetName(L"Player");
+	SetIsFigures(false);
 	auto * r = AddComponent<Rigidbody>();
 	auto* health = AddComponent<Health>();
 	health->SetHealth(100);
@@ -39,7 +40,7 @@ Player::Player()
 		{16.f,0.f},
 		6,0.1f
 	);
-	//animator->Play(L"PlayerIdle");
+	animator->Play(L"PlayerIdle");
 	m_pTex = GET_SINGLE(ResourceManager)->GetTexture(L"PlayerWalk");
 	animator->CreateAnimation
 	(
@@ -60,7 +61,6 @@ Player::Player()
 		{ 16.f,0.f },
 		4, 0.1f
 	);
-	animator->Play(L"PlayerDie");
 
 	GET_SINGLE(TurnManager)->RaiseEvent(TurnType::Select, [this]()
 		{
@@ -132,7 +132,7 @@ void Player::EnterCollision(Collider* _other)
 		Rigidbody* rb = GetComponent<Rigidbody>();
 		float centerX = _other->GetUpdatedPos().x;
 		float disX = std::abs(centerX - GetPos().x);
-		if (disX < centerX * 0.5f)
+		if (rb->GetVelocity().x < rb->GetVelocity().y)
 		{
 			cout << "¶¥ Ãæµ¹!" << endl;
 
@@ -149,7 +149,7 @@ void Player::ExitCollision(Collider* _other)
 		Collider* col = GetComponent<Collider>();
 		col->AddGroundCollCnt(-1);
 		Rigidbody* rb = GetComponent<Rigidbody>();
-		rb->SetGrounded(col->GetGroundCollCnt() > 0);
+		//rb->SetGrounded(col->GetGroundCollCnt() > 0);
 	}
 }
 
@@ -187,7 +187,15 @@ void Player::ChangeState(PlayerState _newState)
 
 void Player::Update()
 {
-
+	if (IsFigures())
+	{
+		if (m_state != PlayerState::IDLE)
+		{
+			m_state = PlayerState::IDLE;
+			ChangeState(PlayerState::IDLE);
+		}
+		return;
+	}
 	Health* health = GetComponent<Health>();
 	if (health->IsDead() && m_state != PlayerState::DIE)
 	{
@@ -279,7 +287,8 @@ void Player::Update()
 		ChangeState(PlayerState::IDLE);
 	}
 	float prevPosX = GetPos().x;
-	Translate({dir.x * fDT * 200.f, dir.y * fDT * 200.f});
+	//Translate({dir.x * fDT * 200.f, dir.y * fDT * 200.f});
+	rb->SetVelocity({ dir.x * 200.f, rb->GetVelocity().y });
 	if (dir.x != 0.f) 
 		m_isFlipped = dir.x < 0.f;
 	float nextPosX = GetPos().x;
