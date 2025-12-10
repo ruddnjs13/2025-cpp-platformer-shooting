@@ -20,5 +20,5 @@ void GameOverScene::Init()
 void GameOverScene::Render(HDC _hdc)
 {
 	Scene::Render(_hdc);
-	pPlayer2->m_pTex->SetFlipped(true);
+	pPlayer2->SetFlipped(true);
 }
