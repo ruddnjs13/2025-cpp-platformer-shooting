@@ -172,6 +172,7 @@ void Player::ChangeState(PlayerState _newState)
 
 void Player::Update()
 {
+	cout << "¾Æ¾Æ¾Æ~~" << endl;
 	if (IsFigures())
 	{
 		if (m_state != PlayerState::IDLE)

@@ -12,6 +12,7 @@ void IscScene::Init()
 	Player* pPlayer1 = Spawn<Player>(Layer::PLAYER, { 300, 500 }, { 28, 28 });
 	Spawn<Floor>(Layer::DEFAULT, { WINDOW_WIDTH / 2, 600 }, { 1000.f,100.f });
 	Spawn<Floor>(Layer::DEFAULT, { 700, 550 }, { 32, 32 });
+	cout << "아아아ㅣ아ㅣ아ㅏ아앙" << endl;
 	pPlayer1->SetPlayerTurn(TurnType::Player1, 1);
 	pPlayer2->SetPlayerTurn(TurnType::Player2, 2);
 	
