@@ -46,8 +46,7 @@ void RazerGun::Update()
 
 		m_offsetPos = Vec2(x, y);
 
-		cout << radian << "라디안" << endl;
-		cout << radius << "반지름" << endl;
+
 	}
 	else if (isFlip == false)
 	{
@@ -57,8 +56,6 @@ void RazerGun::Update()
 		float x = cosf(radian) * radius;
 		float y = -sinf(radian) * radius;
 
-		cout << radian << "라디안" << endl;
-		cout << radius << "반지름" << endl;
 		m_offsetPos = Vec2(x, y);
 	}
 
