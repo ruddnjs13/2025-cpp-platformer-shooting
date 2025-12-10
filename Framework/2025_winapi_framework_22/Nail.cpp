@@ -34,6 +34,8 @@ void Nail::Render(HDC _hdc)
 
 	LONG width = m_pTex->GetWidth();
 	LONG height = m_pTex->GetHeight();
+	HDC texDC = m_pTex->GetRotateTextureDC(m_angleValue, 0, 0, width, height);
+
 
 	::TransparentBlt(_hdc
 		, (int)(pos.x - size.x / 2)

@@ -205,13 +205,13 @@ void TestWeapon::Shoot()
 
 				if (m_playerCount == 1)
 				{
-					pos.y -= 7.f;
+					pos.y -= 5.f;
 					pos.x += 30.f;
 				}
 				else if (m_playerCount == 2)
 				{
-					pos.y -= 7.f;
-					pos.x -= 40.f;
+					pos.y -= 5.f;
+					pos.x -= 50.f;
 				}
 				proj->SetPos(pos);
 				proj->SetSize({ 20.f,20.f });

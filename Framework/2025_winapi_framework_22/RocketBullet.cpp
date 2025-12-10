@@ -63,7 +63,7 @@ void RocketBullet::BurstBullet()
 	Vec2 angle = Vec2(0.f, 0.f);
 
 	bomb->SetPos(pos);
-	bomb->SetSize({ 25,25 });
+	bomb->SetSize({ 30,30 });
 
 	GET_SINGLE(SceneManager)->GetCurScene()->AddObject(bomb, Layer::PROJECTILE);
 }
