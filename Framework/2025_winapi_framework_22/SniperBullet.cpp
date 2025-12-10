@@ -15,7 +15,7 @@ SniperBullet::SniperBullet()
 	col->SetTrigger(true);
 	col->SetSize({ 15,15 });
 
-	m_damage = 10;
+	m_damage = 40;
 	m_speed = 600;
 }
 

@@ -20,7 +20,7 @@ TestBullet::TestBullet()
 	col->SetName(L"PlayerBullet");
 	col->SetTrigger(true);
 	col->SetSize({ 20,20 });
-	m_angle = 20;
+	m_angle = 15;
 	m_speed = 500;
 }
 

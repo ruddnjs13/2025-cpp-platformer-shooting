@@ -163,13 +163,13 @@ void PizzeGun::Shoot()
 	pos.y -= GetSize().y / 2.f;
 	if (m_playerCount == 1)
 	{
-		pos.y -= 5.f;
+		pos.y -= 7.f;
 		pos.x += 30.f;
 	}
 	else if (m_playerCount == 2)
 	{
-		pos.y -= 5.f;
-		pos.x -= 30.f;
+		pos.y -= 7.f;
+		pos.x -= 40.f;
 	}
 	proj->SetPos(pos);
 	proj->SetSize({ 30.f,30.f });
