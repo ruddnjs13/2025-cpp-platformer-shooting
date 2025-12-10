@@ -71,11 +71,11 @@ void TestBullet::Update()
 
 	if (isFlip == true)
 	{
-		m_angleValue += (-38 * fDT);
+		m_angleValue += (38 * fDT);
 	}
 	else if (isFlip == false)
 	{
-		m_angleValue += (38 * fDT);
+		m_angleValue += (-38 * fDT);
 	}
 }
 
