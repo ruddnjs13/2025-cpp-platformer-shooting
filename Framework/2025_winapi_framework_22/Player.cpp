@@ -126,31 +126,16 @@ void Player::StayCollision(Collider* _other)
 
 void Player::EnterCollision(Collider* _other)
 {	
-	if (_other->GetName() == L"Floor")
-	{
-		Collider* col = GetComponent<Collider>();
-		Rigidbody* rb = GetComponent<Rigidbody>();
-		float centerX = _other->GetUpdatedPos().x;
-		float disX = std::abs(centerX - GetPos().x);
-		if (rb->GetVelocity().x < rb->GetVelocity().y)
-		{
-			cout << "땅 충돌!" << endl;
-
-			col->AddGroundCollCnt(1);
-		}
-	}
 }
 // 카운트를 매길때 X값 비교를 해서? 해당 거리가 센터를 기준으로 70%부분보다 많으면 카운트?
 
 void Player::ExitCollision(Collider* _other)
 {
+	Rigidbody* rb = GetComponent<Rigidbody>();
 	if (_other->GetName() == L"Floor")
 	{
-		Collider* col = GetComponent<Collider>();
-		col->AddGroundCollCnt(-1);
-		Rigidbody* rb = GetComponent<Rigidbody>();
-		//rb->SetGrounded(col->GetGroundCollCnt() > 0);
 	}
+	rb->SetGrounded(false);
 }
 
 void Player::ChangeState(PlayerState _newState)
