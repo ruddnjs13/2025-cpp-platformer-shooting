@@ -80,11 +80,11 @@
     { 
         std::thread([this]() 
             {
-            std::this_thread::sleep_for(std::chrono::seconds(3));
+            std::this_thread::sleep_for(std::chrono::seconds(2));
             if (GET_SINGLE(GameManager)->MatchWin())
             {
 
-                std::this_thread::sleep_for(std::chrono::seconds(3));
+                std::this_thread::sleep_for(std::chrono::seconds(1));
                 GET_SINGLE(GameManager)->GameOver();
             }
             ChangeTurn(TurnType::Select); 

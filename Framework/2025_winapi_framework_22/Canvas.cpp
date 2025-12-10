@@ -8,6 +8,7 @@ Canvas::Canvas()
 
 Canvas::~Canvas()
 {
+	Release();
 }
 
 void Canvas::Update()

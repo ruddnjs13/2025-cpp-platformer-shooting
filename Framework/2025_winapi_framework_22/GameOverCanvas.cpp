@@ -52,9 +52,10 @@ void GameOverCanvas::Init()
 		winImage->Init(GET_SINGLE(ResourceManager)->GetTexture(L"Player2_Win"));
 	}
 
-	winImage->SetPos({WINDOW_WIDTH/2, 500});
-	winImage->SetSize({ 400,100 });
+	winImage->SetPos({WINDOW_WIDTH/2, 300});
+	winImage->SetSize({ 400,400 });
 
+	AddUIElement(winImage);
 	AddUIElement(toTitleBtn);
 	AddUIElement(matchScoreUI);
 }
