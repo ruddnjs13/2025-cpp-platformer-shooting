@@ -170,13 +170,13 @@ void Rocket::Shoot()
 				pos.y -= GetSize().y / 2.f;
 				if (m_playerCount == 1)
 				{
-					pos.y -= 5.f;
-					pos.x += 30.f;
+					pos.y -= 2;
+					pos.x += 60.f;
 				}
 				else if (m_playerCount == 2)
 				{
-					pos.y -= 5.f;
-					pos.x -= 50.f;
+					pos.y -= 2;
+					pos.x -= 80.f;
 				}
 				proj->SetPos(pos);
 				proj->SetSize({ 25.f,25.f });
