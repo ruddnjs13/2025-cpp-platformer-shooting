@@ -7,10 +7,8 @@
 #include "MatchScoreUI.h"
 #include "GameManager.h"
 
-
 void InGameCanvas::Init()
 {
-
 	p1_HpBar = new Slider();
 	p1_HpBar->Init(GET_SINGLE(ResourceManager)->GetTexture(L"P1_Boarder"), GET_SINGLE(ResourceManager)->GetTexture(L"HpFill"));
 	p1_HpBar->SetPos({ 220, 80 });
