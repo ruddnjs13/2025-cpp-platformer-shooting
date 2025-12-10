@@ -23,6 +23,7 @@ Player::Player()
 	Collider* c = AddComponent<Collider>();
 	c->SetSize({ 28,28 });
 	c->SetName(L"Player");
+	SetIsFigures(false);
 	auto * r = AddComponent<Rigidbody>();
 	auto* health = AddComponent<Health>();
 	health->SetHealth(100);
@@ -39,7 +40,7 @@ Player::Player()
 		{16.f,0.f},
 		6,0.1f
 	);
-	//animator->Play(L"PlayerIdle");
+	animator->Play(L"PlayerIdle");
 	m_pTex = GET_SINGLE(ResourceManager)->GetTexture(L"PlayerWalk");
 	animator->CreateAnimation
 	(
@@ -60,7 +61,6 @@ Player::Player()
 		{ 16.f,0.f },
 		4, 0.1f
 	);
-	animator->Play(L"PlayerDie");
 
 	GET_SINGLE(TurnManager)->RaiseEvent(TurnType::Select, [this]()
 		{
@@ -126,31 +126,16 @@ void Player::StayCollision(Collider* _other)
 
 void Player::EnterCollision(Collider* _other)
 {	
-	if (_other->GetName() == L"Floor")
-	{
-		Collider* col = GetComponent<Collider>();
-		Rigidbody* rb = GetComponent<Rigidbody>();
-		float centerX = _other->GetUpdatedPos().x;
-		float disX = std::abs(centerX - GetPos().x);
-		if (disX < centerX * 0.5f)
-		{
-			cout << "땅 충돌!" << endl;
-
-			col->AddGroundCollCnt(1);
-		}
-	}
 }
 // 카운트를 매길때 X값 비교를 해서? 해당 거리가 센터를 기준으로 70%부분보다 많으면 카운트?
 
 void Player::ExitCollision(Collider* _other)
 {
+	Rigidbody* rb = GetComponent<Rigidbody>();
 	if (_other->GetName() == L"Floor")
 	{
-		Collider* col = GetComponent<Collider>();
-		col->AddGroundCollCnt(-1);
-		Rigidbody* rb = GetComponent<Rigidbody>();
-		rb->SetGrounded(col->GetGroundCollCnt() > 0);
 	}
+	rb->SetGrounded(false);
 }
 
 void Player::ChangeState(PlayerState _newState)
@@ -187,7 +172,15 @@ void Player::ChangeState(PlayerState _newState)
 
 void Player::Update()
 {
-
+	if (IsFigures())
+	{
+		if (m_state != PlayerState::IDLE)
+		{
+			m_state = PlayerState::IDLE;
+			ChangeState(PlayerState::IDLE);
+		}
+		return;
+	}
 	Health* health = GetComponent<Health>();
 	if (health->IsDead() && m_state != PlayerState::DIE)
 	{
@@ -279,7 +272,8 @@ void Player::Update()
 		ChangeState(PlayerState::IDLE);
 	}
 	float prevPosX = GetPos().x;
-	Translate({dir.x * fDT * 200.f, dir.y * fDT * 200.f});
+	//Translate({dir.x * fDT * 200.f, dir.y * fDT * 200.f});
+	rb->SetVelocity({ dir.x * 200.f, rb->GetVelocity().y });
 	if (dir.x != 0.f) 
 		m_isFlipped = dir.x < 0.f;
 	float nextPosX = GetPos().x;

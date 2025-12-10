@@ -202,21 +202,20 @@ void TestWeapon::Shoot()
 				TestBullet* proj = new TestBullet;
 				Vec2 pos = GetPos();
 				pos.y -= GetSize().y / 2.f;
-
 				if (m_playerCount == 1)
 				{
-					pos.y += 10.f;
-					pos.x += 30.f;
+					pos.y -= 2;
+					pos.x += 60.f;
 				}
 				else if (m_playerCount == 2)
 				{
-					pos.y -= 10.f;
-					pos.x -= 30.f;
+					pos.y -= 2;
+					pos.x -= 80.f;
 				}
 				proj->SetPos(pos);
 				proj->SetSize({ 20.f,20.f });
 				proj->SetDir(m_angle);
-
+				proj->SetAngleValue(m_angleValue);
 
 				GET_SINGLE(SceneManager)->GetCurScene()->AddObject(proj, Layer::PROJECTILE);
 

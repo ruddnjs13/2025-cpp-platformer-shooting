@@ -27,6 +27,7 @@ public:
 	}
 	const float GetStamina() const { m_stamina; }
 	const bool IsFlipped() const { return m_isFlipped; }
+	const void SetFlipped(bool _isFlip) { m_isFlipped = _isFlip; }
 	void Update() override;
 	void Render(HDC _hdc) override;
 	void EnterCollision(Collider* _other)override;
@@ -58,15 +59,14 @@ private:
 public:
 	int playerCount = 0;
 	bool isCanSlotReel = true;
-	Texture* m_pTex;
-private:	
-
+private:
 	int weaponCount = 0;
 	float m_stamina = 0;
 	float m_maxStamina = 0;
 	bool m_isFlipped = false;
 	bool m_isDestroy = false;
 	SlotReel* slotReel = nullptr;
+	Texture* m_pTex;
 	TurnType m_turnType;
 	PlayerState m_state;
 	PlayerState m_prevState;

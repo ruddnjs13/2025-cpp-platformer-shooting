@@ -113,7 +113,7 @@ void SlotReel::DestroyWeapon()
 {
 	std::thread([this]()
 		{
-			std::this_thread::sleep_for(std::chrono::milliseconds(3000));
+			std::this_thread::sleep_for(std::chrono::milliseconds(2000));
 			m_pWeaponHolder->DestroyWeapon();
 			GET_SINGLE(TurnManager)->ChangeTurn(TurnType::Waiting);
 		}).detach();

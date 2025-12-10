@@ -32,7 +32,15 @@ public:
 		m_dir = _dir;
 		m_dir.Normalize();
 	}
+
+	void SetAngleValue(float angle) { m_angleValue = angle; }
+
+	void SetFlip(bool _isFlip) { isFlip = _isFlip; }
+	void SetPlayer(bool playerCnt) { m_playerCount = playerCnt; }
 public:
+	bool isFlip = false;
+	int m_playerCount = 0;
+	float m_angleValue = 0;
 	float m_angle;
 	float m_speed = 500; 
 

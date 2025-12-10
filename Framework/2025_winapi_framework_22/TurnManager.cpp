@@ -32,7 +32,7 @@
 
         srand(static_cast<unsigned>(time(nullptr)));
 
-        int randomInt = (rand() % 61) - 30;
+        int randomInt = (rand() % 4001) - 2000;
 
         GET_SINGLE(WindManager)->SetWind(randomInt);
 
@@ -44,7 +44,7 @@
         {
             std::thread([this]()
                 {
-                    std::this_thread::sleep_for(std::chrono::seconds(5));
+                    std::this_thread::sleep_for(std::chrono::seconds(4));
                     ChangeTurn(TurnType::Waiting);
                 }).detach();
         }
