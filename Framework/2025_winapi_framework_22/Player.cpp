@@ -180,9 +180,6 @@ void Player::EnterCollision(Collider* _other)
 void Player::ExitCollision(Collider* _other)
 {
 	Rigidbody* rb = GetComponent<Rigidbody>();
-	if (_other->GetName() == L"Floor")
-	{
-	}
 	rb->SetGrounded(false);
 }
 
