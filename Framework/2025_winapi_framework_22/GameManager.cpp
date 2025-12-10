@@ -4,10 +4,18 @@
 #include "MatchScoreUI.h"
 #include "SceneManager.h"
 
-void GameManager::Reset()
+void GameManager::ResetMatch()
 {
 	player1_Die = false;
 	player2_Die = false;
+}
+
+void GameManager::ResetGame()
+{
+	player1_Die = false;
+	player2_Die = false;
+	player1_Score = 0;
+	player2_Score = 0;
 }
 
 bool GameManager::MatchWin()

@@ -122,6 +122,7 @@ void Core::CleanUp()
     ::ReleaseDC(m_hWnd, m_hDC);
     GET_SINGLE(TurnManager)->ClearEvents();
     GET_SINGLE(ResourceManager)->Release();
+    GET_SINGLE(TileMapManager)->Release();
 }
 
 

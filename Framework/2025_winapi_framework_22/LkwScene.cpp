@@ -17,7 +17,7 @@
 void InGameScene::Init()
 {
     GET_SINGLE(UIManager)->SetCanvas(CanvasType::InGame);
-    GET_SINGLE(GameManager)->Reset();
+    GET_SINGLE(GameManager)->ResetMatch();
 
     GET_SINGLE(TileMapManager)->SetTileMapToScene(this, L"Map1");
 

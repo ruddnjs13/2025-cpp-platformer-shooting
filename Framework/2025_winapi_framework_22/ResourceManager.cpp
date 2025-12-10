@@ -246,6 +246,8 @@ void ResourceManager::RegisterTexture()
 	LoadTexture(L"StartBtn_Hover", L"Texture\\StartBtn_Hover.bmp");
 	LoadTexture(L"GuideBtn", L"Texture\\GuideBtn.bmp");
 	LoadTexture(L"GuideBtn_Hover", L"Texture\\GuideBtn_Hover.bmp");
+	LoadTexture(L"TitleBtn", L"Texture\\TitleBtn.bmp");
+	LoadTexture(L"TitleBtn_Hover", L"Texture\\TitleBtn_Hover.bmp");
 
 	LoadTexture(L"One_Red", L"Texture\\One_Red.bmp");
 	LoadTexture(L"Two_Red", L"Texture\\Two_Red.bmp");
