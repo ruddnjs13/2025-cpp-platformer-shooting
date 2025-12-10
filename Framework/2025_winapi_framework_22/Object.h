@@ -15,6 +15,8 @@ public:
 	virtual void StayCollision(Collider* _other) {}
 	virtual void ExitCollision(Collider* _other) {}
 public:
+	const void SetIsFigures(bool _isFigures) { m_isFigures = _isFigures; }
+	const bool IsFigures() const { return m_isFigures; }
 	void SetPos(Vec2 _pos) { m_pos = _pos; }
 	void SetSize(Vec2 _size) { m_size = _size; }
 	const Vec2& GetPos() const { return m_pos; }
@@ -71,5 +73,6 @@ private:
 	Vec2 m_size;
 	double m_angle;
 	vector<Component*> m_vecComponents;
+	bool m_isFigures = false;
 };
 
