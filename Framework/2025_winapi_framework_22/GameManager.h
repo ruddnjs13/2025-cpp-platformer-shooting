@@ -7,6 +7,8 @@ class GameManager
 	DECLARE_SINGLE(GameManager)
 
 public:
+	void ResetMatch();
+	void ResetGame();
 	void Reset();
 	bool MatchWin();
 	void GameOver();

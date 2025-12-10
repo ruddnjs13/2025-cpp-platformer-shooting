@@ -21,7 +21,7 @@ void Bullet::EnterCollision(Collider* _other)
 {
 	if (_other->GetName() == L"Player")
 	{
-		_other->GetOwner()->GetComponent<Health>()->TakeDamage(m_damage);
+		_other->GetOwner()->GetComponent<Health>()->TakeDamage(100);
 		BurstBullet();
 		DestoyThis();
 	}

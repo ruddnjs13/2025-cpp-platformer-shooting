@@ -4,6 +4,14 @@
 #include "Tile.h"
 #include <filesystem>
 
+void TileMapManager::Release()
+{
+	for (auto& pair : maps)
+	{
+		delete pair.second;
+	}
+	maps.clear();
+}
 
 void TileMapManager::LoadAllTileMap()
 {

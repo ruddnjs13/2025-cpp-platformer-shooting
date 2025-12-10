@@ -8,6 +8,7 @@ class TileMapManager
 public:
 	std::map<wstring, TileMap*> maps;
 public:
+	void Release();
 	void LoadAllTileMap();
 	void LoadTileMap(wstring mapName, std::string fileName);
 
