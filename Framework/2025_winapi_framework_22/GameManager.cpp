@@ -36,7 +36,14 @@ bool GameManager::MatchWin()
 
 void GameManager::GameOver()
 {
-	GET_SINGLE(SceneManager)->RequestLoadScene(L"LkwScene");
+	if (player1_Score >= 3 || player2_Score >= 3)
+	{
+		GET_SINGLE(SceneManager)->RequestLoadScene(L"GameOverScene");
+	}
+	else
+	{
+		GET_SINGLE(SceneManager)->RequestLoadScene(L"LkwScene");
+	}
 }
 
 void GameManager::SetPlayerDead(int idx)

@@ -14,14 +14,17 @@ void MatchScoreUI::Render(HDC _hdc)
 	DrawTexture(_hdc, curPos, curSize, m_texture);
 }
 
-void MatchScoreUI::InitScoreTexture(Texture* p1_Zero, Texture* p1_One, Texture* p1_Two, Texture* p2_Zero, Texture* p2_One, Texture* p2_Two)
+
+void MatchScoreUI::InitScoreTexture(Texture* p1_Zero, Texture* p1_One, Texture* p1_Two, Texture* p1_Three, Texture* p2_Zero, Texture* p2_One, Texture* p2_Two, Texture* p2_Three)
 {
 	p1_textures[0] = p1_Zero;
 	p1_textures[1] = p1_One;
 	p1_textures[2] = p1_Two;
+	p1_textures[3] = p1_Three;
 	p2_textures[0] = p2_Zero;
 	p2_textures[1] = p2_One;
 	p2_textures[2] = p2_Two;
+	p2_textures[3] = p2_Three;
 }
 
 void MatchScoreUI::SetScore(int p1_Idx, int p2_Idx)

@@ -20,6 +20,7 @@ public:
 	Button* guideBtn;
 	Button* exitBtn;
 	MyAction<void>::Handle exitBtnHandle;
-	Image* backgroundPanel;
+
+	Image* gameTitle;
 };
 

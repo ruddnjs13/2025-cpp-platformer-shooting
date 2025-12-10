@@ -253,9 +253,13 @@ void ResourceManager::RegisterTexture()
 	LoadTexture(L"Two_Red", L"Texture\\Two_Blue.bmp");
 	LoadTexture(L"Zero_Red", L"Texture\\Zero_Red.bmp");
 	LoadTexture(L"Zero_Blue", L"Texture\\Zero_Blue.bmp");
+	LoadTexture(L"Three_Red", L"Texture\\Three_Red.bmp");
+	LoadTexture(L"Three_Blue", L"Texture\\Three_Blue.bmp");
+
 	LoadTexture(L"Colon", L"Texture\\Colon.bmp");
 	LoadTexture(L"Player1_Win", L"Texture\\Player1Win.bmp");
 	LoadTexture(L"Player2_Win", L"Texture\\Player2Win.bmp");
+	LoadTexture(L"GameTitle", L"Texture\\GameTitle.bmp");
 
 	//
 }

@@ -2,6 +2,7 @@
 #include "UIManager.h"
 #include "TitleCanvas.h"
 #include "InGameCanvas.h"
+#include "GameOverCanvas.h"
 
 void UIManager::Init()
 {
@@ -9,6 +10,7 @@ void UIManager::Init()
 
 	RegisterCanvas(CanvasType::InGame, std::make_shared<InGameCanvas>());
 	RegisterCanvas(CanvasType::Title, std::make_shared<TitleCanvas>());
+	RegisterCanvas(CanvasType::GameOver, std::make_shared<GameOverCanvas>());
 }
 
 void UIManager::Update()

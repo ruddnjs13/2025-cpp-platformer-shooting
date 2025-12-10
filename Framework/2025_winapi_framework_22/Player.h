@@ -58,6 +58,7 @@ private:
 public:
 	int playerCount = 0;
 	bool isCanSlotReel = true;
+	Texture* m_pTex;
 private:	
 
 	int weaponCount = 0;
@@ -66,7 +67,6 @@ private:
 	bool m_isFlipped = false;
 	bool m_isDestroy = false;
 	SlotReel* slotReel = nullptr;
-	Texture* m_pTex;
 	TurnType m_turnType;
 	PlayerState m_state;
 	PlayerState m_prevState;

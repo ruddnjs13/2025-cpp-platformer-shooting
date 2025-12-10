@@ -14,8 +14,7 @@
 #include "Slider.h"
 
 
-
-void LkwScene::Init()
+void InGameScene::Init()
 {
     GET_SINGLE(UIManager)->SetCanvas(CanvasType::InGame);
     GET_SINGLE(GameManager)->Reset();
@@ -84,14 +83,14 @@ void LkwScene::Init()
 }
 
 
-void LkwScene::Update()
+void InGameScene::Update()
 {
    
     
 	Scene::Update();
 }
 
-void LkwScene::Release()
+void InGameScene::Release()
 {
     pPlayer1->onDeadEvent.RemoveListener(p1DeadHandle);
     pPlayer2->onDeadEvent.RemoveListener(p2DeadHandle);
