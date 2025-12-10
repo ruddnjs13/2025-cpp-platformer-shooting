@@ -34,6 +34,7 @@ public:
 	void StayCollision(Collider* _other) override;
 	void ExitCollision(Collider* _other) override;
 	void ChangeState(PlayerState _newState);
+	void SetPlayerType();
 	void SetPlayerTurn(TurnType _turnType, int _playerCount)
 	{
 		if (_turnType != TurnType::Player1 && _turnType != TurnType::Player2)
@@ -43,6 +44,7 @@ public:
 		}
 		m_turnType = _turnType; 
 		playerCount = _playerCount;
+		SetPlayerType();
 
 	}
 	void SetWeaponCount(int count) { weaponCount = count; }

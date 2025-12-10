@@ -55,9 +55,8 @@ enum class CanvasType
 {
 	Title,
 	InGame,
-	Segging,
-	Tutorial,
-	Credit
+	Setting,
+	GameOver
 };
 
 enum class TileType

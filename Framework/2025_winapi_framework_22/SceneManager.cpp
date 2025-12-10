@@ -5,6 +5,7 @@
 #include "LkwScene.h"
 #include "KmjScene.h"
 #include "TitleScene.h"
+#include "GameOverScene.h"
 #include "IscScene.h"
 #include "Collider.h"
 #include "Object.h"
@@ -16,11 +17,12 @@ void SceneManager::Init()
 	
 	// 등록
 	RegisterScene(L"DevScene", std::make_shared<DevScene>());
-	RegisterScene(L"LkwScene", std::make_shared<LkwScene>());
+	RegisterScene(L"LkwScene", std::make_shared<InGameScene>());
 	RegisterScene(L"KmjScene", std::make_shared<KmjScene>());
 	RegisterScene(L"IscScene", std::make_shared<IscScene>());
 	RegisterScene(L"TestScene", std::make_shared<TestScene>());
 	RegisterScene(L"TitleScene", std::make_shared<TitleScene>());
+	RegisterScene(L"GameOverScene", std::make_shared<GameOverScene>());
 	// Scene 추가
 	
 	// 로드
@@ -51,7 +53,7 @@ void SceneManager::Update()
 	}
 	else if (GET_KEYDOWN((KEY_TYPE::NUM_2)))
 	{	
-		LoadScene(L"KmjScene");
+		LoadScene(L"GameOverScene");
 	}
 	else if (GET_KEYDOWN((KEY_TYPE::NUM_3)))
 	{

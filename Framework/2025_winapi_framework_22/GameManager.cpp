@@ -4,10 +4,18 @@
 #include "MatchScoreUI.h"
 #include "SceneManager.h"
 
-void GameManager::Reset()
+void GameManager::ResetMatch()
 {
 	player1_Die = false;
 	player2_Die = false;
+}
+
+void GameManager::ResetGame()
+{
+	player1_Die = false;
+	player2_Die = false;
+	player1_Score = 0;
+	player2_Score = 0;
 }
 
 bool GameManager::MatchWin()
@@ -36,7 +44,14 @@ bool GameManager::MatchWin()
 
 void GameManager::GameOver()
 {
-	GET_SINGLE(SceneManager)->RequestLoadScene(L"LkwScene");
+	if (player1_Score >= 3 || player2_Score >= 3)
+	{
+		GET_SINGLE(SceneManager)->RequestLoadScene(L"GameOverScene");
+	}
+	else
+	{
+		GET_SINGLE(SceneManager)->RequestLoadScene(L"LkwScene");
+	}
 }
 
 void GameManager::SetPlayerDead(int idx)

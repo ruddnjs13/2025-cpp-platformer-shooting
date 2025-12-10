@@ -81,7 +81,7 @@ void Core::MainRender()
     //::Rectangle(m_hBackDC, -1, -1, WINDOW_WIDTH +1 , WINDOW_HEIGHT +1 );
 
     // 1. clear
-    ::PatBlt(m_hBackDC, 0,0, WINDOW_WIDTH,WINDOW_HEIGHT, WHITENESS);
+    ::PatBlt(m_hBackDC, 0,0, WINDOW_WIDTH,WINDOW_HEIGHT, BLACKNESS);
     
     //Vec2 pos = m_obj.GetPos();
     //Vec2 size = m_obj.GetSize();
@@ -122,6 +122,7 @@ void Core::CleanUp()
     ::ReleaseDC(m_hWnd, m_hDC);
     GET_SINGLE(TurnManager)->ClearEvents();
     GET_SINGLE(ResourceManager)->Release();
+    GET_SINGLE(TileMapManager)->Release();
 }
 
 

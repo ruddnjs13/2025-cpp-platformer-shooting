@@ -4,7 +4,7 @@
 
 class Player;
 
-class LkwScene :
+class InGameScene :
     public Scene
 {
 private : 

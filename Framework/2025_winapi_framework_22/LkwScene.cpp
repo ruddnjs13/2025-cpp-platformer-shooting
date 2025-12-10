@@ -2,6 +2,7 @@
 #include "LkwScene.h"
 #include "UIManager.h"
 #include "TileMapManager.h"
+#include "DieZone.h"
 #include "Player.h"
 #include "Floor.h"
 #include "CollisionManager.h"
@@ -14,14 +15,14 @@
 #include "Slider.h"
 
 
-
-void LkwScene::Init()
+void InGameScene::Init()
 {
     GET_SINGLE(UIManager)->SetCanvas(CanvasType::InGame);
-    GET_SINGLE(GameManager)->Reset();
+    GET_SINGLE(GameManager)->ResetMatch();
 
     GET_SINGLE(TileMapManager)->SetTileMapToScene(this, L"Map1");
 
+    DieZone* pDiezone = Spawn<DieZone>(Layer::DEFAULT, { 0, 700 }, { 1000.f, 100.f });
     pPlayer2 = Spawn<Player>(Layer::PLAYER, { 500, 300 }, { 32, 32 });
     pPlayer1 = Spawn<Player>(Layer::PLAYER, { 300, 300 }, { 32, 32 });
     pPlayer1->SetPlayerTurn(TurnType::Player1, 1);
@@ -84,14 +85,14 @@ void LkwScene::Init()
 }
 
 
-void LkwScene::Update()
+void InGameScene::Update()
 {
    
     
 	Scene::Update();
 }
 
-void LkwScene::Release()
+void InGameScene::Release()
 {
     pPlayer1->onDeadEvent.RemoveListener(p1DeadHandle);
     pPlayer2->onDeadEvent.RemoveListener(p2DeadHandle);

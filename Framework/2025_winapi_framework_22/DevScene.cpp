@@ -10,16 +10,16 @@
 #include "Floor.h"
 void DevScene::Init()
 {	
-	Object* obj = new Player;
-	obj->SetPos({ WINDOW_WIDTH / 2, 300 });
-	obj->SetSize({ 100.f, 100.f });
+	//Object* obj = new Player;
+	/*obj->SetPos({ WINDOW_WIDTH / 2, 300 });
+	obj->SetSize({ 100.f, 100.f });*/
 	// obj->SetScene(this);
-	AddObject(obj, Layer::PLAYER);
+	//AddObject(obj, Layer::PLAYER);
 
 	Spawn<Floor>(Layer::DEFAULT, { WINDOW_WIDTH / 2, 600}, { 100.f,100.f });
 	Spawn<Enemy>(Layer::ENEMY, { WINDOW_WIDTH / 2, WINDOW_HEIGHT / 4 }, { 100.f,100.f });
 	GET_SINGLE(CollisionManager)->CheckLayer(Layer::PROJECTILE, Layer::ENEMY);
-	GET_SINGLE(CollisionManager)->CheckLayer(Layer::PLAYER, Layer::DEFAULT);
+	//GET_SINGLE(CollisionManager)->CheckLayer(Layer::PLAYER, Layer::DEFAULT);
 	//GET_SINGLE(ResourceManager)->Play(L"BGM");
 }
 

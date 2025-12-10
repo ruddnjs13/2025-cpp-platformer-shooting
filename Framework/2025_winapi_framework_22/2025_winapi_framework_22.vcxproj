@@ -164,7 +164,10 @@
     <ClInclude Include="Bazuka.h" />
     <ClInclude Include="BazukaBullet.h" />
     <ClInclude Include="Button.h" />
+    <ClInclude Include="DieZone.h" />
     <ClInclude Include="GameManager.h" />
+    <ClInclude Include="GameOverCanvas.h" />
+    <ClInclude Include="GameOverScene.h" />
     <ClInclude Include="Health.h" />
     <ClInclude Include="Image.h" />
     <ClInclude Include="InGameCanvas.h" />
@@ -255,9 +258,12 @@
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="Core.cpp" />
     <ClCompile Include="DevScene.cpp" />
+    <ClCompile Include="DieZone.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="Floor.cpp" />
     <ClCompile Include="GameManager.cpp" />
+    <ClCompile Include="GameOverCanvas.cpp" />
+    <ClCompile Include="GameOverScene.cpp" />
     <ClCompile Include="GDISelector.cpp" />
     <ClCompile Include="Health.cpp" />
     <ClCompile Include="Image.cpp" />

@@ -192,10 +192,6 @@ void ResourceManager::RegisterTexture()
 	//LoadTexture(L"Gun1", L"Texture\\Revolver.bmp");
 	LoadTexture(L"AimLine", L"Texture\\Aimming.bmp");
 	LoadTexture(L"Test2", L"Texture\\RoolRetTest.bmp");
-	LoadTexture(L"PlayerWalk", L"Texture\\PlayerWalk.bmp");
-	LoadTexture(L"PlayerIdle", L"Texture\\PlayerIdle.bmp");
-	LoadTexture(L"PlayerDie", L"Texture\\PlayerDie.bmp");
-	LoadTexture(L"Player", L"Texture\\TestPlayer.bmp");
 	LoadTexture(L"Slot", L"Texture\\Slot.bmp");
 
 	//총 텍스쳐
@@ -246,6 +242,8 @@ void ResourceManager::RegisterTexture()
 	LoadTexture(L"StartBtn_Hover", L"Texture\\StartBtn_Hover.bmp");
 	LoadTexture(L"GuideBtn", L"Texture\\GuideBtn.bmp");
 	LoadTexture(L"GuideBtn_Hover", L"Texture\\GuideBtn_Hover.bmp");
+	LoadTexture(L"TitleBtn", L"Texture\\TitleBtn.bmp");
+	LoadTexture(L"TitleBtn_Hover", L"Texture\\TitleBtn_Hover.bmp");
 
 	LoadTexture(L"One_Red", L"Texture\\One_Red.bmp");
 	LoadTexture(L"Two_Red", L"Texture\\Two_Red.bmp");
@@ -253,9 +251,23 @@ void ResourceManager::RegisterTexture()
 	LoadTexture(L"Two_Red", L"Texture\\Two_Blue.bmp");
 	LoadTexture(L"Zero_Red", L"Texture\\Zero_Red.bmp");
 	LoadTexture(L"Zero_Blue", L"Texture\\Zero_Blue.bmp");
+	LoadTexture(L"Three_Red", L"Texture\\Three_Red.bmp");
+	LoadTexture(L"Three_Blue", L"Texture\\Three_Blue.bmp");
+
 	LoadTexture(L"Colon", L"Texture\\Colon.bmp");
 	LoadTexture(L"Player1_Win", L"Texture\\Player1Win.bmp");
 	LoadTexture(L"Player2_Win", L"Texture\\Player2Win.bmp");
+	LoadTexture(L"GameTitle", L"Texture\\GameTitle.bmp");
+
+	// 플레이어 텍스쳐
+	LoadTexture(L"Player1", L"Texture\\PlayerOne.bmp");
+	LoadTexture(L"Player1Idle", L"Texture\\PlayerOneIdle.bmp");
+	LoadTexture(L"Player1Walk", L"Texture\\PlayerOneWalk.bmp");
+	LoadTexture(L"Player1Die", L"Texture\\PlayerOneDie.bmp");
+	LoadTexture(L"Player2", L"Texture\\PlayerTwo.bmp");
+	LoadTexture(L"Player2Idle", L"Texture\\PlayerTwoIdle.bmp");
+	LoadTexture(L"Player2Walk", L"Texture\\PlayerTwoWalk.bmp");
+	LoadTexture(L"Player2Die", L"Texture\\PlayerTwoDie.bmp");
 
 	//
 }

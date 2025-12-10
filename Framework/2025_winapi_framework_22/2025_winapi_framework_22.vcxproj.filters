@@ -188,9 +188,6 @@
       <Filter>Engine\06. Component\Physics</Filter>
     </ClInclude>
     <ClInclude Include="Floor.h" />
-    <ClInclude Include="LkwScene.h">
-      <Filter>Engine\04. Scene</Filter>
-    </ClInclude>
     <ClInclude Include="KmjScene.h">
       <Filter>Engine\04. Scene</Filter>
     </ClInclude>
@@ -328,6 +325,15 @@
     <ClInclude Include="MatchScoreUI.h">
       <Filter>Engine\07. UI\UIElement</Filter>
     </ClInclude>
+    <ClInclude Include="LkwScene.h">
+      <Filter>Engine\04. Scene\BuildScene</Filter>
+    </ClInclude>
+    <ClInclude Include="GameOverScene.h">
+      <Filter>Engine\04. Scene\BuildScene</Filter>
+    </ClInclude>
+    <ClInclude Include="GameOverCanvas.h">
+      <Filter>Engine\07. UI\Canvas</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="2025_winapi_framework_22.rc">
@@ -411,9 +417,6 @@
     </ClCompile>
     <ClCompile Include="Rigidbody.cpp">
       <Filter>Engine\06. Component\Physics</Filter>
-    </ClCompile>
-    <ClCompile Include="LkwScene.cpp">
-      <Filter>Engine\04. Scene</Filter>
     </ClCompile>
     <ClCompile Include="KmjScene.cpp">
       <Filter>Engine\04. Scene</Filter>
@@ -549,6 +552,15 @@
     </ClCompile>
     <ClCompile Include="MatchScoreUI.cpp">
       <Filter>Engine\07. UI\UIElement</Filter>
+    </ClCompile>
+    <ClCompile Include="LkwScene.cpp">
+      <Filter>Engine\04. Scene\BuildScene</Filter>
+    </ClCompile>
+    <ClCompile Include="GameOverScene.cpp">
+      <Filter>Engine\04. Scene\BuildScene</Filter>
+    </ClCompile>
+    <ClCompile Include="GameOverCanvas.cpp">
+      <Filter>Engine\07. UI\Canvas</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

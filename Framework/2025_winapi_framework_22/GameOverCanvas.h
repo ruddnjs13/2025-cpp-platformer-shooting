@@ -1,27 +1,21 @@
 #pragma once
 #include "Canvas.h"
-
-class Slider;
-class Image;
+#include "MyAction.h"
+class Button;
 class MatchScoreUI;
+class Image;
 
-class InGameCanvas :
+class GameOverCanvas :
     public Canvas
 {
-public:
-
     // Canvas을(를) 통해 상속됨
     void Init() override;
     void Release() override;
 
-    void Update() override;
-
-public:
-    Slider* p1_HpBar;
-    Slider* p2_HpBar;
-    Slider* p1_SteminaBar;
-    Slider* p2_SteminaBar;
+private:
+    Image* winImage;
+    Button* toTitleBtn;
+    MyAction<void>::Handle toTitleHandle;
     MatchScoreUI* matchScoreUI;
-
 };
 
