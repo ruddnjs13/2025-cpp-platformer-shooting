@@ -2,6 +2,7 @@
 #include "LkwScene.h"
 #include "UIManager.h"
 #include "TileMapManager.h"
+#include "DieZone.h"
 #include "Player.h"
 #include "Floor.h"
 #include "CollisionManager.h"
@@ -21,6 +22,7 @@ void InGameScene::Init()
 
     GET_SINGLE(TileMapManager)->SetTileMapToScene(this, L"Map1");
 
+    DieZone* pDiezone = Spawn<DieZone>(Layer::DEFAULT, { 0, 700 }, { 1000.f, 100.f });
     pPlayer2 = Spawn<Player>(Layer::PLAYER, { 500, 300 }, { 32, 32 });
     pPlayer1 = Spawn<Player>(Layer::PLAYER, { 300, 300 }, { 32, 32 });
     pPlayer1->SetPlayerTurn(TurnType::Player1, 1);

@@ -1,4 +1,4 @@
-#include "pch.h"
+﻿#include "pch.h"
 #include "TestWeapon2.h"
 #include "TestWeapon.h"
 #include "ResourceManager.h"
@@ -38,6 +38,38 @@ void TestWeapon2::Update()
 	{
 		Shoot();
 	}
+
+	if (isFlip == true)
+	{
+		float radius = sqrtf(10 * 10 + m_offsetPos.y * m_offsetPos.y);
+
+		float radian = m_angleValue * (PI / 180.0f);
+
+		float x = cosf(radian) * radius;
+		float y = -sinf(radian) * radius;
+
+		x *= 5;
+		x = -x;
+
+
+		m_offsetPos = Vec2(x, y);
+
+		cout << radian << "라디안" << endl;
+		cout << radius << "반지름" << endl;
+	}
+	else if (isFlip == false)
+	{
+		float radius = sqrtf(m_offsetPos.x * m_offsetPos.x + m_offsetPos.y * m_offsetPos.y);
+		float radian = m_angleValue * (PI / 180.0f);
+
+		float x = cosf(radian) * radius;
+		float y = -sinf(radian) * radius;
+
+		cout << radian << "라디안" << endl;
+		cout << radius << "반지름" << endl;
+		m_offsetPos = Vec2(x, y);
+	}
+
 
 
 	if (GET_KEY(KEY_TYPE::W) && isRotation == true && m_playerCount == 1)
@@ -199,16 +231,7 @@ void TestWeapon2::Shoot()
 	Vec2 pos = GetPos();
 	pos.y -= GetSize().y / 2.f;
 
-	if (m_playerCount == 1)
-	{
-		pos.y -= 2;
-		pos.x += 60.f;
-	}
-	else if (m_playerCount == 2)
-	{
-		pos.y -= 2;
-		pos.x -= 80.f;
-	}
+
 	proj->SetPos(pos);
 	proj->SetSize({ 20.f,20.f });
 	proj->SetDir(m_angle);

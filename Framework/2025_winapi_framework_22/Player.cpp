@@ -19,8 +19,8 @@ Player::Player()
 	//wstring path = GET_SINGLE(ResourceManager)->GetResPath();
 	//path += L"Texture\\plane.bmp";
 	//m_pTex->Load(path);
-	m_pTex = GET_SINGLE(ResourceManager)->GetTexture(L"PlayerIdle");
 	Collider* c = AddComponent<Collider>();
+	GET_SINGLE(ResourceManager)->GetTexture(L"Player1");
 	c->SetSize({ 28,28 });
 	c->SetName(L"Player");
 	SetIsFigures(false);
@@ -31,41 +31,84 @@ Player::Player()
 	//GetComponent<Rigidbody>()->SetUseGravity(false);
 	r->SetFriction(0);
 	SetStamina(1000);
-	auto* animator = AddComponent<Animator>();
-	animator->CreateAnimation
-	(L"PlayerIdle",
-		m_pTex, 
-		{0.f,0.f},
-		{16.f,16.f},
-		{16.f,0.f},
-		6,0.1f
-	);
-	animator->Play(L"PlayerIdle");
-	m_pTex = GET_SINGLE(ResourceManager)->GetTexture(L"PlayerWalk");
-	animator->CreateAnimation
-	(
-		L"PlayerRun",
-		m_pTex,
-		{ 0.f,0.f },
-		{ 16.f,16.f },
-		{ 16.f,0.f },
-		6, 0.1f
-	);
-	m_pTex = GET_SINGLE(ResourceManager)->GetTexture(L"PlayerDie");
-	animator->CreateAnimation
-	(
-		L"PlayerDie",
-		m_pTex,
-		{ 0.f,0.f },
-		{ 16.f,16.f },
-		{ 16.f,0.f },
-		4, 0.1f
-	);
+	AddComponent<Animator>();
 
 	GET_SINGLE(TurnManager)->RaiseEvent(TurnType::Select, [this]()
 		{
 			
 		});
+}
+
+void Player::SetPlayerType()
+{
+	cout << "아" << endl;
+	auto* animator = GetComponent<Animator>();
+	if (m_turnType == TurnType::Player1)
+	{
+		m_pTex = GET_SINGLE(ResourceManager)->GetTexture(L"Player1Idle");
+		animator->CreateAnimation
+		(L"Player1Idle",
+			m_pTex,
+			{ 0.f,0.f },
+			{ 16.f,16.f },
+			{ 16.f,0.f },
+			6, 0.1f
+		);
+		animator->Play(L"Player1Idle");
+		m_pTex = GET_SINGLE(ResourceManager)->GetTexture(L"Player1Walk");
+		animator->CreateAnimation
+		(
+			L"Player1Walk",
+			m_pTex,
+			{ 0.f,0.f },
+			{ 16.f,16.f },
+			{ 16.f,0.f },
+			6, 0.1f
+		);
+		m_pTex = GET_SINGLE(ResourceManager)->GetTexture(L"Player1Die");
+		animator->CreateAnimation
+		(
+			L"Player1Die",
+			m_pTex,
+			{ 0.f,0.f },
+			{ 16.f,16.f },
+			{ 16.f,0.f },
+			4, 0.3f
+		);
+	}
+	else if (m_turnType == TurnType::Player2)
+	{
+		m_pTex = GET_SINGLE(ResourceManager)->GetTexture(L"Player2Idle");
+		animator->CreateAnimation
+		(L"Player2Idle",
+			m_pTex,
+			{ 0.f,0.f },
+			{ 16.f,16.f },
+			{ 16.f,0.f },
+			6, 0.1f
+		);
+		animator->Play(L"Player2Idle");
+		m_pTex = GET_SINGLE(ResourceManager)->GetTexture(L"Player2Walk");
+		animator->CreateAnimation
+		(
+			L"Player2Walk",
+			m_pTex,
+			{ 0.f,0.f },
+			{ 16.f,16.f },
+			{ 16.f,0.f },
+			6, 0.1f
+		);
+		m_pTex = GET_SINGLE(ResourceManager)->GetTexture(L"Player2Die");
+		animator->CreateAnimation
+		(
+			L"Player2Die",
+			m_pTex,
+			{ 0.f,0.f },
+			{ 16.f,16.f },
+			{ 16.f,0.f },
+			4, 0.3f
+		);
+	}
 }
 
 Player::~Player()
@@ -120,14 +163,19 @@ void Player::Render(HDC _hdc)
 	ComponentRender(_hdc);
 }
 
+
 void Player::StayCollision(Collider* _other)
 {
 }
 
 void Player::EnterCollision(Collider* _other)
-{	
+{
+	if (_other->GetName() == L"DieZone")
+	{
+		auto* health = GetComponent<Health>();
+		health->TakeDamage(-INT_MAX);
+	}
 }
-// 카운트를 매길때 X값 비교를 해서? 해당 거리가 센터를 기준으로 70%부분보다 많으면 카운트?
 
 void Player::ExitCollision(Collider* _other)
 {
@@ -148,21 +196,45 @@ void Player::ChangeState(PlayerState _newState)
 	{
 	case PlayerState::IDLE:
 	{
-		m_pTex = GET_SINGLE(ResourceManager)->GetTexture(L"PlayerIdle");
-		animator->Play(L"PlayerIdle");
+		if (m_turnType == TurnType::Player1)
+		{
+			m_pTex = GET_SINGLE(ResourceManager)->GetTexture(L"Player1Idle");
+			animator->Play(L"Player1Idle");
+		}
+		else
+		{
+			m_pTex = GET_SINGLE(ResourceManager)->GetTexture(L"Player2Idle");
+			animator->Play(L"Player2Idle");
+		}
 	}
 	break;
 	case PlayerState::RUN:
 	{
-		m_pTex = GET_SINGLE(ResourceManager)->GetTexture(L"PlayerWalk");
-		animator->Play(L"PlayerRun");
+		if (m_turnType == TurnType::Player1)
+		{
+			m_pTex = GET_SINGLE(ResourceManager)->GetTexture(L"Player1Walk");
+			animator->Play(L"Player1Walk");
+		}
+		else
+		{
+			m_pTex = GET_SINGLE(ResourceManager)->GetTexture(L"Player2Walk");
+			animator->Play(L"Player2Walk");
+		}
 	}
 	break;
 	case PlayerState::JUMP:
 		break;
 	case PlayerState::DIE:
-		m_pTex = GET_SINGLE(ResourceManager)->GetTexture(L"PlayerDie");
-		animator->Play(L"PlayerDie", PlayMode::Once);
+		if (m_turnType == TurnType::Player1)
+		{
+			m_pTex = GET_SINGLE(ResourceManager)->GetTexture(L"Player1Die");
+			animator->Play(L"Player1Die", PlayMode::Once);
+		}
+		else
+		{
+			m_pTex = GET_SINGLE(ResourceManager)->GetTexture(L"Player2Die");
+			animator->Play(L"Player2Die", PlayMode::Once);
+		}
 		onDeadEvent.Invoke(playerCount);
 		break;
 	default:
@@ -326,7 +398,6 @@ void Player::Update()
 		GET_SINGLE(SceneManager)->GetCurScene()->AddObject(slotReel, Layer::Slot);
 	}
 }
-
 
 void Player::CreateProjectile()
 {
