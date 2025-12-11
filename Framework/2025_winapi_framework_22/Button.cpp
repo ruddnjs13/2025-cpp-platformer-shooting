@@ -53,7 +53,7 @@ void Button::Render(HDC _hdc)
 void Button::OnClick()
 {
 	if (_isClicked) return;
-	cout << "OnCliick";
+	PLAY_SOUND(L"ButtonClickSFX");
 
 	if (OnClickEvt.HasListener())
 	{

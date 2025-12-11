@@ -46,6 +46,33 @@ void ResourceManager::Release()
 
 void ResourceManager::RegisterSound()
 {
+	// 배경음
+	LoadSound(L"TitleBGM", L"Sound\\Title_bgm.mp3", true);
+	LoadSound(L"MapOneBGM", L"Sound\\MapOne_bgm.mp3", true);
+	LoadSound(L"MapThreeBGM", L"Sound\\MapThree_bgm.mp3", true);
+	LoadSound(L"MapTwoBGM", L"Sound\\MapTwo_bgm.mp3", true);
+
+	// 플레이어
+	LoadSound(L"PlayerJumpSFX", L"Sound\\PlayerJump_sfx.mp3", false);
+	LoadSound(L"PlayerDeadSFX", L"Sound\\PlayerDie_sfx.mp3", false);
+
+	// 무기
+	LoadSound(L"AK47FireSFX", L"Sound\\AK47Fire_sfx.mp3", false);
+	LoadSound(L"BazukaFireSFX", L"Sound\\BazukaFire_sfx.mp3", false);
+	LoadSound(L"GrenadeLauncherFireSFX", L"Sound\\GrenadeLauncherFire_sfx.mp3", false);
+	LoadSound(L"LaserGunFireSFX", L"Sound\\LaserGunFire_sfx.mp3", false);
+	LoadSound(L"NailGunFireSFX", L"Sound\\NailGunFire_sfx.mp3", false);
+	LoadSound(L"PizzaGunFireSFX", L"Sound\\PizzaGunFire_sfx.mp3", false);
+	LoadSound(L"RevolverFireSFX", L"Sound\\RevolverFire_sfx.mp3", false);
+	LoadSound(L"SniperFireSFX", L"Sound\\SniperFire_sfx.mp3", false);
+	LoadSound(L"PizzaGunHitSFX", L"Sound\\PizzaGunHit_sfx.mp3", false);
+	LoadSound(L"BulletExplosionSFX", L"Sound\\BulletExplosion_sfx.mp3", false);
+
+	// UI 버튼 클릭
+	LoadSound(L"ButtonClickSFX", L"Sound\\ButtonClick_sfx.mp3", false);
+
+	// 게임 끝
+	LoadSound(L"GameEndSFX", L"Sound\\GameEnd_sfx.mp3", false); 
 	LoadSound(L"BGM", L"Sound\\Retro_bgm.wav", true);
 	LoadSound(L"BGM", L"Sound\\laserShoot.wav", false);
 }
