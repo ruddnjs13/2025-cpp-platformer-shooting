@@ -21,8 +21,6 @@ RazerBullet::RazerBullet()
 
 	m_speed = 700;
 
-	m_damage = 25;
-
 }
 
 RazerBullet::~RazerBullet()

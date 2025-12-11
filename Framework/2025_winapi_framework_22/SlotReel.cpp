@@ -191,8 +191,8 @@ void SlotReel::SlotRolling()
 			switch (storeValue)
 			{
 			case 1: MakeWeapon(new TestWeapon2, playerNum, { 40,40 }); break;
-			case 2: MakeWeapon(new TestWeapon, playerNum, { 40,40 }); break;
-			case 3: MakeWeapon(new Bazuka, playerNum, { 40,40 }); break;
+			case 2: MakeWeapon(new TestWeapon, playerNum, { 35,35 }); break;
+			case 3: MakeWeapon(new Bazuka, playerNum, { 35,35 }); break;
 			case 4: MakeWeapon(new Rocket, playerNum, { 45,45 }); break;
 			case 5: MakeWeapon(new RazerGun, playerNum, { 30,30 }); break;
 			case 6: MakeWeapon(new PizzeGun, playerNum, { 20,20 }); break;
