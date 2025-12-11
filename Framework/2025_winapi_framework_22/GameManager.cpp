@@ -16,6 +16,7 @@ void GameManager::ResetGame()
 	player2_Die = false;
 	player1_Score = 0;
 	player2_Score = 0;
+	mapIdx = 0;
 }
 
 bool GameManager::MatchWin()
@@ -51,6 +52,7 @@ void GameManager::GameOver()
 	else
 	{
 		GET_SINGLE(SceneManager)->RequestLoadScene(L"LkwScene");
+		mapIdx++;
 	}
 }
 
@@ -67,4 +69,21 @@ void GameManager::SetMatchScoreUI(MatchScoreUI* matchscoreUI)
 	matchScoreUI = matchscoreUI;
 	matchScoreUI->SetScore(player1_Score, player2_Score);
 }
+
+wstring GameManager::GetMapName()
+{
+	return mapNames[mapIdx % 3];
+}
+
+Vec2 GameManager::GetPlayer1Pos()
+{
+	return p1_spawnPos[mapIdx];
+}
+
+Vec2 GameManager::GetPlayer2Pos()
+{
+	return p2_spawnPos[mapIdx];
+}
+
+
 

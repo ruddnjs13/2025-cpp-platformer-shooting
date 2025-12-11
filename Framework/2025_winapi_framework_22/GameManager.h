@@ -20,6 +20,11 @@ public:
 
 	void SetMatchScoreUI(MatchScoreUI* matchscoreUI);
 
+	wstring GetMapName();
+
+	Vec2 GetPlayer1Pos();
+	Vec2 GetPlayer2Pos();
+
 public:
 	int player1_Score = 0;
 	int player2_Score = 0;
@@ -28,5 +33,10 @@ public:
 	bool player2_Die = false;
 
 	MatchScoreUI* matchScoreUI;
+private:
+	wstring mapNames[3] = { L"Map1",L"Map2", L"Map3" };
+	Vec2 p1_spawnPos[3] = { {330,300},{400,500},{250,550} };
+	Vec2 p2_spawnPos[3] = { {1070,300},{880,500},{1230,220} };
+	int mapIdx = 0;
 };
 

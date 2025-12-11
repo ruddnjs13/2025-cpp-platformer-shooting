@@ -69,3 +69,11 @@ enum class TileType
 	Bridge = '6',
 
 };
+
+enum class SceneState
+{
+	Idle,
+	FadingOut,
+	LoadingScene,
+	FadingIn
+};

@@ -34,6 +34,9 @@ private:
 
 public:
 	void RequestLoadScene(const std::wstring& _name) { m_pendingScene = _name; }
-
+private:
+	float m_fadeAlpha = 0.f;
+	SceneState m_state = SceneState::Idle;
+	wstring m_nextSceneName;
 };
 

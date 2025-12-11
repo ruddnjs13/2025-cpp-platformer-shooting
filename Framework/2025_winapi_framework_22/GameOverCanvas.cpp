@@ -36,8 +36,8 @@ void GameOverCanvas::Init()
 	toTitleBtn->SetPos({ WINDOW_WIDTH / 2, WINDOW_HEIGHT / 8 * 6 });
 	toTitleBtn->SetSize({ 150, 50 });
 	toTitleHandle = toTitleBtn->OnClickEvt.AddListener([]() {
-		GET_SINGLE(SceneManager)->RequestLoadScene(L"TitleScene");
 		GET_SINGLE(GameManager)->ResetGame();
+		GET_SINGLE(SceneManager)->RequestLoadScene(L"TitleScene");
 		});
 
 

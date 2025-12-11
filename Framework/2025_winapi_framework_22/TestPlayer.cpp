@@ -85,7 +85,6 @@ void TestPlayer::Update()
 
 		slotReel->SlotRolling(1);
 
-		slotReel->SetOwner(this);
 
 		GET_SINGLE(SceneManager)->GetCurScene()->AddObject(slotReel, Layer::Slot);
 	}

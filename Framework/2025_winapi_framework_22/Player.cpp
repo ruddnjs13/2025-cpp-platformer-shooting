@@ -30,7 +30,7 @@ Player::Player()
 	//cout << "Init : " << r->GetOwner() << endl;
 	//GetComponent<Rigidbody>()->SetUseGravity(false);
 	r->SetFriction(0);
-	SetStamina(1000);
+	SetStamina(100);
 	AddComponent<Animator>();
 
 	GET_SINGLE(TurnManager)->RaiseEvent(TurnType::Select, [this]()
@@ -343,13 +343,14 @@ void Player::Update()
 	{
 		ChangeState(PlayerState::IDLE);
 	}
-	float prevPosX = GetPos().x;
+	//float prevPosX = GetPos().x;
 	//Translate({dir.x * fDT * 200.f, dir.y * fDT * 200.f});
 	rb->SetVelocity({ dir.x * 200.f, rb->GetVelocity().y });
 	if (dir.x != 0.f) 
 		m_isFlipped = dir.x < 0.f;
-	float nextPosX = GetPos().x;
-	if (prevPosX != nextPosX)
+	//float nextPosX = GetPos().x;
+	//if (prevPosX != nextPosX)
+	if(rb->GetVelocity().x != 0)
 		AddStamina(-0.1f);
 
 	if (slotReel != nullptr)

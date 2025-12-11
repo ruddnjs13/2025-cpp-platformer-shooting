@@ -9,6 +9,8 @@
 
 void InGameCanvas::Init()
 {
+
+	cout << GET_SINGLE(ResourceManager)->GetTexture(L"Two_Blue")->GetHeight();
 	p1_HpBar = new Slider();
 	p1_HpBar->Init(GET_SINGLE(ResourceManager)->GetTexture(L"P1_Boarder"), GET_SINGLE(ResourceManager)->GetTexture(L"HpFill"));
 	p1_HpBar->SetPos({ 220, 80 });
