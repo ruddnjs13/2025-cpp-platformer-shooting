@@ -14,7 +14,6 @@ Collider::Collider()
 }
 void Collider::LateUpdate()
 {
-	// 오브젝트 따라가게
 	Object* owner = GetOwner();
 	Vec2 pos = owner->GetPos();
 	m_updatedPos = pos + m_offsetPos;
@@ -22,14 +21,6 @@ void Collider::LateUpdate()
 
 void Collider::Render(HDC _hDC)
 {
-	//::TextOut(_hDC, 0, 0, L"안녕", 2);
-	//GDISelector font(_hDC, FontType::TITLE);
-	//::TextOut(_hDC, 10, 10, L"하세요", 3);
-
-	//// 기즈모?
-	//GET_SINGLE(ResourceManager)->GetPen();
-
-	// RAII
 	PenType colorPen = PenType::GREEN;
 	if (m_showDebug)
 		colorPen = PenType::RED;
@@ -44,8 +35,6 @@ void Collider::EnterCollision(Collider* _other)
 	m_isCol = true;
 	GetOwner()->EnterCollision(_other);
 	m_lateColMap[_other->GetID()] = _other;
-	
-	std::wcout << _other->GetName() << endl;
 }
 void Collider::StayCollision(Collider* _other)
 {

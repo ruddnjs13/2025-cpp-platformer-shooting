@@ -15,10 +15,6 @@
 #include "SlotReel.h"
 Player::Player()
 {
-	//m_pTex = new Texture;
-	//wstring path = GET_SINGLE(ResourceManager)->GetResPath();
-	//path += L"Texture\\plane.bmp";
-	//m_pTex->Load(path);
 	Collider* c = AddComponent<Collider>();
 	GET_SINGLE(ResourceManager)->GetTexture(L"Player1");
 	c->SetSize({ 28,28 });
@@ -27,8 +23,6 @@ Player::Player()
 	auto * r = AddComponent<Rigidbody>();
 	auto* health = AddComponent<Health>();
 	health->SetHealth(100);
-	//cout << "Init : " << r->GetOwner() << endl;
-	//GetComponent<Rigidbody>()->SetUseGravity(false);
 	r->SetFriction(0);
 	SetStamina(100);
 	AddComponent<Animator>();
