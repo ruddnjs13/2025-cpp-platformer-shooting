@@ -17,7 +17,14 @@ public:
 	MyAction<int> onDeadEvent;
 	//virtual void Update();
 	//virtual void Render(HDC _hdc);
-	void SetStamina(float _stamina) { m_maxStamina = _stamina;  m_stamina = _stamina; }
+	void SetStamina(float _stamina) {
+		m_maxStamina = _stamina;  
+		if (_stamina != m_stamina)
+		{
+			m_stamina = _stamina;
+			OnStaminaChanged.Invoke(m_stamina);
+		}
+	}
 	void AddStamina(float _delta)
 	{
 		m_stamina += _delta;
@@ -67,6 +74,7 @@ private:
 	float m_maxStamina = 0;
 	bool m_isFlipped = false;
 	bool m_isDestroy = false;
+	bool m_isShooting = false;
 	SlotReel* slotReel = nullptr;
 	Texture* m_pTex;
 	TurnType m_turnType;

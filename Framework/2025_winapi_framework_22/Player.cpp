@@ -224,6 +224,7 @@ void Player::ChangeState(PlayerState _newState)
 	case PlayerState::JUMP:
 		break;
 	case PlayerState::DIE:
+		PLAY_SOUND(L"PlayerDeadSFX");
 		if (m_turnType == TurnType::Player1)
 		{
 			m_pTex = GET_SINGLE(ResourceManager)->GetTexture(L"Player1Die");
@@ -253,13 +254,16 @@ void Player::Update()
 		return;
 	}
 	Health* health = GetComponent<Health>();
+	Rigidbody* rb = GetComponent<Rigidbody>();
 	if (health->IsDead() && m_state != PlayerState::DIE)
 	{
+		rb->SetVelocity({ 0.f, 0.f });
 		ChangeState(PlayerState::DIE);
 		return;
 	}
 	if (health->IsDead()) return;
-	Rigidbody* rb = GetComponent<Rigidbody>();
+	if (m_isShooting && GET_SINGLE(TurnManager)->GetCurrentTurn() != m_turnType)
+		m_isShooting = false;
 
 	//Vec2 pos = GetPos();
 
@@ -273,66 +277,72 @@ void Player::Update()
 	//	pos.x += 200.f * fDT;
 	//SetPos(pos);
 
-	Vec2 dir = {};
+	Vec2 dir = {0.f, 0.f};
 
-
-	if (CheckPlayerTurn(TurnType::Player1) && GET_SINGLE(TurnManager)->GetCurrentTurn() == TurnType::Player1)
+	if (!m_isShooting)
 	{
-
-		if (GET_KEYDOWN(KEY_TYPE::RSHIFT) && m_isDestroy)
+		if (CheckPlayerTurn(TurnType::Player1) && GET_SINGLE(TurnManager)->GetCurrentTurn() == TurnType::Player1)
 		{
-			m_isDestroy = false;
-			slotReel->DestroyWeapon();
-		}
 
-		isCanSlotReel = true;
-		if (m_stamina > 0)
-		{
-			if (GET_KEY(KEY_TYPE::A)) dir.x -= 1.f;
-			if (GET_KEY(KEY_TYPE::D)) dir.x += 1.f;
-			
-
-			if (GET_KEYDOWN(KEY_TYPE::SPACE))
+			if (GET_KEYDOWN(KEY_TYPE::RSHIFT) && m_isDestroy)
 			{
-				rb = GetComponent<Rigidbody>();
-				if (rb->IsGrounded())
-				{
-					AddStamina(-10);
-					Jump();
-				}
-			
+				m_isDestroy = false;
+				m_isShooting = true;
+				SetStamina(m_maxStamina);
+				slotReel->DestroyWeapon();
 			}
-		}
 
-		
-	}
-	else if (CheckPlayerTurn(TurnType::Player2) && GET_SINGLE(TurnManager)->GetCurrentTurn() == TurnType::Player2)
-	{
-
-		if (GET_KEYDOWN(KEY_TYPE::ENTER) &&m_isDestroy)
-		{
-			m_isDestroy = false;
-			slotReel->DestroyWeapon();
-		}
-
-		isCanSlotReel = true;
-		if (m_stamina > 0)
-		{
-			if (GET_KEY(KEY_TYPE::LEFT)) dir.x -= 1.f;
-			if (GET_KEY(KEY_TYPE::RIGHT)) dir.x += 1.f;
-			//if (GET_KEY(KEY_TYPE::UP)) angle += 0.1f;
-			//if (GET_KEY(KEY_TYPE::DOWN)) angle -= 0.1f;
-			if (GET_KEYDOWN(KEY_TYPE::RSHIFT))
+			isCanSlotReel = true;
+			if (m_stamina > 0)
 			{
-				rb = GetComponent<Rigidbody>();
-				if (rb->IsGrounded())
+				if (GET_KEY(KEY_TYPE::A)) dir.x -= 1.f;
+				if (GET_KEY(KEY_TYPE::D)) dir.x += 1.f;
+
+
+				if (GET_KEYDOWN(KEY_TYPE::SPACE))
 				{
-					AddStamina(-15);
-					Jump();
+					rb = GetComponent<Rigidbody>();
+					if (rb->IsGrounded())
+					{
+						AddStamina(-10);
+						Jump();
+					}
+
 				}
 			}
-		}
 
+
+		}
+		else if (CheckPlayerTurn(TurnType::Player2) && GET_SINGLE(TurnManager)->GetCurrentTurn() == TurnType::Player2)
+		{
+
+			if (GET_KEYDOWN(KEY_TYPE::ENTER) && m_isDestroy)
+			{
+				m_isDestroy = false;
+				slotReel->DestroyWeapon();
+				m_isShooting = true;
+				SetStamina(m_maxStamina);
+			}
+
+			isCanSlotReel = true;
+			if (m_stamina > 0)
+			{
+				if (GET_KEY(KEY_TYPE::LEFT)) dir.x -= 1.f;
+				if (GET_KEY(KEY_TYPE::RIGHT)) dir.x += 1.f;
+				//if (GET_KEY(KEY_TYPE::UP)) angle += 0.1f;
+				//if (GET_KEY(KEY_TYPE::DOWN)) angle -= 0.1f;
+				if (GET_KEYDOWN(KEY_TYPE::RSHIFT))
+				{
+					rb = GetComponent<Rigidbody>();
+					if (rb->IsGrounded())
+					{
+						AddStamina(-15);
+						Jump();
+					}
+				}
+			}
+
+		}
 	}
 	if (m_state != PlayerState::RUN && dir.Length() > 0.f)
 	{
@@ -350,7 +360,7 @@ void Player::Update()
 	//float nextPosX = GetPos().x;
 	//if (prevPosX != nextPosX)
 	if(rb->GetVelocity().x != 0)
-		AddStamina(-1.f);
+		AddStamina(-0.5f);
 
 	if (slotReel != nullptr)
 	{
@@ -416,6 +426,7 @@ void Player::CreateProjectile()
 
 void Player::Jump()
 {
+	PLAY_SOUND(L"PlayerJumpSFX");
 	Rigidbody* rb = GetComponent<Rigidbody>();
 	rb->SetGrounded(false);
 	Vec2 jumpPower{ 0, -50 };
