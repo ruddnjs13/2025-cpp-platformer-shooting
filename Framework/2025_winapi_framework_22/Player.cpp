@@ -41,7 +41,6 @@ Player::Player()
 
 void Player::SetPlayerType()
 {
-	cout << "¾Æ" << endl;
 	auto* animator = GetComponent<Animator>();
 	if (m_turnType == TurnType::Player1)
 	{

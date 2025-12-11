@@ -73,6 +73,8 @@ void ResourceManager::RegisterSound()
 
 	// ∞‘¿” ≥°
 	LoadSound(L"GameEndSFX", L"Sound\\GameEnd_sfx.mp3", false); 
+	LoadSound(L"BGM", L"Sound\\Retro_bgm.wav", true);
+	LoadSound(L"BGM", L"Sound\\laserShoot.wav", false);
 }
 
 void ResourceManager::FmodUpdate()
@@ -273,7 +275,7 @@ void ResourceManager::RegisterTexture()
 	LoadTexture(L"One_Red", L"Texture\\One_Red.bmp");
 	LoadTexture(L"Two_Red", L"Texture\\Two_Red.bmp");
 	LoadTexture(L"One_Blue", L"Texture\\One_Blue.bmp");
-	LoadTexture(L"Two_Red", L"Texture\\Two_Blue.bmp");
+	LoadTexture(L"Two_Blue", L"Texture\\Two_Blue.bmp");
 	LoadTexture(L"Zero_Red", L"Texture\\Zero_Red.bmp");
 	LoadTexture(L"Zero_Blue", L"Texture\\Zero_Blue.bmp");
 	LoadTexture(L"Three_Red", L"Texture\\Three_Red.bmp");
