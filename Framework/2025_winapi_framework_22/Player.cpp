@@ -383,6 +383,7 @@ void Player::Update()
 		m_isDestroy = true;
 
 		isCanSlotReel = false;
+
 		if (slotReel != nullptr)
 		{
 			GET_SINGLE(SceneManager)->GetCurScene()->RequestDestroy(slotReel);
@@ -401,7 +402,7 @@ void Player::Update()
 	
 		int turnNum = m_turnType == TurnType::Player1 ? 1 : 2;
 	
-		slotReel->SlotRolling(turnNum);
+		slotReel->SetSlotRolling(turnNum);
 	
 		slotReel->SetOwner(this);
 	

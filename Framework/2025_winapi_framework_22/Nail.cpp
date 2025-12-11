@@ -25,6 +25,14 @@ Nail::~Nail()
 void Nail::Update()
 {         
 	Translate({ m_dir.x * m_speed * fDT, m_dir.y * m_speed * fDT });
+
+	destoryTime += 1 * fDT;
+
+	if (destoryTime >= 7)
+	{
+		DestoyThis();
+	}
+	BulletFlip();
 }
 
 void Nail::Render(HDC _hdc)

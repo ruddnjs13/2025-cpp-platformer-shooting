@@ -35,6 +35,14 @@ void SniperBullet::Update()
 		m_angleValue += (-38 * fDT);
 	}
 	BulletFlip();
+
+	destoryTime += 1 * fDT;
+
+
+	if (destoryTime >= 6)
+	{
+		DestoyThis();
+	}
 }
 
 void SniperBullet::BulletFlip()

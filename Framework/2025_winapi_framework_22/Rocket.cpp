@@ -68,7 +68,7 @@ void Rocket::Update()
 
 		isRotation = false;
 
-		m_angleValue += 1;
+		m_angleValue += 0.5f;
 		if (m_angleValue >= 75)
 		{
 			m_angleValue = 75;
@@ -79,11 +79,7 @@ void Rocket::Update()
 
 		SetShootAngle(m_angleValue);
 
-		std::thread([this]()
-			{
-				std::this_thread::sleep_for(std::chrono::milliseconds(30));
 				isRotation = true;
-			}).detach();
 
 	}
 
@@ -91,7 +87,7 @@ void Rocket::Update()
 	{
 		isRotation = false;
 
-		m_angleValue += 1;
+		m_angleValue += 0.5f;
 
 		if (m_angleValue >= 75)
 		{
@@ -103,11 +99,7 @@ void Rocket::Update()
 		SetShootAngle(m_angleValue);
 
 
-		std::thread([this]()
-			{
-				std::this_thread::sleep_for(std::chrono::milliseconds(30));
-				isRotation = true;
-			}).detach();
+		isRotation = true;
 
 	}
 
@@ -116,7 +108,7 @@ void Rocket::Update()
 
 		isRotation = false;
 
-		m_angleValue -= 1;
+		m_angleValue -= 0.5f;
 
 		if (m_angleValue <= -45)
 		{
@@ -130,18 +122,14 @@ void Rocket::Update()
 		SetShootAngle(m_angleValue);
 
 
-		std::thread([this]()
-			{
-				std::this_thread::sleep_for(std::chrono::milliseconds(30));
-				isRotation = true;
-			}).detach();
+		isRotation = true;
 
 	}
 
 	if (GET_KEY(KEY_TYPE::DOWN) && isRotation && m_playerCount == 2)
 	{
 		isRotation = false;
-		m_angleValue -= 1;
+		m_angleValue -= 0.5f;
 
 		if (m_angleValue <= -45)
 		{
@@ -153,11 +141,7 @@ void Rocket::Update()
 
 		SetShootAngle(m_angleValue);
 
-		std::thread([this]()
-			{
-				std::this_thread::sleep_for(std::chrono::milliseconds(30));
-				isRotation = true;
-			}).detach();
+		isRotation = true;
 
 	}
 }
@@ -192,7 +176,7 @@ void Rocket::Shoot()
 		{
 			for (int i = 0; i < 3; i++)
 			{
-				std::this_thread::sleep_for(std::chrono::milliseconds(500));
+				std::this_thread::sleep_for(std::chrono::milliseconds(300));
 
 				RocketBullet* proj = new RocketBullet;
 				Vec2 pos = GetPos();

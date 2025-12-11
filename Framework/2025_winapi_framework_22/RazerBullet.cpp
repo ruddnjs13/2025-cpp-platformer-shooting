@@ -31,6 +31,13 @@ void RazerBullet::Update()
 {
 	BulletFlip();
 	Translate({ m_dir.x * m_speed * fDT, m_dir.y * m_speed * fDT });
+
+	destoryTime += 1 * fDT;
+
+	if (destoryTime >= 6)
+	{
+		DestoyThis();
+	}
 }
 
 void RazerBullet::Render(HDC _hdc)

@@ -19,6 +19,7 @@ public:
 	void DestoyThis() override;
 	void DestroyOther(Collider* _other) override;
 private:
+
 	Texture* m_pTex;
 };
 

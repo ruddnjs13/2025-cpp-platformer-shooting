@@ -27,6 +27,12 @@ Bomb::~Bomb()
 
 void Bomb::Update()
 {
+	fadeTime += 100 * fDT;
+
+	if (fadeTime >= 3.f)
+	{
+		GET_SINGLE(SceneManager)->GetCurScene()->RequestDestroy(this);
+	}
 }
 
 void Bomb::Render(HDC _hdc)
@@ -71,8 +77,5 @@ void Bomb::ExitCollision(Collider* _other)
 
 void Bomb::FadeOut()
 {
-	std::thread([this]() {	
-		std::this_thread::sleep_for(std::chrono::seconds(1));
-		GET_SINGLE(SceneManager)->RequestDestroy(this);
-		}).detach();
+	
 }
