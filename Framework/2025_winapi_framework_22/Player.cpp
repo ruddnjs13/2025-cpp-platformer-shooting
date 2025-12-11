@@ -235,6 +235,10 @@ void Player::ChangeState(PlayerState _newState)
 			m_pTex = GET_SINGLE(ResourceManager)->GetTexture(L"Player2Die");
 			animator->Play(L"Player2Die", PlayMode::Once);
 		}
+		if (GET_SINGLE(TurnManager)->GetCurrentTurn() == TurnType::Player1 || GET_SINGLE(TurnManager)->GetCurrentTurn() == TurnType::Player2)
+		{
+			slotReel->DestroyWeapon();			
+		}
 		onDeadEvent.Invoke(playerCount);
 		break;
 	default:
