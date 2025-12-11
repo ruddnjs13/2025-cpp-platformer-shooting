@@ -176,9 +176,7 @@ void PizzeGun::Shoot()
 	pos.y -= GetSize().y / 2.f;
 
 	proj->SetPos(pos);
-	proj->SetSize({ 30.f,30.f });
-	proj->SetDir(m_angle);
-	proj->SetAngleValue(m_angleValue);
+	proj->SetSize({ 40.f,40.f });
 	proj->SetFlip(isFlip);
 	proj->SetPlayer(m_playerCount);
 

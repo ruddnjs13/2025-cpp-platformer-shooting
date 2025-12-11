@@ -15,7 +15,7 @@ BazukaBullet::BazukaBullet()
 	col->SetTrigger(true);
 	col->SetSize({ 25,25 });
 	m_damage = 40;
-	m_speed = 200;
+	m_speed = 300;
 }
 
 BazukaBullet::~BazukaBullet()
