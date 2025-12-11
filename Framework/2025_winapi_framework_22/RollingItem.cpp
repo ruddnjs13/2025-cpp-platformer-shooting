@@ -55,7 +55,6 @@ void RollingItem::EnterCollision(Collider* _other)
 {
 	if (_other->IsTrigger())
 	{
-		cout << "Enter" << endl;
 		if (_other->GetName() == L"Rolling")
 		{
 			SetIsShow(true);

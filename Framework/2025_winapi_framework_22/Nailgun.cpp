@@ -44,7 +44,7 @@ void Nailgun::Shoot()
 	}
 
 	proj->SetPos(pos);
-	proj->SetSize({ 30.f,30.f });
+	proj->SetSize({ 15,15 });
 	proj->SetDir(m_angle);
 	proj->SetAngleValue(m_angleValue);
 	proj->SetFlip(isFlip);
