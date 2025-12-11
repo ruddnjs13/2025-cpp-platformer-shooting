@@ -59,11 +59,12 @@ void Collider::ExitCollision(Collider* _other)
 	GetOwner()->ExitCollision(_other);
 	
 	m_lateColMap[_other->GetID()] = nullptr;
+	m_lateColMap.erase(_other->GetID());
 }
 Collider::~Collider()
 {
 	
-	for (auto item : m_lateColMap)
+	for (auto& item : m_lateColMap)
 	{
 		if (item.second != nullptr)
 		{
