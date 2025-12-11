@@ -41,22 +41,29 @@ void Collider::Render(HDC _hDC)
 void Collider::EnterCollision(Collider* _other)
 {
 	m_showDebug = true;
+	m_isCol = true;
 	GetOwner()->EnterCollision(_other);
+	m_lateCol = _other;
 }
 void Collider::StayCollision(Collider* _other)
 {
+	m_isCol = true;
 	GetOwner()->StayCollision(_other);
-
+	m_lateCol = _other;
 }
 void Collider::ExitCollision(Collider* _other)
 {
 	m_showDebug = false;
 	GetOwner()->ExitCollision(_other);
-
+	m_lateCol = nullptr;
 }
 Collider::~Collider()
 {
-
+	if (m_isCol && m_lateCol != nullptr)
+	{
+		m_lateCol->ExitCollision(this);
+	}
+	m_isCol = false;
 }
 
 void Collider::Init()

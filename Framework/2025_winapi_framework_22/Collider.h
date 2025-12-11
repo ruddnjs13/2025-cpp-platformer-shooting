@@ -28,13 +28,6 @@ public:
     {
         return m_updatedPos;
     }
-    const int GetGroundCollCnt() const { return m_groundCollCnt; }
-    const void AddGroundCollCnt(int _cnt)
-    {
-        m_groundCollCnt += _cnt;
-
-        if (m_groundCollCnt < 0) m_groundCollCnt = 0;
-    }
     void SetName(const wstring& n) { m_name = n; }
     const wstring& GetName() const { return m_name; }
 
@@ -53,6 +46,6 @@ private:
     UINT m_ID; // 충돌체 고유 id 값
     static UINT m_nextID;
     bool m_showDebug;
-
-    int m_groundCollCnt = 0; // 현재 자신의 바닥에 있는 충돌체 개수
+    bool m_isCol = false; // 지금 충돌중인 물체가 있나?
+    Collider* m_lateCol = nullptr; // 가장 최근에 충돌한 물체.
 };
