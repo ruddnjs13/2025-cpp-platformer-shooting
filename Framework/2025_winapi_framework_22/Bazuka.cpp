@@ -174,7 +174,7 @@ void Bazuka::Shoot()
 {
 	PLAY_SOUND(L"BazukaFireSFX");
 	isShoot = false;
-
+	isRotation = false;
 	BazukaBullet* proj = new BazukaBullet;
 	Vec2 pos = GetPos();
 	pos.y -= GetSize().y / 2.f;

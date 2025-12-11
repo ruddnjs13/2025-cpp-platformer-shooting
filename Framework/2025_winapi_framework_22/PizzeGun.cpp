@@ -170,7 +170,7 @@ void PizzeGun::Shoot()
 {
 	PLAY_SOUND(L"PizzaGunFireSFX");
 	isShoot = false;
-
+	isRotation = false;
 	PizzaBullet* proj = new PizzaBullet;
 	Vec2 pos = GetPos();
 	pos.y -= GetSize().y / 2.f;

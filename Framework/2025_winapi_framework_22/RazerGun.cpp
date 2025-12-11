@@ -163,7 +163,7 @@ void RazerGun::Shoot()
 {
 	PLAY_SOUND(L"LaserGunFireSFX");
 	isShoot = false;
-
+	isRotation = false;
 	RazerBullet* proj = new RazerBullet;
 	Vec2 pos = GetPos();
 	pos.y -= GetSize().y / 2.f;

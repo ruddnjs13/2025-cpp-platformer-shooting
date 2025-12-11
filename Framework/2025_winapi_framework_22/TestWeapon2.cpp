@@ -208,6 +208,7 @@ void TestWeapon2::Shoot()
 {
 	PLAY_SOUND(L"RevolverFireSFX");
 	isShoot = false;
+	isRotation = false;
 	TestBullet* proj = new TestBullet;
 	Vec2 pos = GetPos();
 	pos.y -= GetSize().y / 2.f;
