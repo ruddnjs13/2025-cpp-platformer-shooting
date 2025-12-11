@@ -32,6 +32,16 @@ void Rocket::Update()
 		Shoot();
 	}
 
+	if (m_ismultiShoot == true)
+	{
+		m_waitTime += fDT;
+
+		if (m_waitTime >= 0.3)
+		{
+			MakeBullet();
+		}
+	}
+
 	if (isFlip == true)
 	{
 		float radius = sqrtf(10 * 10 + m_offsetPos.y * m_offsetPos.y);
@@ -168,47 +178,54 @@ void Rocket::Render(HDC _hdc)
 
 	ComponentRender(_hdc);
 }
+
+void Rocket::MakeBullet()
+{
+	if (m_bulletCnt >= 2)
+	{
+		m_bulletCnt = 0;
+		m_ismultiShoot = false;
+		m_waitTime = 0;
+	}
+
+	m_waitTime = 0;
+
+	m_bulletCnt += 1;
+
+	RocketBullet* proj = new RocketBullet;
+	Vec2 pos = GetPos();
+	pos.y -= GetSize().y / 2.f;
+	if (isFlip == false)
+	{
+		pos.y += 5;
+		pos.x += 6;
+	}
+	else if (isFlip == true)
+	{
+		pos.y += 5;
+		pos.x -= 8;
+	}
+	proj->SetPos(pos);
+	proj->SetSize({ 15.f,15.f });
+	proj->SetDir(m_angle);
+	proj->SetAngleValue(m_angleValue);
+	proj->SetFlip(isFlip);
+	proj->SetPlayer(m_playerCount);
+
+
+	GET_SINGLE(SceneManager)->GetCurScene()->AddObject(proj, Layer::PROJECTILE);
+
+	Vec2 vec = GetOwner()->GetPos();
+
+	vec.x -= 4.f;
+
+	GetOwner()->SetPos(vec);
+}
 void Rocket::Shoot()
 {
-	isShoot = false;
+	isShoot = false; 
 
-	std::thread([this]()
-		{
-			for (int i = 0; i < 3; i++)
-			{
-				std::this_thread::sleep_for(std::chrono::milliseconds(300));
-
-				RocketBullet* proj = new RocketBullet;
-				Vec2 pos = GetPos();
-				pos.y -= GetSize().y / 2.f;
-				if (isFlip == false)
-				{
-					pos.y += 5;
-					pos.x += 6;
-				}
-				else if (isFlip == true)
-				{
-					pos.y += 5;
-					pos.x -= 8;
-				}
-				proj->SetPos(pos);
-				proj->SetSize({ 15.f,15.f });
-				proj->SetDir(m_angle);
-				proj->SetAngleValue(m_angleValue);
-				proj->SetFlip(isFlip);
-				proj->SetPlayer(m_playerCount);
-
-
-				GET_SINGLE(SceneManager)->GetCurScene()->AddObject(proj, Layer::PROJECTILE);
-
-				Vec2 vec = GetOwner()->GetPos();
-
-				vec.x -= 4.f;
-
-				GetOwner()->SetPos(vec);
-			}
-			isRotation = true;
-		}).detach();
+	m_ismultiShoot = true;		
 }
 
 void Rocket::WeaponFlip()
