@@ -217,7 +217,7 @@ void TestWeapon::Render(HDC _hdc)
 void TestWeapon::Shoot()
 {
 	isShoot = false;
-
+	isRotation = false;
 	m_ismultiShoot = true;
 }
 

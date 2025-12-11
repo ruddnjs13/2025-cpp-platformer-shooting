@@ -164,7 +164,7 @@ void Sniper::Shoot()
 {
 	PLAY_SOUND(L"SniperFireSFX");
 	isShoot = false;
-
+	isRotation = false;
 	SniperBullet* proj = new SniperBullet;
 	Vec2 pos = GetPos();
 	pos.y -= GetSize().y / 2.f;
