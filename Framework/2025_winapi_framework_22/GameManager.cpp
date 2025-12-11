@@ -45,7 +45,7 @@ bool GameManager::MatchWin()
 
 void GameManager::GameOver()
 {
-	if (player1_Score >= 3 || player2_Score >= 3)
+	if (player1_Score >= 2 || player2_Score >= 2)
 	{
 		GET_SINGLE(SceneManager)->RequestLoadScene(L"GameOverScene");
 	}

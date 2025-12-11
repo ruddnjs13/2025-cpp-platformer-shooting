@@ -55,7 +55,6 @@ void Scene::FlushEvent()
 
 void Scene::RequestSpawn(Object* obj, Layer _type)
 {
-
 }
 
 
