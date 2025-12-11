@@ -28,6 +28,8 @@ void Bazuka::Update()
 {
 	WeaponFlip();
 
+
+
 	if (GET_KEYDOWN(KEY_TYPE::RSHIFT) && isShoot == true && m_playerCount == 1)
 		Shoot();
 
@@ -70,7 +72,7 @@ void Bazuka::Update()
 
 		isRotation = false;
 
-		m_angleValue += 1;
+		m_angleValue += 0.5f;
 		if (m_angleValue >= 75)
 		{
 			m_angleValue = 75;
@@ -81,11 +83,7 @@ void Bazuka::Update()
 
 		SetShootAngle(m_angleValue);
 
-		std::thread([this]()
-			{
-				std::this_thread::sleep_for(std::chrono::milliseconds(30));
 				isRotation = true;
-			}).detach();
 
 	}
 
@@ -93,7 +91,7 @@ void Bazuka::Update()
 	{
 		isRotation = false;
 
-		m_angleValue += 1;
+		m_angleValue += 0.5f;
 
 		if (m_angleValue >= 75)
 		{
@@ -104,12 +102,8 @@ void Bazuka::Update()
 		pos.y -= GetSize().y / 2.f;
 		SetShootAngle(m_angleValue);
 
-
-		std::thread([this]()
-			{
-				std::this_thread::sleep_for(std::chrono::milliseconds(30));
 				isRotation = true;
-			}).detach();
+
 
 	}
 
@@ -118,7 +112,7 @@ void Bazuka::Update()
 
 		isRotation = false;
 
-		m_angleValue -= 1;
+		m_angleValue -= 0.5f;
 
 		if (m_angleValue <= -45)
 		{
@@ -131,19 +125,14 @@ void Bazuka::Update()
 
 		SetShootAngle(m_angleValue);
 
-
-		std::thread([this]()
-			{
-				std::this_thread::sleep_for(std::chrono::milliseconds(30));
-				isRotation = true;
-			}).detach();
+		isRotation = true;
 
 	}
 
 	if (GET_KEY(KEY_TYPE::DOWN) && isRotation && m_playerCount == 2)
 	{
 		isRotation = false;
-		m_angleValue -= 1;
+		m_angleValue -= 0.5f;
 
 		if (m_angleValue <= -45)
 		{
@@ -154,12 +143,7 @@ void Bazuka::Update()
 		pos.y -= GetSize().y / 2.f;
 
 		SetShootAngle(m_angleValue);
-
-		std::thread([this]()
-			{
-				std::this_thread::sleep_for(std::chrono::milliseconds(30));
 				isRotation = true;
-			}).detach();
 
 	}
 }
@@ -196,12 +180,12 @@ void Bazuka::Shoot()
 
 	if (isFlip == false)
 	{
-		pos.y += 8;
+		pos.y += 10;
 		pos.x += 3;
 	}
 	else if (isFlip == true)
 	{
-		pos.y += 8;
+		pos.y += 10;
 		pos.x -= 7;
 	}
 	proj->SetPos(pos);

@@ -39,6 +39,14 @@ void PizzaBullet::Update()
 		m_angleValue += (-38 * fDT);
 	}
 	BulletFlip();
+
+	destoryTime += 1 * fDT;
+
+	if (destoryTime >= 7)
+	{
+		DestoyThis();
+	}
+
 }
 
 void PizzaBullet::Render(HDC _hdc)
