@@ -16,6 +16,7 @@ public:
     void Render(HDC _hdc) override;
     void BurstBullet() override;
     void Rotate() override;
+    void AfterEffect() override;
 
     void DestoyThis() override;
     void DestroyOther(Collider* _other) override;

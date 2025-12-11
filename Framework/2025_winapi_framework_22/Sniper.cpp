@@ -162,6 +162,7 @@ void Sniper::Render(HDC _hdc)
 
 void Sniper::Shoot()
 {
+	PLAY_SOUND(L"SniperFireSFX");
 	isShoot = false;
 
 	SniperBullet* proj = new SniperBullet;

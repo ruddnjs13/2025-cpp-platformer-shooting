@@ -168,6 +168,7 @@ void PizzeGun::Render(HDC _hdc)
 
 void PizzeGun::Shoot()
 {
+	PLAY_SOUND(L"PizzaGunFireSFX");
 	isShoot = false;
 
 	PizzaBullet* proj = new PizzaBullet;

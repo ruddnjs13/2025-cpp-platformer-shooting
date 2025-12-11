@@ -61,14 +61,14 @@ void ResourceManager::RegisterSound()
 
 	// 무기
 	LoadSound(L"AK47FireSFX", L"Sound\\AK47Fire_sfx.mp3", false);
+	LoadSound(L"RevolverFireSFX", L"Sound\\RevolverFire_sfx.mp3", false);
 	LoadSound(L"BazukaFireSFX", L"Sound\\BazukaFire_sfx.mp3", false);
 	LoadSound(L"GrenadeLauncherFireSFX", L"Sound\\GrenadeLauncherFire_sfx.mp3", false);
-	LoadSound(L"LaserGunFireSFX", L"Sound\\LaserGunFire_sfx.mp3", false);
 	LoadSound(L"NailGunFireSFX", L"Sound\\NailGunFire_sfx.mp3", false);
 	LoadSound(L"PizzaGunFireSFX", L"Sound\\PizzaGunFire_sfx.mp3", false);
-	LoadSound(L"RevolverFireSFX", L"Sound\\RevolverFire_sfx.mp3", false);
-	LoadSound(L"SniperFireSFX", L"Sound\\SniperFire_sfx.mp3", false);
 	LoadSound(L"PizzaGunHitSFX", L"Sound\\PizzaGunHit_sfx.mp3", false);
+	LoadSound(L"LaserGunFireSFX", L"Sound\\LaserGunFire_sfx.mp3", false);
+	LoadSound(L"SniperFireSFX", L"Sound\\SniperFire_sfx.mp3", false);
 	LoadSound(L"BulletExplosionSFX", L"Sound\\BulletExplosion_sfx.mp3", false);
 
 	// UI 버튼 클릭
