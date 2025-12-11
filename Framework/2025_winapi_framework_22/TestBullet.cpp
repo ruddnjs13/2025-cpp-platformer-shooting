@@ -20,7 +20,7 @@ TestBullet::TestBullet()
 	col->SetName(L"PlayerBullet");
 	col->SetTrigger(true);
 	col->SetSize({ 20,20 });
-	m_angle = 15;
+	m_damage = 15;
 	m_speed = 500;
 }
 
@@ -104,4 +104,5 @@ void TestBullet::DestoyThis()
 
 void TestBullet::DestroyOther(Collider* _other)
 {
+	GET_SINGLE(SceneManager)->RequestDestroy(_other->GetOwner());
 }

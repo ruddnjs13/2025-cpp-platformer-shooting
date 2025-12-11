@@ -89,6 +89,7 @@ void PizzaBullet::DestoyThis()
 
 void PizzaBullet::DestroyOther(Collider* _other)
 {
+	GET_SINGLE(SceneManager)->RequestDestroy(_other->GetOwner());
 }
 
 void PizzaBullet::BulletFlip()

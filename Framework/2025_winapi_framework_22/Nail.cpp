@@ -82,6 +82,7 @@ void Nail::DestoyThis()
 
 void Nail::DestroyOther(Collider* _other)
 {
+	GET_SINGLE(SceneManager)->RequestDestroy(_other->GetOwner());
 }
 
 void Nail::BulletFlip()

@@ -82,6 +82,7 @@ void BazukaBullet::DestoyThis()
 
 void BazukaBullet::DestroyOther(Collider* _other)
 {
+	GET_SINGLE(SceneManager)->RequestDestroy(_other->GetOwner());
 }
 
 void BazukaBullet::BulletFlip()
