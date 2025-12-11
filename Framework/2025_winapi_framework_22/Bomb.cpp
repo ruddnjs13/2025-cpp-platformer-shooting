@@ -15,7 +15,7 @@ Bomb::Bomb()
 	auto* col = AddComponent<Collider>();
 	col->SetName(L"Bomb");
 	col->SetTrigger(true);
-	col->SetSize({50.f, 50.f});
+	col->SetSize({35.f, 35.f});
 	PLAY_SOUND(L"BulletExplosionSFX");
 	FadeOut();
 
