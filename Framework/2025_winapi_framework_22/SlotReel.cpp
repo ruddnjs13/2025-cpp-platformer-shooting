@@ -66,7 +66,7 @@ void SlotReel::Render(HDC _hdc)
 
 void SlotReel::SetRollingTexture(RollingItem* rollItem, wstring textureName, Vec2 offsetPos, float speed)
 {
-	rollItem->SetSize({ 25,25 });
+	rollItem->SetSize({ 125,125 });
 	rollItem->SetPos(offsetPos);
 	rollItem->SetTexture(textureName);
 	rollItem->SetDownSpeed(speed);
@@ -74,7 +74,7 @@ void SlotReel::SetRollingTexture(RollingItem* rollItem, wstring textureName, Vec
 
 void SlotReel::SetStartTexture(RollingItem* rollItem, wstring textureName, Vec2 offsetPos)
 {
-	rollItem->SetSize({ 25,25 });
+	rollItem->SetSize({ 125,125 });
 	rollItem->SetPos(offsetPos);
 	rollItem->SetTexture(textureName);
 }
@@ -148,7 +148,6 @@ void SlotReel::SlotRolling()
 		if (m_rollingCnt == 9)
 			speed = 0;
 
-		// 안전하게 rollingVec 조작
 		if (rollingVec.size() < 3)
 			rollingVec.resize(3, nullptr);
 

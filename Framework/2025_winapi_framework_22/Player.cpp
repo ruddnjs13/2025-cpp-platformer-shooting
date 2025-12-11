@@ -113,6 +113,11 @@ void Player::SetPlayerType()
 
 Player::~Player()
 {
+	if (slotReel != nullptr)
+		{
+			GET_SINGLE(SceneManager)->GetCurScene()->RequestDestroy(slotReel);
+			slotReel = nullptr;
+		}
 	// DELETE
 }
 void Player::Render(HDC _hdc)
@@ -369,7 +374,7 @@ void Player::Update()
 	//Scale({ factor, factor });
 
 	if (GET_SINGLE(TurnManager)->GetCurrentTurn() == TurnType::Select 
-		&& GET_SINGLE(TurnManager)->GetCurPlayer() == playerCount && isCanSlotReel == true)
+		&& GET_SINGLE(TurnManager)->GetCurPlayer() == playerCount && isCanSlotReel == true && !health->IsDead())
 	{
 		m_isDestroy = true;
 
@@ -382,13 +387,9 @@ void Player::Update()
 		}
 	
 		slotReel = new SlotReel();
-		slotReel->SetSize({ 100, 100 });
+		slotReel->SetSize({ 500, 500 });
 	
-		Vec2 pos = GetPos();
-	
-		pos.y -= 60;
-	
-		slotReel->SetPos(pos);
+		slotReel->SetPos({ WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2 });
 	
 	
 		int turnNum = m_turnType == TurnType::Player1 ? 1 : 2;

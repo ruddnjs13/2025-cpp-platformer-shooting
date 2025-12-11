@@ -15,9 +15,12 @@ public:
 	void Rotate();
 	void Render(HDC _hdc) override;
 	void Shoot();
-
+	void MakeBullet();
 
 private:
+	float m_bulletCnt = 0;
+	bool m_ismultiShoot = false;
+	float m_waitTime = 0;
 	Texture* m_pTex;
 };
 
