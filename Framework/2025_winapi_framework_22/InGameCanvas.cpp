@@ -23,7 +23,7 @@ void InGameCanvas::Init()
 	p1_SteminaBar->SetFill({ 262,100 }, { 252,6 });
 
 
-	p2_HpBar = new Slider();
+	p2_HpBar = new Slider();                                                          
 	p2_HpBar->isReverse = true;
 	p2_HpBar->Init(GET_SINGLE(ResourceManager)->GetTexture(L"P2_Boarder"), GET_SINGLE(ResourceManager)->GetTexture(L"HpFill"));
 	p2_HpBar->SetPos({ 1060, 80 });
@@ -49,8 +49,8 @@ void InGameCanvas::Init()
 		GET_SINGLE(ResourceManager)->GetTexture(L"Two_Blue"),
 		GET_SINGLE(ResourceManager)->GetTexture(L"Three_Blue")
 		);
-	matchScoreUI->SetPos({ 640,80 });
-	matchScoreUI->SetSize({ 100,100 });
+	matchScoreUI->SetPos({ WINDOW_WIDTH/2,80 });
+	matchScoreUI->SetSize({ 60,66 });
 
 	GET_SINGLE(GameManager)->SetMatchScoreUI(matchScoreUI);
 
