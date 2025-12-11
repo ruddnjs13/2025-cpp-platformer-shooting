@@ -30,7 +30,7 @@ void Bazuka::Update()
 
 
 
-	if (GET_KEYDOWN(KEY_TYPE::RSHIFT) && isShoot == true && m_playerCount == 1)
+	if (GET_KEYDOWN(KEY_TYPE::F) && isShoot == true && m_playerCount == 1)
 		Shoot();
 
 	if (GET_KEYDOWN(KEY_TYPE::ENTER) && isShoot == true && m_playerCount == 2)
@@ -172,8 +172,9 @@ void Bazuka::Render(HDC _hdc)
 }
 void Bazuka::Shoot()
 {
+	PLAY_SOUND(L"BazukaFireSFX");
 	isShoot = false;
-
+	isRotation = false;
 	BazukaBullet* proj = new BazukaBullet;
 	Vec2 pos = GetPos();
 	pos.y -= GetSize().y / 2.f;

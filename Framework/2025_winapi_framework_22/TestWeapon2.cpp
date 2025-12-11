@@ -31,7 +31,7 @@ void TestWeapon2::Update()
 {
 	WeaponFlip();
 
-	if (GET_KEYDOWN(KEY_TYPE::RSHIFT) && isShoot == true && m_playerCount == 1)
+	if (GET_KEYDOWN(KEY_TYPE::F) && isShoot == true && m_playerCount == 1)
 		Shoot();
 
 	if (GET_KEYDOWN(KEY_TYPE::ENTER) && isShoot == true && m_playerCount == 2)
@@ -206,7 +206,9 @@ void TestWeapon2::Render(HDC _hdc)
 
 void TestWeapon2::Shoot()
 {
+	PLAY_SOUND(L"RevolverFireSFX");
 	isShoot = false;
+	isRotation = false;
 	TestBullet* proj = new TestBullet;
 	Vec2 pos = GetPos();
 	pos.y -= GetSize().y / 2.f;

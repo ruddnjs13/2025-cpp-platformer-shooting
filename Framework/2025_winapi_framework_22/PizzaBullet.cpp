@@ -77,6 +77,11 @@ void PizzaBullet::Rotate()
 {
 }
 
+void PizzaBullet::AfterEffect()
+{
+	PLAY_SOUND(L"PizzaGunHitSFX");
+}
+
 void PizzaBullet::DestoyThis()
 {
 	GET_SINGLE(SceneManager)->RequestDestroy(this);
@@ -84,6 +89,7 @@ void PizzaBullet::DestoyThis()
 
 void PizzaBullet::DestroyOther(Collider* _other)
 {
+	GET_SINGLE(SceneManager)->RequestDestroy(_other->GetOwner());
 }
 
 void PizzaBullet::BulletFlip()

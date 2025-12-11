@@ -23,7 +23,7 @@ void Sniper::Update()
 {
 	WeaponFlip();
 
-	if (GET_KEYDOWN(KEY_TYPE::RSHIFT) && isShoot == true && m_playerCount == 1)
+	if (GET_KEYDOWN(KEY_TYPE::F) && isShoot == true && m_playerCount == 1)
 		Shoot();
 
 	if (GET_KEYDOWN(KEY_TYPE::ENTER) && isShoot == true && m_playerCount == 2)
@@ -162,8 +162,9 @@ void Sniper::Render(HDC _hdc)
 
 void Sniper::Shoot()
 {
+	PLAY_SOUND(L"SniperFireSFX");
 	isShoot = false;
-
+	isRotation = false;
 	SniperBullet* proj = new SniperBullet;
 	Vec2 pos = GetPos();
 	pos.y -= GetSize().y / 2.f;

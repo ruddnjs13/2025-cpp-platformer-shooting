@@ -27,7 +27,9 @@ Nailgun::~Nailgun()
 
 void Nailgun::Shoot()
 {
+	PLAY_SOUND(L"NailGunFireSFX");
 	isShoot = false;
+	isRotation = false;
 	Nail* proj = new Nail;
 	Vec2 pos = GetPos();
 	pos.y -= GetSize().y / 2.f;
@@ -88,7 +90,7 @@ void Nailgun::Update()
 {
 	WeaponFlip();
 
-	if (GET_KEYDOWN(KEY_TYPE::RSHIFT) && isShoot == true && m_playerCount == 1)
+	if (GET_KEYDOWN(KEY_TYPE::F) && isShoot == true && m_playerCount == 1)
 		Shoot();
 
 	if (GET_KEYDOWN(KEY_TYPE::ENTER) && isShoot == true && m_playerCount == 2)

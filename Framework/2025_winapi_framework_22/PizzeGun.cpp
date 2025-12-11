@@ -26,7 +26,7 @@ void PizzeGun::Update()
 
 
 
-	if (GET_KEYDOWN(KEY_TYPE::RSHIFT) && isShoot == true && m_playerCount == 1)
+	if (GET_KEYDOWN(KEY_TYPE::F) && isShoot == true && m_playerCount == 1)
 		Shoot();
 
 	if (GET_KEYDOWN(KEY_TYPE::ENTER) && isShoot == true && m_playerCount == 2)
@@ -168,8 +168,9 @@ void PizzeGun::Render(HDC _hdc)
 
 void PizzeGun::Shoot()
 {
+	PLAY_SOUND(L"PizzaGunFireSFX");
 	isShoot = false;
-
+	isRotation = false;
 	PizzaBullet* proj = new PizzaBullet;
 	Vec2 pos = GetPos();
 	pos.y -= GetSize().y / 2.f;

@@ -24,7 +24,7 @@ void Rocket::Update()
 {
 	WeaponFlip();
 
-	if (GET_KEYDOWN(KEY_TYPE::RSHIFT) && isShoot == true && m_playerCount == 1)
+	if (GET_KEYDOWN(KEY_TYPE::F) && isShoot == true && m_playerCount == 1)
 		Shoot();
 
 	if (GET_KEYDOWN(KEY_TYPE::ENTER) && isShoot == true && m_playerCount == 2)
@@ -38,6 +38,7 @@ void Rocket::Update()
 
 		if (m_waitTime >= 0.3)
 		{
+			PLAY_SOUND(L"GrenadeLauncherFireSFX");
 			MakeBullet();
 		}
 	}
@@ -224,6 +225,7 @@ void Rocket::MakeBullet()
 void Rocket::Shoot()
 {
 	isShoot = false; 
+	isRotation = false;
 
 	m_ismultiShoot = true;		
 }

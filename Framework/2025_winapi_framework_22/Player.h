@@ -18,9 +18,9 @@ public:
 	//virtual void Update();
 	//virtual void Render(HDC _hdc);
 	void SetStamina(float _stamina) {
-		m_maxStamina = _stamina;  
 		if (_stamina != m_stamina)
 		{
+			m_maxStamina = _stamina;  
 			m_stamina = _stamina;
 			OnStaminaChanged.Invoke(m_stamina);
 		}

@@ -102,4 +102,5 @@ void SniperBullet::DestoyThis()
 
 void SniperBullet::DestroyOther(Collider* _other)
 {
+	GET_SINGLE(SceneManager)->RequestDestroy(_other->GetOwner());
 }

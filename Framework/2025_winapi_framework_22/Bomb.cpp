@@ -16,13 +16,14 @@ Bomb::Bomb()
 	col->SetName(L"Bomb");
 	col->SetTrigger(true);
 	col->SetSize({50.f, 50.f});
+	PLAY_SOUND(L"BulletExplosionSFX");
 	FadeOut();
 
+	damage = 15;
 }
 
 Bomb::~Bomb()
 {
-	
 }
 
 void Bomb::Update()
@@ -58,7 +59,7 @@ void Bomb::EnterCollision(Collider* _other)
 
 	if (_other->GetName() == L"Player")
 	{
-		_other->GetOwner()->GetComponent<Health>()->TakeDamage(1006);
+		_other->GetOwner()->GetComponent<Health>()->TakeDamage(damage);
 	}	
 
 	if(_other->GetName() == L"Floor")

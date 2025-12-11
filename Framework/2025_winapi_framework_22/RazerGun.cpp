@@ -23,7 +23,7 @@ void RazerGun::Update()
 {
 	WeaponFlip();
 
-	if (GET_KEYDOWN(KEY_TYPE::RSHIFT) && isShoot == true && m_playerCount == 1)
+	if (GET_KEYDOWN(KEY_TYPE::F) && isShoot == true && m_playerCount == 1)
 		Shoot();
 
 	if (GET_KEYDOWN(KEY_TYPE::ENTER) && isShoot == true && m_playerCount == 2)
@@ -161,8 +161,9 @@ void RazerGun::Render(HDC _hdc)
 
 void RazerGun::Shoot()
 {
+	PLAY_SOUND(L"LaserGunFireSFX");
 	isShoot = false;
-
+	isRotation = false;
 	RazerBullet* proj = new RazerBullet;
 	Vec2 pos = GetPos();
 	pos.y -= GetSize().y / 2.f;

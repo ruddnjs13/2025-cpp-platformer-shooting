@@ -167,6 +167,8 @@ void SlotReel::SlotRolling()
 		if (m_rollingCnt == 8)
 			storeValue = randomTexture;
 
+
+		PLAY_SOUND(L"SlotMachineSFX");
 		switch (randomTexture)
 		{
 		case 1: SetRollingTexture(rollingItems, L"Gun1", offsetPoss, speed); break;
@@ -185,6 +187,7 @@ void SlotReel::SlotRolling()
 
 		if (m_rollingCnt == 10)
 		{
+			GET_SINGLE(ResourceManager)->Stop(SOUND_CHANNEL::EFFECT);
 			switch (storeValue)
 			{
 			case 1: MakeWeapon(new TestWeapon2, playerNum, { 40,40 }); break;
