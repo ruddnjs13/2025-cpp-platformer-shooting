@@ -223,7 +223,7 @@ void Rocket::MakeBullet()
 }
 void Rocket::Shoot()
 {
-	isShoot = false;
+	isShoot = false; 
 
 	m_ismultiShoot = true;		
 }

@@ -12,10 +12,12 @@ RazerBullet::RazerBullet()
 {
 	m_pTex = GET_SINGLE(ResourceManager)->GetTexture(L"EnergyBullet");
 	auto* col = AddComponent<Collider>();
-	AddComponent<Rigidbody>();
+	auto* rbCompo = AddComponent<Rigidbody>();
+	rbCompo->SetIsKinematic(true);
 	col->SetName(L"PlayerBullet");
 	col->SetTrigger(true);
 	col->SetSize({ 20,20 });
+	
 
 	m_speed = 700;
 
