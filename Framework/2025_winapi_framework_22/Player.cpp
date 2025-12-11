@@ -327,7 +327,7 @@ void Player::Update()
 				rb = GetComponent<Rigidbody>();
 				if (rb->IsGrounded())
 				{
-					AddStamina(-10);
+					AddStamina(-15);
 					Jump();
 				}
 			}
@@ -350,7 +350,7 @@ void Player::Update()
 	//float nextPosX = GetPos().x;
 	//if (prevPosX != nextPosX)
 	if(rb->GetVelocity().x != 0)
-		AddStamina(-0.1f);
+		AddStamina(-1.f);
 
 	if (slotReel != nullptr)
 	{
@@ -416,7 +416,6 @@ void Player::CreateProjectile()
 
 void Player::Jump()
 {
-	cout << "มกวม!" << endl;
 	Rigidbody* rb = GetComponent<Rigidbody>();
 	rb->SetGrounded(false);
 	Vec2 jumpPower{ 0, -50 };
