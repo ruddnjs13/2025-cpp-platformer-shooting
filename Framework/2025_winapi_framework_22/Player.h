@@ -46,7 +46,6 @@ public:
 	{
 		if (_turnType != TurnType::Player1 && _turnType != TurnType::Player2)
 		{
-			std::cout << "플레이어가 잘못된 턴 타입을 받음!" << endl;
 			return;
 		}
 		m_turnType = _turnType; 

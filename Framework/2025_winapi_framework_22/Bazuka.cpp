@@ -68,7 +68,6 @@ void Bazuka::Update()
 
 	if (GET_KEY(KEY_TYPE::W) && isRotation == true && m_playerCount == 1)
 	{
-		cout << m_playerCount << endl;
 
 		isRotation = false;
 
@@ -190,7 +189,7 @@ void Bazuka::Shoot()
 		pos.x -= 7;
 	}
 	proj->SetPos(pos);
-	proj->SetSize({ 15.f,15.f });
+	proj->SetSize({ 25.f,25.f });
 	proj->SetDir(m_angle);
 	proj->SetAngleValue(m_angleValue);
 	proj->SetFlip(isFlip);

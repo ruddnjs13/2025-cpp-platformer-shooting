@@ -61,7 +61,6 @@ void Sniper::Update()
 
 	if (GET_KEY(KEY_TYPE::W) && isRotation == true && m_playerCount == 1)
 	{
-		cout << m_playerCount << endl;
 
 		isRotation = false;
 

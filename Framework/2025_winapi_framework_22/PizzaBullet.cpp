@@ -28,17 +28,9 @@ PizzaBullet::~PizzaBullet()
 void PizzaBullet::Update()
 {
 	m_speed + GET_SINGLE(WindManager)->m_windPower;
-	Translate({ m_dir.x * m_speed * fDT, m_dir.y * m_speed * fDT });
+	Translate({0 * m_speed * fDT, -1 * m_speed * fDT });
 
-	if (isFlip == true)
-	{
-		m_angleValue += (38 * fDT);
-	}
-	else if (isFlip == false)
-	{
-		m_angleValue += (-38 * fDT);
-	}
-	BulletFlip();
+
 
 	destoryTime += 1 * fDT;
 
@@ -89,7 +81,6 @@ void PizzaBullet::DestoyThis()
 
 void PizzaBullet::DestroyOther(Collider* _other)
 {
-	GET_SINGLE(SceneManager)->RequestDestroy(_other->GetOwner());
 }
 
 void PizzaBullet::BulletFlip()

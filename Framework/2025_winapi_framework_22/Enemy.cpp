@@ -31,7 +31,6 @@ void Enemy::Render(HDC _hdc)
 
 void Enemy::EnterCollision(Collider* _other)
 {
-	cout << "Enter" << endl;
 	if (_other->IsTrigger())
 	{
 		if (_other->GetName() == L"PlayerBullet")
@@ -51,10 +50,8 @@ void Enemy::EnterCollision(Collider* _other)
 
 void Enemy::StayCollision(Collider* _other)
 {
-	cout << "Stay" << endl;
 }
 
 void Enemy::ExitCollision(Collider* _other)
 {
-	cout << "Exit" << endl;
 }

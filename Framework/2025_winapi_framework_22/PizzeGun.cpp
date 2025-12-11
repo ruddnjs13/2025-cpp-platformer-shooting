@@ -172,35 +172,16 @@ void PizzeGun::Shoot()
 	isShoot = false;
 	isRotation = false;
 	PizzaBullet* proj = new PizzaBullet;
-	Vec2 pos = GetPos();
+	Vec2 pos = GetOwner()->GetPos();
 	pos.y -= GetSize().y / 2.f;
 
-	if (isFlip == false)
-	{
-		pos.y += 5;
-		pos.x += 3;
-	}
-	else if (isFlip == true)
-	{
-		pos.y += 5;
-		pos.x -= 7;
-	}
-
 	proj->SetPos(pos);
-	proj->SetSize({ 30.f,30.f });
-	proj->SetDir(m_angle);
-	proj->SetAngleValue(m_angleValue);
+	proj->SetSize({ 40.f,40.f });
 	proj->SetFlip(isFlip);
 	proj->SetPlayer(m_playerCount);
 
 
 	GET_SINGLE(SceneManager)->GetCurScene()->AddObject(proj, Layer::PROJECTILE);
-
-	Vec2 vec = GetOwner()->GetPos();
-
-	vec.x -= 4.f;
-
-	GetOwner()->SetPos(vec);
 }
 
 void PizzeGun::WeaponFlip()
