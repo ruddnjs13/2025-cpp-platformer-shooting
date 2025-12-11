@@ -43,27 +43,35 @@ void Collider::EnterCollision(Collider* _other)
 	m_showDebug = true;
 	m_isCol = true;
 	GetOwner()->EnterCollision(_other);
-	m_lateCol = _other;
+	m_lateColMap[_other->GetID()] = _other;
+	
+	std::wcout << _other->GetName() << endl;
 }
 void Collider::StayCollision(Collider* _other)
 {
 	m_isCol = true;
 	GetOwner()->StayCollision(_other);
-	m_lateCol = _other;
+	m_lateColMap[_other->GetID()] = _other;
 }
 void Collider::ExitCollision(Collider* _other)
 {
 	m_showDebug = false;
 	GetOwner()->ExitCollision(_other);
-	m_lateCol = nullptr;
+	
+	m_lateColMap[_other->GetID()] = nullptr;
 }
 Collider::~Collider()
 {
-	if (m_isCol && m_lateCol != nullptr)
+	
+	for (auto item : m_lateColMap)
 	{
-		m_lateCol->ExitCollision(this);
+		if (item.second != nullptr)
+		{
+			item.second->ExitCollision(this);
+		}
 	}
 	m_isCol = false;
+	m_lateColMap.clear();
 }
 
 void Collider::Init()

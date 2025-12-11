@@ -30,7 +30,7 @@ Player::Player()
 	//cout << "Init : " << r->GetOwner() << endl;
 	//GetComponent<Rigidbody>()->SetUseGravity(false);
 	r->SetFriction(0);
-	SetStamina(1000);
+	SetStamina(100);
 	AddComponent<Animator>();
 
 	GET_SINGLE(TurnManager)->RaiseEvent(TurnType::Select, [this]()
@@ -78,6 +78,8 @@ void Player::SetPlayerType()
 	}
 	else if (m_turnType == TurnType::Player2)
 	{
+		Collider* col = GetComponent<Collider>();
+		//col->SetName(L"Player2");
 		m_pTex = GET_SINGLE(ResourceManager)->GetTexture(L"Player2Idle");
 		animator->CreateAnimation
 		(L"Player2Idle",
@@ -179,6 +181,7 @@ void Player::EnterCollision(Collider* _other)
 
 void Player::ExitCollision(Collider* _other)
 {
+	cout << "¾Æ¾Æ¾Æ" << endl;
 	Rigidbody* rb = GetComponent<Rigidbody>();
 	rb->SetGrounded(false);
 }
@@ -342,13 +345,13 @@ void Player::Update()
 	{
 		ChangeState(PlayerState::IDLE);
 	}
-	float prevPosX = GetPos().x;
+	//float prevPosX = GetPos().x;
 	//Translate({dir.x * fDT * 200.f, dir.y * fDT * 200.f});
 	rb->SetVelocity({ dir.x * 200.f, rb->GetVelocity().y });
 	if (dir.x != 0.f) 
 		m_isFlipped = dir.x < 0.f;
-	float nextPosX = GetPos().x;
-	if (prevPosX != nextPosX)
+	//float nextPosX = GetPos().x;
+	if (rb->GetVelocity().x != 0)
 		AddStamina(-0.1f);
 
 	if (slotReel != nullptr)

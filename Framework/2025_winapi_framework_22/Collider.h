@@ -1,5 +1,7 @@
 #pragma once
 #include "Component.h"
+#include <unordered_map>
+
 class Collider :
     public Component
 {
@@ -47,5 +49,5 @@ private:
     static UINT m_nextID;
     bool m_showDebug;
     bool m_isCol = false; // 지금 충돌중인 물체가 있나?
-    Collider* m_lateCol = nullptr; // 가장 최근에 충돌한 물체.
+    std::unordered_map<UINT, Collider*> m_lateColMap; // 가장 최근에 충돌한 물체들
 };

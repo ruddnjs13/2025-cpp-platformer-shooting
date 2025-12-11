@@ -65,15 +65,14 @@ void ResourceManager::RegisterSound()
 	LoadSound(L"PizzaGunFireSFX", L"Sound\\PizzaGunFire_sfx.mp3", false);
 	LoadSound(L"RevolverFireSFX", L"Sound\\RevolverFire_sfx.mp3", false);
 	LoadSound(L"SniperFireSFX", L"Sound\\SniperFire_sfx.mp3", false);
+	LoadSound(L"PizzaGunHitSFX", L"Sound\\PizzaGunHit_sfx.mp3", false);
 	LoadSound(L"BulletExplosionSFX", L"Sound\\BulletExplosion_sfx.mp3", false);
-	
-
 
 	// UI 버튼 클릭
 	LoadSound(L"ButtonClickSFX", L"Sound\\ButtonClick_sfx.mp3", false);
 
 	// 게임 끝
-	LoadSound(L"GameEndSFX", L"Sound\\GameEnd_sfx.mp3", false);
+	LoadSound(L"GameEndSFX", L"Sound\\GameEnd_sfx.mp3", false); 
 }
 
 void ResourceManager::FmodUpdate()
