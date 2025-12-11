@@ -284,7 +284,7 @@ void Player::Update()
 		if (CheckPlayerTurn(TurnType::Player1) && GET_SINGLE(TurnManager)->GetCurrentTurn() == TurnType::Player1)
 		{
 
-			if (GET_KEYDOWN(KEY_TYPE::RSHIFT) && m_isDestroy)
+			if (GET_KEYDOWN(KEY_TYPE::F) && m_isDestroy)
 			{
 				m_isDestroy = false;
 				m_isShooting = true;

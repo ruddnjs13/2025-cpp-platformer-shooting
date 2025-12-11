@@ -94,7 +94,7 @@ void TestWeapon::Update()
 	}
 
 
-	if (GET_KEYDOWN(KEY_TYPE::RSHIFT) && isShoot == true && m_playerCount == 1)
+	if (GET_KEYDOWN(KEY_TYPE::F) && isShoot == true && m_playerCount == 1)
 		Shoot();
 
 	if (GET_KEYDOWN(KEY_TYPE::ENTER) && isShoot == true && m_playerCount == 2)
