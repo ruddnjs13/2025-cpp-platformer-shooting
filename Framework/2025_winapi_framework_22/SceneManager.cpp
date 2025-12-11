@@ -26,7 +26,7 @@ void SceneManager::Init()
 	// Scene 추가
 	
 	// 로드
-	LoadScene(L"DevScene");
+	LoadScene(L"TitleScene");
 
 	// todo
 	//dynamic_cast<> 
@@ -46,19 +46,6 @@ void SceneManager::Update()
 		return;
 	m_curScene->Update();
 	m_curScene->LateUpdate();
-
-	if (GET_KEYDOWN((KEY_TYPE::NUM_1)))
-	{
-		LoadScene(L"TitleScene");
-	}
-	else if (GET_KEYDOWN((KEY_TYPE::NUM_2)))
-	{	
-		LoadScene(L"GameOverScene");
-	}
-	else if (GET_KEYDOWN((KEY_TYPE::NUM_3)))
-	{
-		LoadScene(L"IscScene");
-	}
 
 	if (!m_pendingScene.empty())
 	{

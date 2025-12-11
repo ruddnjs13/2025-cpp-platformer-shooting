@@ -9,6 +9,3 @@ UIElement::~UIElement()
 {
 }
 
-void UIElement::ClearAllEvents()
-{
-}

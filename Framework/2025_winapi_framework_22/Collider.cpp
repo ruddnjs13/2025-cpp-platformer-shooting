@@ -35,8 +35,8 @@ void Collider::Render(HDC _hDC)
 		colorPen = PenType::RED;
 	GDISelector pen(_hDC, colorPen);
 	GDISelector brush(_hDC, BrushType::HOLLOW);
-	RECT_RENDER(_hDC, m_updatedPos.x, m_updatedPos.y,
-		m_size.x, m_size.y);
+	//RECT_RENDER(_hDC, m_updatedPos.x, m_updatedPos.y,
+		//m_size.x, m_size.y);
 }
 void Collider::EnterCollision(Collider* _other)
 {

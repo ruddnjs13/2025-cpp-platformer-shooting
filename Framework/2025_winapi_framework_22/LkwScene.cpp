@@ -94,11 +94,8 @@ void InGameScene::Init()
         });
 }
 
-
 void InGameScene::Update()
 {
-   
-    
 	Scene::Update();
 }
 
