@@ -17,7 +17,7 @@ RazerBullet::RazerBullet()
 	col->SetTrigger(true);
 	col->SetSize({ 20,20 });
 
-	m_speed = 1500;
+	m_speed = 700;
 
 	m_damage = 25;
 

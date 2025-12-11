@@ -32,6 +32,16 @@ void Nailgun::Shoot()
 	Vec2 pos = GetPos();
 	pos.y -= GetSize().y / 2.f;
 
+	if (isFlip == false)
+	{
+		pos.y += 5;
+		pos.x += 3;
+	}
+	else if (isFlip == true)
+	{
+		pos.y += 5;
+		pos.x -= 7;
+	}
 
 	proj->SetPos(pos);
 	proj->SetSize({ 30.f,30.f });

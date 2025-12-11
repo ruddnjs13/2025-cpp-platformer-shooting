@@ -52,7 +52,7 @@ void Bomb::EnterCollision(Collider* _other)
 
 	if (_other->GetName() == L"Player")
 	{
-		_other->GetOwner()->GetComponent<Health>()->TakeDamage(10);
+		_other->GetOwner()->GetComponent<Health>()->TakeDamage(1006);
 	}	
 
 	if(_other->GetName() == L"Floor")
