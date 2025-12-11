@@ -9,7 +9,7 @@
 
 PizzeGun::PizzeGun()
 {
-	m_pTex = GET_SINGLE(ResourceManager)->GetTexture(L"PizzaGun");
+	m_pTex = GET_SINGLE(ResourceManager)->GetTexture(L"Pizza");
 
 
 	SetShootAngle(m_angleValue);
@@ -24,6 +24,8 @@ void PizzeGun::Update()
 {
 	WeaponFlip();
 
+
+
 	if (GET_KEYDOWN(KEY_TYPE::RSHIFT) && isShoot == true && m_playerCount == 1)
 		Shoot();
 
@@ -31,6 +33,8 @@ void PizzeGun::Update()
 	{
 		Shoot();
 	}
+
+
 
 	if (isFlip == true)
 	{
@@ -46,7 +50,6 @@ void PizzeGun::Update()
 
 
 		m_offsetPos = Vec2(x, y);
-
 	}
 	else if (isFlip == false)
 	{
@@ -188,6 +191,17 @@ void PizzeGun::Shoot()
 	PizzaBullet* proj = new PizzaBullet;
 	Vec2 pos = GetPos();
 	pos.y -= GetSize().y / 2.f;
+
+	if (isFlip == false)
+	{
+		pos.y += 5;
+		pos.x += 3;
+	}
+	else if (isFlip == true)
+	{
+		pos.y += 5;
+		pos.x -= 7;
+	}
 
 	proj->SetPos(pos);
 	proj->SetSize({ 30.f,30.f });

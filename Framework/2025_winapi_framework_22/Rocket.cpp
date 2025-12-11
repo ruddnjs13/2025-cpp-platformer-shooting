@@ -47,7 +47,6 @@ void Rocket::Update()
 
 		m_offsetPos = Vec2(x, y);
 
-
 	}
 	else if (isFlip == false)
 	{
@@ -198,9 +197,18 @@ void Rocket::Shoot()
 				RocketBullet* proj = new RocketBullet;
 				Vec2 pos = GetPos();
 				pos.y -= GetSize().y / 2.f;
-
+				if (isFlip == false)
+				{
+					pos.y += 5;
+					pos.x += 6;
+				}
+				else if (isFlip == true)
+				{
+					pos.y += 5;
+					pos.x -= 8;
+				}
 				proj->SetPos(pos);
-				proj->SetSize({ 25.f,25.f });
+				proj->SetSize({ 15.f,15.f });
 				proj->SetDir(m_angle);
 				proj->SetAngleValue(m_angleValue);
 				proj->SetFlip(isFlip);

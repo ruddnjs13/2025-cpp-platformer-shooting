@@ -188,6 +188,18 @@ void Sniper::Shoot()
 	Vec2 pos = GetPos();
 	pos.y -= GetSize().y / 2.f;
 
+
+	if (isFlip == false)
+	{
+		pos.y += 7;
+		pos.x += 7;
+	}
+	else if (isFlip == true)
+	{
+		pos.y += 7;
+		pos.x -= 11;
+	}
+
 	proj->SetPos(pos);
 	proj->SetSize({ 15,15 });
 	proj->SetDir(m_angle);

@@ -50,6 +50,7 @@ void Bazuka::Update()
 
 
 		m_offsetPos = Vec2(x, y);
+
 	}
 	else if (isFlip == false)
 	{
@@ -193,8 +194,18 @@ void Bazuka::Shoot()
 	Vec2 pos = GetPos();
 	pos.y -= GetSize().y / 2.f;
 
+	if (isFlip == false)
+	{
+		pos.y += 8;
+		pos.x += 3;
+	}
+	else if (isFlip == true)
+	{
+		pos.y += 8;
+		pos.x -= 7;
+	}
 	proj->SetPos(pos);
-	proj->SetSize({ 30.f,30.f });
+	proj->SetSize({ 15.f,15.f });
 	proj->SetDir(m_angle);
 	proj->SetAngleValue(m_angleValue);
 	proj->SetFlip(isFlip);

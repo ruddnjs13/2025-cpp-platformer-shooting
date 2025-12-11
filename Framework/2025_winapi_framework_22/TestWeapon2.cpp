@@ -226,9 +226,19 @@ void TestWeapon2::Shoot()
 	Vec2 pos = GetPos();
 	pos.y -= GetSize().y / 2.f;
 
+	if (isFlip == false)
+	{
+		pos.y += 5;
+		pos.x += 3;
+	}
+	else if (isFlip == true)
+	{
+		pos.y += 5;
+		pos.x -= 7;
+	}
 
 	proj->SetPos(pos);
-	proj->SetSize({ 20.f,20.f });
+	proj->SetSize({ 15.f,15.f });
 	proj->SetDir(m_angle);
 	proj->SetAngleValue(m_angleValue);
 	proj->SetFlip(isFlip);
