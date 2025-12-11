@@ -13,28 +13,28 @@ void InGameCanvas::Init()
 	cout << GET_SINGLE(ResourceManager)->GetTexture(L"Two_Blue")->GetHeight();
 	p1_HpBar = new Slider();
 	p1_HpBar->Init(GET_SINGLE(ResourceManager)->GetTexture(L"P1_Boarder"), GET_SINGLE(ResourceManager)->GetTexture(L"HpFill"));
-	p1_HpBar->SetPos({ 220, 80 });
-	p1_HpBar->SetSize({ 384, 96 });
-	p1_HpBar->SetFill({ 265,70 }, { 270,30 });
+	p1_HpBar->SetPos({ 420, 60 });
+	p1_HpBar->SetSize({ 256, 64 });
+	p1_HpBar->SetFill({ 450,54 }, { 180,20 });
 
 	p1_SteminaBar = new Slider();
 	p1_SteminaBar->isNotBoarder = true;
 	p1_SteminaBar->Init(GET_SINGLE(ResourceManager)->GetTexture(L"P1_Boarder"), GET_SINGLE(ResourceManager)->GetTexture(L"SteminaFill"));
-	p1_SteminaBar->SetFill({ 262,100 }, { 252,6 });
+	p1_SteminaBar->SetFill({ 448,74 }, { 168,4 });
 
 
 	p2_HpBar = new Slider();                                                          
 	p2_HpBar->isReverse = true;
 	p2_HpBar->Init(GET_SINGLE(ResourceManager)->GetTexture(L"P2_Boarder"), GET_SINGLE(ResourceManager)->GetTexture(L"HpFill"));
-	p2_HpBar->SetPos({ 1060, 80 });
-	p2_HpBar->SetSize({ 384, 96 });
-	p2_HpBar->SetFill({ 1015,70 }, { 270,30 });
+	p2_HpBar->SetPos({ 860, 60 });
+	p2_HpBar->SetSize({ 256, 64  });
+	p2_HpBar->SetFill({ 830,54 }, { 180,20 });
 
 	p2_SteminaBar = new Slider();
 	p2_SteminaBar->isReverse = true;
 	p2_SteminaBar->isNotBoarder = true;
 	p2_SteminaBar->Init(GET_SINGLE(ResourceManager)->GetTexture(L"P2_Boarder"), GET_SINGLE(ResourceManager)->GetTexture(L"SteminaFill"));
-	p2_SteminaBar->SetFill({ 1018,100 }, { 252,6 });
+	p2_SteminaBar->SetFill({ 832,74 }, { 168,4 });
 
 	matchScoreUI = new MatchScoreUI();
 
@@ -49,7 +49,7 @@ void InGameCanvas::Init()
 		GET_SINGLE(ResourceManager)->GetTexture(L"Two_Blue"),
 		GET_SINGLE(ResourceManager)->GetTexture(L"Three_Blue")
 		);
-	matchScoreUI->SetPos({ WINDOW_WIDTH/2,80 });
+	matchScoreUI->SetPos({ WINDOW_WIDTH/2,60 });
 	matchScoreUI->SetSize({ 60,66 });
 
 	GET_SINGLE(GameManager)->SetMatchScoreUI(matchScoreUI);
