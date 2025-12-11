@@ -78,8 +78,6 @@ void Player::SetPlayerType()
 	}
 	else if (m_turnType == TurnType::Player2)
 	{
-		Collider* col = GetComponent<Collider>();
-		//col->SetName(L"Player2");
 		m_pTex = GET_SINGLE(ResourceManager)->GetTexture(L"Player2Idle");
 		animator->CreateAnimation
 		(L"Player2Idle",
@@ -181,8 +179,10 @@ void Player::EnterCollision(Collider* _other)
 
 void Player::ExitCollision(Collider* _other)
 {
-	cout << "아아아" << endl;
 	Rigidbody* rb = GetComponent<Rigidbody>();
+	if (_other->GetName() == L"Floor")
+	{
+	}
 	rb->SetGrounded(false);
 }
 
@@ -299,7 +299,6 @@ void Player::Update()
 				if (rb->IsGrounded())
 				{
 					AddStamina(-10);
-					GET_SINGLE(ResourceManager)->Play(L"PlayerJumpSFX");
 					Jump();
 				}
 			
@@ -330,7 +329,6 @@ void Player::Update()
 				if (rb->IsGrounded())
 				{
 					AddStamina(-10);
-					GET_SINGLE(ResourceManager)->Play(L"PlayerJumpSFX");
 					Jump();
 				}
 			}
@@ -351,7 +349,8 @@ void Player::Update()
 	if (dir.x != 0.f) 
 		m_isFlipped = dir.x < 0.f;
 	//float nextPosX = GetPos().x;
-	if (rb->GetVelocity().x != 0)
+	//if (prevPosX != nextPosX)
+	if(rb->GetVelocity().x != 0)
 		AddStamina(-0.1f);
 
 	if (slotReel != nullptr)
@@ -418,6 +417,7 @@ void Player::CreateProjectile()
 
 void Player::Jump()
 {
+	cout << "점프!" << endl;
 	Rigidbody* rb = GetComponent<Rigidbody>();
 	rb->SetGrounded(false);
 	Vec2 jumpPower{ 0, -50 };

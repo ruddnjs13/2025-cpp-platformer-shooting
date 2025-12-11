@@ -14,6 +14,7 @@ public:
     void ClearEvents();
     int GetCurPlayer() { return m_CurPlayer; }
     void SendTurnName();
+    void SetCurrentPlayer(int _player) { m_CurPlayer = _player; }
 private:
     void Invoke(TurnType _turn);
     void ChangingTurnCondition();

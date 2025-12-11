@@ -20,13 +20,20 @@ void InGameScene::Init()
     GET_SINGLE(UIManager)->SetCanvas(CanvasType::InGame);
     GET_SINGLE(GameManager)->ResetMatch();
 
-    GET_SINGLE(TileMapManager)->SetTileMapToScene(this, L"Map1");
+    GET_SINGLE(TileMapManager)->SetTileMapToScene(this, GET_SINGLE(GameManager)->GetMapName());
 
-    DieZone* pDiezone = Spawn<DieZone>(Layer::DEFAULT, { 0, 700 }, { 1000.f, 100.f });
-    pPlayer2 = Spawn<Player>(Layer::PLAYER, { 500, 300 }, { 32, 32 });
-    pPlayer1 = Spawn<Player>(Layer::PLAYER, { 300, 300 }, { 32, 32 });
+    DieZone* pDiezone = Spawn<DieZone>(Layer::DEFAULT, { 0, 800 }, { 1000.f, 100.f });
+    pPlayer1 = Spawn<Player>(Layer::PLAYER, GET_SINGLE(GameManager)->GetPlayer1Pos(), { 32, 32 });
+    pPlayer2 = Spawn<Player>(Layer::PLAYER, GET_SINGLE(GameManager)->GetPlayer2Pos(), {32, 32});
     pPlayer1->SetPlayerTurn(TurnType::Player1, 1);
     pPlayer2->SetPlayerTurn(TurnType::Player2, 2);
+
+
+    srand(static_cast<unsigned int>(time(nullptr)));
+
+    int randomPlayer = rand() % 2 + 1;
+
+    GET_SINGLE(TurnManager)->SetCurrentPlayer(randomPlayer);
 
     GET_SINGLE(TurnManager)->ChangeTurn(TurnType::Waiting);
 

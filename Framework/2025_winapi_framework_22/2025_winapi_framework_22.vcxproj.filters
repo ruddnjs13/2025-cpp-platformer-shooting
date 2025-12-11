@@ -334,6 +334,7 @@
     <ClInclude Include="GameOverCanvas.h">
       <Filter>Engine\07. UI\Canvas</Filter>
     </ClInclude>
+    <ClInclude Include="DieZone.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="2025_winapi_framework_22.rc">
@@ -345,6 +346,9 @@
       <Filter>리소스 파일</Filter>
     </Image>
     <Image Include="2025_winapi_framework_22.ico">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="..\Output\build\Resource\icon.ico">
       <Filter>리소스 파일</Filter>
     </Image>
   </ItemGroup>
@@ -562,5 +566,6 @@
     <ClCompile Include="GameOverCanvas.cpp">
       <Filter>Engine\07. UI\Canvas</Filter>
     </ClCompile>
+    <ClCompile Include="DieZone.cpp" />
   </ItemGroup>
 </Project>
