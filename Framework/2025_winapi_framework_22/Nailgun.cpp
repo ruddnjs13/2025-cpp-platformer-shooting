@@ -27,6 +27,7 @@ Nailgun::~Nailgun()
 
 void Nailgun::Shoot()
 {
+	PLAY_SOUND(L"NailGunFireSFX");
 	isShoot = false;
 	Nail* proj = new Nail;
 	Vec2 pos = GetPos();

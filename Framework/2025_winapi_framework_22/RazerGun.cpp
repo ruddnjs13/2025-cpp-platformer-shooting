@@ -161,6 +161,7 @@ void RazerGun::Render(HDC _hdc)
 
 void RazerGun::Shoot()
 {
+	PLAY_SOUND(L"LaserGunFireSFX");
 	isShoot = false;
 
 	RazerBullet* proj = new RazerBullet;

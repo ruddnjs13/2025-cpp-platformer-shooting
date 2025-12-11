@@ -61,6 +61,7 @@ void TestWeapon::Update()
 
 		if (m_waitTime >= 0.3)
 		{
+			PLAY_SOUND(L"AK47FireSFX");
 			MakeBullet();
 		}
 	}

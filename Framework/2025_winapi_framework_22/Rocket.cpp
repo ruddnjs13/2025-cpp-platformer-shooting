@@ -38,6 +38,7 @@ void Rocket::Update()
 
 		if (m_waitTime >= 0.3)
 		{
+			PLAY_SOUND(L"GrenadeLauncherFireSFX");
 			MakeBullet();
 		}
 	}

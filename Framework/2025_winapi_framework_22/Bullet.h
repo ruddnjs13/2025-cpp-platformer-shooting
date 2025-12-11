@@ -15,10 +15,10 @@ public:
 	virtual void Rotate() abstract;
 	virtual void DestoyThis() abstract;
 	virtual void DestroyOther(Collider* _other) abstract;
+	virtual void AfterEffect();
 	void EnterCollision(Collider* _other)override;
 	void StayCollision(Collider* _other) override;
 	void ExitCollision(Collider* _other) override;
-
 
 public:
 	void SetDamage(float _damage) { m_damage = _damage; }

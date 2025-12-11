@@ -206,6 +206,7 @@ void TestWeapon2::Render(HDC _hdc)
 
 void TestWeapon2::Shoot()
 {
+	PLAY_SOUND(L"RevolverFireSFX");
 	isShoot = false;
 	TestBullet* proj = new TestBullet;
 	Vec2 pos = GetPos();

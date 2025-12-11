@@ -19,6 +19,10 @@ Bullet::~Bullet()
 {
 }
 
+void Bullet::AfterEffect()
+{
+}
+
 void Bullet::EnterCollision(Collider* _other)
 {
 	if (_other->GetName() == L"Player")
@@ -26,6 +30,7 @@ void Bullet::EnterCollision(Collider* _other)
 		_other->GetOwner()->GetComponent<Health>()->TakeDamage(m_damage);
 		BurstBullet();
 		DestoyThis();
+		AfterEffect();
 	}
 
 	if (_other->GetName() == L"Floor")

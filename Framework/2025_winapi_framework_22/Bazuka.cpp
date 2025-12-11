@@ -172,6 +172,7 @@ void Bazuka::Render(HDC _hdc)
 }
 void Bazuka::Shoot()
 {
+	PLAY_SOUND(L"BazukaFireSFX");
 	isShoot = false;
 
 	BazukaBullet* proj = new BazukaBullet;

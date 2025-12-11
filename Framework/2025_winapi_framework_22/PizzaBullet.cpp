@@ -77,6 +77,11 @@ void PizzaBullet::Rotate()
 {
 }
 
+void PizzaBullet::AfterEffect()
+{
+	PLAY_SOUND(L"PizzaGunHitSFX");
+}
+
 void PizzaBullet::DestoyThis()
 {
 	GET_SINGLE(SceneManager)->RequestDestroy(this);

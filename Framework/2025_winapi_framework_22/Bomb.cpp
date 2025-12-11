@@ -16,13 +16,13 @@ Bomb::Bomb()
 	col->SetName(L"Bomb");
 	col->SetTrigger(true);
 	col->SetSize({50.f, 50.f});
+	PLAY_SOUND(L"BulletExplosionSFX");
 	FadeOut();
 
 }
 
 Bomb::~Bomb()
 {
-	
 }
 
 void Bomb::Update()
