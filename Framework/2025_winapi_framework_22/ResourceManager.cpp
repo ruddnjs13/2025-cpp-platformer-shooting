@@ -48,9 +48,6 @@ void ResourceManager::RegisterSound()
 {
 	LoadSound(L"BGM", L"Sound\\Retro_bgm.wav", true);
 	LoadSound(L"BGM", L"Sound\\laserShoot.wav", false);
-
-	// 플레이어
-	LoadSound(L"PlayerJumpSFX", L"Sound\\PlayerJump_sfx.mp3", false);
 }
 
 void ResourceManager::FmodUpdate()

@@ -23,10 +23,6 @@ void GameOverScene::Init()
 	pPlayer1->AddStamina(-1000);
 	pPlayer1->AddStamina(-1000);
 
-	pPlayer1->SetPlayerTurn(TurnType::Player1, 1);
-	pPlayer2->SetPlayerTurn(TurnType::Player2, 2);
-	pPlayer2->SetFlipped(true);
-
 	pPlayer1->GetComponent<Rigidbody>()->SetUseGravity(false);
 	pPlayer2->GetComponent<Rigidbody>()->SetUseGravity(false);
 }
