@@ -41,7 +41,7 @@ public:
 	float destoryTime = 0;
 	bool isFlip = false;
 	int m_playerCount = 0;
-	float m_angleValue = 0;
+	float m_angleValue = 90;
 	float m_angle;
 	float m_speed = 500; 
 

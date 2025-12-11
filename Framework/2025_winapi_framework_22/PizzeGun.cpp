@@ -175,17 +175,6 @@ void PizzeGun::Shoot()
 	Vec2 pos = GetPos();
 	pos.y -= GetSize().y / 2.f;
 
-	if (isFlip == false)
-	{
-		pos.y += 5;
-		pos.x += 3;
-	}
-	else if (isFlip == true)
-	{
-		pos.y += 5;
-		pos.x -= 7;
-	}
-
 	proj->SetPos(pos);
 	proj->SetSize({ 30.f,30.f });
 	proj->SetDir(m_angle);
@@ -195,12 +184,6 @@ void PizzeGun::Shoot()
 
 
 	GET_SINGLE(SceneManager)->GetCurScene()->AddObject(proj, Layer::PROJECTILE);
-
-	Vec2 vec = GetOwner()->GetPos();
-
-	vec.x -= 4.f;
-
-	GetOwner()->SetPos(vec);
 }
 
 void PizzeGun::WeaponFlip()
