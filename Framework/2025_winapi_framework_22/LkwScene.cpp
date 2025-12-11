@@ -20,7 +20,10 @@ void InGameScene::Init()
     GET_SINGLE(UIManager)->SetCanvas(CanvasType::InGame);
     GET_SINGLE(GameManager)->ResetMatch();
 
-    GET_SINGLE(TileMapManager)->SetTileMapToScene(this, GET_SINGLE(GameManager)->GetMapName());
+    std::wstring mapname = GET_SINGLE(GameManager)->GetMapName();
+    GET_SINGLE(TileMapManager)->SetTileMapToScene(this, mapname);
+    PLAY_SOUND(mapname + L"BGM");
+
 
     DieZone* pDiezone = Spawn<DieZone>(Layer::DEFAULT, { 0, 800 }, { 1000.f, 100.f });
     pPlayer1 = Spawn<Player>(Layer::PLAYER, GET_SINGLE(GameManager)->GetPlayer1Pos(), { 32, 32 });
@@ -101,6 +104,7 @@ void InGameScene::Update()
 
 void InGameScene::Release()
 {
+    GET_SINGLE(ResourceManager)->StopAllSound();
     pPlayer1->onDeadEvent.RemoveListener(p1DeadHandle);
     pPlayer2->onDeadEvent.RemoveListener(p2DeadHandle);
 

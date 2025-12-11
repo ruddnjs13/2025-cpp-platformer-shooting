@@ -30,6 +30,7 @@ public:
 	void LoadSound(const wstring& _key, const wstring& _path, bool _isLoop);
 	void Play(const wstring& _key);
 	void Stop(SOUND_CHANNEL _channel);
+	void StopAllSound();
 	void Volume(SOUND_CHANNEL _channel, float _vol);
 	void Pause(SOUND_CHANNEL _channel, bool _ispause);
 public:

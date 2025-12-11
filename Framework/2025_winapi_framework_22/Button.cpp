@@ -72,7 +72,6 @@ void Button::OnMouseEnter()
 {
 	if (_isHovered) return;
 	_isHovered = true;
-	cout << "È£¹öµÊ";
 
 	SetSize({ GetSize().x * 1.1f,GetSize().y * 1.1f });
 

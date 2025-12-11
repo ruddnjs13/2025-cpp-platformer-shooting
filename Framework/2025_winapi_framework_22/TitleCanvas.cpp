@@ -60,7 +60,6 @@ void TitleCanvas::Release()
 {
     startBtn->OnClickEvt.RemoveListener(startBtnHandle);
     exitBtn->OnClickEvt.RemoveListener(exitBtnHandle);
-
     Canvas::Release();
     startBtn = nullptr;
     guideBtn = nullptr;
