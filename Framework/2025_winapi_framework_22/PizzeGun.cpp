@@ -172,7 +172,7 @@ void PizzeGun::Shoot()
 	isShoot = false;
 	isRotation = false;
 	PizzaBullet* proj = new PizzaBullet;
-	Vec2 pos = GetPos();
+	Vec2 pos = GetOwner()->GetPos();
 	pos.y -= GetSize().y / 2.f;
 
 	proj->SetPos(pos);

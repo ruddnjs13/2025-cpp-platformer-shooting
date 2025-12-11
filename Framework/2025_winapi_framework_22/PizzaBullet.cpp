@@ -18,7 +18,7 @@ PizzaBullet::PizzaBullet()
 
 	m_damage = -20;
 
-	m_speed = 150;
+	m_speed = 300;
 }
 
 PizzaBullet::~PizzaBullet()
