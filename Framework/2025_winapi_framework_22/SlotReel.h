@@ -25,9 +25,10 @@ public:
     void EnterCollision(Collider* _other)override;
     void StayCollision(Collider* _other) override;
     void ExitCollision(Collider* _other) override;
+    void SetSlotRolling(int _playerNum);
 
 public:
-    void SlotRolling(int _playerNum);
+    void SlotRolling();
     void SetOffset(Vec2 newOffset) { m_offsetPos = newOffset; }
     Vec2 GetOffset() { return m_offsetPos; }
     Object* GetOwner() { return m_owner; }
@@ -36,9 +37,14 @@ public:
     void SetPlayerNum(int _pNum) { playerNum = _pNum; }
     void SetRunning(bool _isRunning) { isRunning = _isRunning; }
 private:
-    int m_rollingCnt = 0;
-    int m_arriveTime = 0;
-    int m_waitTime = 0;
+    float m_destoryTime = 0;
+    bool isDestory = false;;
+    float speed = 150;
+    int storeValue = 0;
+    float m_rollingCnt = 0;
+    float m_arriveTime = 0;
+    float m_waitTime = 0;
+    float m_maxWaitTime = 0.3f;
     bool isRunning = false;
     int playerNum;
     WeaponHolderComponent* m_pWeaponHolder = nullptr;

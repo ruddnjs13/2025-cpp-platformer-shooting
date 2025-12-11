@@ -98,7 +98,7 @@ void TestWeapon::Update()
 
 		isRotation = false;
 
-		m_angleValue += 1;
+		m_angleValue += 0.5f;
 		if (m_angleValue >= 75)
 		{
 			m_angleValue = 75;
@@ -109,11 +109,7 @@ void TestWeapon::Update()
 
 		SetShootAngle(m_angleValue);
 
-		std::thread([this]()
-			{
-				std::this_thread::sleep_for(std::chrono::milliseconds(30));
 				isRotation = true;
-			}).detach();
 
 	}
 
@@ -121,7 +117,7 @@ void TestWeapon::Update()
 	{
 		isRotation = false;
 
-		m_angleValue += 1;
+		m_angleValue += 0.5f;
 
 		if (m_angleValue >= 75)
 		{
@@ -132,12 +128,7 @@ void TestWeapon::Update()
 		pos.y -= GetSize().y / 2.f;
 		SetShootAngle(m_angleValue);
 
-
-		std::thread([this]()
-			{
-				std::this_thread::sleep_for(std::chrono::milliseconds(30));
 				isRotation = true;
-			}).detach();
 
 	}
 
@@ -146,7 +137,7 @@ void TestWeapon::Update()
 
 		isRotation = false;
 
-		m_angleValue -= 1;
+		m_angleValue -= 0.5f;
 
 		if (m_angleValue <= -45)
 		{
@@ -160,18 +151,15 @@ void TestWeapon::Update()
 		SetShootAngle(m_angleValue);
 
 
-		std::thread([this]()
-			{
-				std::this_thread::sleep_for(std::chrono::milliseconds(30));
+
 				isRotation = true;
-			}).detach();
 
 	}
 
 	if (GET_KEY(KEY_TYPE::DOWN) && isRotation && m_playerCount == 2)
 	{
 		isRotation = false;
-		m_angleValue -= 1;
+		m_angleValue -= 0.5f;
 
 		if (m_angleValue <= -45)
 		{
@@ -183,11 +171,7 @@ void TestWeapon::Update()
 
 		SetShootAngle(m_angleValue);
 
-		std::thread([this]()
-			{
-				std::this_thread::sleep_for(std::chrono::milliseconds(30));
 				isRotation = true;
-			}).detach();
 
 	}
 }
@@ -221,31 +205,35 @@ void TestWeapon::Render(HDC _hdc)
 void TestWeapon::Shoot()
 {
 	isShoot = false;
+
+	isShoot = false;
+
 	std::thread([this]()
 		{
 			for (int i = 0; i < 3; i++)
 			{
-				std::this_thread::sleep_for(std::chrono::milliseconds(500));
+				std::this_thread::sleep_for(std::chrono::milliseconds(300));
 
 				TestBullet* proj = new TestBullet;
 				Vec2 pos = GetPos();
 				pos.y -= GetSize().y / 2.f;
-
 				if (isFlip == false)
 				{
 					pos.y += 5;
-					pos.x += 3;
+					pos.x += 6;
 				}
 				else if (isFlip == true)
 				{
 					pos.y += 5;
-					pos.x -= 7;
+					pos.x -= 8;
 				}
-
 				proj->SetPos(pos);
 				proj->SetSize({ 15.f,15.f });
 				proj->SetDir(m_angle);
 				proj->SetAngleValue(m_angleValue);
+				proj->SetFlip(isFlip);
+				proj->SetPlayer(m_playerCount);
+
 
 				GET_SINGLE(SceneManager)->GetCurScene()->AddObject(proj, Layer::PROJECTILE);
 
@@ -257,6 +245,4 @@ void TestWeapon::Shoot()
 			}
 			isRotation = true;
 		}).detach();
-
-
 }

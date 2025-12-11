@@ -77,6 +77,13 @@ void TestBullet::Update()
 	{
 		m_angleValue += (-38 * fDT);
 	}
+
+	destoryTime += 1 * fDT;
+
+	if (destoryTime >= 7)
+	{
+		DestoyThis();
+	}
 }
 
 void TestBullet::BurstBullet()

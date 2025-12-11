@@ -2,6 +2,7 @@
 #include "WeaponHolderComponent.h"
 #include "Weapon.h"
 #include "SceneManager.h"
+#include <thread>
 
 WeaponHolderComponent::WeaponHolderComponent()
 {

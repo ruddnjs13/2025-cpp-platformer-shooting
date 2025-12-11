@@ -38,6 +38,7 @@ public:
 	void SetFlip(bool _isFlip) { isFlip = _isFlip; }
 	void SetPlayer(bool playerCnt) { m_playerCount = playerCnt; }
 public:
+	float destoryTime = 0;
 	bool isFlip = false;
 	int m_playerCount = 0;
 	float m_angleValue = 0;
