@@ -27,6 +27,13 @@ void BazukaBullet::Update()
 	m_speed + GET_SINGLE(WindManager)->m_windPower;
 	Translate({ m_dir.x * m_speed * fDT, m_dir.y * m_speed * fDT });
 	BulletFlip();
+
+	destoryTime += 1 * fDT;
+
+	if (destoryTime >= 7)
+	{
+		DestoyThis();
+	}
 }
 
 void BazukaBullet::Render(HDC _hdc)

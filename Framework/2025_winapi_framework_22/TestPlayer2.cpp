@@ -83,7 +83,7 @@ void TestPlayer2::Update()
 		slotReel->SetPos(pos);
 
 
-		slotReel->SlotRolling(2);
+		slotReel->SetSlotRolling(2);
 
 
 		GET_SINGLE(SceneManager)->GetCurScene()->AddObject(slotReel, Layer::Slot);

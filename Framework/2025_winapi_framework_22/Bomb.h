@@ -19,7 +19,7 @@ public:
 private:
 	void FadeOut();
 private:
-	float fadeTime = 3.f;
+	float fadeTime = 0.f;
 	float damage = 0.f;
 	Texture* m_pTex = nullptr;
 
