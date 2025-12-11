@@ -112,11 +112,6 @@ void Player::SetPlayerType()
 
 Player::~Player()
 {
-	if (slotReel != nullptr)
-		{
-			GET_SINGLE(SceneManager)->GetCurScene()->RequestDestroy(slotReel);
-			slotReel = nullptr;
-		}
 	// DELETE
 }
 void Player::Render(HDC _hdc)
