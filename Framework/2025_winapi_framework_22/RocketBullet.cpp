@@ -94,6 +94,7 @@ void RocketBullet::DestoyThis()
 
 void RocketBullet::DestroyOther(Collider* _other)
 {
+	GET_SINGLE(SceneManager)->RequestDestroy(_other->GetOwner());
 }
 
 void RocketBullet::BulletFlip()
