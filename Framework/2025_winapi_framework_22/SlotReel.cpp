@@ -29,7 +29,7 @@ SlotReel::SlotReel()
 	Vec2 pos = GetPos();
 	pos.y -= 6;
 	col->SetOffSetPos(pos);
-	
+
 	m_pWeaponHolder = AddComponent<WeaponHolderComponent>();
 
 	//m_pWeaponHolder->ChangeWeapon(new TestWeapon(),
@@ -64,7 +64,7 @@ void SlotReel::Render(HDC _hdc)
 		Vec2 size = GetSize();
 		LONG width = m_pTex->GetWidth();
 		LONG height = m_pTex->GetHeight();
-		
+
 		::TransparentBlt(_hdc
 			, (int)(pos.x - size.x / 2)
 			, (int)(pos.y - size.y / 2)
@@ -77,7 +77,7 @@ void SlotReel::Render(HDC _hdc)
 
 }
 
-void SlotReel::SetRollingTexture(RollingItem* rollItem,wstring textureName, Vec2 offsetPos, float speed)
+void SlotReel::SetRollingTexture(RollingItem* rollItem, wstring textureName, Vec2 offsetPos, float speed)
 {
 	rollItem->SetSize({ 25,25 });
 	rollItem->SetPos(offsetPos);
@@ -92,7 +92,7 @@ void SlotReel::SetStartTexture(RollingItem* rollItem, wstring textureName, Vec2 
 	rollItem->SetTexture(textureName);
 }
 
-void SlotReel::MakeWeapon(Weapon* targetWeapon, int _playerNum , Vec2 weaponSize)
+void SlotReel::MakeWeapon(Weapon* targetWeapon, int _playerNum, Vec2 weaponSize)
 {
 	m_pWeaponHolder->SetOwner(GetOwner());
 	Vec2 pos = GetOwner()->GetPos();
@@ -102,7 +102,7 @@ void SlotReel::MakeWeapon(Weapon* targetWeapon, int _playerNum , Vec2 weaponSize
 
 	m_pWeaponHolder->ChangeWeapon(targetWeapon,
 		{ pos },
-		{ weaponSize }
+		{ 40.f,40.f }
 	, _playerNum);
 
 
@@ -140,10 +140,13 @@ void SlotReel::SlotRolling(int _playerNum)
 
 	rollingVec.clear();
 
-	int randoCnt = rand() % 50 + 26;
-
 	Vec2 offsetPos = GetPos();
 
+	if (rollingVec.size() < 3)
+	{
+		rollingVec.resize(3, nullptr);
+	}
+	
 	for (int i = 0; i < 3; i++)
 	{
 		int randoCnt = rand() % 3 + 1;
@@ -185,7 +188,7 @@ void SlotReel::SlotRolling(int _playerNum)
 			{
 				if (i == 10)
 				{
-					responTime = 2000;
+					responTime = 1000;
 				}
 				std::this_thread::sleep_for(std::chrono::milliseconds(responTime));
 
@@ -290,28 +293,28 @@ void SlotReel::SlotRolling(int _playerNum)
 					switch (storeValue)
 					{
 					case 1:
-						MakeWeapon(new TestWeapon2, playerNum,{40,40 });
+						MakeWeapon(new TestWeapon2, playerNum, { 40,40 });
 						break;
 					case 2:
-						MakeWeapon(new TestWeapon, playerNum, {20,20});
+						MakeWeapon(new TestWeapon, playerNum, { 20,20 });
 						break;
 					case 3:
-						MakeWeapon(new Bazuka, playerNum, {50,50});
+						MakeWeapon(new Bazuka, playerNum, { 50,50 });
 						break;
 					case 4:
-						MakeWeapon(new Rocket, playerNum, {45,45 });
+						MakeWeapon(new Rocket, playerNum, { 45,45 });
 						break;
 					case 5:
-						MakeWeapon(new RazerGun, playerNum, {30,30});
+						MakeWeapon(new RazerGun, playerNum, { 30,30 });
 						break;
 					case 6:
-						MakeWeapon(new PizzeGun, playerNum, {20,20});
+						MakeWeapon(new PizzeGun, playerNum, { 20,20 });
 						break;
 					case 7:
-						MakeWeapon(new Nailgun, playerNum, {20,20});
+						MakeWeapon(new Nailgun, playerNum, { 20,20 });
 						break;
 					case 8:
-						MakeWeapon(new Sniper, playerNum, {50,50});
+						MakeWeapon(new Sniper, playerNum, { 50,50 });
 						break;
 					}
 
@@ -329,6 +332,7 @@ void SlotReel::SlotRolling(int _playerNum)
 						GET_SINGLE(SceneManager)->GetCurScene()->RequestDestroy(rollingItem[i]);
 					}
 
+					rollingVec.clear();
 					rollingItem.clear();
 					GET_SINGLE(TurnManager)->ChangeTurn(TurnType::Play);
 					std::this_thread::sleep_for(std::chrono::milliseconds(1000));
@@ -337,7 +341,3 @@ void SlotReel::SlotRolling(int _playerNum)
 			}
 		}).detach();
 }
-
-
-
-
