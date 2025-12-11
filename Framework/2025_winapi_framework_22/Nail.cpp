@@ -3,6 +3,7 @@
 #include "Texture.h"
 #include "WindManager.h"
 #include "ResourceManager.h"
+#include "Rigidbody.h"
 #include "SceneManager.h"
 #include "Nail.h"
 #include <thread>
@@ -11,6 +12,7 @@ Nail::Nail()
 {
 	m_pTex = GET_SINGLE(ResourceManager)->GetTexture(L"Nail");
 	auto* col = AddComponent<Collider>();
+	auto* rbCompo = AddComponent<Rigidbody>();
 	col->SetName(L"PlayerBullet");
 	col->SetTrigger(true);
 	col->SetSize({ 15,15 });
@@ -25,6 +27,16 @@ Nail::~Nail()
 void Nail::Update()
 {         
 	Translate({ m_dir.x * m_speed * fDT, m_dir.y * m_speed * fDT });
+
+	if (isFlip == true)
+	{
+		m_angleValue += (38 * fDT);
+	}
+	else if (isFlip == false)
+	{
+		m_angleValue += (-38 * fDT);
+	}
+	BulletFlip();
 
 	destoryTime += 1 * fDT;
 

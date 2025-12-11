@@ -31,6 +31,14 @@ RazerBullet::~RazerBullet()
 
 void RazerBullet::Update()
 {
+	if (isFlip == true)
+	{
+		m_angleValue += (38 * fDT);
+	}
+	else if (isFlip == false)
+	{
+		m_angleValue += (-38 * fDT);
+	}
 	BulletFlip();
 	Translate({ m_dir.x * m_speed * fDT, m_dir.y * m_speed * fDT });
 
