@@ -46,7 +46,6 @@ void RazerGun::Update()
 
 		m_offsetPos = Vec2(x, y);
 
-
 	}
 	else if (isFlip == false)
 	{
@@ -187,6 +186,17 @@ void RazerGun::Shoot()
 	RazerBullet* proj = new RazerBullet;
 	Vec2 pos = GetPos();
 	pos.y -= GetSize().y / 2.f;
+
+	if (isFlip == false)
+	{
+		pos.y += 8;
+		pos.x += 3;
+	}
+	else if (isFlip == true)
+	{
+		pos.y += 8;
+		pos.x -= 7;
+	}
 
 	proj->SetPos(pos);
 	proj->SetSize({ 30.f,30.f });

@@ -92,7 +92,7 @@ void SlotReel::SetStartTexture(RollingItem* rollItem, wstring textureName, Vec2 
 	rollItem->SetTexture(textureName);
 }
 
-void SlotReel::MakeWeapon(Weapon* targetWeapon, int _playerNum)
+void SlotReel::MakeWeapon(Weapon* targetWeapon, int _playerNum , Vec2 weaponSize)
 {
 	m_pWeaponHolder->SetOwner(GetOwner());
 	Vec2 pos = GetOwner()->GetPos();
@@ -102,7 +102,7 @@ void SlotReel::MakeWeapon(Weapon* targetWeapon, int _playerNum)
 
 	m_pWeaponHolder->ChangeWeapon(targetWeapon,
 		{ pos },
-		{ 40.f,40.f }
+		{ weaponSize }
 	, _playerNum);
 
 
@@ -290,28 +290,28 @@ void SlotReel::SlotRolling(int _playerNum)
 					switch (storeValue)
 					{
 					case 1:
-						MakeWeapon(new TestWeapon2, playerNum);
+						MakeWeapon(new TestWeapon2, playerNum,{40,40 });
 						break;
 					case 2:
-						MakeWeapon(new TestWeapon, playerNum);
+						MakeWeapon(new TestWeapon, playerNum, {20,20});
 						break;
 					case 3:
-						MakeWeapon(new Bazuka, playerNum);
+						MakeWeapon(new Bazuka, playerNum, {50,50});
 						break;
 					case 4:
-						MakeWeapon(new Rocket, playerNum);
+						MakeWeapon(new Rocket, playerNum, {45,45 });
 						break;
 					case 5:
-						MakeWeapon(new RazerGun, playerNum);
+						MakeWeapon(new RazerGun, playerNum, {30,30});
 						break;
 					case 6:
-						MakeWeapon(new PizzeGun, playerNum);
+						MakeWeapon(new PizzeGun, playerNum, {20,20});
 						break;
 					case 7:
-						MakeWeapon(new Nailgun, playerNum);
+						MakeWeapon(new Nailgun, playerNum, {20,20});
 						break;
 					case 8:
-						MakeWeapon(new Sniper, playerNum);
+						MakeWeapon(new Sniper, playerNum, {50,50});
 						break;
 					}
 

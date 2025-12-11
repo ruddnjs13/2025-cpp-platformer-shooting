@@ -20,7 +20,7 @@ public:
     void Render(HDC _hdc) override;
     void SetRollingTexture(RollingItem* rollItem,wstring textureName, Vec2 offsetPos, float speed);
     void SetStartTexture(RollingItem* rollItem, wstring textureName, Vec2 offsetPos);
-    void MakeWeapon(Weapon* targetWeapon, int _playerNum);
+    void MakeWeapon(Weapon* targetWeapon, int _playerNum, Vec2 weaponSize);
     void DestroyWeapon();
     void EnterCollision(Collider* _other)override;
     void StayCollision(Collider* _other) override;
@@ -34,8 +34,12 @@ public:
     void SetOwner(Object* owner) { m_owner = owner; }
     int GetPlayerNum() { return playerNum; }
     void SetPlayerNum(int _pNum) { playerNum = _pNum; }
-    
+    void SetRunning(bool _isRunning) { isRunning = _isRunning; }
 private:
+    int m_rollingCnt = 0;
+    int m_arriveTime = 0;
+    int m_waitTime = 0;
+    bool isRunning = false;
     int playerNum;
     WeaponHolderComponent* m_pWeaponHolder = nullptr;
     vector<RollingItem*> 

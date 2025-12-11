@@ -28,6 +28,13 @@ void InGameScene::Init()
     pPlayer1->SetPlayerTurn(TurnType::Player1, 1);
     pPlayer2->SetPlayerTurn(TurnType::Player2, 2);
 
+
+    srand(static_cast<unsigned int>(time(nullptr)));
+
+    int randomPlayer = rand() % 2 + 1;
+
+    GET_SINGLE(TurnManager)->SetCurrentPlayer(randomPlayer);
+
     GET_SINGLE(TurnManager)->ChangeTurn(TurnType::Waiting);
 
     GET_SINGLE(CollisionManager)->CheckLayer(Layer::PLAYER, Layer::DEFAULT);
