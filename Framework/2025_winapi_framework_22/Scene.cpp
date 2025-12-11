@@ -10,7 +10,7 @@ Scene::Scene()
 
 Scene::~Scene()
 {
-	Release();
+	//Release();
 }
 void Scene::Release()
 {

@@ -251,7 +251,7 @@ void ResourceManager::RegisterTexture()
 	LoadTexture(L"One_Red", L"Texture\\One_Red.bmp");
 	LoadTexture(L"Two_Red", L"Texture\\Two_Red.bmp");
 	LoadTexture(L"One_Blue", L"Texture\\One_Blue.bmp");
-	LoadTexture(L"Two_Red", L"Texture\\Two_Blue.bmp");
+	LoadTexture(L"Two_Blue", L"Texture\\Two_Blue.bmp");
 	LoadTexture(L"Zero_Red", L"Texture\\Zero_Red.bmp");
 	LoadTexture(L"Zero_Blue", L"Texture\\Zero_Blue.bmp");
 	LoadTexture(L"Three_Red", L"Texture\\Three_Red.bmp");

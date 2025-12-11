@@ -12,7 +12,7 @@ class GameOverScene :
     void Render(HDC _hdc) override;
 
 private:
-    Player* pPlayer2    ;
+    Player* pPlayer2;
     Player* pPlayer1;
 
 };
