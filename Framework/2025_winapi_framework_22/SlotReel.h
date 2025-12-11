@@ -42,8 +42,7 @@ private:
     bool isRunning = false;
     int playerNum;
     WeaponHolderComponent* m_pWeaponHolder = nullptr;
-    vector<RollingItem*> 
-        rollingVec;
+    vector<RollingItem*> rollingVec;
     Weapon* selectWeapon;
     Object* m_owner;
     Vec2 m_offsetPos;
