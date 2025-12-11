@@ -59,6 +59,9 @@ void ResourceManager::RegisterSound()
 	LoadSound(L"PlayerJumpSFX", L"Sound\\PlayerJump_sfx.mp3", false);
 	LoadSound(L"PlayerDeadSFX", L"Sound\\PlayerDie_sfx.mp3", false);
 
+	// ·ê·¿
+	LoadSound(L"SlotMachineSFX", L"Sound\\SlotMachine_sfx.mp3", false);
+
 	// ¹«±â
 	LoadSound(L"AK47FireSFX", L"Sound\\AK47Fire_sfx.mp3", false);
 	LoadSound(L"RevolverFireSFX", L"Sound\\RevolverFire_sfx.mp3", false);
