@@ -17,7 +17,7 @@ RocketBullet::RocketBullet()
 	col->SetTrigger(true);
 	col->SetSize({ 25,25 });
 
-	m_damage = 15;
+	m_damage = 5;
 	m_speed = 500;
 }
 
