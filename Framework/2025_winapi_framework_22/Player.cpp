@@ -309,7 +309,7 @@ void Player::Update()
 					rb = GetComponent<Rigidbody>();
 					if (rb->IsGrounded())
 					{
-						AddStamina(-10);
+						AddStamina(-15);
 						Jump();
 					}
 

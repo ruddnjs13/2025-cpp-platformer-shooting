@@ -1,14 +1,15 @@
 #include "pch.h"
 #include "Texture.h"
 #include "GameOverScene.h"
+#include "ResourceManager.h"
 #include "Player.h"
 #include "Rigidbody.h"
 #include "UIManager.h"
 
 void GameOverScene::Init()
 {
-	cout << "게임오버씬 진입";
 	GET_SINGLE(UIManager)->SetCanvas(CanvasType::GameOver);
+	PLAY_SOUND(L"GameEndSFX");
 	pPlayer2 = Spawn<Player>(Layer::PLAYER, { 300, 300 }, {128, 128 });
 	pPlayer1 = Spawn<Player>(Layer::PLAYER, { 980, 300 }, { 128, 128 });
 

@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "UIElement.h"
 #include "Canvas.h"
+#include "ResourceManager.h"
 
 Canvas::Canvas()
 {
@@ -27,6 +28,7 @@ void Canvas::Render(HDC dc)
 
 void Canvas::Release()
 {
+	GET_SINGLE(ResourceManager)->StopAllSound();
 	for (auto element : _vecUIElement)
 	{
 		SAFE_DELETE(element);

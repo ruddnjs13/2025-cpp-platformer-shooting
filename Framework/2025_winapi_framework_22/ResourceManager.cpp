@@ -48,9 +48,12 @@ void ResourceManager::RegisterSound()
 {
 	// 배경음
 	LoadSound(L"TitleBGM", L"Sound\\Title_bgm.mp3", true);
-	LoadSound(L"MapOneBGM", L"Sound\\MapOne_bgm.mp3", true);
-	LoadSound(L"MapThreeBGM", L"Sound\\MapThree_bgm.mp3", true);
-	LoadSound(L"MapTwoBGM", L"Sound\\MapTwo_bgm.mp3", true);
+	LoadSound(L"Map1BGM", L"Sound\\MapOne_bgm.mp3", true);
+	LoadSound(L"Map2BGM", L"Sound\\MapTwo_bgm.mp3", true);
+	LoadSound(L"Map3BGM", L"Sound\\MapThree_bgm.mp3", true);
+
+	// 게임 끝
+	LoadSound(L"GameEndSFX", L"Sound\\GameEnd_sfx.mp3", false); 
 
 	// 플레이어
 	LoadSound(L"PlayerJumpSFX", L"Sound\\PlayerJump_sfx.mp3", false);
@@ -71,8 +74,6 @@ void ResourceManager::RegisterSound()
 	// UI 버튼 클릭
 	LoadSound(L"ButtonClickSFX", L"Sound\\ButtonClick_sfx.mp3", false);
 
-	// 게임 끝
-	LoadSound(L"GameEndSFX", L"Sound\\GameEnd_sfx.mp3", false); 
 	LoadSound(L"BGM", L"Sound\\Retro_bgm.wav", true);
 	LoadSound(L"BGM", L"Sound\\laserShoot.wav", false);
 }
@@ -133,7 +134,20 @@ void ResourceManager::Play(const wstring& _key)
 void ResourceManager::Stop(SOUND_CHANNEL _channel)
 {
 	m_pChannel[(UINT)_channel]->stop();
+	m_pChannel[(UINT)_channel] = nullptr;
 
+}
+void ResourceManager::StopAllSound()
+{
+	
+	for (int i = 0; i < (UINT)SOUND_CHANNEL::END; ++i)
+	{
+		if (m_pChannel[i])
+		{
+			m_pChannel[i]->stop();
+			m_pChannel[i] = nullptr;
+		}
+	}
 }
 
 void ResourceManager::Volume(SOUND_CHANNEL _channel, float _vol)
