@@ -176,7 +176,7 @@ void SlotReel::SlotRolling()
 		case 3: SetRollingTexture(rollingItems, L"Bazooka", offsetPoss, speed); break;
 		case 4: SetRollingTexture(rollingItems, L"Rocket", offsetPoss, speed); break;
 		case 5: SetRollingTexture(rollingItems, L"RazerGun", offsetPoss, speed); break;
-		case 6: SetRollingTexture(rollingItems, L"PizzaGun", offsetPoss, speed); break;
+		case 6: SetRollingTexture(rollingItems, L"Pizza", offsetPoss, speed); break;
 		case 7: SetRollingTexture(rollingItems, L"NailGun", offsetPoss, speed); break;
 		case 8: SetRollingTexture(rollingItems, L"Sniper", offsetPoss, speed); break;
 		}
@@ -196,7 +196,7 @@ void SlotReel::SlotRolling()
 			case 4: MakeWeapon(new Rocket, playerNum, { 45,45 }); break;
 			case 5: MakeWeapon(new RazerGun, playerNum, { 30,30 }); break;
 			case 6: MakeWeapon(new PizzeGun, playerNum, { 20,20 }); break;
-			case 7: MakeWeapon(new Nailgun, playerNum, { 20,20 }); break;
+			case 7: MakeWeapon(new Nailgun, playerNum, { 40,40 }); break;
 			case 8: MakeWeapon(new Sniper, playerNum, { 50,50 }); break;
 			}
 
