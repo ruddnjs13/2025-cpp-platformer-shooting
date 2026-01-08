@@ -32,19 +32,6 @@ void Weapon::StartAngle(float x, float shootPosx)
 	m_offsetPos.x = shootPosx;
 	m_angle.x = x;
 }
-
-void Weapon::SetAngleToPositon()
-{
-	m_offsetPos.y -= 1.f;
-	m_offsetPos.x -= 0.5f;
-}
-
-void Weapon::SetAngleToPosition2()
-{
-	m_offsetPos.y -= 1.f;
-	m_offsetPos.x += 0.5f;
-}
-
 void Weapon::SetShootAngle(float angle)
 {
 	float radian = angle / 57.2958f;
