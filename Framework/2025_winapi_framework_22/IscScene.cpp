@@ -5,7 +5,7 @@
 #include "Player.h"
 #include "TurnManager.h"
 #include "Floor.h"
-#include "CollisionManager.h"3
+#include "CollisionManager.h"
 
 void IscScene::Init()
 {	
