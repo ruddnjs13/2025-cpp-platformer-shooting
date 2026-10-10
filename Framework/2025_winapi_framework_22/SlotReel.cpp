@@ -109,7 +109,7 @@ void SlotReel::Update()
 
 		if (m_destoryTime >= 2)
 		{
-			m_pWeaponHolder->DestroyWeapon();
+			m_pWeaponHolder->DestroyWeapon();	
 		}
 	}
 }
